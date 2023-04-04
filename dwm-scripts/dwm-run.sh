@@ -9,6 +9,8 @@ flameshot &
 solaar -w hide &
 /usr/lib/kdeconnectd &
 picom &
+dwmblocks &
+screenlayout.sh &
 
-# while type dwm >/dev/null; do dwm && continue || break; done
-dwm
+while type dwm >/dev/null; do dwm && continue || break; done
+# dwm

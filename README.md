@@ -6,6 +6,6 @@ A basic build of dwm for myself and anyone who wishes to use it too. If you find
 
 ```bash
 git clone https://github.com/JeffofBread/jeff_dwm.git
-cd dwm-6.4/
-sudo make clean install
+
+TBD, still a massive WIP
 ```
