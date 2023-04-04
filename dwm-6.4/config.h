@@ -8,10 +8,6 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono:size=10" };
 static const char dmenufont[]       = "JetBrainsMono:size=10";
 
-// Alpha Patch
-static unsigned int baralpha        = 0xd0;
-static unsigned int borderalpha     = OPAQUE;
-
 // Default Color Scheme
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
