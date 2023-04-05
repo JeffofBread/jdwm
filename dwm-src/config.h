@@ -84,6 +84,7 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *recompilecmd[]  = { "/home/wyatt/Documents/Github_Repos/jeff_dwm/dwm-scripts/recompile.sh", NULL };
 
 #include "focusurgent.c"
+#include "exitdwm.c"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -140,7 +141,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_q,      exitdwm,        {0} },
 	{ MODKEY,                       XK_u,      focusurgent,    {0} },
 };
 
