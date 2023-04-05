@@ -83,6 +83,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *recompilecmd[]  = { "/home/wyatt/Documents/Github_Repos/jeff_dwm/dwm-scripts/recompile.sh", NULL };
 
+#include "focusurgent.c"
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
@@ -139,6 +141,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_u,      focusurgent,    {0} },
 };
 
 /* button definitions */
