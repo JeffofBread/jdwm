@@ -1,2 +1,3 @@
 #!/bin/sh
-kitty --hold sh -c "cd ~/Documents/Github_Repos/jeff_dwm/dwm-src/ && sudo make clean install"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+kitty --hold sh -c "cd ${SCRIPT_DIR} && cd .. && cd dwm-src && sudo make clean install"
