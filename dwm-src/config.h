@@ -91,6 +91,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *recompilecmd[]  = { "/home/wyatt/Documents/Github_Repos/jeff_dwm/dwm-scripts/recompile.sh", NULL };
+static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
 
 #include "focusurgent.c"
 #include "exitdwm.c"
@@ -182,5 +183,6 @@ static const Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkRootWin,  0, Button3, spawn, {.v = jgmenucmd } },
 };
 
