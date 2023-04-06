@@ -94,17 +94,26 @@ static const char *recompilecmd[]  = { "/home/wyatt/Documents/Github_Repos/jeff_
 
 #include "focusurgent.c"
 #include "exitdwm.c"
+#include "shift-tools.c"
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ ControlMask|ShiftMask,        XK_q,      spawn,          {.v = recompilecmd } },
+	{ MODKEY,                       XK_o, shiftviewclients,    { .i = +1 } },
+	{ MODKEY|ShiftMask,             XK_o,	   shiftview,      { .i = +1 } },
+	{ MODKEY|ShiftMask,             XK_i,	   shiftview,      { .i = -1 } },
+	{ MODKEY,	                    XK_i, shiftviewclients,    { .i = -1 } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY|ShiftMask,		        XK_h,      shiftboth,      { .i = -1 }	},
+	{ MODKEY|ControlMask,	     	XK_h,      shiftswaptags,  { .i = -1 }	},
+	{ MODKEY|ControlMask,	    	XK_l,      shiftswaptags,  { .i = +1 }	},
+	{ MODKEY|ShiftMask,             XK_l,      shiftboth,      { .i = +1 }	},
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
