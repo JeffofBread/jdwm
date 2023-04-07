@@ -46,11 +46,15 @@ install: all
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
-
+	sudo ln -sf ${CURDIR}/dwm-scripts/jeff-dwm-recompile.sh /bin
+	rm -f /bin/jeff-dwm-recompile.sh
+	echo -e '#!/bin/sh\nkitty --hold sh -c "cd ${CURDIR} && sudo make clean install"' > /bin/jeff-dwm-recompile.sh
+	chmod 755 /bin/jeff-dwm-recompile.sh
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/bin/dwm-run.sh\
 		${DESTDIR}${MANPREFIX}/usr/share/xsessions/jeff_dwm.desktop\
+		${DESTDIR}${MANPREFIX}/bin/jeff-dwm-recompile.sh\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
 .PHONY: all options clean dist install uninstall

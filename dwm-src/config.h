@@ -90,7 +90,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *recompilecmd[]  = { "/home/wyatt/Documents/Github_Repos/jeff_dwm/dwm-src/dwm-scripts/recompile.sh", NULL };
+static const char *recompilecmd[]  = { "jeff-dwm-recompile.sh", NULL };
 static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
