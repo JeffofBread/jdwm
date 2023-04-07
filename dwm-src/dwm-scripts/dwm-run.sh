@@ -1,15 +1,7 @@
 #!/bin/sh
 
-# Edit the file here, and it will be automatically be moved into /usr/share/xsessions on recompile
-
-pasystray &
-~/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize &
-clipit &
-blueman-applet &
-nm-applet &
+# Apps that persist through a dwm restart can be added here
 flameshot &
-solaar -w hide &
-/usr/lib/kdeconnectd &
 picom &
 dwmblocks &
 

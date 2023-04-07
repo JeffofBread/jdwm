@@ -100,6 +100,17 @@ static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 
+// For autostarting programs that don't persist though a dwm restart, like most tray apps
+static const char *const autostart[] = {
+	"pasystray", NULL,
+	"clipit", NULL,
+	"blueman-applet", NULL,
+	"nm-applet", NULL,
+	"solaar", "-w", "hide", NULL,
+	"jetbrains-toolbox", "--minimize", NULL,
+	NULL /* terminate */
+};
+
 #include "focusurgent.c"
 #include "exitdwm.c"
 #include "shift-tools.c"
@@ -109,19 +120,19 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ ControlMask|ShiftMask,        XK_q,      spawn,          {.v = recompilecmd } },
-	{ MODKEY,                       XK_o,      shiftviewclients,    { .i = +1 } },
+	{ MODKEY,                       XK_o,      shiftboth,    { .i = +1 } },
 	{ MODKEY|ShiftMask,             XK_o,	   shiftview,      { .i = +1 } },
 	{ MODKEY|ShiftMask,             XK_i,	   shiftview,      { .i = -1 } },
-	{ MODKEY,	                    XK_i,      shiftviewclients,    { .i = -1 } },
+	{ MODKEY,	                    XK_i,      shiftboth,    { .i = -1 } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY|ShiftMask,		        XK_h,      shiftboth,      { .i = -1 }	},
+	{ MODKEY|ShiftMask,		        XK_h,      shiftviewclients,      { .i = -1 }	},
 	{ MODKEY|ControlMask,	     	XK_h,      shiftswaptags,  { .i = -1 }	},
 	{ MODKEY|ControlMask,	    	XK_l,      shiftswaptags,  { .i = +1 }	},
-	{ MODKEY|ShiftMask,             XK_l,      shiftboth,      { .i = +1 }	},
+	{ MODKEY|ShiftMask,             XK_l,      shiftviewclients,      { .i = +1 }	},
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
