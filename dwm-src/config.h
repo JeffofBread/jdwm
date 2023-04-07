@@ -92,6 +92,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *recompilecmd[]  = { "/home/wyatt/Documents/Github_Repos/jeff_dwm/dwm-scripts/recompile.sh", NULL };
 static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 
 #include "focusurgent.c"
 #include "exitdwm.c"
@@ -166,6 +168,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,    	   {0} },
 	{ MODKEY|ShiftMask,             XK_e,      exitdwm,        {0} },
 	{ MODKEY,                       XK_u,      focusurgent,    {0} },
+	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 };
 
 /* button definitions */
