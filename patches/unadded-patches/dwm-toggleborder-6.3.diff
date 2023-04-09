@@ -1,0 +1,53 @@
+From ef85b0473590615fda4ba4b20a717e42c99e3f99 Mon Sep 17 00:00:00 2001
+From: Stanisław Bitner <sbitner420@tutanota.com>
+Date: Tue, 9 Aug 2022 23:17:47 +0200
+Subject: [PATCH] toggleborder
+
+This patch allows you to toggle client border. It works by setting the
+border of the client to 0 or to borderpx defined in configuration file.
+---
+ config.def.h | 1 +
+ dwm.c        | 8 ++++++++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index a2ac963..60b811f 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -65,6 +65,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+ 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
++  { MODKEY|ShiftMask,             XK_b,      toggleborder,   {0} },
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+ 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+diff --git a/dwm.c b/dwm.c
+index 967c9e8..91d00f6 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -211,6 +211,7 @@ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+ static void tile(Monitor *m);
+ static void togglebar(const Arg *arg);
++static void toggleborder(const Arg *arg);
+ static void togglefloating(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+@@ -1707,6 +1708,13 @@ togglebar(const Arg *arg)
+ 	arrange(selmon);
+ }
+ 
++void
++toggleborder(const Arg *arg)
++{
++  selmon->sel->bw = (selmon->sel->bw == borderpx ? 0 : borderpx);
++  arrange(selmon);
++}
++
+ void
+ togglefloating(const Arg *arg)
+ {
+-- 
+2.37.1
+

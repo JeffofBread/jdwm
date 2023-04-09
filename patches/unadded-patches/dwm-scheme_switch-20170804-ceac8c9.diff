@@ -1,0 +1,114 @@
+diff --git a/config.def.h b/config.def.h
+index a9ac303..b047735 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -12,10 +12,26 @@ static const char col_gray2[]       = "#444444";
+ static const char col_gray3[]       = "#bbbbbb";
+ static const char col_gray4[]       = "#eeeeee";
+ static const char col_cyan[]        = "#005577";
++
++/* solarized colors http://ethanschoonover.com/solarized */
++static const char s_base03[]        = "#002b36";
++static const char s_base02[]        = "#073642";
++static const char s_base01[]        = "#586e75";
++static const char s_base00[]        = "#657b83";
++static const char s_base0[]         = "#839496";
++static const char s_base1[]         = "#93a1a1";
++static const char s_base2[]         = "#eee8d5";
++static const char s_base3[]         = "#fdf6e3";
++
++
+ static const char *colors[][3]      = {
+ 	/*               fg         bg         border   */
+-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
++	{ s_base0, s_base03, s_base2 },      /* SchemeNorm dark */
++	{ s_base0, s_base02, s_base2 },      /* SchemeSel dark */
++	{ s_base00, s_base3, s_base02 },     /* SchemeNorm light */
++	{ s_base00, s_base2, s_base02},      /* SchemeSel light */
++	{ col_gray3, col_gray1, col_gray2 }, /* SchemeNorm orig */
++	{ col_gray4, col_cyan,  col_cyan  }, /* SchemeSel orig */
+ };
+ 
+ /* tagging */
+@@ -84,6 +100,8 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+ 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+ 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
++	{ MODKEY|ShiftMask,             XK_t,      schemeToggle,   {0} },
++	{ MODKEY|ShiftMask,             XK_z,      schemeCycle,    {0} },
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+diff --git a/dwm.c b/dwm.c
+index a5ce993..3935efc 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -60,7 +60,6 @@
+ 
+ /* enums */
+ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+-enum { SchemeNorm, SchemeSel }; /* color schemes */
+ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
+        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+@@ -195,6 +194,8 @@ static void resizemouse(const Arg *arg);
+ static void restack(Monitor *m);
+ static void run(void);
+ static void scan(void);
++static void schemeCycle(const Arg*);
++static void schemeToggle(const Arg*);
+ static int sendevent(Client *c, Atom proto);
+ static void sendmon(Client *c, Monitor *m);
+ static void setclientstate(Client *c, long state);
+@@ -264,6 +265,7 @@ static Atom wmatom[WMLast], netatom[NetLast];
+ static int running = 1;
+ static Cur *cursor[CurLast];
+ static Scm *scheme;
++static int SchemeNorm = 0, SchemeSel = 1;
+ static Display *dpy;
+ static Drw *drw;
+ static Monitor *mons, *selmon;
+@@ -1410,6 +1412,42 @@ scan(void)
+ }
+ 
+ void
++schemeCycle(const Arg *arg) {
++
++	if ((SchemeSel + 2) < LENGTH(colors))
++	{
++		SchemeNorm += 2;
++		SchemeSel += 2;
++	} else {
++		SchemeNorm = 0;
++		SchemeSel = 1;
++	}
++
++	drawbars();
++}
++
++void
++schemeToggle(const Arg *arg) {
++
++	int numThemePairs = LENGTH(colors) / 4;
++	int sheme = SchemeNorm / 2;
++
++	if (sheme / 2 > numThemePairs-1) {
++		return;
++	}
++
++	if (sheme % 2 == 0) {
++		SchemeNorm += 2;
++		SchemeSel += 2;
++	} else {
++		SchemeNorm -= 2;
++		SchemeSel -= 2;
++	}
++
++	drawbars();
++}
++
++void
+ sendmon(Client *c, Monitor *m)
+ {
+ 	if (c->mon == m)

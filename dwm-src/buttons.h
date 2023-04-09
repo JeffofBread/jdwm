@@ -6,7 +6,11 @@ static const Button buttons[] = {
 	//{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+
+	// Note for myself on a future patch:
+	// When you go to add the notitle patch, make it on an int toggle in config.h
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+	
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },

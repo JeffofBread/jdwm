@@ -1,0 +1,12 @@
+diff -up dwm-6.2-original/config.def.h dwm-6.2-modified/config.def.h
+--- dwm-6.2-original/config.def.h	2019-02-02 14:55:28.000000000 +0200
++++ dwm-6.2-modified/config.def.h	2019-11-18 17:46:56.829143140 +0200
+@@ -56,7 +56,7 @@ static const Layout layouts[] = {
+ 
+ /* commands */
+ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
++static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, topbar ? NULL : "-b", NULL };
+ static const char *termcmd[]  = { "st", NULL };
+ 
+ static Key keys[] = {
