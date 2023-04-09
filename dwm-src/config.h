@@ -1,28 +1,28 @@
 /* See LICENSE file for copyright and license details. */
 
 /* alt-tab configuration */
-static const unsigned int tabModKey 		= 0x40;	/* if this key is hold the alt-tab functionality stays acitve. This key must be the same as key that is used to active functin altTabStart `*/
-static const unsigned int tabCycleKey 		= 0x17;	/* if this key is hit the alt-tab program moves one position forward in clients stack. This key must be the same as key that is used to active functin altTabStart */
-static const unsigned int tabPosY 			= 1;	/* tab position on Y axis, 0 = bottom, 1 = center, 2 = top */
-static const unsigned int tabPosX 			= 1;	/* tab position on X axis, 0 = left, 1 = center, 2 = right */
-static const unsigned int maxWTab 			= 600;	/* tab menu width */
-static const unsigned int maxHTab 			= 200;	/* tab menu height */
+static const unsigned int tabModKey 		= 0x40;		/* if this key is hold the alt-tab functionality stays acitve. This key must be the same as key that is used to active functin altTabStart `*/
+static const unsigned int tabCycleKey 		= 0x17;		/* if this key is hit the alt-tab program moves one position forward in clients stack. This key must be the same as key that is used to active functin altTabStart */
+static const unsigned int tabPosY 			= 1;		/* tab position on Y axis, 0 = bottom, 1 = center, 2 = top */
+static const unsigned int tabPosX 			= 1;		/* tab position on X axis, 0 = left, 1 = center, 2 = right */
+static const unsigned int maxWTab 			= 600;		/* tab menu width */
+static const unsigned int maxHTab 			= 200;		/* tab menu height */
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;        /* 0 means no systray */
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 20;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const unsigned int borderpx  		= 0;        /* border pixel of windows */
+static const unsigned int snap      		= 32;       /* snap pixel */
+static const unsigned int systraypinning 	= 0;   		/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft 	= 0;    	/* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing 	= 2;   		/* systray spacing */
+static const int systraypinningfailfirst 	= 1;   		/* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        		= 1;        /* 0 means no systray */
+static const unsigned int gappih    		= 20;       /* horiz inner gap between windows */
+static const unsigned int gappiv    		= 20;       /* vert inner gap between windows */
+static const unsigned int gappoh    		= 20;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    		= 20;       /* vert outer gap between windows and screen edge */
+static       int smartgaps          		= 0;        /* 1 means no outer gap when there is only one window */
+static const int showbar            		= 1;        /* 0 means no bar */
+static const int topbar             		= 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono:size=10" };
 static const char dmenufont[]       = "JetBrainsMono:size=10";
 
@@ -115,95 +115,8 @@ static const char *const autostart[] = {
 #include "exitdwm.c"
 #include "shift-tools.c"
 
-static const Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ ControlMask|ShiftMask,        XK_q,      spawn,          {.v = recompilecmd } },
-	{ MODKEY,                       XK_o,      shiftboth,    { .i = +1 } },
-	{ MODKEY|ShiftMask,             XK_o,	   shiftview,      { .i = +1 } },
-	{ MODKEY|ShiftMask,             XK_i,	   shiftview,      { .i = -1 } },
-	{ MODKEY,	                    XK_i,      shiftboth,    { .i = -1 } },
-	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY|ShiftMask,		        XK_h,      shiftviewclients,      { .i = -1 }	},
-	{ MODKEY|ControlMask,	     	XK_h,      shiftswaptags,  { .i = -1 }	},
-	{ MODKEY|ControlMask,	    	XK_l,      shiftswaptags,  { .i = +1 }	},
-	{ MODKEY|ShiftMask,             XK_l,      shiftviewclients,      { .i = +1 }	},
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
-	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_o,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_6,      incrihgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_7,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_8,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY|ShiftMask,             XK_Tab,    view,           {0} },
-	{ Mod1Mask,             		XK_Tab,    altTabStart,	   {0} },
-	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_f,      togglefullscreen, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      togglefakefullscreen, {0} },
-	{ MODKEY|ControlMask,			XK_comma,  cyclelayout,    {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_Left,   tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Right,  tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Left,   focusmon,       {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Right,  focusmon,       {.i = +1 } },
-	{ MODKEY,                       XK_Left,   focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_Right,  focusmon,       {.i = +1 } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,    	   {0} },
-	{ MODKEY|ShiftMask,             XK_e,      exitdwm,        {0} },
-	{ MODKEY,                       XK_u,      focusurgent,    {0} },
-	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
-};
+// Include Keybinds
+#include "keys.h"
 
-/* button definitions */
-/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static const Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	//{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	//{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkRootWin,  0, Button3, spawn, {.v = jgmenucmd } },
-};
-
+// Include Button Binds
+#include "buttons.h"
