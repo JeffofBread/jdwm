@@ -774,6 +774,7 @@ configurerequest(XEvent *e)
 					c->oldy = c->y;
 					c->y = m->my + ev->y;
 				}
+            }
             if (ev->value_mask & CWWidth) {
                 c->oldw = c->w;
                 c->w = ev->width;
