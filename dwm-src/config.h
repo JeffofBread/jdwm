@@ -96,8 +96,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *recompilecmd[]  = { "jeff-dwm-recompile.sh", NULL };
 static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
-static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 
 // For autostarting programs that don't persist though a dwm restart, like most tray apps
 static const char *const autostart[] = {

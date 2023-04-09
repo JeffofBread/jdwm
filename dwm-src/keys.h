@@ -65,5 +65,4 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,    	   {0} },
 	{ MODKEY|ShiftMask,             XK_e,      exitdwm,        {0} },
 	{ MODKEY,                       XK_u,      focusurgent,    {0} },
-	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 };
