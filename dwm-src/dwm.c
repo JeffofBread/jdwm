@@ -281,6 +281,7 @@ static void updatemotifhints(Client *c);
 static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
 static void updatestatus(void);
+static void updaterules(Client *c);
 static void updatesystray(void);
 static void updatesystrayicongeom(Client *i, int w, int h);
 static void updatesystrayiconstate(Client *i, XPropertyEvent *ev);
@@ -1553,6 +1554,7 @@ propertynotify(XEvent *e)
         }
         if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
             updatetitle(c);
+            updaterules(c);
             if (c == c->mon->sel && showtitle)
                 drawbar(c->mon);
         }
@@ -2837,6 +2839,54 @@ updatestatus(void)
         strcpy(stext, "dwm-"VERSION);
     drawbar(selmon);
     updatesystray();
+}
+
+void
+updaterules(Client *c)
+{
+    //applyrules(c)
+	const char *class, *instance;
+	unsigned int i;
+	const Rule *r;
+	Monitor *m;
+	XClassHint ch = { NULL, NULL };
+
+	/* rule matching */
+	XGetClassHint(dpy, c->win, &ch);
+	class    = ch.res_class ? ch.res_class : broken;
+	instance = ch.res_name  ? ch.res_name  : broken;
+    char found_rule = 0;
+
+	for (i = 0; i < LENGTH(rules); i++) {
+		r = &rules[i];
+		if ((!r->title || strstr(c->name, r->title))
+		&& (!r->class || strstr(class, r->class))
+		&& (!r->instance || strstr(instance, r->instance)))
+		{
+			c->isfloating = r->isfloating;
+
+            if(!found_rule)
+            {
+                c->tags=0;
+			    found_rule=1;
+            }    
+            c->tags |= r->tags;
+            for (m = mons; m && m->num != r->monitor; m = m->next);
+			if (m)
+				c->mon = m;
+		}
+	}
+	if (ch.res_class)
+		XFree(ch.res_class);
+	if (ch.res_name)
+		XFree(ch.res_name);
+	c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : c->mon->tagset[c->mon->seltags];
+
+    // end apply rules
+	if (c->isfloating)
+		resize(c, c->x, c->y,
+			c->w, c->h, 0);
+	arrange(c->mon);
 }
 
 void
