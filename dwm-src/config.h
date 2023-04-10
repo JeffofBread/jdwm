@@ -25,7 +25,7 @@ static const int showbar            		= 1;        /* 0 means no bar */
 static const int topbar             		= 1;        /* 0 means bottom bar */
 static const int vertpad           			= 10;       /* vertical padding of bar */
 static const int sidepad            		= 10;       /* horizontal padding of bar */
-
+static const unsigned int centeredwindowname= 0;		/* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
 static const char *fonts[]          		= { "JetBrainsMono:size=10" };
 static const char dmenufont[]       		= "JetBrainsMono:size=10";
 
