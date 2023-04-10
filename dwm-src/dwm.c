@@ -550,16 +550,17 @@ buttonpress(XEvent *e)
             /* Do not reserve space for vacant tags */
             if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
                 continue;
-            x += TEXTW(tags[i]);
+		    if (showtags)
+				x += TEXTW(tags[i]);
         } while (ev->x >= x && ++i < LENGTH(tags));
-        if (i < LENGTH(tags)) {
+        if (i < LENGTH(tags) && showtags) {
             click = ClkTagBar;
             arg.ui = 1 << i;
-        } else if (ev->x < x + TEXTW(selmon->ltsymbol))
+        } else if (ev->x < x + TEXTW(selmon->ltsymbol) && showlayout)
             click = ClkLtSymbol;
-        else if (ev->x > selmon->ww - (int)TEXTW(stext) - getsystraywidth())
+        else if (ev->x > selmon->ww - (int)TEXTW(stext) - getsystraywidth() && showstatus)
             click = ClkStatusText;
-        else
+        else if (showtitle)
             click = ClkWinTitle;
     } else if ((c = wintoclient(ev->window))) {
         focus(c);
@@ -912,7 +913,7 @@ drawbar(Monitor *m)
 		stw = getsystraywidth();
 
     /* draw status first so it can be overdrawn by tags later */
-    if (m == selmon) { /* status is only drawn on selected monitor */
+    if (m == selmon && showstatus) { /* status is only drawn on selected monitor */
         drw_setscheme(drw, scheme[SchemeNorm]);
 		tw = TEXTW(stext) - lrpad / 2 + 2; /* 2px extra right padding */
         drw_text(drw, m->ww - tw - stw - 2 * sp, 0, tw, bh, lrpad / 2 - 2, stext, 0);
@@ -921,7 +922,7 @@ drawbar(Monitor *m)
     resizebarwin(m);
     for (c = m->clients; c; c = c->next) {
         occ |= c->tags;
-        if (c->isurgent)
+        if (c->isurgent && showtags)
             urg |= c->tags;
     }
     x = 0;
@@ -929,17 +930,24 @@ drawbar(Monitor *m)
         /* Do not draw vacant tags */
         if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
             continue;
-        w = TEXTW(tags[i]);
-        drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
-        drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
-        x += w;
+		if (showtags) {
+				w = TEXTW(tags[i]);
+				drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+				drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+				if (occ & 1 << i && showfloating)
+				x += w;
+		}
     }
-    w = TEXTW(m->ltsymbol);
-    drw_setscheme(drw, scheme[SchemeNorm]);
-    x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+	
+	/* draw layout indicator if showlayout */
+	if (showlayout) {
+		w = TEXTW(m->ltsymbol);
+		drw_setscheme(drw, scheme[SchemeNorm]);
+		x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+	}
 
     if ((w = m->ww - tw - stw - x) > bh) {
-        if (m->sel) {
+        if (m->sel && showtitle) {
             /* fix overflow when window name is bigger than window width */
 			int mid = (m->ww - (int)TEXTW(m->sel->name)) / 2 - x;
 			/* make sure name will not overlap on tags even when it is very long */
@@ -951,7 +959,7 @@ drawbar(Monitor *m)
             else if (centeredwindowname == 1) {
                 drw_text(drw, x, 0, w - 2 * sp, bh, mid, m->sel->name, 0);
             }
-            if (m->sel->isfloating)
+            if (m->sel->isfloating && showfloating)
                 drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
         } else {
             drw_setscheme(drw, scheme[SchemeNorm]);
@@ -1541,7 +1549,7 @@ propertynotify(XEvent *e)
         }
         if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
             updatetitle(c);
-            if (c == c->mon->sel)
+            if (c == c->mon->sel && showtitle)
                 drawbar(c->mon);
         }
         if (ev->atom == netatom[NetWMWindowType])
@@ -2792,7 +2800,7 @@ updatesizehints(Client *c)
 void
 updatestatus(void)
 {
-    if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
+    if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)) && showstatus)
         strcpy(stext, "dwm-"VERSION);
     drawbar(selmon);
     updatesystray();
