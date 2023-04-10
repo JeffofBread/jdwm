@@ -101,17 +101,7 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *recompilecmd[]  = { "jeff-dwm-recompile.sh", NULL };
 static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
 
-// For autostarting programs that don't persist though a dwm restart, like most tray apps
-static const char *const autostart[] = {
-	"pasystray", NULL,
-	"clipit", NULL,
-	"blueman-applet", NULL,
-	"nm-applet", NULL,
-	"solaar", "-w", "hide", NULL,
-	"jetbrains-toolbox", "--minimize", NULL,
-	NULL /* terminate */
-};
-
+#include "autorun.h"
 #include "focusurgent.c"
 #include "exitdwm.c"
 #include "shift-tools.c"

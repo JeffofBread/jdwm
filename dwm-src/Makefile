@@ -40,13 +40,11 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
-	cp -f dwm-scripts/dwm-run.sh ${DESTDIR}${PREFIX}/bin
-	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm-run.sh
+	sudo ln -sf ${CURDIR}/dwm-scripts/dwm-run.sh /bin
 	cp -f dwm-scripts/jeff_dwm.desktop /usr/share/xsessions
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
-	sudo ln -sf ${CURDIR}/dwm-scripts/jeff-dwm-recompile.sh /bin
 	rm -f /bin/jeff-dwm-recompile.sh
 	echo -e '#!/bin/sh\nkitty --hold sh -c "cd ${CURDIR} && sudo make clean install"' > /bin/jeff-dwm-recompile.sh
 	chmod 755 /bin/jeff-dwm-recompile.sh
