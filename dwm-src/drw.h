@@ -21,6 +21,7 @@ typedef struct {
 	int screen;
 	Window root;
 	Drawable drawable;
+	Picture picture;
 	GC gc;
 	Clr *scheme;
 	Fnt *fonts;
@@ -49,6 +50,8 @@ void drw_cur_free(Drw *drw, Cur *cursor);
 /* Drawing context manipulation */
 void drw_setfontset(Drw *drw, Fnt *set);
 void drw_setscheme(Drw *drw, Clr *scm);
+
+Picture drw_picture_create_resized(Drw *drw, char *src, unsigned int src_w, unsigned int src_h, unsigned int dst_w, unsigned int dst_h);
 
 /* Drawing functions */
 void drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert);
