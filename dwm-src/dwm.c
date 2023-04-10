@@ -1364,6 +1364,7 @@ manage(Window w, XWindowAttributes *wa)
     if (!c->isfloating)
         c->isfloating = c->oldstate = trans != None || c->isfixed;
     if (c->isfloating)
+        c->bw = fborderpx;
         XRaiseWindow(dpy, c->win);
     attach(c);
     attachstack(c);
@@ -2466,8 +2467,15 @@ togglefloating(const Arg *arg)
     if (c->isfullscreen && c->fakefullscreen != 1) /* no support for fullscreen windows */
         return;
     c->isfloating = !c->isfloating || c->isfixed;
-    if (selmon->sel->isfloating)
-        resize(c, c->x, c->y, c->w, c->h, 0);
+	if (c->isfloating) {
+		c->bw = fborderpx;
+		configure(c);
+        int borderdiff = (fborderpx - borderpx) * 2;
+        resize(c, c->x, c->y, c->w - borderdiff, c->h - borderdiff, 0);
+	} else {
+		c->bw = borderpx;
+		configure(c);
+	}
     arrange(c->mon);
 }
 
