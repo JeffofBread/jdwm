@@ -8,6 +8,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_i,	   shiftview,      { .i = -1 } },
 	{ MODKEY,	                    XK_i,      shiftboth,    { .i = -1 } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
+	{ MODKEY|ControlMask,           XK_b,      toggleborder,   {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_i,      incnmaster,     {.i = +1 } },

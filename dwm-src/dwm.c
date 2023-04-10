@@ -265,6 +265,7 @@ static Monitor *systraytomon(Monitor *m);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
+static void toggleborder(const Arg *arg);
 static void togglefakefullscreen(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglefullscreen(const Arg *arg);
@@ -2423,6 +2424,13 @@ togglebar(const Arg *arg)
 		XConfigureWindow(dpy, systray->win, CWY, &wc);
 	}
     arrange(selmon);
+}
+
+void
+toggleborder(const Arg *arg)
+{
+  selmon->sel->bw = (selmon->sel->bw == borderpx ? 0 : borderpx);
+  arrange(selmon);
 }
 
 void
