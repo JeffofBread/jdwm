@@ -59,6 +59,7 @@
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
 #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
+#define ColFloat                3
 
 #define SYSTEM_TRAY_REQUEST_DOCK    0
 /* XEMBED messages */
@@ -1068,7 +1069,10 @@ focus(Client *c)
         attachstack(c);
         grabbuttons(c, 1);
         /* set new focused border first to avoid flickering */
-        XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+        if(c->isfloating)
+			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
+		else
+			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 		/* lastfocused may be us if another window was unmanaged */
 		if (lastfocused && lastfocused != c)
 			XSetWindowBorder(dpy, lastfocused->win, scheme[SchemeNorm][ColBorder].pixel);
@@ -1427,7 +1431,10 @@ manage(Window w, XWindowAttributes *wa)
 
     wc.border_width = c->bw;
     XConfigureWindow(dpy, w, CWBorderWidth, &wc);
-    XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
+	if(c->isfloating)
+		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloat].pixel);
+	else
+		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
     configure(c); /* propagates border_width, if size doesn't change */
     updatewindowtype(c);
     updatesizehints(c);
@@ -1461,6 +1468,8 @@ manage(Window w, XWindowAttributes *wa)
     if (c->isfloating)
         c->bw = fborderpx;
         XRaiseWindow(dpy, c->win);
+    if(c->isfloating)
+		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloat].pixel);
     attach(c);
     attachstack(c);
     XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
@@ -2205,7 +2214,7 @@ setup(void)
     /* init appearance */
     scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
     for (i = 0; i < LENGTH(colors); i++)
-        scheme[i] = drw_scm_create(drw, colors[i], 3);
+        scheme[i] = drw_scm_create(drw, colors[i], 4);
 	/* init system tray */
 	updatesystray();
     /* init bars */
@@ -2601,11 +2610,13 @@ togglefloating(const Arg *arg)
         return;
     c->isfloating = !c->isfloating || c->isfixed;
 	if (c->isfloating) {
+        XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
 		c->bw = fborderpx;
 		configure(c);
         int borderdiff = (fborderpx - borderpx) * 2;
         resize(c, c->x, c->y, c->w - borderdiff, c->h - borderdiff, 0);
 	} else {
+        XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 		c->bw = borderpx;
 		configure(c);
 	}
