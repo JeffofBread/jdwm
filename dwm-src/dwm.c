@@ -287,6 +287,7 @@ static void updatetitle(Client *c);
 static void updatewindowtype(Client *c);
 static void updatewmhints(Client *c);
 static void view(const Arg *arg);
+static void viewall(const Arg *arg);
 static void warp(const Client *c);
 static Client *wintoclient(Window w);
 static Monitor *wintomon(Window w);
@@ -935,6 +936,8 @@ drawbar(Monitor *m)
 				drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 				drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 				if (occ & 1 << i && showfloating)
+                // idk how this fixes vacant tabs + bartoggle, but it does - JeffofBread
+				drw_rect(0, 0, 0, 0, 0, m == selmon && selmon->sel && selmon->sel->tags & 1 << i, urg & 1 << i);
 				x += w;
 		}
     }
@@ -2997,6 +3000,18 @@ view(const Arg *arg)
         togglebar(NULL);
     focus(NULL);
     arrange(selmon);
+}
+
+void
+viewall(const Arg *arg)
+{
+	Monitor *m;
+
+	for (m = mons; m; m = m->next) {
+		m->tagset[m->seltags] = arg->ui;
+		arrange(m);
+	}
+	focus(NULL);
 }
 
 Client *
