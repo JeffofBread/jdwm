@@ -168,6 +168,7 @@ struct Monitor {
     Window barwin;
     Window tabwin;
     const Layout *lt[2];
+    int ltcur; /* current layout */
     Pertag *pertag;
 };
 
@@ -251,6 +252,7 @@ static void setclientstate(Client *c, long state);
 static void setclienttagprop(Client *c);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
+static void layoutscroll(const Arg *arg);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
@@ -816,6 +818,7 @@ createmon(void)
     m->nmaster = nmaster;
     m->showbar = showbar;
     m->topbar = topbar;
+    m->ltcur = 0;
     m->gappih = gappih;
     m->gappiv = gappiv;
     m->gappoh = gappoh;
@@ -1915,6 +1918,25 @@ setfullscreen(Client *c, int fullscreen)
      */
     if (!c->isfullscreen)
         while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
+}
+
+void
+layoutscroll(const Arg *arg)
+{
+	if (!arg || !arg->i)
+		return;
+	int switchto = selmon->ltcur + arg->i;
+	int l = LENGTH(layouts);
+
+	if (switchto == l)
+		switchto = 0;
+	else if(switchto < 0)
+		switchto = l - 1;
+
+	selmon->ltcur = switchto;
+	Arg arg2 = {.v= &layouts[switchto] };
+	setlayout(&arg2);
+
 }
 
 void
