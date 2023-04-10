@@ -44,6 +44,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY|ShiftMask,             XK_j,      layoutscroll,   {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,      layoutscroll,   {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_j,      rotatestack,    {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_k,      rotatestack,    {.i = -1 } },
 	{ MODKEY,                       XK_f,      togglefullscreen, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefakefullscreen, {0} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
