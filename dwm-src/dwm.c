@@ -120,7 +120,7 @@ struct Client {
     int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
     int bw, oldbw;
     unsigned int tags;
-    int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+    int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, ignoretransient;
     unsigned int icw, ich; Picture icon;
     int fakefullscreen;
     int issteam;
@@ -187,6 +187,7 @@ typedef struct {
     unsigned int tags;
     int isfloating;
     int monitor;
+    int ignoretransient;
 } Rule;
 
 typedef struct Systray   Systray;
@@ -429,6 +430,7 @@ applyrules(Client *c)
         && (!r->class || strstr(class, r->class))
         && (!r->instance || strstr(instance, r->instance)))
         {
+            c->ignoretransient = r->ignoretransient;
             c->isfloating = r->isfloating;
             c->tags |= r->tags;
             for (m = mons; m && m->num != r->monitor; m = m->next);
@@ -1700,9 +1702,10 @@ propertynotify(XEvent *e)
         switch(ev->atom) {
         default: break;
         case XA_WM_TRANSIENT_FOR:
-            if (!c->isfloating && (XGetTransientForHint(dpy, c->win, &trans)) &&
-                (c->isfloating = (wintoclient(trans)) != NULL))
-                arrange(c->mon);
+			if (!c->ignoretransient && !c->isfloating && 
+			(XGetTransientForHint(dpy, c->win, &trans)) && 
+			(c->isfloating = (wintoclient(trans)) != NULL))
+			    arrange(c->mon);
             break;
         case XA_WM_NORMAL_HINTS:
             c->hintsvalid = 0;

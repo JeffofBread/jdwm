@@ -4,6 +4,11 @@
 picom &
 dwmblocks &
 
+# Fix some java apps not liking dwm
+export _JAVA_AWT_WM_NONREPARENTING=1
+export AWT_TOOLKIT=MToolkit
+wmname LG3D
+
 # Area to add personal run options
 
 # My Desktop Settings:
