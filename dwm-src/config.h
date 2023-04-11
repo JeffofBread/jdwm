@@ -114,8 +114,5 @@ static const char *jgmenucmd[]  = { "jgmenu_run", NULL };
 #include "exitdwm.c"
 #include "shift-tools.c"
 
-// Include Keybinds
-#include "keys.h"
-
-// Include Button Binds
-#include "buttons.h"
+// Include Button and Key Bindings
+#include "binds.h"
