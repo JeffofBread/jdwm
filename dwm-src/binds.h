@@ -72,6 +72,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_e,      exitdwm,        {0} },
 	{ MODKEY,                       XK_u,      focusurgent,    {0} },
 	{ MODKEY,                       XK_r,      resetlayout,    {0} },
+	{ MODKEY,                       XK_s,      togglesticky,    {0} },
 };
 
 /* button definitions */
