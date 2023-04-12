@@ -2213,16 +2213,22 @@ sendmon(Client *c, Monitor *m)
 {
     if (c->mon == m)
         return;
+    int hadfocus = (c == selmon->sel);
     unfocus(c, 1);
     detach(c);
     detachstack(c);
+    arrange(c->mon);
     c->mon = m;
     c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
     attach(c);
     attachstack(c);
     setclienttagprop(c);
-    focus(NULL);
-    arrange(NULL);
+	arrange(m);
+	if (hadfocus) {
+		focus(c);
+		restack(m);
+	} else
+		focus(NULL);
 }
 
 void
