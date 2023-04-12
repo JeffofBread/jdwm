@@ -1019,6 +1019,8 @@ drawbar(Monitor *m)
             }
             if (m->sel->isfloating && showfloating)
                 drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+            if (m->sel->issticky)
+				drw_polygon(drw, x + boxs, m->sel->isfloating ? boxs * 2 + boxw : boxs, stickyiconbb.x, stickyiconbb.y, boxw, boxw * stickyiconbb.y / stickyiconbb.x, stickyicon, LENGTH(stickyicon), Nonconvex, m->sel->tags & m->tagset[m->seltags]);
         } else {
             drw_setscheme(drw, scheme[SchemeInfoNorm]);
             drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
