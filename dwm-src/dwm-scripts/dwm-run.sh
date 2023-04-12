@@ -18,5 +18,5 @@ wmname LG3D
 # My Laptop Settings
 # xrandr --output eDP-1 --primary --mode 1920x1080 --rate 60.00 --pos 0x0 --rotate normal --output HDMI-1 --off
 
-while type dwm >/dev/null; do dwm && continue || break; done
-# dwm
+# while type dwm >/dev/null; do dwm && continue || break; done
+dwm
