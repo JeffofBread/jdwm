@@ -2454,13 +2454,13 @@ takepreview(void)
 		imlib_context_set_visual(DefaultVisual(dpy, screen));
 		imlib_context_set_drawable(root);
 
-		if (previewbar)
+		if (!previewbar)
 			imlib_copy_drawable_to_image(0, selmon->wx, selmon->wy, selmon->ww, selmon->wh, 0, 0, 1);
 		else
 			imlib_copy_drawable_to_image(0, selmon->mx, selmon->my, selmon->mw ,selmon->mh, 0, 0, 1);
 		selmon->tagmap[i] = XCreatePixmap(dpy, selmon->tagwin, selmon->mw / scalepreview, selmon->mh / scalepreview, DefaultDepth(dpy, screen));
 		imlib_context_set_drawable(selmon->tagmap[i]);
-		imlib_render_image_part_on_drawable_at_size(0, 0, selmon->mw, selmon->mh, 0, 0, selmon->mw / scalepreview, selmon->mh / scalepreview);
+		imlib_render_image_part_on_drawable_at_size(0, 0, selmon->mw, selmon->mh - bh - vp, 0, 0, selmon->mw / scalepreview, selmon->mh / scalepreview);
 		imlib_free_image();
 	}
 }
