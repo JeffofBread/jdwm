@@ -87,7 +87,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeStatus, SchemeTagsSel, SchemeTagsNorm, SchemeInfoSel, SchemeInfoNorm }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -961,7 +961,7 @@ drawbar(Monitor *m)
 
     /* draw status first so it can be overdrawn by tags later */
     if (m == selmon && showstatus) { /* status is only drawn on selected monitor */
-        drw_setscheme(drw, scheme[SchemeNorm]);
+        drw_setscheme(drw, scheme[SchemeStatus]);
 		tw = TEXTW(stext) - lrpad / 2 + 2; /* 2px extra right padding */
         drw_text(drw, m->ww - tw - stw - 2 * sp, 0, tw, bh, lrpad / 2 - 2, stext, 0);
     }
@@ -975,12 +975,12 @@ drawbar(Monitor *m)
     x = 0;
     for (i = 0; i < LENGTH(tags); i++) {
         /* Do not draw vacant tags */
-        if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+        if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
             continue;
 		if (showtags) {
 				w = TEXTW(tags[i]);
                 wdelta = selmon->alttag ? abs(TEXTW(tags[i]) - TEXTW(tagsalt[i])) / 2 : 0;
-				drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+				drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeTagsSel : SchemeTagsNorm]);
                 drw_text(drw, x, 0, w, bh, wdelta + lrpad / 2, (selmon->alttag ? tagsalt[i] : tags[i]), urg & 1 << i);
 				if (occ & 1 << i && showfloating)
                 // idk how this fixes vacant tabs + bartoggle, but it does - JeffofBread
@@ -992,7 +992,7 @@ drawbar(Monitor *m)
 	/* draw layout indicator if showlayout */
 	if (showlayout) {
 		w = TEXTW(m->ltsymbol);
-		drw_setscheme(drw, scheme[SchemeNorm]);
+		drw_setscheme(drw, scheme[SchemeTagsNorm]);
 		x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 	}
 
@@ -1002,7 +1002,7 @@ drawbar(Monitor *m)
 			int mid = (m->ww - (int)TEXTW(m->sel->name)) / 2 - x;
 			/* make sure name will not overlap on tags even when it is very long */
 			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
-            drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+            drw_setscheme(drw, scheme[m == selmon ? SchemeInfoSel : SchemeInfoNorm]);
             if (centeredwindowname == 0) {
                 drw_text(drw, x, 0, w - 2 * sp, bh, lrpad / 2 + (m->sel->icon ? m->sel->icw + ICONSPACING : 0), m->sel->name, 0);
                 if (m->sel->icon) drw_pic(drw, x + lrpad / 2, (bh - m->sel->ich) / 2, m->sel->icw, m->sel->ich, m->sel->icon);
@@ -1014,7 +1014,7 @@ drawbar(Monitor *m)
             if (m->sel->isfloating && showfloating)
                 drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
         } else {
-            drw_setscheme(drw, scheme[SchemeNorm]);
+            drw_setscheme(drw, scheme[SchemeInfoNorm]);
             drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
         }
     }
