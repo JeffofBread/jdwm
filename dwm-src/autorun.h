@@ -6,6 +6,5 @@ static const char *const autostart[] = {
 	"nm-applet", NULL,
 	"solaar", "-w", "hide", NULL,
 	"jetbrains-toolbox", "--minimize", NULL,
-	"steam", "-silent", NULL,
 	NULL /* terminate */
 };

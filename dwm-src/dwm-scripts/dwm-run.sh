@@ -3,6 +3,7 @@
 # Apps that persist through a dwm restart can be added here
 picom &
 dwmblocks &
+steam -silent &
 
 # Fix some java apps not liking dwm
 export _JAVA_AWT_WM_NONREPARENTING=1
