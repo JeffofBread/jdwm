@@ -76,6 +76,11 @@ static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,       0 },
 };
 
+/* window swallowing */
+static const int swaldecay = 3;
+static const int swalretroactive = 1;
+static const char swalsymbol[] = "👅";
+
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */

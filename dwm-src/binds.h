@@ -70,9 +70,10 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_9,                      		8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,    	   		{0} },
 	{ MODKEY|ShiftMask,             XK_e,      exitdwm,        		{0} },
-	{ MODKEY,                       XK_u,      focusurgent,    		{0} },
+	{ MODKEY|ShiftMask,             XK_u,      focusurgent,    		{0} },
 	{ MODKEY,                       XK_r,      resetlayout,    		{0} },
 	{ MODKEY,                       XK_s,      togglesticky,    	{0} },
+	{ MODKEY,                       XK_u,      swalstopsel,    		{0} },
 };
 
 /* button definitions */
@@ -99,12 +100,13 @@ static const Button buttons[] = {
 	 * to control these separately (i.e. to retain the feature to move a tiled window
 	 * into a floating position).
 	 */
-	{ ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-	{ ClkRootWin,  			0, 				Button3, 		spawn, 			{.v = jgmenucmd } },
+	{ ClkClientWin,      MODKEY,          Button1,        moveorplace,    {.i = 0} },
+	{ ClkClientWin,      MODKEY,          Button2,        togglefloating, {0} },
+	{ ClkClientWin,      MODKEY,          Button3,        resizemouse,    {0} },
+	{ ClkClientWin,      MODKEY|ShiftMask,Button1,        swalmouse,      {0} },
+	{ ClkTagBar,         0,               Button1,        view,           {0} },
+	{ ClkTagBar,         0,               Button3,        toggleview,     {0} },
+	{ ClkTagBar,         MODKEY,          Button1,        tag,            {0} },
+	{ ClkTagBar,         MODKEY,          Button3,        toggletag,      {0} },
+	{ ClkRootWin,  		 0, 			  Button3, 		  spawn, 		  {.v = jgmenucmd } },
 };

@@ -40,6 +40,8 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
+	cp -f dwmswallow ${DESTDIR}${PREFIX}/bin
+	chmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
 	sudo ln -sf ${CURDIR}/dwm-scripts/dwm-run.sh /bin
 	cp -f dwm-scripts/jeff_dwm.desktop /usr/share/xsessions
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
@@ -50,6 +52,7 @@ install: all
 	chmod 755 /bin/jeff-dwm-recompile.sh
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
+		${DESTDIR}${MANPREFIX}/bin/dwmswallow\
 		${DESTDIR}${MANPREFIX}/bin/dwm-run.sh\
 		${DESTDIR}${MANPREFIX}/usr/share/xsessions/jeff_dwm.desktop\
 		${DESTDIR}${MANPREFIX}/bin/jeff-dwm-recompile.sh\
