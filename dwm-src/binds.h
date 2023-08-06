@@ -74,6 +74,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_r,      resetlayout,    		{0} },
 	{ MODKEY,                       XK_s,      togglesticky,    	{0} },
 	{ MODKEY,                       XK_u,      swalstopsel,    		{0} },
+	{ MODKEY,                       XK_grave,  togglescratch,       {.v = scratchpadcmd } },
 };
 
 /* button definitions */
