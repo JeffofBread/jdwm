@@ -28,7 +28,7 @@ static const int scalepreview       		= 4;        /* preview scaling (display w 
 static const int previewbar         		= 0;        /* show the bar in the preview window */
 static const int showbar            		= 1;        /* 0 means no bar */
 static const int topbar             		= 1;        /* 0 means bottom bar */
-static const int showtitle         			= 1;        /* 0 means no title */
+static const int showtitle         			= 0;        /* 0 means no title */
 static const int showtags           		= 1;        /* 0 means no tags */
 static const int showlayout         		= 1;        /* 0 means no layout indicator */
 static const int showstatus         		= 1;        /* 0 means no status bar */
@@ -39,7 +39,7 @@ static const unsigned int centeredwindowname= 0;		/* 0 is default dwm behavior, 
 #define ICONSIZE 							  16   		/* icon size */
 #define ICONSPACING							  5 		/* space between icon and title */
 static const char *fonts[]          		= { "JetBrainsMono:size=10" };
-static const char dmenufont[]       		= "JetBrainsMono:size=10";
+static const char dmenufont[]       		=   "JetBrainsMono:size=10";
 
 // Default Color Scheme
 static const char col_gray1[]       		= "#222222";

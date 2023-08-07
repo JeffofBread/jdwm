@@ -689,8 +689,9 @@ cleanup(void)
         while (m->stack)
             unmanage(m->stack, 0);
     XUngrabKey(dpy, AnyKey, AnyModifier, root);
-    while (mons)
+    while (mons) {
         cleanupmon(mons);
+    }
 	if (showsystray) {
 		XUnmapWindow(dpy, systray->win);
 		XDestroyWindow(dpy, systray->win);
@@ -1034,8 +1035,9 @@ drawbar(Monitor *m)
     unsigned int i, occ = 0, urg = 0;
     Client *c;
 
-    if (!m->showbar)
+    if (!m->showbar) {
         return;
+    }
 
 	if(showsystray && m == systraytomon(m) && !systrayonleft)
 		stw = getsystraywidth();
@@ -1687,11 +1689,12 @@ manage(Window w, XWindowAttributes *wa)
     c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
     XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
     grabbuttons(c, 0);
-    if (!c->isfloating)
+    if (!c->isfloating) 
         c->isfloating = c->oldstate = trans != None || c->isfixed;
-    if (c->isfloating)
+    if (c->isfloating) {
         c->bw = fborderpx;
         XRaiseWindow(dpy, c->win);
+    }
     if(c->isfloating)
 		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloat].pixel);
     attach(c);
@@ -1737,8 +1740,9 @@ maprequest(XEvent *e)
 		updatesystray();
 	}
 
-    if (!XGetWindowAttributes(dpy, ev->window, &wa) || wa.override_redirect)
+    if (!XGetWindowAttributes(dpy, ev->window, &wa) || wa.override_redirect) {
         return;
+    }
 	switch (wintoclient2(ev->window, &c, &root)) {
 	case ClientRegular: /* fallthrough */
 	case ClientSwallowee:
@@ -2746,8 +2750,9 @@ setup(void)
     cursor[CurSwal] = drw_cur_create(drw, XC_bottom_side);
     /* init appearance */
     scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
-    for (i = 0; i < LENGTH(colors); i++)
+    for (i = 0; i < LENGTH(colors); i++) {
         scheme[i] = drw_scm_create(drw, colors[i], 4);
+    }
 	/* init system tray */
 	updatesystray();
     /* init bars */
@@ -2812,8 +2817,9 @@ void
 sigchld(int unused)
 {
     pid_t pid;
-    if (signal(SIGCHLD, sigchld) == SIG_ERR)
+    if (signal(SIGCHLD, sigchld) == SIG_ERR) {
         die("can't install SIGCHLD handler:");
+    }
 	while (0 < (pid = waitpid(-1, NULL, WNOHANG))) {
 		pid_t *p, *lim;
 
@@ -3963,7 +3969,7 @@ updaterules(Client *c)
 			    found_rule=1;
             }    
             c->tags |= r->tags;
-            for (m = mons; m && m->num != r->monitor; m = m->next);
+            for (m = mons; m && m->num != r->monitor; m = m->next){};  /* Not sure where this is from, havent fixed, pretty sure its useless, will maybe get rid of it later */
 			if (m)
 				c->mon = m;
 		}
