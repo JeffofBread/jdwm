@@ -2030,6 +2030,7 @@ placemouse(const Arg *arg)
 	if (nx != -9999)
 		resize(c, nx, ny, c->w, c->h, 0);
 	arrangemon(c->mon);
+    arrange(c->mon);
 }
 
 void
@@ -2868,8 +2869,8 @@ swal(Client *swer, Client *swee, int manage)
 	/* Disable fullscreen prior to swallow. Swallows involving fullscreen
 	 * windows produces quirky artefacts such as fullscreen terminals or tiled
 	 * pseudo-fullscreen windows. */
-	//setfullscreen(swer, 0);
-	//setfullscreen(swee, 0);
+	setfullscreen(swer, 0);
+	setfullscreen(swee, 0);
 
 	/* Swap swallowee into client and focus lists. Keeps current focus unless
 	 * the swer (which gets unmapped) is focused in which case the swee will
@@ -2903,8 +2904,7 @@ swal(Client *swer, Client *swee, int manage)
 
 	if (swee->isfloating || !swee->mon->lt[swee->mon->sellt]->arrange)
 		XRaiseWindow(dpy, swee->win);
-	resize(swee, swer->x, swer->y, swer->w, swer->h, 0);
-
+	//resize(swee, swer->x, swer->y, swer->w, swer->h, 0);
 	focus(NULL);
 	arrange(NULL);
 	if (manage)
