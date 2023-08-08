@@ -113,7 +113,8 @@ static const char *dmenucmd[]      = { "dmenu_run", "-fn", dmenufont, "-nb", col
 static const char *termcmd[]       = { "kitty", NULL };
 static const char *recompilecmd[]  = { "jeff-dwm-recompile.sh", NULL };
 static const char *jgmenucmd[]     = { "jgmenu_run", NULL };
-static const char *scratchpadcmd[] = { "kitty", "-T", "scratchpad", NULL };
+static const char  scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 
 #include "autorun.h"
 #include "focusurgent.c"
