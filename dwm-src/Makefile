@@ -17,10 +17,10 @@ options:
 .c.o:
 	${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h config.mk
+${OBJ}: config/config.h config.mk
 
-config.h:
-	cp config.def.h $@
+config/config.h:
+	cp config/config.def.h $@
 
 dwm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}

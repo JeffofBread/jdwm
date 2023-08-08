@@ -42,7 +42,7 @@ static const char *fonts[]          		= { "JetBrainsMono:size=10" };
 static const char dmenufont[]       		=   "JetBrainsMono:size=10";
 
 /* Include chosen theme here. Make custom themes by copying .def file and customizing/renaming */
-#include "themes/default_theme.h"
+#include <default_theme.h>
 
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
 static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
@@ -75,7 +75,7 @@ static const int   decorhints     = 1;    /* 1 means respect decoration hints   
 static const int   lockfullscreen = 1;    /* 1 will force focus on the fullscreen window  */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
-#include "vanitygaps.c"
+#include <vanitygaps.c>
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -116,10 +116,10 @@ static const char *jgmenucmd[]     = { "jgmenu_run", NULL };
 static const char  scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
 
-#include "autorun.h"
-#include "focusurgent.c"
-#include "exitdwm.c"
-#include "shift-tools.c"
+#include <autorun.h>
+#include <focusurgent.c>
+#include <exitdwm.c>
+#include <shift-tools.c>
 
 // Include Button and Key Bindings
-#include "binds.h"
+#include <binds.h>

@@ -412,7 +412,7 @@ static Swallow *swallows;
 static Window root, wmcheckwin;
 
 /* configuration, allows nested code to access above variables */
-#include "config.h"
+#include <config.h>
 
 static unsigned int scratchtag = 1 << LENGTH(tags);
 
