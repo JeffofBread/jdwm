@@ -40,7 +40,7 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
-	cp -f dwmswallow ${DESTDIR}${PREFIX}/bin
+	cp -f dwm-scripts/dwmswallow ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
 	sudo ln -sf ${CURDIR}/dwm-scripts/dwm-run.sh /bin
 	cp -f dwm-scripts/jeff_dwm.desktop /usr/share/xsessions
@@ -50,6 +50,8 @@ install: all
 	rm -f /bin/jeff-dwm-recompile.sh
 	echo -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make clean install && read -rp \"\n\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > /bin/jeff-dwm-recompile.sh
 	chmod 755 /bin/jeff-dwm-recompile.sh
+# Lazy way of making a build directory, just moves the binaries after they have been built and copied. 
+	mv dwm *.o ${CURDIR}/build
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/bin/dwmswallow\
