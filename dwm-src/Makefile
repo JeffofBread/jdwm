@@ -51,6 +51,7 @@ install: all
 	echo -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make clean install && read -rp \"\n\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > /bin/jeff-dwm-recompile.sh
 	chmod 755 /bin/jeff-dwm-recompile.sh
 # Lazy way of making a build directory, just moves the binaries after they have been built and copied. 
+	mkdir -p ${CURDIR}/build
 	mv dwm *.o ${CURDIR}/build
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
