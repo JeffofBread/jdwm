@@ -33,32 +33,16 @@ static const int showtags           		= 1;        /* 0 means no tags */
 static const int showlayout         		= 1;        /* 0 means no layout indicator */
 static const int showstatus         		= 1;        /* 0 means no status bar */
 static const int showfloating       		= 1;        /* 0 means no floating indicator */
-static const int vertpad           			= 10;       /* vertical padding of bar */
-static const int sidepad            		= 10;       /* horizontal padding of bar */
+static const int vertpad           			= 0;       /* vertical padding of bar */
+static const int sidepad            		= 0;       /* horizontal padding of bar */
 static const unsigned int centeredwindowname= 0;		/* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
 #define ICONSIZE 							  16   		/* icon size */
 #define ICONSPACING							  5 		/* space between icon and title */
 static const char *fonts[]          		= { "JetBrainsMono:size=10" };
 static const char dmenufont[]       		=   "JetBrainsMono:size=10";
 
-// Default Color Scheme
-static const char col_gray1[]       		= "#222222";
-static const char col_gray2[]       		= "#444444";
-static const char col_gray3[]       		= "#bbbbbb";
-static const char col_gray4[]       		= "#eeeeee";
-static const char col_cyan[]        		= "#005577";
-static const char *colors[][4] = {
-	/*               fg         bg         border     float */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2, col_gray2 },
-	[SchemeSel] =  { col_gray4, col_cyan,  col_gray2, col_cyan },
-
-	// colorbar Patch
-	[SchemeStatus]  	= { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  	= { col_gray4, col_cyan,   "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
-	[SchemeTagsNorm]  	= { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-	[SchemeInfoSel]  	= { col_gray4, col_cyan,   "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
-	[SchemeInfoNorm]  	= { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
-};
+/* Include chosen theme here. Make custom themes by copying .def file and customizing/renaming */
+#include "themes/default_theme.h"
 
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
 static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
