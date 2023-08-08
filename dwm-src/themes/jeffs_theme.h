@@ -1,4 +1,4 @@
-// Default Color Scheme
+// Jeff's custom color scheme
 static const char col_gray1[] = "#222222";
 static const char col_gray2[] = "#444444";
 static const char col_gray3[] = "#bbbbbb";

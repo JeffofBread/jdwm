@@ -2,7 +2,6 @@
 
 # Apps that persist through a dwm restart can be added here
 picom &
-dwmblocks &
 
 
 # Fix some java apps not liking dwm
