@@ -44,6 +44,7 @@ install: all
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
 	sudo ln -sf ${CURDIR}/dwm-scripts/jeff_dwm-run.sh /bin
 	cp -f dwm-scripts/jeff_dwm.desktop /usr/share/xsessions
+	echo "Icon=${CURDIR}/resources/dwm.png" >> /usr/share/xsessions/jeff_dwm.desktop
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < resources/dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
