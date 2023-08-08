@@ -42,10 +42,10 @@ install: all
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
 	cp -f dwm-scripts/dwmswallow ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
-	sudo ln -sf ${CURDIR}/dwm-scripts/dwm-run.sh /bin
+	sudo ln -sf ${CURDIR}/dwm-scripts/jeff_dwm-run.sh /bin
 	cp -f dwm-scripts/jeff_dwm.desktop /usr/share/xsessions
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
-	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	sed "s/VERSION/${VERSION}/g" < resources/dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	rm -f /bin/jeff-dwm-recompile.sh
 	echo -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make clean install && read -rp \"\n\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > /bin/jeff-dwm-recompile.sh
@@ -56,7 +56,7 @@ install: all
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/bin/dwmswallow\
-		${DESTDIR}${MANPREFIX}/bin/dwm-run.sh\
+		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-run.sh\
 		${DESTDIR}${MANPREFIX}/usr/share/xsessions/jeff_dwm.desktop\
 		${DESTDIR}${MANPREFIX}/bin/jeff-dwm-recompile.sh\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1

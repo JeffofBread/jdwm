@@ -22,7 +22,7 @@ FREETYPEINC = /usr/include/freetype2
 #MANPREFIX = ${PREFIX}/man
 
 # includes and libs
-INCS = -I${X11INC} -I${FREETYPEINC} -I${CURDIR} -I${CURDIR}/config -I${CURDIR}/themes 
+INCS = -I${X11INC} -I${FREETYPEINC} -I${CURDIR} -I${CURDIR}/config -I${CURDIR}/themes -I${CURDIR}/resources
 LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2
 
 # flags
