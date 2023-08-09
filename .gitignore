@@ -3,3 +3,4 @@ util.o
 drw.o
 dwm.o
 .*
+build/

@@ -1,12 +1,67 @@
 # dwm - dynamic window manager
 # See LICENSE file for copyright and license details.
 
-include config.mk
+#######################################################################################
+#  Big thanks to FTLabs (https://github.com/FT-Labs) for help with the build dir and  #
+#  thanks much to UtkarshVerma (https://github.com/UtkarshVerma) who is the creator   #
+#  of dwmblocks-async, whos Makefile I shamelessly pulled and learned from.           #
+#######################################################################################
 
-SRC = drw.c dwm.c util.c
-OBJ = ${SRC:.c=.o}
+# dwm version
+VERSION = 6.4
 
+# paths
+PREFIX = /usr/local
+MANPREFIX = ${PREFIX}/share/man
+
+X11INC = /usr/X11R6/include
+X11LIB = /usr/X11R6/lib
+
+# Xinerama, comment if you don't want it
+XINERAMALIBS  = -lXinerama
+XINERAMAFLAGS = -DXINERAMA
+
+# freetype
+FREETYPELIBS = -lfontconfig -lXft
+FREETYPEINC = /usr/include/freetype2
+
+# OpenBSD (uncomment)
+#FREETYPEINC = ${X11INC}/freetype2
+#MANPREFIX = ${PREFIX}/man
+
+# includes and libs
+INCS = -I${X11INC} -I${FREETYPEINC} -I${CURDIR} -I${CURDIR}/config -I${CURDIR}/themes -I${CURDIR}/resources
+LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2
+
+# flags
+CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+CFLAGS   = -g -std=c99 -pedantic -Wall -O0 -Wno-deprecated-declarations -Wno-implicit-function-declaration ${INCS} ${CPPFLAGS}
+LDFLAGS  = ${LIBS}
+
+# compiler and linker
+CC = cc
+
+# jeff_dwm dirs
+BUILD_DIR := build
+CONFIG_DIR := config
+RESOURCES_DIR := resources
+THEMES_DIR := themes
+SCRIPTS_DIR := scripts
+
+SRC := drw.c dwm.c util.c
+OBJ := ${addprefix ${BUILD_DIR}/,${SRC:.c=.o}}
+
+# 0 = pretty, 1 = raw make output
+VERBOSE := 0
+
+# Print format for prettier output
+PRINTF := @printf "%-21s  |  %s\n"
+ifeq ($(VERBOSE), 0)
+	Q := @
+all: dwm
+else
 all: options dwm
+endif
 
 options:
 	@echo dwm build options:
@@ -14,67 +69,60 @@ options:
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
 
-.c.o:
-	${CC} -c ${CFLAGS} $<
+${BUILD_DIR}/%.o: %.c | ${BUILD_DIR}
+	$(PRINTF) "Compile source (${CC})" $@
+	$Q${CC} -c ${CFLAGS} $< -o $@
 
-${OBJ}: config/config.h config.mk
+${BUILD_DIR}:
+	$(PRINTF) "Make build directory" $@
+	$Qmkdir -p ${BUILD_DIR}
+
+${OBJ}: ${CONFIG_DIR}/config.h
 
 config/config.h:
-	cp config/config.def.h $@
+	$(PRINTF) "Copy config.def.h" "${CONFIG_DIR}/config.def.h -> ${CONFIG_DIR}/config.h"
+	$Qcp ${CONFIG_DIR}/config.def.h $@
 
 dwm: ${OBJ}
-	${CC} -o $@ ${OBJ} ${LDFLAGS}
+	$(PRINTF) "Compile source (${CC})" ${BUILD_DIR}/$@
+	$Q${CC} -o ${BUILD_DIR}/$@ ${OBJ} ${LDFLAGS}
 
 clean:
-	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
-
-dist: clean
-	mkdir -p dwm-${VERSION}
-	cp -R LICENSE Makefile README config.def.h config.mk\
-		dwm.1 drw.h util.h ${SRC} dwm.png transient.c dwm-${VERSION}
-	tar -cf dwm-${VERSION}.tar dwm-${VERSION}
-	gzip dwm-${VERSION}.tar
-	rm -rf dwm-${VERSION}
+	$(PRINTF) "Clean build directory" /$(BUILD_DIR)
+	$Qrm -f ${BUILD_DIR}/dwm ${OBJ} dwm-${VERSION}.tar.gz
 
 install: all
-	mkdir -p ${DESTDIR}${PREFIX}/bin
-	cp -f dwm ${DESTDIR}${PREFIX}/bin
-	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
-# Copy dwmswallow script into bin for dynamic swallow patch and make it executable
-	cp -f dwm-scripts/dwmswallow ${DESTDIR}${PREFIX}/bin
-	chmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
+	$(PRINTF) "Install binary" ${DESTDIR}${PREFIX}/bin
+	$Qmkdir -p ${DESTDIR}${PREFIX}/bin
+	$Qcp -f ${BUILD_DIR}/dwm ${DESTDIR}${PREFIX}/bin
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwm
+	$(PRINTF) "Install scripts" ${DESTDIR}${PREFIX}/bin
+	$Qcp -f ${SCRIPTS_DIR}/dwmswallow ${DESTDIR}${PREFIX}/bin
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
 #Alternate method of having the swallow script executed, makes editable without recompile
-##	sudo ln -sf ${CURDIR}/dwm-scripts/dwmswallow /bin
-
-# Copy run script to bin directory and make executable
-	cp -f dwm-scripts/jeff_dwm-run.sh ${DESTDIR}${PREFIX}/bin
-	chmod 755 ${DESTDIR}${PREFIX}/bin/jeff_dwm-run.sh
+##	sudo ln -sf ${CURDIR}/${SCRIPTS_DIR}/dwmswallow /bin
+	$Qcp -f ${SCRIPTS_DIR}/jeff_dwm-run.sh ${DESTDIR}${PREFIX}/bin
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/jeff_dwm-run.sh
 # Alternate method of having the run script executed, makes editable without recompile
-##	sudo ln -sf ${CURDIR}/dwm-scripts/jeff_dwm-run.sh /bin
+##	sudo ln -sf ${CURDIR}/${SCRIPTS_DIR}/jeff_dwm-run.sh /bin
+	$Qrm -f /bin/jeff_dwm-recompile.sh
+	$Qecho -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make clean install && read -rp \"\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > /bin/jeff_dwm-recompile.sh
+	$Qchmod 755 /bin/jeff_dwm-recompile.sh
+	$(PRINTF) "Install .desktop file" /usr/share/xsessions/jeff_dwm.desktop
+	$Qcp -f ${SCRIPTS_DIR}/jeff_dwm.desktop /usr/share/xsessions
+	$Qecho "Icon=${CURDIR}/${RESOURCES_DIR}/dwm.png" >> /usr/share/xsessions/jeff_dwm.desktop
+	$(PRINTF) "Install man page" ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	$Qmkdir -p ${DESTDIR}${MANPREFIX}/man1
+	$Qsed "s/VERSION/${VERSION}/g" < resources/dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	$Qchmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-# Copy .desktop file into xsessions and append with icon directory (absolute path to dwm-src/resources/dwm.png)
-	cp -f dwm-scripts/jeff_dwm.desktop /usr/share/xsessions
-	echo "Icon=${CURDIR}/resources/dwm.png" >> /usr/share/xsessions/jeff_dwm.desktop
-
-	mkdir -p ${DESTDIR}${MANPREFIX}/man1
-	sed "s/VERSION/${VERSION}/g" < resources/dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
-	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
-# Remove old recompile file. Not 100% necessary but protects against changing source code directory
-	rm -f /bin/jeff_dwm-recompile.sh
-
-# Create recompile file and make executable. Lazy, easier than copying a file. If you need to change terminal you can, just update "kitty sh -c"
-	echo -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make clean install && read -rp \"\n\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > /bin/jeff_dwm-recompile.sh
-	chmod 755 /bin/jeff_dwm-recompile.sh
-
-# Lazy way of making a build directory, just moves the binaries after they have been built and copied. 
-	mkdir -p ${CURDIR}/build
-	mv dwm *.o ${CURDIR}/build
 uninstall:
-	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
+	$(PRINTF) "Remove all files" "dwm, dwmswallow,jeff_dwm-run.sh,jeff_dwm.desktop, dwm.1"
+	$Qrm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/bin/dwmswallow\
 		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-run.sh\
 		${DESTDIR}${MANPREFIX}/usr/share/xsessions/jeff_dwm.desktop\
 		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-recompile.sh\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all options clean install uninstall
