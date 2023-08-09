@@ -6,6 +6,7 @@
 Block blocks[] = {
 //   Command, Update Interval, Update Signal
     {"free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	30,	0},
+    {"date '+%b %d (%a) %I:%M%p'", 60, 0},
 };
 
 const unsigned short blockCount = LEN(blocks);
