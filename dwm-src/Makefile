@@ -29,9 +29,13 @@ FREETYPEINC = /usr/include/freetype2
 #FREETYPEINC = ${X11INC}/freetype2
 #MANPREFIX = ${PREFIX}/man
 
+# yajl
+YAJLLIBS = -lyajl
+YAJLINC = /usr/include/yajl
+
 # includes and libs
-INCS = -I${X11INC} -I${FREETYPEINC} -I${CURDIR} -I${CURDIR}/config -I${CURDIR}/themes -I${CURDIR}/resources
-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2
+INCS = -I${X11INC} -I${FREETYPEINC} -I${CURDIR} -I${CURDIR}/config -I${CURDIR}/themes -I${CURDIR}/resources -I${YAJLINC}
+LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2 ${YAJLLIBS}
 
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
@@ -58,9 +62,9 @@ VERBOSE := 0
 PRINTF := @printf "%-21s  |  %s\n"
 ifeq ($(VERBOSE), 0)
 	Q := @
-all: dwm
+all: dwm dwm-msg
 else
-all: options dwm
+all: options dwm dwm-msg
 endif
 
 options:
@@ -87,15 +91,21 @@ dwm: ${OBJ}
 	$(PRINTF) "Compile source (${CC})" ${BUILD_DIR}/$@
 	$Q${CC} -o ${BUILD_DIR}/$@ ${OBJ} ${LDFLAGS}
 
+dwm-msg: ${BUILD_DIR}/dwm-msg.o
+	$(PRINTF) "Compile source (${CC})" ${BUILD_DIR}/$@
+	$Q${CC} -o ${BUILD_DIR}/$@ $< ${LDFLAGS}
+
 clean:
 	$(PRINTF) "Clean build directory" /$(BUILD_DIR)
-	$Qrm -f ${BUILD_DIR}/dwm ${OBJ} dwm-${VERSION}.tar.gz
+	$Qrm -f ${BUILD_DIR}/dwm ${BUILD_DIR}/dwm-msg ${OBJ} dwm-${VERSION}.tar.gz
 
 install: all
 	$(PRINTF) "Install binary" ${DESTDIR}${PREFIX}/bin
 	$Qmkdir -p ${DESTDIR}${PREFIX}/bin
 	$Qcp -f ${BUILD_DIR}/dwm ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwm
+	$Qcp -f ${BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}/bin
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwm-msg
 	$(PRINTF) "Install scripts" ${DESTDIR}${PREFIX}/bin
 	$Qcp -f ${SCRIPTS_DIR}/dwmswallow ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
