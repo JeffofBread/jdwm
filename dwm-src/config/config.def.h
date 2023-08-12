@@ -42,13 +42,14 @@ static const char *fonts[]          		= { "JetBrainsMono:size=10" };
 static const char dmenufont[]       		=   "JetBrainsMono:size=10";
 
 /* Include chosen theme here. Make custom themes by copying .def file and customizing/renaming */
-#include <default_theme.h>
+#include <jeffs_theme.h>
+//#include <default_theme.h>
 
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
 static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
 
 /* tagging */
-static const char *tags[]           = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[]           		= { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[]        = { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
 static const int   momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
@@ -105,13 +106,31 @@ static const Layout layouts[] = {
 	{ MODKEY|Mod1Mask,              KEY,      viewall,        {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      previewtag,     {.ui = TAG } },     
 
+static const char *ipcsockpath = "/tmp/dwm.sock";
+static IPCCommand ipccommands[] = {
+  IPCCOMMAND(  view,                1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggleview,          1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tag,                 1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggletag,           1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tagmon,              1,      {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  focusmon,            1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  focusstack,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  zoom,                1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  killclient,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  togglefloating,      1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  setmfact,            1,      {ARG_TYPE_FLOAT}  ),
+  IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
+  IPCCOMMAND(  quit,                1,      {ARG_TYPE_NONE}   )
+};
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static const char *dmenucmd[]      = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]       = { "kitty", NULL };
-static const char *recompilecmd[]  = { "jeff-dwm-recompile.sh", NULL };
+static const char *recompilecmd[]  = { "jeff_dwm-recompile.sh", NULL };
 static const char *jgmenucmd[]     = { "jgmenu_run", NULL };
 static const char  scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
