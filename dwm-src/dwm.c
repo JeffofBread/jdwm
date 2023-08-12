@@ -770,6 +770,11 @@ clientmessage(XEvent *e)
 			updatesystrayicongeom(c, wa.width, wa.height);
 			XAddToSaveSet(dpy, c->win);
 			XSelectInput(dpy, c->win, StructureNotifyMask | PropertyChangeMask | ResizeRedirectMask);
+
+            /* https://www.reddit.com/r/suckless/comments/hzop00/comment/fzpr3dc/?utm_source=share&utm_medium=web2x&context=3 */
+            XClassHint ch = {"dwmsystray", "dwmsystray"};
+			XSetClassHint(dpy, c->win, &ch);
+
 			XReparentWindow(dpy, c->win, systray->win, 0, 0);
 			/* use parents background color */
 			swa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
