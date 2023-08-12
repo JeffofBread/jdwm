@@ -8,7 +8,7 @@ git clone https://github.com/JeffofBread/jeff_dwm.git
 cd jeff_dwm
 sudo ./install.sh
 ```
-After your first install, you can use `Ctrl + Shift + Q` to open the recompile script in kitty. To restart jeff_dwm ([assuming you haven't removed the auto-restart script in `jeff_dwm-run.sh`](https://github.com/JeffofBread/jeff_dwm/blob/e9e86bc5097c194a8f25db21be4e961054f4e123/dwm-src/scripts/jeff_dwm-run.sh#L19C1-L19C61), otherwise it will just quit to your display manager), press `Super + Shift + Q`.
+After your first install, you can use `Ctrl + Shift + Q` to open the recompile script in kitty. To restart jeff_dwm ([assuming you haven't removed the auto-restart script in `jeff_dwm-run.sh`](https://github.com/JeffofBread/jeff_dwm/blob/e9e86bc5097c194a8f25db21be4e961054f4e123/dwm-src/scripts/jeff_dwm-run.sh#L19C1-L19C61)), press `Super + Shift + Q`.
 
 ## Dependencies
 
