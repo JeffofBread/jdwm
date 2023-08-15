@@ -20,3 +20,50 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 
 - picom
 - feh
+
+## Patches
+
+All the original .diff files are located in /patches. Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together. Not unexpected when adding 40+ patches together hahaha. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember which. Massive credit to him though for helping me directly and indirectly with certain patches and fixes.
+
+- alternativetags
+- alttab (soon to be replaced by rofi)
+- alwayscenter
+- barpadding
+- bartoggle
+- centeredwindowname
+- colorbar
+- coolautostart
+- cursorwarp
+- decorhints
+- dragmfacts
+- dynamicswallow
+- ewmhtags
+- exitmenu (soon to be replaced by rofi)
+- floatbordercolor
+- floatborderwidth
+- focusurgent
+- fullscreencompilation
+- hidevacanttags
+- ignoretransientwindows
+- ipc
+- layoutscroll
+- noborderflicker
+- pertag
+- placemouse (slightly buggy with current implementation, is a TODO)
+- preserveonrestart
+- resetlayout
+- resizecorners
+- rotatestack
+- rulerefresher
+- scratchpad
+- shiftools
+- statuspadding
+- steam
+- sticky
+- stickyindicator
+- switchallmonitortags
+- systray
+- tagpreview
+- toggleborder
+- vanitygaps
+- winicon
