@@ -8,7 +8,7 @@ fi
 # Optional clear command to clear terminal for cleaner look #
 # clear &&
 echo -e "\n|----- Compiling dwmblocks-async -----|\n" &&
-cd dwmblocks-async/ &&
+cd dwmblocks/ &&
 make install &&
 cd .. &&
 echo -e "\n|-------- Compiling jeff_dwm ---------|\n" &&
