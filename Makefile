@@ -158,14 +158,18 @@ install: all
 	$(PRINTF) "Install jeff_dwm .desktop file" /usr/share/xsessions/jeff_dwm.desktop
 	$Qcp -f ${DWM_SCRIPTS_DIR}/jeff_dwm.desktop /usr/share/xsessions
 	$Qecho "Icon=${CURDIR}/${DWM_RESOURCES_DIR}/dwm.png" >> /usr/share/xsessions/jeff_dwm.desktop
+	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/bin
+	$Qcp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}/bin
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmblocks
 
 uninstall:
-	$(PRINTF) "Remove all files" "dwm, dwmswallow, jeff_dwm-run.sh, jeff_dwm.desktop, dwm.1"
+	$(PRINTF) "Remove all files" "dwm, dwmswallow, jeff_dwm-run.sh, jeff_dwm.desktop, dwm.1, dwmblocks"
 	$Qrm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/bin/dwmswallow\
 		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-run.sh\
 		${DESTDIR}${MANPREFIX}/usr/share/xsessions/jeff_dwm.desktop\
 		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-recompile.sh\
-		${DESTDIR}${MANPREFIX}/man1/dwm.1
+		${DESTDIR}${MANPREFIX}/man1/dwm.1\
+		${DESTDIR}${PREFIX}/bin/dwmblocks
 
 .PHONY: all options blocks-clean dwm-clean install uninstall
