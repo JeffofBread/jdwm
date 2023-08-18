@@ -160,6 +160,7 @@ typedef struct {
 typedef struct {
     const char *symbol;
     void (*arrange)(Monitor *);
+    const char *name;
 } Layout;
 
 typedef struct Pertag Pertag;

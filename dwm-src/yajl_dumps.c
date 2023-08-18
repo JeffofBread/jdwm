@@ -189,6 +189,7 @@ dump_layouts(yajl_gen gen, const Layout layouts[], const int layouts_len)
         // the end of the layouts array with a NULL pointer for the symbol
         YSTR("symbol"); YSTR((layouts[i].symbol ? layouts[i].symbol : ""));
         YSTR("address"); YINT((uintptr_t)(layouts + i));
+        YSTR("symbol"); YSTR((layouts[i].name ? layouts[i].name : ""));
       )
     }
   )

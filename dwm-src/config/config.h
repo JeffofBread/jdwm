@@ -69,21 +69,21 @@ static const int   lockfullscreen = 1;    /* 1 will force focus on the fullscree
 #include <vanitygaps.c>
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "[M]",      monocle },
-	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
-	{ "H[]",      deck },
-	{ "TTT",      bstack },
-	{ "===",      bstackhoriz },
-	{ "HHH",      grid },
-	{ "###",      nrowgrid },
-	{ "---",      horizgrid },
-	{ ":::",      gaplessgrid },
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+/*    symbol      arrange function          name                        */
+	{ "[]=",      tile,						"Tile" 						},    /* first entry is default */
+	{ "[M]",      monocle,					"Monocle"  					},
+	{ "[@]",      spiral,					"Spiral"  					},
+	{ "[\\]",     dwindle,					"Dwindle"  					},
+	{ "H[]",      deck,						"Deck"  					},
+	{ "TTT",      bstack,					"B-Stack"  					},
+	{ "===",      bstackhoriz,				"B-Stack Horizontal"  		},
+	{ "HHH",      grid,						"Grid"  					},
+	{ "###",      nrowgrid,					"Narrow Grid"  				},
+	{ "---",      horizgrid,				"Horizontal Grid"  			},
+	{ ":::",      gaplessgrid,				"Gapless Grid" 				},
+	{ "|M|",      centeredmaster,			"Centered Master"  			},
+	{ ">M>",      centeredfloatingmaster,	"Centered Floating Master"  },
+	{ "><>",      NULL,						"Floating"  				},    /* no layout function means floating behavior */
 };
 
 /* key definitions */
