@@ -48,12 +48,12 @@ static void (*writestatus) () = pstdout;
 #endif
 
 
-#include "blocks.h"
+#include "config/blocks.h"
 
 static char statusbar[LENGTH(blocks)][CMDLENGTH] = {0};
 static char statusstr[2][STATUSLENGTH];
 static int statusContinue = 1;
-static int returnStatus = 0;
+// static int returnStatus = 0; (currently unused)
 
 //opens process *cmd and stores output in *output
 void getcmd(const Block *block, char *output)
