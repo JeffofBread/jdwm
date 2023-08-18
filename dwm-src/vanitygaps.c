@@ -186,15 +186,6 @@ getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *s
 	*sr = ssize - stotal; // the remainder (rest) of pixels after an even stack split
 }
 
-/***
- * Layouts
- */
-
-/*
- * Bottomstack layout + gaps
- * https://dwm.suckless.org/patches/bottomstack/
- */
-
 void monocle(Monitor *m)
 {
 	unsigned int n;
@@ -209,6 +200,15 @@ void monocle(Monitor *m)
 		resize(c, m->wx + ov, m->wy + oh, m->ww - 2 * c->bw - 2 * ov,
 		       m->wh - 2 * c->bw - 2 * oh, 0);
 }
+
+/***
+ * Layouts
+ */
+
+/*
+ * Bottomstack layout + gaps
+ * https://dwm.suckless.org/patches/bottomstack/
+ */
 
 static void
 bstack(Monitor *m)
