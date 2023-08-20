@@ -133,13 +133,14 @@ blocks-clean:
 	$Qrm -f ${BLOCKS_BUILD_DIR}/dwmblocks
 
 install: all
-	$(PRINTF) "Install jeff_dwm binary       " ${DESTDIR}${PREFIX}/bin
+	$(PRINTF) "Install jeff_dwm binary       " ${DESTDIR}${PREFIX}/bin/dwm
 	$Qmkdir -p ${DESTDIR}${PREFIX}/bin
 	$Qcp -f ${DWM_BUILD_DIR}/dwm ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwm
+	$(PRINTF) "Install dwm-msg binary        " ${DESTDIR}${PREFIX}/bin/dwm-msg
 	$Qcp -f ${DWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwm-msg
-	$(PRINTF) "Install jeff_dwm scripts      " ${DESTDIR}${PREFIX}/bin
+	$(PRINTF) "Install jeff_dwm scripts      " ${DESTDIR}${PREFIX}/bin/
 	$Qcp -f ${DWM_SCRIPTS_DIR}/dwmswallow ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
 #Alternate method of having the swallow script executed, makes editable without recompile
@@ -158,7 +159,7 @@ install: all
 	$(PRINTF) "Install jeff_dwm .desktop file" /usr/share/xsessions/jeff_dwm.desktop
 	$Qcp -f ${DWM_SCRIPTS_DIR}/jeff_dwm.desktop /usr/share/xsessions
 	$Qecho "Icon=${CURDIR}/${DWM_RESOURCES_DIR}/dwm.png" >> /usr/share/xsessions/jeff_dwm.desktop
-	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/bin
+	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/bin/dwmblocks
 	$Qcp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmblocks
 
