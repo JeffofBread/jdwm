@@ -295,7 +295,6 @@ static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
 static Client *recttoclient(int x, int y, int w, int h);
 static Monitor *recttomon(int x, int y, int w, int h);
-static void resetlayout(const Arg *arg);
 static void removesystrayicon(Client *i);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizebarwin(Monitor *m);
@@ -2190,16 +2189,6 @@ recttomon(int x, int y, int w, int h)
 }
 
 void
-resetlayout(const Arg *arg)
-{
-	Arg default_layout = {.v = &layouts[0]};
-	Arg default_mfact = {.f = mfact + 1};
-
-	setlayout(&default_layout);
-	setmfact(&default_mfact);
-}
-
-void
 removesystrayicon(Client *i)
 {
 	Client **ii;
@@ -2239,8 +2228,6 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	if (c->beingmoved)
 		return;
     wc.border_width = c->bw;
-    if ((nexttiled(c->mon->clients) == c) && !(nexttiled(c->next)))
-		resetlayout(NULL);
     XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
     configure(c);
     XSync(dpy, False);
