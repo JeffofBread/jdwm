@@ -2,7 +2,6 @@
 static const char *const autostart[] = {
 	"dwmblocks", NULL, // Dont remove unless you want to lose functionality
 	"pasystray", NULL,
-	"clipit", NULL,
 	"blueman-applet", NULL,
 	"nm-applet", NULL,
 	"solaar", "-w", "hide", NULL,

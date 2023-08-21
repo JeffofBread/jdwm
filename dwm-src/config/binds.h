@@ -1,6 +1,6 @@
 static const Key keys[] = {
 	/* modifier                     key        function        		argument */
-	{ MODKEY,                       XK_d,      spawn,          		{.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          		{.v = rofi_launcher_cmd } },
 	{ MODKEY,                       XK_Return, spawn,          		{.v = termcmd } },
 	{ ControlMask|ShiftMask,        XK_q,      spawn,          		{.v = recompilecmd } },
 	{ MODKEY,                       XK_o,      shiftboth,      		{ .i = +1 } },
@@ -41,8 +41,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      		{.v = &layouts[0]} },
 	{ MODKEY,                       XK_e,      setlayout,      		{.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      		{.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,             XK_j,      layoutscroll,   		{.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_k,      layoutscroll,   		{.i = +1 } },
 	{ MODKEY|ControlMask,           XK_j,      rotatestack,    		{.i = +1 } },
 	{ MODKEY|ControlMask,           XK_k,      rotatestack,    		{.i = -1 } },
 	{ MODKEY,                       XK_f,      togglefullscreen, 	{0} },
@@ -67,7 +65,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      		7)
 	TAGKEYS(                        XK_9,                      		8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,    	   		{0} },
-	{ MODKEY|ShiftMask,             XK_e,      exitdwm,        		{0} },
+	//{ MODKEY|ShiftMask,             XK_e,      exitdwm,        		{0} },
 	{ MODKEY|ShiftMask,             XK_u,      focusurgent,    		{0} },
 	{ MODKEY,                       XK_r,      resetlayout,    		{0} },
 	{ MODKEY,                       XK_s,      togglesticky,    	{0} },
@@ -79,8 +77,8 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	//{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	//{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+	{ ClkLtSymbol,          0,              Button3,        spawn,          {.v = layoutmenucmd} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 
@@ -107,5 +105,5 @@ static const Button buttons[] = {
 	{ ClkTagBar,         0,               Button3,        toggleview,     {0} },
 	{ ClkTagBar,         MODKEY,          Button1,        tag,            {0} },
 	{ ClkTagBar,         MODKEY,          Button3,        toggletag,      {0} },
-	{ ClkRootWin,  		 0, 			  Button3, 		  spawn, 		  {.v = jgmenucmd } },
+	//{ ClkRootWin,  		 0, 			  Button3, 		  spawn, 		  {.v = jgmenucmd } },
 };

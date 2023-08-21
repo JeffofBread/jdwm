@@ -6,7 +6,7 @@ A build of dwm for myself and anyone who wishes to use it too. If you find any i
 ```bash
 git clone https://github.com/JeffofBread/jeff_dwm.git
 cd jeff_dwm
-sudo ./install.sh
+./install.sh
 ```
 After your first install, you can use `Ctrl + Shift + Q` to open the recompile script in kitty. To reload jeff_dwm ([assuming you haven't removed the auto-restart script in `jeff_dwm-run.sh`](https://github.com/JeffofBread/jeff_dwm/blob/e9e86bc5097c194a8f25db21be4e961054f4e123/dwm-src/scripts/jeff_dwm-run.sh#L19C1-L19C61)), press `Super + Shift + Q`.
 
@@ -14,6 +14,7 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 
 - yajl
 - imlib2
+- rofi
 - kitty (Heavily recommended and built on, but can be changed in source if you want to spend the time)
 
 ## Recommended
@@ -23,10 +24,9 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 
 ## Patches
 
-All the original .diff files are located in /patches. Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together. Not unexpected when adding 40+ patches together hahaha. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember which. Massive credit to him though for helping me directly and indirectly with certain patches and fixes.
+All the original .diff files are located in /patches. Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together. Not unexpected when adding almost 40 patches together hahaha. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember which. Massive credit to him though for helping me directly and indirectly with certain patches and fixes.
 
 - alternativetags
-- alttab (soon to be replaced by rofi)
 - alwayscenter
 - barpadding
 - bartoggle
@@ -38,7 +38,6 @@ All the original .diff files are located in /patches. Needless to say that a lot
 - dragmfacts
 - dynamicswallow
 - ewmhtags
-- exitmenu (soon to be replaced by rofi)
 - floatbordercolor
 - floatborderwidth
 - focusurgent
@@ -46,7 +45,6 @@ All the original .diff files are located in /patches. Needless to say that a lot
 - hidevacanttags
 - ignoretransientwindows
 - ipc
-- layoutscroll
 - noborderflicker
 - pertag
 - placemouse (slightly buggy with current implementation, is a TODO)

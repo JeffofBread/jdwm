@@ -66,6 +66,11 @@ BLOCKS_SCRIPTS_DIR = ${BLOCKS_SRC_DIR}/scripts
 BLOCKS_SRC := dwmblocks.c
 BLOCKS_OBJ := ${addprefix ${BLOCKS_BUILD_DIR}/,${BLOCKS_SRC:.c=.o}}
 
+# rofi diirs
+ROFI_DIR = ${CURDIR}/rofi
+ROFI_SCRIPTS_DIR = ${ROFI_DIR}/scripts
+ROFI_THEMES_DIR = ${ROFI_DIR}/themes
+
 # 0 = pretty, 1 = raw make output
 VERBOSE := 0
 
@@ -141,17 +146,17 @@ install: all
 	$Qcp -f ${DWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwm-msg
 	$(PRINTF) "Install jeff_dwm scripts      " ${DESTDIR}${PREFIX}/bin/
-	$Qcp -f ${DWM_SCRIPTS_DIR}/dwmswallow ${DESTDIR}${PREFIX}/bin
-	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow
+	$Qcp -f ${DWM_SCRIPTS_DIR}/dwmswallow.sh ${DESTDIR}${PREFIX}/bin
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow.sh
 #Alternate method of having the swallow script executed, makes editable without recompile
-##	sudo ln -sf ${CURDIR}/${DWM_SCRIPTS_DIR}/dwmswallow /bin
+##	sudo ln -sf ${CURDIR}/${DWM_SCRIPTS_DIR}/dwmswallow.sh /bin
 	$Qcp -f ${DWM_SCRIPTS_DIR}/jeff_dwm-run.sh ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/jeff_dwm-run.sh
 # Alternate method of having the run script executed, makes editable without recompile
 ##	sudo ln -sf ${CURDIR}/${DWM_SCRIPTS_DIR}/jeff_dwm-run.sh /bin
-	$Qrm -f /bin/jeff_dwm-recompile.sh
-	$Qecho -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make install && read -rp \"\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > /bin/jeff_dwm-recompile.sh
-	$Qchmod 755 /bin/jeff_dwm-recompile.sh
+	$Qrm -f ${DESTDIR}${PREFIX}/bin/jeff_dwm-recompile.sh
+	$Qecho -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make install && read -rp \"\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > ${DESTDIR}${PREFIX}/bin/jeff_dwm-recompile.sh
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/jeff_dwm-recompile.sh
 	$(PRINTF) "Install jeff_dwm man page     " ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	$Qmkdir -p ${DESTDIR}${MANPREFIX}/man1
 	$Qsed "s/VERSION/${VERSION}/g" < ${DWM_RESOURCES_DIR}/dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
@@ -162,15 +167,20 @@ install: all
 	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/bin/dwmblocks
 	$Qcp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmblocks
+	$(PRINTF) "Install rofi scripts          " ${DESTDIR}${PREFIX}/bin/
+	$Qrm -f ${DESTDIR}${PREFIX}/bin/rofi_layoutmenu.sh
+	$Qcp -f ${ROFI_SCRIPTS_DIR}/rofi_layoutmenu.sh ${DESTDIR}${PREFIX}/bin
+	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/rofi_layoutmenu.sh
 
 uninstall:
-	$(PRINTF) "Remove all files" "dwm, dwmswallow, jeff_dwm-run.sh, jeff_dwm.desktop, dwm.1, dwmblocks"
+	$(PRINTF) "Remove all files" "dwm, dwmswallow.sh, jeff_dwm-run.sh, jeff_dwm.desktop, dwm.1, dwmblocks, rofi_layoutmenu"
 	$Qrm -f ${DESTDIR}${PREFIX}/bin/dwm\
-		${DESTDIR}${MANPREFIX}/bin/dwmswallow\
+		${DESTDIR}${MANPREFIX}/bin/dwmswallow.sh\
 		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-run.sh\
 		${DESTDIR}${MANPREFIX}/usr/share/xsessions/jeff_dwm.desktop\
 		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-recompile.sh\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1\
-		${DESTDIR}${PREFIX}/bin/dwmblocks
+		${DESTDIR}${PREFIX}/bin/dwmblocks\
+		${DESTDIR}${MANPREFIX}/bin/rofi_layoutmenu.sh
 
 .PHONY: all options blocks-clean dwm-clean install uninstall

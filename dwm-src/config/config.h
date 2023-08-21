@@ -18,7 +18,7 @@ static const int scalepreview       		= 4;        /* preview scaling (display w 
 static const int previewbar         		= 0;        /* show the bar in the preview window */
 static const int showbar            		= 1;        /* 0 means no bar */
 static const int topbar             		= 1;        /* 0 means bottom bar */
-static const int showtitle         			= 0;        /* 0 means no title */
+static const int showtitle         			= 1;        /* 0 means no title */
 static const int showtags           		= 1;        /* 0 means no tags */
 static const int showlayout         		= 1;        /* 0 means no layout indicator */
 static const int showstatus         		= 1;        /* 0 means no status bar */
@@ -39,7 +39,7 @@ static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0}
 static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
 
 /* tagging */
-static const char *tags[]           		= { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[]           = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[]        = { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
 static const int   momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
@@ -118,16 +118,15 @@ static IPCCommand ipccommands[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[]      = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]       = { "kitty", NULL };
-static const char *recompilecmd[]  = { "jeff_dwm-recompile.sh", NULL };
-static const char *jgmenucmd[]     = { "jgmenu_run", NULL };
-static const char  scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
+static const char *rofi_launcher_cmd[]  = {"rofi", "-show", "drun", };
+static const char *termcmd[]       		= { "kitty", NULL };
+static const char *recompilecmd[]  		= { "jeff_dwm-recompile.sh", NULL };
+static const char  scratchpadname[] 	= "Scratchpad";
+static const char *scratchpadcmd[] 		= { "kitty", "-T", scratchpadname, NULL };
+static const char *layoutmenucmd[]  	= { "rofi_layoutmenu.sh", NULL };
 
 #include <autorun.h>
 #include <focusurgent.c>
-#include <exitdwm.c>
 #include <shift-tools.c>
 
 // Include Button and Key Bindings
