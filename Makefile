@@ -97,11 +97,19 @@ ${DWM_BUILD_DIR}:
 	$(PRINTF) "Make jeff_dwm build directory " $@
 	$Qmkdir -p ${DWM_BUILD_DIR}
 
-${DWM_OBJ}: ${DWM_CONFIG_DIR}/config.h
+${DWM_OBJ}: ${DWM_CONFIG_DIR}/config.h ${DWM_CONFIG_DIR}/binds.h ${DWM_CONFIG_DIR}/autorun.h
 
 ${DWM_CONFIG_DIR}/config.h:
 	$(PRINTF) "Copy jeff_dwm default config  " "cp config.def.h -> config.h"
 	$Qcp ${DWM_CONFIG_DIR}/config.def.h $@
+
+${DWM_CONFIG_DIR}/binds.h:
+	$(PRINTF) "Copy jeff_dwm default binds   " "cp binds.def.h -> binds.h"
+	$Qcp ${DWM_CONFIG_DIR}/binds.def.h $@
+
+${DWM_CONFIG_DIR}/autorun.h:
+	$(PRINTF) "Copy jeff_dwm default autorun " "cp autorun.def.h -> autorun.h"
+	$Qcp ${DWM_CONFIG_DIR}/autorun.def.h $@
 
 ${BLOCKS_BUILD_DIR}/%.o: ${BLOCKS_SRC_DIR}/%.c | ${BLOCKS_BUILD_DIR}
 	$(PRINTF) "Compile dwmblocks source (${CC}) " $@
