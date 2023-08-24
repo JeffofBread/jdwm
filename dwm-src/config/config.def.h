@@ -1,15 +1,5 @@
 /* See LICENSE file for copyright and license details. */
 
-// TODO: Fix window tiling after dynamic swallow and mouse move
-
-/* alt-tab configuration */
-static const unsigned int tabModKey 		= 0x40;		/* if this key is hold the alt-tab functionality stays acitve. This key must be the same as key that is used to active functin altTabStart `*/
-static const unsigned int tabCycleKey 		= 0x17;		/* if this key is hit the alt-tab program moves one position forward in clients stack. This key must be the same as key that is used to active functin altTabStart */
-static const unsigned int tabPosY 			= 1;		/* tab position on Y axis, 0 = bottom, 1 = center, 2 = top */
-static const unsigned int tabPosX 			= 1;		/* tab position on X axis, 0 = left, 1 = center, 2 = right */
-static const unsigned int maxWTab 			= 600;		/* tab menu width */
-static const unsigned int maxHTab 			= 200;		/* tab menu height */
-
 /* appearance */
 static const unsigned int borderpx  		= 0;        /* border pixel of windows */
 static const unsigned int fborderpx			= 1;        /* border pixel of floating windows */
@@ -28,7 +18,7 @@ static const int scalepreview       		= 4;        /* preview scaling (display w 
 static const int previewbar         		= 0;        /* show the bar in the preview window */
 static const int showbar            		= 1;        /* 0 means no bar */
 static const int topbar             		= 1;        /* 0 means bottom bar */
-static const int showtitle         			= 0;        /* 0 means no title */
+static const int showtitle         			= 1;        /* 0 means no title */
 static const int showtags           		= 1;        /* 0 means no tags */
 static const int showlayout         		= 1;        /* 0 means no layout indicator */
 static const int showstatus         		= 1;        /* 0 means no status bar */
@@ -49,7 +39,7 @@ static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0}
 static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
 
 /* tagging */
-static const char *tags[]           		= { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[]           = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[]        = { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
 static const int   momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
@@ -79,21 +69,21 @@ static const int   lockfullscreen = 1;    /* 1 will force focus on the fullscree
 #include <vanitygaps.c>
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "[M]",      monocle },
-	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
-	{ "H[]",      deck },
-	{ "TTT",      bstack },
-	{ "===",      bstackhoriz },
-	{ "HHH",      grid },
-	{ "###",      nrowgrid },
-	{ "---",      horizgrid },
-	{ ":::",      gaplessgrid },
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+/*    symbol      arrange function          name                        */
+	{ "[]=",      tile,						"Tile" 						},    /* first entry is default */
+	{ "[M]",      monocle,					"Monocle"  					},
+	{ "[@]",      spiral,					"Spiral"  					},
+	{ "[\\]",     dwindle,					"Dwindle"  					},
+	{ "H[]",      deck,						"Deck"  					},
+	{ "TTT",      bstack,					"B-Stack"  					},
+	{ "===",      bstackhoriz,				"B-Stack Horizontal"  		},
+	{ "HHH",      grid,						"Grid"  					},
+	{ "###",      nrowgrid,					"Narrow Grid"  				},
+	{ "---",      horizgrid,				"Horizontal Grid"  			},
+	{ ":::",      gaplessgrid,				"Gapless Grid" 				},
+	{ "|M|",      centeredmaster,			"Centered Master"  			},
+	{ ">M>",      centeredfloatingmaster,	"Centered Floating Master"  },
+	{ "><>",      NULL,						"Floating"  				},    /* no layout function means floating behavior */
 };
 
 /* key definitions */
@@ -128,16 +118,15 @@ static IPCCommand ipccommands[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[]      = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]       = { "kitty", NULL };
-static const char *recompilecmd[]  = { "jeff_dwm-recompile.sh", NULL };
-static const char *jgmenucmd[]     = { "jgmenu_run", NULL };
-static const char  scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "kitty", "-T", scratchpadname, NULL };
+static const char *rofi_launcher_cmd[]  = {"rofi", "-show", "drun", };
+static const char *termcmd[]       		= { "kitty", NULL };
+static const char *recompilecmd[]  		= { "jeff_dwm-recompile.sh", NULL };
+static const char  scratchpadname[] 	= "Scratchpad";
+static const char *scratchpadcmd[] 		= { "kitty", "-T", scratchpadname, NULL };
+static const char *layoutmenucmd[]  	= { "rofi_layoutmenu.sh", NULL };
 
 #include <autorun.h>
 #include <focusurgent.c>
-#include <exitdwm.c>
 #include <shift-tools.c>
 
 // Include Button and Key Bindings

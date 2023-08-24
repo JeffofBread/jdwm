@@ -13,3 +13,14 @@
 .*
 build/
 !Makefile
+!.gitignore
+
+### Ignore user configs
+
+#dwmblocks
+dwmblocks/config/blocks.h
+
+#jeff_dwm
+dwm-src/config/autorun.h
+dwm-src/config/config.h
+dwm-src/config/binds.h
