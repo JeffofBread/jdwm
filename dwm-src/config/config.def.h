@@ -124,6 +124,7 @@ static const char *recompilecmd[]  		= { "jeff_dwm-recompile.sh", NULL };
 static const char  scratchpadname[] 	= "Scratchpad";
 static const char *scratchpadcmd[] 		= { "kitty", "-T", scratchpadname, NULL };
 static const char *layoutmenucmd[]  	= { "rofi_layoutmenu.sh", NULL };
+static const char *alttabcmd[]  		= { "rofi", "-show", "window", NULL };
 
 #include <autorun.h>
 #include <focusurgent.c>
