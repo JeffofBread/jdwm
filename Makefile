@@ -102,14 +102,17 @@ ${DWM_OBJ}: ${DWM_CONFIG_DIR}/config.h ${DWM_CONFIG_DIR}/binds.h ${DWM_CONFIG_DI
 ${DWM_CONFIG_DIR}/config.h:
 	$(PRINTF) "Copy jeff_dwm default config  " "cp config.def.h -> config.h"
 	$Qcp ${DWM_CONFIG_DIR}/config.def.h $@
+	$Qchmod a=rw $@
 
 ${DWM_CONFIG_DIR}/binds.h:
 	$(PRINTF) "Copy jeff_dwm default binds   " "cp binds.def.h -> binds.h"
 	$Qcp ${DWM_CONFIG_DIR}/binds.def.h $@
+	$Qchmod a=rw $@
 
 ${DWM_CONFIG_DIR}/autorun.h:
 	$(PRINTF) "Copy jeff_dwm default autorun " "cp autorun.def.h -> autorun.h"
 	$Qcp ${DWM_CONFIG_DIR}/autorun.def.h $@
+	$Qchmod a=rw $@
 
 ${BLOCKS_BUILD_DIR}/%.o: ${BLOCKS_SRC_DIR}/%.c | ${BLOCKS_BUILD_DIR}
 	$(PRINTF) "Compile dwmblocks source (${CC}) " $@
@@ -124,6 +127,7 @@ ${BLOCKS_OBJ}: ${BLOCKS_CONFIG_DIR}/blocks.h
 ${BLOCKS_CONFIG_DIR}/blocks.h:
 	$(PRINTF) "Copy dwmblocks default config " "cp blocks.def.h -> blocks.h"
 	$Qcp ${BLOCKS_CONFIG_DIR}/blocks.def.h $@
+	$Qchmod a=rw $@
 
 dwm: ${DWM_OBJ} ${DWM_BUILD_DIR}
 	$(PRINTF) "Linking jeff_dwm source  (${CC}) " ${DWM_BUILD_DIR}/dwm
