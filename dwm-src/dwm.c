@@ -769,6 +769,7 @@ clientmessage(XEvent *e)
 	XSetWindowAttributes swa;
     XClientMessageEvent *cme = &e->xclient;
     Client *c = wintoclient(cme->window);
+    unsigned int i;
 
 	if (showsystray && cme->window == systray->win && cme->message_type == netatom[NetSystemTrayOP]) {
 		/* add systray icons */
@@ -837,8 +838,15 @@ clientmessage(XEvent *e)
             setsticky(c, (cme->data.l[0] == 1 || (cme->data.l[0] == 2 && !c->issticky)));
         }
     } else if (cme->message_type == netatom[NetActiveWindow]) {
-        if (c != selmon->sel && !c->isurgent)
-            seturgent(c, 1);
+		for (i = 0; i < LENGTH(tags) && !((1 << i) & c->tags); i++);
+		if (i < LENGTH(tags)) {
+			const Arg a = {.ui = 1 << i};
+			selmon = c->mon;
+			view(&a);
+			focus(c);
+			restack(selmon);
+            XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w/2, c->h/2);
+		}
     }
 }
 

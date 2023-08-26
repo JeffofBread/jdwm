@@ -40,6 +40,7 @@ All the original .diff files are located in /patches. Needless to say that a lot
 - ewmhtags
 - floatbordercolor
 - floatborderwidth
+- focusonnetactive
 - focusurgent
 - fullscreencompilation
 - hidevacanttags
