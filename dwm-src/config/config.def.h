@@ -23,13 +23,13 @@ static const int showtags           		= 1;        /* 0 means no tags */
 static const int showlayout         		= 1;        /* 0 means no layout indicator */
 static const int showstatus         		= 1;        /* 0 means no status bar */
 static const int showfloating       		= 1;        /* 0 means no floating indicator */
-static const int vertpad           			= 0;       /* vertical padding of bar */
-static const int sidepad            		= 0;       /* horizontal padding of bar */
+static const int vertpad           			= 0;        /* vertical padding of bar */
+static const int sidepad            		= 0;        /* horizontal padding of bar */
 static const unsigned int centeredwindowname= 0;		/* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
 #define ICONSIZE 							  16   		/* icon size */
 #define ICONSPACING							  5 		/* space between icon and title */
-static const char *fonts[]          		= { "JetBrainsMono:size=10" };
-static const char dmenufont[]       		=   "JetBrainsMono:size=10";
+static const char *fonts[]          		= { "JetBrainsMono:size=12" };
+static const char dmenufont[]       		=   "JetBrainsMono:size=12";
 
 /* Include chosen theme here. Make custom themes by copying .def file and customizing/renaming */
 #include <jeffs_theme.h>
@@ -54,9 +54,9 @@ static const Rule rules[] = {
 };
 
 /* window swallowing */
-static const int  swaldecay = 3;
-static const int  swalretroactive = 1;
-static const char swalsymbol[] = "👅";
+static const int  swaldecay 		= 3;
+static const int  swalretroactive 	= 1;
+static const char swalsymbol[] 		= "👅";
 
 /* layout(s) */
 static const float mfact          = 0.5;  /* factor of master area size [0.05..0.95]      */
