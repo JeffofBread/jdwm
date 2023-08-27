@@ -118,13 +118,13 @@ static IPCCommand ipccommands[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *rofi_launcher_cmd[]  = {"rofi", "-show", "drun", };
 static const char *termcmd[]       		= { "kitty", NULL };
 static const char *recompilecmd[]  		= { "jeff_dwm-recompile.sh", NULL };
 static const char  scratchpadname[] 	= "Scratchpad";
 static const char *scratchpadcmd[] 		= { "kitty", "-T", scratchpadname, NULL };
+static const char *rofi_launcher_cmd[]  = { "rofi", "-normal-window", "-show", "drun", };
 static const char *layoutmenucmd[]  	= { "rofi_layoutmenu.sh", NULL };
-static const char *alttabcmd[]  		= { "rofi", "-show", "window", NULL };
+static const char *alttabcmd[]  		= { "rofi", "-normal-window", "-show", "window", NULL };
 
 #include <autorun.h>
 #include <focusurgent.c>
