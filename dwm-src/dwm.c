@@ -1676,7 +1676,6 @@ losefullscreen(Client *next)
 void
 manage(Window w, XWindowAttributes *wa)
 {
-    const char *class;
     Client *c, *t = NULL;
     Window trans = None;
     XWindowChanges wc;
@@ -1707,13 +1706,6 @@ manage(Window w, XWindowAttributes *wa)
     c->x = MAX(c->x, c->mon->wx);
     c->y = MAX(c->y, c->mon->wy);
     c->bw = borderpx;
-
-    XClassHint ch = { NULL, NULL };
-    XGetClassHint(dpy, c->win, &ch);
-    class    = ch.res_class ? ch.res_class : broken;
-
-    if (strstr(class, "rofi") || strstr(class, "Rofi"))
-		c->isfloating = True;
 
 	selmon->tagset[selmon->seltags] &= ~scratchtag;
 	if (!strcmp(c->name, scratchpadname)) {
