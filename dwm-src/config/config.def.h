@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  		= 0;        /* border pixel of windows */
-static const unsigned int fborderpx			= 1;        /* border pixel of floating windows */
+static const unsigned int fborderpx			= 5;        /* border pixel of floating windows */
 static const unsigned int snap      		= 32;       /* snap pixel */
 static const unsigned int systraypinning 	= 0;   		/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft 	= 0;    	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -123,9 +123,9 @@ static const char *termcmd[]       		= { "kitty", NULL };
 static const char *recompilecmd[]  		= { "jeff_dwm-recompile.sh", NULL };
 static const char  scratchpadname[] 	= "Scratchpad";
 static const char *scratchpadcmd[] 		= { "kitty", "-T", scratchpadname, NULL };
-static const char *rofi_launcher_cmd[]  = { "rofi", "-normal-window", "-show", "drun", };
+static const char *rofi_launcher_cmd[]  = { "rofi", /*"-normal-window",*/ "-show", "drun", };
 static const char *layoutmenucmd[]  	= { "rofi_layoutmenu.sh", NULL };
-static const char *alttabcmd[]  		= { "rofi", "-normal-window", "-show", "window", NULL };
+static const char *alttabcmd[]  		= { "rofi", /*"-normal-window",*/ "-show", "window", NULL };
 
 #include <autorun.h>
 #include <focusurgent.c>

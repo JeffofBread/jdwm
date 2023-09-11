@@ -340,7 +340,6 @@ static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglealttag(const Arg *arg);
 static void togglebar(const Arg *arg);
-static void toggleborder(const Arg *arg);
 static void togglefakefullscreen(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
@@ -1691,72 +1690,67 @@ manage(Window w, XWindowAttributes *wa)
 
     updateicon(c);
     updatetitle(c);
+    updatesizehints(c);
+    updatewmhints(c);
     if (XGetTransientForHint(dpy, w, &trans) && (t = wintoclient(trans))) {
         c->mon = t->mon;
         c->tags = t->tags;
+        updatewindowtype(c);
     } else {
         c->mon = selmon;
         applyrules(c);
+        updatewindowtype(c);
+        {
+            int format;
+            unsigned long *data, n, extra;
+            Monitor *m;
+            Atom atom;
+            if (XGetWindowProperty(dpy, c->win, netatom[NetClientInfo], 0L, 2L, False, XA_CARDINAL,
+                    &atom, &format, &n, &extra, (unsigned char **)&data) == Success && n == 2) {
+                c->tags = *data;
+                for (m = mons; m; m = m->next) {
+                    if (m->num == *(data+1)) {
+                        c->mon = m;
+                        break;
+                    }
+                }
+            }
+            if (n > 0)
+                XFree(data);
+        }
+        setclienttagprop(c);
     }
 
-    if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
-        c->x = c->mon->wx + c->mon->ww - WIDTH(c);
-    if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh)
-        c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
-    c->x = MAX(c->x, c->mon->wx);
-    c->y = MAX(c->y, c->mon->wy);
-    c->bw = borderpx;
+    if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww){ c->x = c->mon->wx + c->mon->ww - WIDTH(c); }
+    if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh){ c->y = c->mon->wy + c->mon->wh - HEIGHT(c); }
 
 	selmon->tagset[selmon->seltags] &= ~scratchtag;
 	if (!strcmp(c->name, scratchpadname)) {
 		c->mon->tagset[c->mon->seltags] |= c->tags = scratchtag;
 		c->isfloating = True;
-		c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
-		c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
 	}
 
-    wc.border_width = c->bw;
-    XConfigureWindow(dpy, w, CWBorderWidth, &wc);
-	if(c->isfloating)
-		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloat].pixel);
-	else
-		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
-    configure(c); /* propagates border_width, if size doesn't change */
-    updatewindowtype(c);
-    updatesizehints(c);
-    updatewmhints(c);
-    {
-        int format;
-        unsigned long *data, n, extra;
-        Monitor *m;
-        Atom atom;
-        if (XGetWindowProperty(dpy, c->win, netatom[NetClientInfo], 0L, 2L, False, XA_CARDINAL,
-                &atom, &format, &n, &extra, (unsigned char **)&data) == Success && n == 2) {
-            c->tags = *data;
-            for (m = mons; m; m = m->next) {
-                if (m->num == *(data+1)) {
-                    c->mon = m;
-                    break;
-                }
-            }
-        }
-        if (n > 0)
-            XFree(data);
-    }
-    setclienttagprop(c);
-    updatemotifhints(c);
-    c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
-    c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
-    XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
-    grabbuttons(c, 0);
+
     if (!c->isfloating) 
         c->isfloating = c->oldstate = trans != None || c->isfixed;
+
     if (c->isfloating) {
         c->bw = fborderpx;
         XRaiseWindow(dpy, c->win);
+        XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloat].pixel);
+    } else {
+        c->bw = borderpx;
+		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
     }
-    if(c->isfloating)
-		XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloat].pixel);
+
+    wc.border_width = c->bw;
+    c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
+    c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;/*  */
+    XConfigureWindow(dpy, w, CWBorderWidth, &wc);
+    configure(c); /* propagates border_width, if size doesn't change */
+    updatemotifhints(c);
+    XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
+    grabbuttons(c, 0);
     attach(c);
     attachstack(c);
     XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
@@ -3364,13 +3358,6 @@ togglealttag(const Arg *arg)
 }
 
 void
-toggleborder(const Arg *arg)
-{
-  selmon->sel->bw = (selmon->sel->bw == borderpx ? 0 : borderpx);
-  arrange(selmon);
-}
-
-void
 togglefakefullscreen(const Arg *arg)
 {
     Client *c = selmon->sel;
@@ -3796,7 +3783,11 @@ updatemotifhints(Client *c)
             if (motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_ALL ||
                 motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_BORDER ||
                 motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_TITLE)
-                c->bw = c->oldbw = borderpx;
+                if (c->isfloating) {
+                    c->bw = c->oldbw = fborderpx;
+                } else {
+                    c->bw = c->oldbw = borderpx;
+                }
             else
                 c->bw = c->oldbw = 0;
 
