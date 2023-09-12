@@ -157,15 +157,6 @@ install: all
 	$(PRINTF) "Install dwm-msg binary        " ${DESTDIR}${PREFIX}/bin/dwm-msg
 	$Qcp -f ${DWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwm-msg
-	$(PRINTF) "Install jeff_dwm scripts      " ${DESTDIR}${PREFIX}/bin/
-	$Qcp -f ${DWM_SCRIPTS_DIR}/dwmswallow.sh ${DESTDIR}${PREFIX}/bin
-	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmswallow.sh
-#Alternate method of having the swallow script executed, makes editable without recompile
-##	sudo ln -sf ${CURDIR}/${DWM_SCRIPTS_DIR}/dwmswallow.sh /bin
-	$Qcp -f ${DWM_SCRIPTS_DIR}/jeff_dwm-run.sh ${DESTDIR}${PREFIX}/bin
-	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/jeff_dwm-run.sh
-# Alternate method of having the run script executed, makes editable without recompile
-##	sudo ln -sf ${CURDIR}/${DWM_SCRIPTS_DIR}/jeff_dwm-run.sh /bin
 	$Qrm -f ${DESTDIR}${PREFIX}/bin/jeff_dwm-recompile.sh
 	$Qecho -e '#!/bin/sh\nkitty sh -c "cd ${CURDIR} && sudo make install && read -rp \"\n\033[32;1mBuild and install completed successfully. Press ENTER to exit terminal...\033[0m\" || read -rp \"\n\n\033[31;1mBuild Failed. Press ENTER to exit terminal...\033[0m\""' > ${DESTDIR}${PREFIX}/bin/jeff_dwm-recompile.sh
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/jeff_dwm-recompile.sh
@@ -174,15 +165,11 @@ install: all
 	$Qsed "s/VERSION/${VERSION}/g" < ${DWM_RESOURCES_DIR}/dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	$Qchmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	$(PRINTF) "Install jeff_dwm .desktop file" /usr/share/xsessions/jeff_dwm.desktop
-	$Qcp -f ${DWM_SCRIPTS_DIR}/jeff_dwm.desktop /usr/share/xsessions
+	$Qcp -f ${DWM_RESOURCES_DIR}/jeff_dwm.desktop /usr/share/xsessions
 	$Qecho "Icon=${CURDIR}/${DWM_RESOURCES_DIR}/dwm.png" >> /usr/share/xsessions/jeff_dwm.desktop
 	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/bin/dwmblocks
 	$Qcp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}/bin
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmblocks
-	$(PRINTF) "Install rofi scripts          " ${DESTDIR}${PREFIX}/bin/
-	$Qrm -f ${DESTDIR}${PREFIX}/bin/rofi_layoutmenu.sh
-	$Qcp -f ${ROFI_SCRIPTS_DIR}/rofi_layoutmenu.sh ${DESTDIR}${PREFIX}/bin
-	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/rofi_layoutmenu.sh
 
 uninstall:
 	$(PRINTF) "Remove all files" "dwm, dwmswallow.sh, jeff_dwm-run.sh, jeff_dwm.desktop, dwm.1, dwmblocks, rofi_layoutmenu"

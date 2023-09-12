@@ -1,37 +1,45 @@
 #!/bin/sh
 
+PARENT_DIR=$(pwd)
+ROFI_DIR="rofi"
+DWM_DIR="dwm-src"
+DWM_BLOCKS_DIR="dwmblocks"
+
 if ! [ $(id -u) != 0 ]; then
    echo "The script need to be run as non-root to start."
    exit 1
 fi
 
-rofi_config_install(){
-   echo -e "Rofi config being installed:"
-   mkdir -p ~/.config/rofi/
-   cd rofi 
-   cp -f config.rasi ~/.config/rofi/
-   echo -e "   $(pwd)config.rasi -> ~/.config/rofi/config.rasi"
-   mkdir -p ~/.config/rofi/themes/
-   cd themes && cp -f *.rasi ~/.config/rofi/themes/
-   echo -e "\nRofi themes being installed to ~/.config/rofi/themes/ \nThemes being installed from jeff_dwm/rofi/themes:\n"
-   ls | grep -E '\.rasi$' | sed -e 's/^/#) /'
-   cd ../../
-}
-
 # Optional clear command to clear terminal for cleaner look #
-# clear &&
+clear &&
 
 ########################################################
 echo -e "\n|--------- Install Started -----------|\n"  #
 ########################################################
 
-rofi_config_install
+########################################################
+echo -e "\n|---- Rofi config and scripts --------|\n"  #
+########################################################
+
+cd $ROFI_DIR && bash rofi_install.sh && cd $PARENT_DIR
+
+########################################################
+echo -e "\n|--------- dwmblocks scripts----------|\n"  #
+########################################################
+
+cd $DWM_BLOCKS_DIR && sudo bash dwmblocks_scripts_install.sh && cd $PARENT_DIR
+
+########################################################
+echo -e "\n|-------- jeff_dwm scripts ----------|\n"   #
+########################################################
+
+cd $DWM_DIR && sudo bash dwm_scripts_install.sh && cd $PARENT_DIR
 
 ########################################################
 echo -e "\n|--Building and installing jeff-dwm---|\n"  #
 ########################################################
 
-sudo make install
+cd $PARENT_DIR && sudo make install
 
 ########################################################
 echo -e "\n|----------Install Complete-----------|\n"  #
