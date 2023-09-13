@@ -24,3 +24,4 @@ dwmblocks/config/blocks.h
 dwm-src/config/autorun.h
 dwm-src/config/config.h
 dwm-src/config/binds.h
+dwm-src/scripts/jeff_dwm_setup.sh

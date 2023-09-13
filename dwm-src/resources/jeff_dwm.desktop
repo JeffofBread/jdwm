@@ -2,6 +2,6 @@
 Encoding=UTF-8
 Name=jeff_dwm
 Comment=Jeff's dynamic window manager (dwm) build
-Exec=jeff_dwm-run.sh
+Exec=jeff_dwm_run.sh
 Type=Application
 Version=6.4

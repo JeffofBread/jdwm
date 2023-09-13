@@ -324,6 +324,8 @@ static void setviewport(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
+static void sighup(int unused);
+static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void swal(Client *swer, Client *swee, int manage);
 static void swalreg(Client *c, const char* class, const char* inst, const char* title);
@@ -382,7 +384,7 @@ static void zoom(const Arg *arg);
 static void showtagpreview(unsigned int i);
 static void takepreview(void);
 static void previewtag(const Arg *arg);
-static void autostart_exec(void);
+static void autostart_exec(unsigned int firstrun);
 
 /* variables */
 static Client *lastfocused = NULL;
@@ -418,6 +420,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 static Atom wmatom[WMLast], netatom[NetLast], xatom[XLast], motifatom;
 static int epoll_fd;
 static int dpy_fd;
+static int restart = 0;
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
@@ -453,30 +456,38 @@ struct Pertag {
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 
 /* dwm will keep pid's of processes from autostart array and kill them at quit */
-static pid_t *autostart_pids;
-static size_t autostart_len;
+static pid_t *startandrestart_pids;
+static size_t startandrestart_len;
+static pid_t *startonce_pids;
+static size_t startonce_len;
 
 /* execute command from autostart array */
 static void
-autostart_exec() {
+autostart_exec(unsigned int firstrun) {
 	const char *const *p;
-    struct sigaction sa;
+    const char *const *q;
+    struct sigaction sa1;
+    struct sigaction sa2;
 	size_t i = 0;
 
 	/* count entries */
-	for (p = autostart; *p; autostart_len++, p++)
+	for (p = startandrestart; *p; startandrestart_len++, p++)
 		while (*++p);
+    
+    for (q = startonce; *q; startonce_len++, q++)
+		while (*++q);
 
-	autostart_pids = malloc(autostart_len * sizeof(pid_t));
-	for (p = autostart; *p; i++, p++) {
-		if ((autostart_pids[i] = fork()) == 0) {
+	startandrestart_pids = malloc(startandrestart_len * sizeof(pid_t));
+    startonce_pids = malloc(startonce_len * sizeof(pid_t));
+	for (p = startandrestart; *p; i++, p++) {
+		if ((startandrestart_pids[i] = fork()) == 0) {
 			setsid();
 
 			/* Restore SIGCHLD sighandler to default before spawning a program */
-			sigemptyset(&sa.sa_mask);
-			sa.sa_flags = 0;
-			sa.sa_handler = SIG_DFL;
-			sigaction(SIGCHLD, &sa, NULL);
+			sigemptyset(&sa1.sa_mask);
+			sa1.sa_flags = 0;
+			sa1.sa_handler = SIG_DFL;
+			sigaction(SIGCHLD, &sa1, NULL);
 
 			execvp(*p, (char *const *)p);
 			fprintf(stderr, "dwm: execvp %s\n", *p);
@@ -486,6 +497,31 @@ autostart_exec() {
 		/* skip arguments */
 		while (*++p);
 	}
+
+
+    if (firstrun == 1){
+
+        i = 0;
+
+        for (q = startonce; *q; i++, q++) {
+		    if ((startonce_pids[i] = fork()) == 0) {
+			    setsid();
+
+			    /* Restore SIGCHLD sighandler to default before spawning a program */
+			    sigemptyset(&sa2.sa_mask);
+			    sa2.sa_flags = 0;
+			    sa2.sa_handler = SIG_DFL;
+			    sigaction(SIGCHLD, &sa2, NULL);
+
+			    execvp(*q, (char *const *)q);
+			    fprintf(stderr, "dwm: execvp %s\n", *q);
+			    perror(" failed");
+			    _exit(EXIT_FAILURE);
+		    }
+		    /* skip arguments */
+		    while (*++q);
+	    }
+    }
 }
 
 /* function implementations */
@@ -2152,12 +2188,13 @@ quit(const Arg *arg)
 	size_t i;
 
 	/* kill child processes */
-	for (i = 0; i < autostart_len; i++) {
-		if (0 < autostart_pids[i]) {
-			kill(autostart_pids[i], SIGTERM);
-			waitpid(autostart_pids[i], NULL, 0);
+	for (i = 0; i < startandrestart_len; i++) {
+		if (0 < startandrestart_pids[i]) {
+			kill(startandrestart_pids[i], SIGTERM);
+			waitpid(startandrestart_pids[i], NULL, 0);
 		}
 	}
+    if(arg->i) restart = 1;
     running = 0;
 }
 
@@ -2781,6 +2818,8 @@ setup(void)
 
     /* clean up any zombies immediately */
     sigchld(0);
+	signal(SIGHUP, sighup);
+	signal(SIGTERM, sigterm);
 
     /* init screen */
     screen = DefaultScreen(dpy);
@@ -2945,9 +2984,10 @@ sigchld(int unused)
 	while (0 < (pid = waitpid(-1, NULL, WNOHANG))) {
 		pid_t *p, *lim;
 
-		if (!(p = autostart_pids))
-			continue;
-		lim = &p[autostart_len];
+		if (!(p = startandrestart_pids))
+			lim = &p[startandrestart_len];
+        else if (!(p = startonce_pids))
+            lim = &p[startonce_len];
 
 		for (; p < lim; p++) {
 			if (*p == pid) {
@@ -2957,6 +2997,20 @@ sigchld(int unused)
 		}
 
 	}
+}
+
+void
+sighup(int unused)
+{
+	Arg a = {.i = 1};
+	quit(&a);
+}
+
+void
+sigterm(int unused)
+{
+	Arg a = {.i = 0};
+	quit(&a);
 }
 
 void
@@ -4285,14 +4339,18 @@ main(int argc, char *argv[])
 {
     if (argc == 2 && !strcmp("-v", argv[1]))
         die("dwm-"VERSION);
+    else if (argc == 2 && !strcmp("--firstrun", argv[1]))
+        autostart_exec(1);
     else if (argc != 1)
-        die("usage: dwm [-v]");
+        die("usage: dwm [-v] or [--firstrun]");
+    else
+        autostart_exec(0);
+
     if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
         fputs("warning: no locale support\n", stderr);
     if (!(dpy = XOpenDisplay(NULL)))
         die("dwm: cannot open display");
     checkotherwm();
-    autostart_exec();
     setup();
 #ifdef __OpenBSD__
     if (pledge("stdio rpath proc exec", NULL) == -1)
@@ -4300,6 +4358,8 @@ main(int argc, char *argv[])
 #endif /* __OpenBSD__ */
     scan();
     run();
+    char *dwm_empty_start[] = {"dwm", NULL};
+    if(restart) execvp(argv[0], dwm_empty_start);
     cleanup();
     XCloseDisplay(dpy);
     return EXIT_SUCCESS;

@@ -172,10 +172,10 @@ install: all
 	$Qchmod 755 ${DESTDIR}${PREFIX}/bin/dwmblocks
 
 uninstall:
-	$(PRINTF) "Remove all files" "dwm, dwmswallow.sh, jeff_dwm-run.sh, jeff_dwm.desktop, dwm.1, dwmblocks, rofi_layoutmenu"
+	$(PRINTF) "Remove all files" "dwm, dwm_swallow.sh, jeff_dwm_run.sh, jeff_dwm.desktop, dwm.1, dwmblocks, rofi_layoutmenu"
 	$Qrm -f ${DESTDIR}${PREFIX}/bin/dwm\
-		${DESTDIR}${MANPREFIX}/bin/dwmswallow.sh\
-		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-run.sh\
+		${DESTDIR}${MANPREFIX}/bin/dwm_swallow.sh\
+		${DESTDIR}${MANPREFIX}/bin/jeff_dwm_run.sh\
 		${DESTDIR}${MANPREFIX}/usr/share/xsessions/jeff_dwm.desktop\
 		${DESTDIR}${MANPREFIX}/bin/jeff_dwm-recompile.sh\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1\

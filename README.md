@@ -51,6 +51,7 @@ All the original .diff files are located in /patches. Needless to say that a lot
 - placemouse (slightly buggy with current implementation, is a TODO)
 - preserveonrestart
 - resizecorners
+- restartsig
 - rotatestack
 - rulerefresher
 - scratchpad
