@@ -7,6 +7,8 @@ static const char *const startandrestart[] = {
 };
 
 // For autostarting programs that DO persist though a dwm restart, compositor or a favorite desktop app
+// Optionally you can also have this start a bash script that starts your programs instead, so
+// you do not need to recompile to change. 
 static const char *const startonce[] = {
 	"jeff_dwm_setup.sh", NULL,
 	"picom", NULL,
