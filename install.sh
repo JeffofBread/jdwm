@@ -2,7 +2,7 @@
 
 PARENT_DIR=$(pwd)
 ROFI_DIR="rofi"
-DWM_DIR="dwm-src"
+DWM_DIR="dwmsrc"
 DWM_BLOCKS_DIR="dwmblocks"
 
 if ! [ $(id -u) != 0 ]; then
@@ -21,7 +21,7 @@ echo -e "\n|--------- Install Started -----------|\n"  #
 echo -e "\n|---- Rofi config and scripts --------|\n"  #
 ########################################################
 
-cd $ROFI_DIR && bash rofi_install.sh && cd $PARENT_DIR
+cd $ROFI_DIR && bash rofi_theme_install.sh && cd $PARENT_DIR
 
 ########################################################
 echo -e "\n|--------- dwmblocks scripts----------|\n"  #

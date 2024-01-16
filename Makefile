@@ -46,7 +46,7 @@ LDFLAGS  = ${LIBS}
 CC = cc
 
 # jeff_dwm dirs
-DWM_SRC_DIR = ${CURDIR}/dwm-src
+DWM_SRC_DIR = ${CURDIR}/dwmsrc
 DWM_BUILD_DIR = ${DWM_SRC_DIR}/build
 DWM_CONFIG_DIR = ${DWM_SRC_DIR}/config
 DWM_RESOURCES_DIR = ${DWM_SRC_DIR}/resources
