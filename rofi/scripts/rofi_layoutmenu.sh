@@ -3,7 +3,13 @@
 
 GET_LAYOUTS_CMD="dwm-msg get_layouts"
 LAYOUTS_JSON=$($GET_LAYOUTS_CMD)
-ARRAY_LENGTH=$($GET_LAYOUTS_CMD | jq -r 'length')
+
+if jq -V ; then
+    ARRAY_LENGTH=$($GET_LAYOUTS_CMD | jq -r 'length')
+else
+    rofi -e "Please install or verify that jq is working." 
+    exit 0
+fi
 
 main() {
     for ((i = 0; i < ARRAY_LENGTH; i++ )); do
