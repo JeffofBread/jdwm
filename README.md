@@ -46,6 +46,7 @@ All the original .diff files are located in /patches. Needless to say that a lot
 - hidevacanttags
 - ignoretransientwindows
 - ipc
+- layoutscroll
 - noborderflicker
 - pertag
 - placemouse (slightly buggy with current implementation, is a TODO)
