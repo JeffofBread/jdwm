@@ -23,6 +23,8 @@ static const int showstatus         		= 1;        /* 0 means no status bar */
 static const int showfloating       		= 1;        /* 0 means no floating indicator */
 static const int vertpad           			= 0;        /* vertical padding of bar */
 static const int sidepad            		= 0;        /* horizontal padding of bar */
+static const int horizpadbar        		= 2;        /* horizontal padding for statusbar */
+static const int vertpadbar         		= 0;        /* vertical padding for statusbar */
 static const unsigned int centeredwindowname= 0;		/* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
 #define ICONSIZE 							  16   		/* icon size */
 #define ICONSPACING							  5 		/* space between icon and title */
