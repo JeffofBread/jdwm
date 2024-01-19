@@ -62,5 +62,6 @@ All the original .diff files are located in /patches. Needless to say that a lot
 - stickyindicator
 - switchallmonitortags
 - systray
+- underlinetags
 - vanitygaps
 - winicon

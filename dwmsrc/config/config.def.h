@@ -25,6 +25,10 @@ static const int vertpad           			= 0;        /* vertical padding of bar */
 static const int sidepad            		= 0;        /* horizontal padding of bar */
 static const int horizpadbar        		= 2;        /* horizontal padding for statusbar */
 static const int vertpadbar         		= 0;        /* vertical padding for statusbar */
+static const int ulineall 					= 0;		/* 1 to show underline on all tags, 0 for just the active ones */
+static const unsigned int ulinepad			= 5;		/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke		= 2;		/* thickness / height of the underline */
+static const unsigned int ulinevoffset		= 1;		/* how far above the bottom of the bar the line should appear */
 static const unsigned int centeredwindowname= 0;		/* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
 #define ICONSIZE 							  16   		/* icon size */
 #define ICONSPACING							  5 		/* space between icon and title */
