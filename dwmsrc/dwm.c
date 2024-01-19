@@ -340,6 +340,7 @@ static void togglealttag(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglefakefullscreen(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void centerfloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void togglesticky(const Arg *arg);
 static void togglefullscreen(const Arg *arg);
@@ -3325,6 +3326,20 @@ togglefloating(const Arg *arg)
 		configure(c);
 	}
     arrange(c->mon);
+}
+
+void
+centerfloating(const Arg *arg)
+{
+    Client *c = selmon->sel;
+    int nx, ny;
+
+    if (c->isfloating) {
+        nx = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
+        ny = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
+
+        resize(c, nx, ny, c->w, c->h, 0);
+    }
 }
 
 void
