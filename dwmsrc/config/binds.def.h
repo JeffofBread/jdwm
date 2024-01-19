@@ -71,6 +71,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_s,      togglesticky,    	{0} },
 	{ MODKEY,                       XK_u,      swalstopsel,    		{0} },
 	{ MODKEY,                       XK_grave,  togglescratch,       {.v = scratchpadcmd } },
+	{ MODKEY|ShiftMask,             XK_grave,  spawn,       		{.v = scratchpadcmd } },
 	{ Mod1Mask,                     XK_Tab,    spawn,               {.v = alttabcmd } },
 };
 
