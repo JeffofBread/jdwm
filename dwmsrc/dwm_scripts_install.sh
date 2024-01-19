@@ -25,7 +25,8 @@ scripts_install(){
          cp $EXAMPLE_SETUPFILE $SETUPFILE
          echo -e "\nCopying default setup config."
 
-         mkdir -p $DEFAULT_BG_INSTALL_DIR && cp $RESOURCES_DIR/Green.png $DEFAULT_BG_INSTALL_DIR/Green.png
+         mkdir -p $DEFAULT_BG_INSTALL_DIR
+         cp $RESOURCES_DIR/Green.png $DEFAULT_BG_INSTALL_DIR/Green.png
          echo -e "Copying placeholder background image to $DEFAULT_BG_INSTALL_DIR."
       fi
    fi
