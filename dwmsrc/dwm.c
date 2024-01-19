@@ -958,22 +958,22 @@ configurerequest(XEvent *e)
         } else
             configure(c);
 		break;
-	case ClientSwallower:
-		/* Reject any move/resize requests for swallowers and communicate
-		 * refusal to client via a synthetic ConfigureNotify (ICCCM 4.1.5). */
-		configure(c);
-		break;
-	default:
-        wc.x = ev->x;
-        wc.y = ev->y;
-        wc.width = ev->width;
-        wc.height = ev->height;
-        wc.border_width = ev->border_width;
-        wc.sibling = ev->above;
-        wc.stack_mode = ev->detail;
-        XConfigureWindow(dpy, ev->window, ev->value_mask, &wc);
-        break;
-    }
+	    case ClientSwallower:
+		    /* Reject any move/resize requests for swallowers and communicate
+		     * refusal to client via a synthetic ConfigureNotify (ICCCM 4.1.5). */
+		    configure(c);
+		    break;
+	    default:
+            wc.x = ev->x;
+            wc.y = ev->y;
+            wc.width = ev->width;
+            wc.height = ev->height;
+            wc.border_width = ev->border_width;
+            wc.sibling = ev->above;
+            wc.stack_mode = ev->detail;
+            XConfigureWindow(dpy, ev->window, ev->value_mask, &wc);
+            break;
+        }
     XSync(dpy, False);
 }
 
