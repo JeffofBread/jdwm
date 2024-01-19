@@ -38,8 +38,11 @@ INCS = -I${X11INC} -I${FREETYPEINC} -I${DWM_SRC_DIR} -I${DWM_CONFIG_DIR} -I${DWM
 LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2 ${YAJLLIBS}
 
 # flags
+# DEBUGFLAG = -ggdb # Debug flag to allow you to debug dwm with gdb
+DEBUGFLAG = -g  # Default flag, use if you are not debugging dwm
+
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
-CFLAGS   = -g -std=c99 -pedantic -Wall -O0 -Wno-deprecated-declarations -Wno-implicit-function-declaration ${INCS} ${CPPFLAGS}
+CFLAGS   = ${DEBUGFLAG} -std=c99 -pedantic -Wall -O0 -Wno-deprecated-declarations -Wno-implicit-function-declaration ${INCS} ${CPPFLAGS}
 LDFLAGS  = ${LIBS}
 
 # compiler and linker
