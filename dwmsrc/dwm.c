@@ -4230,10 +4230,10 @@ main(int argc, char *argv[])
 {
     if (argc == 2 && !strcmp("-v", argv[1]))
         die("dwm-"VERSION);
-    else if (argc == 2 && !strcmp("--firstrun", argv[1]))
+    else if (argc == 2 && !strcmp("--first-run", argv[1]))
         autostart_exec(1);
     else if (argc != 1)
-        die("usage: dwm [-v] or [--firstrun]");
+        die("usage: dwm [-v] or [--first-run]");
     else
         autostart_exec(0);
 
