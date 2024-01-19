@@ -2857,14 +2857,22 @@ sigchld(int unused)
         die("can't install SIGCHLD handler:");
     }
 	while (0 < (pid = waitpid(-1, NULL, WNOHANG))) {
-		pid_t *p, *lim;
+		pid_t *p, *startandrestart_lim, *startonce_lim;
 
-		if (!(p = startandrestart_pids))
-			lim = &p[startandrestart_len];
-        else if (!(p = startonce_pids))
-            lim = &p[startonce_len];
+		if (!(p = startandrestart_pids) || !(p = startonce_pids))
+            continue;
 
-		for (; p < lim; p++) {
+        startandrestart_lim = &p[startandrestart_len];
+        startonce_lim = &p[startonce_len];
+
+		for (; p < startandrestart_lim; p++) {
+			if (*p == pid) {
+				*p = -1;
+				break;
+			}
+		}
+
+        for (; p < startonce_lim; p++) {
 			if (*p == pid) {
 				*p = -1;
 				break;
