@@ -1,6 +1,15 @@
-/* See LICENSE file for copyright and license details. */
+//////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                               			//
+//          /\                                                                        		//
+//         /  \     _ __    _ __     ___    __ _   _ __    __ _   _ __     ___    ___ 		//
+//        / /\ \   | '_ \  | '_ \   / _ \  / _` | | '__|  / _` | | '_ \   / __|  / _ \		//
+//       / ____ \  | |_) | | |_) | |  __/ | (_| | | |    | (_| | | | | | | (__  |  __/		//
+//      /_/    \_\ | .__/  | .__/   \___|  \__,_| |_|     \__,_| |_| |_|  \___|  \___|      //
+//                 | |     | |                                                        		//
+//                 |_|     |_|                                                        		//
+//																							//
+//////////////////////////////////////////////////////////////////////////////////////////////
 
-/* appearance */
 static const unsigned int borderpx  		= 0;        /* border pixel of windows */
 static const unsigned int fborderpx			= 5;        /* border pixel of floating windows */
 static const unsigned int snap      		= 32;       /* snap pixel */
@@ -32,104 +41,138 @@ static const unsigned int ulinevoffset		= 1;		/* how far above the bottom of the
 static const unsigned int centeredwindowname= 0;		/* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
 #define ICONSIZE 							  16   		/* icon size */
 #define ICONSPACING							  5 		/* space between icon and title */
-static const char *fonts[]          		= { "JetBrainsMono:size=12" };
-static const char dmenufont[]       		=   "JetBrainsMono:size=12";
 
-/* Include chosen theme here. Make custom themes by copying .def file and customizing/renaming */
+// Fonts
+static const char *fonts[]          		= { "JetBrainsMono:size=14" };
+static const char dmenufont[]       		=   "JetBrainsMono:size=14";
+
+// Include chosen theme here. Make custom themes by copying .def file and customizing/renaming
 #include <jeffs_theme.h>
 //#include <default_theme.h>
 
+// Sticky Icon
 static const XPoint stickyicon[]    = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */
-static const XPoint stickyiconbb    = {4,8};	/* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
+static const XPoint stickyiconbb    = {4,8}; /* defines the bottom right corner of the polygon's bounding box (speeds up scaling) */
 
-/* tagging */
+// Tags
 static const char *tags[]           = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[]        = { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
 static const int   momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
-static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor   ignoretransient */
-	{ "Gimp",     NULL,       NULL,       0,            0,           -1,       0 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,       0 },
-	{ "Rofi",  	  NULL,       NULL,       0,       		1,           -1,       0 },
-};
-
-/* window swallowing */
+// Window Swallowing Variables
 static const int  swaldecay 		= 3;
 static const int  swalretroactive 	= 1;
-static const char swalsymbol[] 		= "👅";
+static const char swalsymbol[] 		= "🔗";
 
-/* layout(s) */
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//				  _                                        _         						//
+//				 | |                                      | |        						//
+//				 | |        __ _   _   _    ___    _   _  | |_   ___ 						//
+//				 | |       / _` | | | | |  / _ \  | | | | | __| / __|						//
+//				 | |____  | (_| | | |_| | | (_) | | |_| | | |_  \__ \						//
+//				 |______|  \__,_|  \__, |  \___/   \__,_|  \__| |___/						//
+//				                    __/ |                            						//
+//				                   |___/                             						//
+//																							//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// Layout Variables
 static const float mfact          = 0.5;  /* factor of master area size [0.05..0.95]      */
 static const int   nmaster        = 1;    /* number of clients in master area             */
 static const int   resizehints    = 1;    /* 1 means respect size hints in tiled resizals */
 static const int   decorhints     = 1;    /* 1 means respect decoration hints             */
 static const int   lockfullscreen = 1;    /* 1 will force focus on the fullscreen window  */
 
+// Layouts and Layout Rules
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include <vanitygaps.c>
-
 static const Layout layouts[] = {
-/*    symbol      arrange function          name                        */
-	{ "[]=",      tile,						"Tile" 						},    /* first entry is default */
-	{ "[M]",      monocle,					"Monocle"  					},
-	{ "[@]",      spiral,					"Spiral"  					},
-	{ "[\\]",     dwindle,					"Dwindle"  					},
-	{ "H[]",      deck,						"Deck"  					},
-	{ "TTT",      bstack,					"B-Stack"  					},
-	{ "===",      bstackhoriz,				"B-Stack Horizontal"  		},
-	{ "HHH",      grid,						"Grid"  					},
-	{ "###",      nrowgrid,					"Narrow Grid"  				},
-	{ "---",      horizgrid,				"Horizontal Grid"  			},
-	{ ":::",      gaplessgrid,				"Gapless Grid" 				},
-	{ "|M|",      centeredmaster,			"Centered Master"  			},
-	{ ">M>",      centeredfloatingmaster,	"Centered Floating Master"  },
-	{ "><>",      NULL,						"Floating"  				},    /* no layout function means floating behavior */
+    //  symbol      arrange function            name                        
+	{   "[]=",      tile,						"Tile" 						},    /* first entry is default */
+	{   "[M]",      monocle,					"Monocle"  					},
+	{   "[@]",      spiral,					    "Spiral"  					},
+	{   "[\\]",     dwindle,					"Dwindle"  					},
+	{   "H[]",      deck,						"Deck"  					},
+	{   "TTT",      bstack,					    "B-Stack"  					},
+	{   "===",      bstackhoriz,				"B-Stack Horizontal"  		},
+	{   "HHH",      grid,						"Grid"  					},
+	{   "###",      nrowgrid,					"Narrow Grid"  				},
+	{   "---",      horizgrid,				    "Horizontal Grid"  			},
+	{   ":::",      gaplessgrid,				"Gapless Grid" 				},
+	{   "|M|",      centeredmaster,			    "Centered Master"  			},
+	{   ">M>",      centeredfloatingmaster,	    "Centered Floating Master"  },
+	{   "><>",      NULL,						"Floating"  				},    /* no layout function means floating behavior */
 };
 
-/* key definitions */
-#define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|Mod1Mask,              KEY,      viewall,        {.ui = 1 << TAG} }, \
+// Window Rules
+static const Rule rules[] = {
 
+	/* xprop(1):
+	 *	WM_CLASS(STRING) = instance, class
+	 *	WM_NAME(STRING) = title
+	 */
+
+	/* class      instance    title       tags mask     isfloating   monitor   ignoretransient */
+	{ "Gimp",     NULL,       NULL,       0,            0,           -1,       0 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,       0 },
+	{ "Rofi",  	  NULL,       NULL,       0,       		1,           -1,       0 },
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//																							//
+//	  __  __   _                       _   _                                              	//
+//	 |  \/  | (_)                     | | | |                                             	//
+//	 | \  / |  _   ___    ___    ___  | | | |   __ _   _ __     ___    ___    _   _   ___ 	//
+//	 | |\/| | | | / __|  / __|  / _ \ | | | |  / _` | | '_ \   / _ \  / _ \  | | | | / __|	//
+//	 | |  | | | | \__ \ | (__  |  __/ | | | | | (_| | | | | | |  __/ | (_) | | |_| | \__ \	//
+//	 |_|  |_| |_| |___/  \___|  \___| |_| |_|  \__,_| |_| |_|  \___|  \___/   \__,_| |___/	//
+//																							//
+//																							//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// IPC Variables
 static const char *ipcsockpath = "/tmp/dwm.sock";
 static IPCCommand ipccommands[] = {
-  IPCCOMMAND(  view,                1,      {ARG_TYPE_UINT}   ),
-  IPCCOMMAND(  toggleview,          1,      {ARG_TYPE_UINT}   ),
-  IPCCOMMAND(  tag,                 1,      {ARG_TYPE_UINT}   ),
-  IPCCOMMAND(  toggletag,           1,      {ARG_TYPE_UINT}   ),
-  IPCCOMMAND(  tagmon,              1,      {ARG_TYPE_UINT}   ),
-  IPCCOMMAND(  focusmon,            1,      {ARG_TYPE_SINT}   ),
-  IPCCOMMAND(  focusstack,          1,      {ARG_TYPE_SINT}   ),
-  IPCCOMMAND(  zoom,                1,      {ARG_TYPE_NONE}   ),
-  IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
-  IPCCOMMAND(  killclient,          1,      {ARG_TYPE_SINT}   ),
-  IPCCOMMAND(  togglefloating,      1,      {ARG_TYPE_NONE}   ),
-  IPCCOMMAND(  setmfact,            1,      {ARG_TYPE_FLOAT}  ),
-  IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
-  IPCCOMMAND(  quit,                1,      {ARG_TYPE_NONE}   )
+  IPCCOMMAND(  view,         	1,	{ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggleview,      1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tag,             1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggletag,       1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tagmon,          1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  focusmon,        1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  focusstack,      1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  zoom,            1,  {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  incnmaster,      1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  killclient,      1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  togglefloating,  1,  {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  setmfact,        1,  {ARG_TYPE_FLOAT}  ),
+  IPCCOMMAND(  setlayoutsafe,   1,  {ARG_TYPE_PTR}    ),
+  IPCCOMMAND(  quit,            1,  {ARG_TYPE_NONE}   )
 };
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
+// Helper for spawning shell commands in the pre dwm-5.0 fashion
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
+// Commands
 static const char *termcmd[]       		= { "kitty", NULL };
 static const char *recompilecmd[]  		= { "jeff_dwm-recompile.sh", NULL };
-static const char  scratchpadname[] 	= "Scratchpad";
+static const char  scratchpadname[] 	=   "Scratchpad";
 static const char *scratchpadcmd[] 		= { "kitty", "-T", scratchpadname, NULL };
 static const char *rofi_launcher_cmd[]  = { "rofi", /*"-normal-window",*/ "-show", "drun", };
 static const char *layoutmenucmd[]  	= { "rofi_layoutmenu.sh", NULL };
 static const char *alttabcmd[]  		= { "rofi", /*"-normal-window",*/ "-show", "window", NULL };
 
+// Key Defenitions
+#define MODKEY Mod4Mask
+#define TAGKEYS(KEY,TAG) \
+	{ MODKEY,               KEY,      view,         {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,   KEY,      toggleview,   {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,     KEY,      tag,          {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,     KEY,      view,         {.ui = 1 << TAG} }, \
+	{ MODKEY|Mod1Mask,      KEY,      viewall,      {.ui = 1 << TAG} }, \
+
+// Function Includes
 #include <autorun.h>
 #include <focusurgent.c>
 #include <shift-tools.c>
