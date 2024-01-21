@@ -163,19 +163,11 @@ static const char *rofi_launcher_cmd[]  = { "rofi", /*"-normal-window",*/ "-show
 static const char *layoutmenucmd[]      = { "rofi_layoutmenu.sh", NULL };
 static const char *alttabcmd[]          = { "rofi", /*"-normal-window",*/ "-show", "window", NULL };
 
-// Key Defenitions
-#define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG) \
-        { MODKEY,               KEY,      view,         {.ui = 1 << TAG} }, \
-        { MODKEY|ControlMask,   KEY,      toggleview,   {.ui = 1 << TAG} }, \
-        { MODKEY|ShiftMask,     KEY,      tag,          {.ui = 1 << TAG} }, \
-        { MODKEY|ShiftMask,     KEY,      view,         {.ui = 1 << TAG} }, \
-        { MODKEY|Mod1Mask,      KEY,      viewall,      {.ui = 1 << TAG} }, \
-
 // Function Includes
 #include <autorun.h>
 #include <focusurgent.c>
 #include <shift-tools.c>
 
-// Include Button and Key Bindings
+// Include Button, Key Bindings, and Key Defenitions
+#include <keydefs.h>
 #include <binds.h>
