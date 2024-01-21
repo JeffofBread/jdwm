@@ -4,7 +4,7 @@
 
 # Example config: 
 xrandr --output HDMI-1 --mode 1920x1080
-feh --bg-scale /usr/local/share/Green.png
+feh --bg-scale /usr/local/share/jeff_dwm/Green.png
 
 
 #####################################################
