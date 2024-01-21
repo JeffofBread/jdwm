@@ -100,7 +100,7 @@ ${DWM_BUILD_DIR}:
 	$(PRINTF) "Make jeff_dwm build directory " $@
 	$Qmkdir -p ${DWM_BUILD_DIR}
 
-${DWM_OBJ}: ${DWM_CONFIG_DIR}/config.h ${DWM_CONFIG_DIR}/binds.h ${DWM_CONFIG_DIR}/autorun.h
+${DWM_OBJ}: ${DWM_CONFIG_DIR}/config.h ${DWM_CONFIG_DIR}/binds.h ${DWM_CONFIG_DIR}/autorun.h ${DWM_CONFIG_DIR}/keydefs.h
 
 ${DWM_CONFIG_DIR}/config.h:
 	$(PRINTF) "Copy jeff_dwm default config  " "cp config.def.h -> config.h"
@@ -115,6 +115,11 @@ ${DWM_CONFIG_DIR}/binds.h:
 ${DWM_CONFIG_DIR}/autorun.h:
 	$(PRINTF) "Copy jeff_dwm default autorun " "cp autorun.def.h -> autorun.h"
 	$Qcp ${DWM_CONFIG_DIR}/autorun.def.h $@
+	$Qchmod a=rw $@
+
+${DWM_CONFIG_DIR}/keydefs.h:
+	$(PRINTF) "Copy jeff_dwm default keydefs " "cp keydefs.def.h -> keydefs.h"
+	$Qcp ${DWM_CONFIG_DIR}/keydefs.def.h $@
 	$Qchmod a=rw $@
 
 ${BLOCKS_BUILD_DIR}/%.o: ${BLOCKS_SRC_DIR}/%.c | ${BLOCKS_BUILD_DIR}
