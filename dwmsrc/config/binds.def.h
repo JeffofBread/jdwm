@@ -21,10 +21,11 @@ static const Key keys[] = {
 
         #define TAGKEYS(KEY,TAG) \
         { Win,           KEY,      view,         {.ui = 1 << TAG} }, \
-        { Win|Alt,       KEY,      viewall,      {.ui = 1 << TAG} }, \
-        { Win|Shift,     KEY,      view,         {.ui = 1 << TAG} }, \
-        { Win|Shift,     KEY,      tag,          {.ui = 1 << TAG} }, \
         { Win|Control,   KEY,      toggleview,   {.ui = 1 << TAG} }, \
+        { Win|Shift,     KEY,      tag,          {.ui = 1 << TAG} }, \
+        { Win|Shift,     KEY,      view,         {.ui = 1 << TAG} }, \
+        { Win|Alt,       KEY,      viewall,      {.ui = 1 << TAG} }, \
+
 
         //Modifier       Key        Function         Argument
         TAGKEYS(         XK_1,                       0)
