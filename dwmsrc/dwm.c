@@ -2189,6 +2189,7 @@ removesystrayicon(Client *i)
 {
 	Client **ii;
 
+    XReparentWindow(dpy, i->win, root, 0, 0);  // https://www.reddit.com/r/suckless/comments/vdpq14/comment/icpsnhe/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 	if (!showsystray || !i)
 		return;
 	for (ii = &systray->icons; *ii && *ii != i; ii = &(*ii)->next);
