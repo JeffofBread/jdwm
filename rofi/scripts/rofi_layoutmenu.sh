@@ -24,7 +24,7 @@ main
 choice=$(
     for ((snidx = 0; snidx < ARRAY_LENGTH; snidx++)); do
         echo "${LAYOUT_SYMBOL[snidx]} | ${LAYOUT_NAME[snidx]}"
-    done  | rofi -normal-window -format 'i' -dmenu -i -fuzzy -p "Layout"
+    done  | rofi -no-fixed-num-lines -format 'i' -dmenu -i -fuzzy -p "Layout"
 );
 
 dwm-msg run_command setlayoutsafe $((${LAYOUT_ADDRESS[$choice]}))

@@ -159,9 +159,9 @@ static const char *termcmd[]            = { "kitty", NULL };
 static const char *recompilecmd[]       = { "jeff_dwm-recompile.sh", NULL };
 static const char  scratchpadname[]     =   "Scratchpad";
 static const char *scratchpadcmd[]      = { "kitty", "-T", scratchpadname, NULL };
-static const char *rofi_launcher_cmd[]  = { "rofi", /*"-normal-window",*/ "-show", "drun", };
+static const char *rofi_launcher_cmd[]  = { "rofi", "-no-fixed-num-lines", /*"-normal-window",*/ "-show", "drun", };
 static const char *layoutmenucmd[]      = { "rofi_layoutmenu.sh", NULL };
-static const char *alttabcmd[]          = { "rofi", /*"-normal-window",*/ "-show", "window", NULL };
+static const char *alttabcmd[]          = { "rofi", "-no-fixed-num-lines", /*"-normal-window",*/ "-show", "window", NULL };
 
 // Function Includes
 #include <autorun.h>
