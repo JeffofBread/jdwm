@@ -3373,6 +3373,7 @@ centerfloating(const Arg *arg)
         ny = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
 
         resize(c, nx, ny, c->w, c->h, 0);
+        XWarpPointer(dpy, None, c->mon->sel->win, 0, 0, 0, 0, c->mon->sel->w/2, c->mon->sel->h/2);
     }
 }
 
