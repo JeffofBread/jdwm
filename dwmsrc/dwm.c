@@ -1331,8 +1331,11 @@ focus(Client *c)
         attachstack(c);
         grabbuttons(c, 1);
         /* set new focused border first to avoid flickering */
-        if(c->isfloating)
+        if(c->isfloating){
 			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
+            if(raisefloatwinfoc)
+                XRaiseWindow(dpy, c->win);
+        }
 		else
 			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
 		/* lastfocused may be us if another window was unmanaged */
