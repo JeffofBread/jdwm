@@ -79,7 +79,7 @@ element {
 }
 
 element normal active {
-    text-color: @normalgreen;
+    text-color: @lightgrey;
 }
 
 element selected normal, element selected active {
