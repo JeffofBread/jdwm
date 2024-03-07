@@ -1,0 +1,102 @@
+// 95% of the credit for this goes to LR-Tech on github for the file 'rounded-common.rasi' file present here,
+// which this is based off of. Most of what you see here is LR-Tech's with minor modifications to fit my taste. 
+
+* {
+    grey:         #25272a;
+    normalgreen:  #253a29;
+    white:        #e1e0db;
+    lightgrey:    #969696;
+
+    font: "JetBrainsMono 12";
+
+    background-color:   transparent;
+    text-color:         @white;
+
+    margin:     0px;
+    padding:    0px;
+    spacing:    0px;
+}
+
+window {
+    location:       center;
+    width:          480;
+    border-radius:  24px;
+    
+    background-color:   @grey;
+}
+
+mainbox {
+    padding:    12px;
+}
+
+inputbar {
+    background-color:   @grey;
+    border-color:       @normalgreen;
+
+    border:         2px;
+    border-radius:  16px;
+
+    padding:    8px 16px;
+    spacing:    8px;
+    children:   [ prompt, entry ];
+}
+
+prompt {
+    text-color: @white;
+}
+
+entry {
+    placeholder:        "Search";
+    placeholder-color:  @lightgrey;
+}
+
+message {
+    margin:             12px 0 0;
+    border-radius:      16px;
+    border-color:       @normalgreen;
+    background-color:   @grey;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    background-color:   transparent;
+
+    margin:         12px 0 0;
+    lines:          16;
+    columns:        1;
+    scrollbar:      true;
+    fixed-height:   false;
+    dynamic:        true;
+}
+
+element {
+    padding:        8px 16px;
+    spacing:        8px;
+    border-radius:  16px;
+}
+
+element normal active {
+    text-color: @normalgreen;
+}
+
+element selected normal, element selected active {
+    background-color:   @normalgreen;
+}
+
+element-icon {
+    size:           1em;
+    vertical-align: 0.5;
+}
+
+element-text {
+    text-color: inherit;
+}
+
+scrollbar {
+  handle-width : 8px;
+  handle-color : @normalgreen;
+  padding      : 0 4px;
+}
