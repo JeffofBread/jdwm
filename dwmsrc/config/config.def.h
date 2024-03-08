@@ -16,7 +16,7 @@ static const unsigned int raisefloatwinfoc      = 1;            /* whether to ra
 static const unsigned int snap                  = 32;           /* snap pixel */
 static const unsigned int systraypinning        = 0;            /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft         = 0;            /* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing        = 2;            /* systray spacing */
+static const unsigned int systrayspacing        = 3;            /* systray spacing */
 static const int systraypinningfailfirst        = 1;            /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray                    = 1;            /* 0 means no systray */
 static const unsigned int gappih                = 10;           /* horiz inner gap between windows */
@@ -31,16 +31,16 @@ static const int showtags                       = 1;            /* 0 means no ta
 static const int showlayout                     = 1;            /* 0 means no layout indicator */
 static const int showstatus                     = 1;            /* 0 means no status bar */
 static const int showfloating                   = 1;            /* 0 means no floating indicator */
-static const int vertpad                        = 0;            /* vertical padding of bar */
-static const int sidepad                        = 0;            /* horizontal padding of bar */
-static const int horizpadbar                    = 2;            /* horizontal padding for statusbar */
-static const int vertpadbar                     = 0;            /* vertical padding for statusbar */
+static const int vertpad                        = 10;           /* vertical padding of bar */
+static const int sidepad                        = 10;           /* horizontal padding of bar */
+static const int horizpadbar                    = 0;            /* horizontal padding for statusbar */
+static const int vertpadbar                     = 2;            /* vertical padding for statusbar */
 static const int ulineall                       = 0;            /* 1 to show underline on all tags, 0 for just the active ones */
 static const unsigned int ulinepad              = 5;            /* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke           = 2;            /* thickness / height of the underline */
 static const unsigned int ulinevoffset          = 1;            /* how far above the bottom of the bar the line should appear */
-static const unsigned int centeredwindowname    = 0;            /* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
-#define ICONSIZE                                  16            /* icon size */
+static const unsigned int centeredwindowname    = 1;            /* 0 is default dwm behavior, 1 centers the name on the monitor width (not the bars), and over 1 is a lazy toggle off for the window name */
+#define ICONSIZE                                  20            /* icon size */
 #define ICONSPACING                               5             /* space between icon and title */
 
 // Fonts
