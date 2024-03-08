@@ -285,6 +285,7 @@ static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static void moveorplace(const Arg *arg);
+static void floatandmove(const Arg *arg);
 static Client *nexttiled(Client *c);
 static void placemouse(const Arg *arg);
 static void pop(Client *c);
@@ -1873,6 +1874,14 @@ moveorplace(const Arg *arg) {
 		movemouse(arg);
 	else
 		placemouse(arg);
+}
+
+void 
+floatandmove(const Arg *arg) {
+    if(selmon->sel && selmon->sel->isfloating){}
+    else 
+        togglefloating(NULL);
+    movemouse(arg);
 }
 
 void

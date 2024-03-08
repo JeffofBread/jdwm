@@ -180,7 +180,8 @@ static const Button buttons[] = {
          * to control these separately (i.e. to retain the feature to move a tiled window
          * into a floating position).
          */
-        { ClkClientWin,   Win,   LeftClick,   moveorplace,   {.i = 0} },
+        { ClkClientWin,   Win,          LeftClick,   moveorplace,   {.i = 0} },
+        { ClkClientWin,   Win|Control,  LeftClick,   floatandmove,  {.i = 0} },
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
