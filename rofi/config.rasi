@@ -13,7 +13,7 @@ configuration {
 /*	dpi: -1;*/
 
 	/*---------- Matching setting ----------*/
-	matching: "fuzzy";
+	matching: "normal";
 	tokenize: true;
 
 	/*---------- SSH settings ----------*/
@@ -60,7 +60,7 @@ configuration {
 
 	/*---------- History and Sorting ----------*/
 	disable-history: false;
-	sorting-method: "fzf";
+	sorting-method: "normal";
 	max-history-size: 25;
 
 	/*---------- Display setting ----------*/
