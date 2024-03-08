@@ -1145,7 +1145,7 @@ drawbar(Monitor *m)
 	/* Draw swalsymbol next to ltsymbol. */
 	if (m->sel && m->sel->swer) {
 		w = TEXTW(swalsymbol);
-		x = drw_text(drw, x, 0, w, bh, lrpad / 2, swalsymbol, 0);
+		x = drw_text(drw, x, 0, w, bh, 0, swalsymbol, 0);
 	}
 
     if ((w = m->ww - tw - stw - x) > bh) {
@@ -1158,15 +1158,19 @@ drawbar(Monitor *m)
             if (centeredwindowname == 0) {
                 drw_text(drw, x, 0, w - 2 * sp, bh, lrpad / 2 + (m->sel->icon ? m->sel->icw + ICONSPACING : 0), m->sel->name, 0);
                 if (m->sel->icon) drw_pic(drw, x + lrpad / 2, (bh - m->sel->ich) / 2, m->sel->icw, m->sel->ich, m->sel->icon);
+                if (m->sel->isfloating && showfloating)
+                    drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+                if (m->sel->issticky)
+				    drw_polygon(drw, x + boxs, m->sel->isfloating ? boxs * 2 + boxw : boxs, stickyiconbb.x, stickyiconbb.y, boxw, boxw * stickyiconbb.y / stickyiconbb.x, stickyicon, LENGTH(stickyicon), Nonconvex, m->sel->tags & m->tagset[m->seltags]);
             } 
             else if (centeredwindowname == 1) {
                 drw_text(drw, x, 0, w - 2 * sp, bh, mid + (m->sel->icon ? m->sel->icw + ICONSPACING : 0), m->sel->name, 0);
                 if (m->sel->icon) drw_pic(drw, x + mid, (bh - m->sel->ich) / 2, m->sel->icw, m->sel->ich, m->sel->icon);
-            }
-            if (m->sel->isfloating && showfloating)
-                drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
-            if (m->sel->issticky)
-				drw_polygon(drw, x + boxs, m->sel->isfloating ? boxs * 2 + boxw : boxs, stickyiconbb.x, stickyiconbb.y, boxw, boxw * stickyiconbb.y / stickyiconbb.x, stickyicon, LENGTH(stickyicon), Nonconvex, m->sel->tags & m->tagset[m->seltags]);
+                if (m->sel->isfloating && showfloating)
+                    drw_rect(drw, x + mid - ICONSPACING - 3, boxs, boxw, boxw, m->sel->isfixed, 0);
+                if (m->sel->issticky)
+				    drw_polygon(drw, x + mid - ICONSPACING - 3, m->sel->isfloating ? boxs * 2 + boxw : boxs, stickyiconbb.x, stickyiconbb.y, boxw, boxw * stickyiconbb.y / stickyiconbb.x, stickyicon, LENGTH(stickyicon), Nonconvex, m->sel->tags & m->tagset[m->seltags]);
+                }
         } else {
             drw_setscheme(drw, scheme[SchemeInfoNorm]);
             drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
