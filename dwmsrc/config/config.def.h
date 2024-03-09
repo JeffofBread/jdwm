@@ -114,10 +114,15 @@ static const Rule rules[] = {
          *      WM_NAME(STRING) = title
          */
 
-        // Class        Instance    Title       Tags Mask       isfloating      Monitor         ignoretransient
-        { "Gimp",       NULL,       NULL,       0,              0,              -1,             0 },
-        { "Firefox",    NULL,       NULL,       1 << 8,         0,              -1,             0 },
-        { "Rofi",       NULL,       NULL,       0,              1,              -1,             0 },
+        // Class                Instance    Title       Tags Mask       isfloating      Monitor         ignoretransient
+        //-------------------------------------------------------------------------------------------------------------
+        // The below are my personal examples, feel free to remove them. 
+        { "Rofi",               NULL,       NULL,       0,              1,              -1,             0 },
+        { "MellowPlayer3",      NULL,       NULL,       2,              0,               1,             0 },
+        { "discord",            NULL,       NULL,       1,              0,               1,             0 },
+        { "steam",              NULL,       "Steam",    3,              0,               1,             0 },
+        { "firefox",            NULL,       NULL,       1,              0,               0,             0 },
+        { "VSCodium",           NULL,       NULL,       2,              0,               0,             0 },
 };
 
 
