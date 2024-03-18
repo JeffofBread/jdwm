@@ -24,7 +24,7 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 
 ## Patches
 
-All the original .diff files are located in /patches. Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together. Not unexpected when adding almost 40 patches together. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember which. Massive credit to him though for helping me directly and indirectly with certain patches and fixes.
+All the original .diff files are located in /dwmpatches. Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together. Not unexpected when adding almost 40 patches together. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember which. Also major thanks to [FT-Labs](https://github.com/FT-Labs) for helping me learn so much about dwm and x11 directly and indirectly through his [pdwm](https://github.com/FT-Labs/pdwm).
 
 - alternativetags
 - alwayscenter
