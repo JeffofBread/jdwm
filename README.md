@@ -2,7 +2,7 @@
 
 A build of dwm for myself and anyone who wishes to use it too. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and will be changing often and will be receiving major changes in the near future. Any recommendations or critique is appreciated.
 
-## Installation for new users
+## Installation
 
 **Notes before you install:**
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during install
