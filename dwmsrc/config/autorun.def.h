@@ -8,22 +8,19 @@
 //                                                                                          //                              
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+// For autostarting programs and scripts at dwm startup.
+static const char *const autostart[] = {
+	"jeff_dwm_setup.sh", NULL,
 
-// For autostarting programs that DON'T persist though a dwm restart, like some tray apps
-static const char *const startandrestart[] = {
-        "dwmblocks", NULL, // Dont remove unless you want to lose functionality
-        //"example", "-e", "--example" NULL,
-        //"example2", "-e", "--example" NULL,
-        NULL /* terminate */
-};
-
-// For autostarting programs that DO persist though a dwm restart, compositor or a favorite desktop app
-// Optionally you can also have this start a bash script that starts your programs instead, so
-// you do not need to recompile to change. 
-static const char *const startonce[] = {
-        "jeff_dwm_setup.sh", NULL,
-        "picom", NULL,
-        //"example", "-e", "--example" NULL,
-        //"example2", "-e", "--example" NULL,
-        NULL
+    // Below are examples, not necessary:
+    //---------------------------------//
+	//"picom", NULL,  // Compositor, I recommend https://github.com/FT-Labs/picom
+	//"dunst", NULL,	// Deals with app notifications
+	//"dwmblocks", NULL,  // Sets the status on the bar with time, memory usage, etc
+	//"playerctld", "daemon", NULL,  // Background daemon to improve playerctld commands like prev, next, etc
+	//"nm-applet", NULL,  // Simple network tray app
+	//"flameshot", NULL,  // Screenshot tray tool
+	//"pasystray", NULL,	// Simple pulse audio tray app
+	//"jetbrains-toolbox", "--minimize", NULL,  // Jetbrains toolbox app for jetbrains software
+	NULL,
 };

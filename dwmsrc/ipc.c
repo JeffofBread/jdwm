@@ -1131,7 +1131,14 @@ ipc_send_events(Monitor *mons, Monitor **lastselmon, Monitor *selmon)
                      .isfloating = sel->isfloating,
                      .isfullscreen = sel->isfullscreen,
                      .isurgent = sel->isurgent,
-                     .neverfocus = sel->neverfocus};
+                     .neverfocus = sel->neverfocus,
+                     .isfullscreen = sel->isfullscreen,
+                     .ignoretransient = sel->ignoretransient,
+                     .beingmoved = sel->beingmoved,
+                     .issticky = sel->issticky,
+                     .fakefullscreen = sel->fakefullscreen,
+                     .issteam = sel->issteam,
+                     .hintsvalid = sel->hintsvalid};
     if (memcmp(o, &n, sizeof(ClientState)) != 0) {
       ipc_focused_state_change_event(m->num, m->sel->win, o, &n);
       *o = n;

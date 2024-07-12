@@ -88,6 +88,12 @@ dump_client(yajl_gen gen, Client *c)
       YSTR("never_focus"); YBOOL(c->neverfocus);
       YSTR("old_state"); YBOOL(c->oldstate);
       YSTR("is_fullscreen"); YBOOL(c->isfullscreen);
+      YSTR("ignore_transient"); YBOOL(c->ignoretransient);
+      YSTR("being_moved"); YBOOL(c->beingmoved);
+      YSTR("is_sticky"); YBOOL(c->issticky);
+      YSTR("fake_fullscreen"); YBOOL(c->fakefullscreen);
+      YSTR("is_steam"); YBOOL(c->issteam);
+      YSTR("hints_valid"); YBOOL(c->hintsvalid);
     )
   )
   // clang-format on
@@ -119,6 +125,13 @@ dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
       YSTR("height"); YINT(mon->wh);
     )
 
+    YSTR("window_gaps"); YMAP(
+      YSTR("horizontal_between_windows"); YINT(mon->gappih);
+      YSTR("vertical_between_windows"); YINT(mon->gappiv);
+      YSTR("horizontal_outer"); YINT(mon->gappoh);
+      YSTR("vertical_outer"); YINT(mon->gappov);
+    )
+
     YSTR("tagset"); YMAP(
       YSTR("current");  YINT(mon->tagset[mon->seltags]);
       YSTR("old"); YINT(mon->tagset[mon->seltags ^ 1]);
@@ -142,6 +155,7 @@ dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
       YSTR("symbol"); YMAP(
         YSTR("current"); YSTR(mon->ltsymbol);
         YSTR("old"); YSTR(mon->lastltsymbol);
+        YSTR("alternate_tags"); YINT(mon->alttag);
       )
       YSTR("address"); YMAP(
         YSTR("current"); YINT((uintptr_t)mon->lt[mon->sellt]);
@@ -306,12 +320,18 @@ dump_client_state(yajl_gen gen, const ClientState *state)
 {
   // clang-format off
   YMAP(
-    YSTR("old_state"); YBOOL(state->oldstate);
     YSTR("is_fixed"); YBOOL(state->isfixed);
     YSTR("is_floating"); YBOOL(state->isfloating);
-    YSTR("is_fullscreen"); YBOOL(state->isfullscreen);
     YSTR("is_urgent"); YBOOL(state->isurgent);
     YSTR("never_focus"); YBOOL(state->neverfocus);
+    YSTR("old_state"); YBOOL(state->oldstate);
+    YSTR("is_fullscreen"); YBOOL(state->isfullscreen);
+    YSTR("ignore_transient"); YBOOL(state->ignoretransient);
+    YSTR("being_moved"); YBOOL(state->beingmoved);
+    YSTR("is_sticky"); YBOOL(state->issticky);
+    YSTR("fake_fullscreen"); YBOOL(state->fakefullscreen);
+    YSTR("is_steam"); YBOOL(state->issteam);
+    YSTR("hints_valid"); YBOOL(state->hintsvalid);
   )
   // clang-format on
 

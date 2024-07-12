@@ -47,7 +47,7 @@ static const unsigned int centeredwindowname    = 1;            /* 0 is default 
 static const char *fonts[]                      = { "JetBrainsMono:size=14" };
 static const char dmenufont[]                   =   "JetBrainsMono:size=14";
 
-// Include chosen theme here. Make custom themes by copying .def file and customizing/renaming
+// Include chosen theme here. Feel free to add your own themes, copy an existing one and edit values.
 #include <jeffs_theme.h>
 //#include <default_theme.h>
 
@@ -59,12 +59,6 @@ static const XPoint stickyiconbb        = {4,8}; /* defines the bottom right cor
 static const char *tags[]               = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[]            = { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
 static const int   momentaryalttags     = 0; /* 1 means alttags will show only when key is held down*/
-
-// Window Swallowing Variables
-static const int  swaldecay             = 3;
-static const int  swalretroactive       = 1;
-static const char swalsymbol[]          = "🔗";
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 //                  _                                        _                              //
@@ -114,15 +108,14 @@ static const Rule rules[] = {
          *      WM_NAME(STRING) = title
          */
 
-        // Class                Instance    Title       Tags Mask       isfloating      Monitor         ignoretransient
-        //-------------------------------------------------------------------------------------------------------------
-        // The below are my personal examples, feel free to remove them. 
+
+        // The below are my personal examples, feel free to remove them: 
+        /* class                instance    title       tags mask       isfloating       monitor        ignoretransient*/
         { "Rofi",               NULL,       NULL,       0,              1,              -1,             0 },
-        { "MellowPlayer3",      NULL,       NULL,       2,              0,               1,             0 },
-        { "discord",            NULL,       NULL,       1,              0,               1,             0 },
-        { "steam",              NULL,       "Steam",    3,              0,               1,             0 },
-        { "firefox",            NULL,       NULL,       1,              0,               0,             0 },
-        { "VSCodium",           NULL,       NULL,       2,              0,               0,             0 },
+        //{ "discord",            NULL,       NULL,       1,              0,               1,             0 },
+        //{ "firefox",            NULL,       NULL,       2,              0,               1,             0 },
+        //{ "VSCodium",           NULL,       NULL,       1,              0,               0,             0 },
+        //{ "obsidian",           NULL,       NULL,       2,              0,               0,             0 },
 };
 
 
@@ -139,7 +132,7 @@ static const Rule rules[] = {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 // IPC Variables
-static const char *ipcsockpath = "/tmp/dwm.sock";
+static const char *ipcsockpath = "/tmp/jeff_dwm.sock";
 static IPCCommand ipccommands[] = {
   IPCCOMMAND(  view,            1,  {ARG_TYPE_UINT}   ),
   IPCCOMMAND(  toggleview,      1,  {ARG_TYPE_UINT}   ),
@@ -157,20 +150,31 @@ static IPCCommand ipccommands[] = {
   IPCCOMMAND(  quit,            1,  {ARG_TYPE_NONE}   )
 };
 
+// GNU argp parser
+const char *argp_program_version = "jeff_dwm "VERSION;
+const char *argp_program_bug_address = "https://github.com/JeffofBread/jeff_dwm/issues";
+static char doc[] = "A custom build of dwm made by JeffofBread. If you wish to know more, check out the github page at https://github.com/JeffofBread/jeff_dwm";
+static char args_doc[] = "";
+static struct argp_option options[] = {
+  {"first-run", 'F', 0, 0, "Execute dwm along with all programs defined in the array startonce in autostart.h" },
+  {"simple-version", 'v', 0, 0, "Simplified version output"},
+  {"simple-execute", 's', 0, 0, "Basic execute, avoids starting any programs in autostart.h. Only for debug"},
+  { 0 }
+};
+static struct argp argp = { options, parse_opt, args_doc, doc };
+
 // Helper for spawning shell commands in the pre dwm-5.0 fashion
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/bash", "-ic", cmd, NULL } }
 
 // Commands
-static const char *termcmd[]            = { "kitty", NULL };
-static const char *recompilecmd[]       = { "jeff_dwm-recompile.sh", NULL };
-static const char  scratchpadname[]     =   "Scratchpad";
-static const char *scratchpadcmd[]      = { "kitty", "-T", scratchpadname, NULL };
 static const char *rofi_launcher_cmd[]  = { "rofi", "-no-fixed-num-lines", /*"-normal-window",*/ "-show", "drun", };
 static const char *layoutmenucmd[]      = { "rofi_layoutmenu.sh", NULL };
 static const char *alttabcmd[]          = { "rofi", "-no-fixed-num-lines", /*"-normal-window",*/ "-show", "window", NULL };
 
+// Please make sure this matches the name of your terminal defined as SCRATCHPAD in jeff_dwm.aliases
+static const char  scratchpadname[]     =   "Scratchpad";
+
 // Function Includes
-#include <autorun.h>
 #include <focusurgent.c>
 #include <shift-tools.c>
 

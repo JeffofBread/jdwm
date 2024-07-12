@@ -8,7 +8,8 @@
 #define LeftClick Button1
 #define MiddleClick Button2
 #define RightClick Button3
-
+#define PageUp XK_Prior
+#define PageDown XK_Next
 
 /* XFree86 vendor specific keysyms                                                                                      */
 /*----------------------------------------------------------------------------------------------------------------------*/

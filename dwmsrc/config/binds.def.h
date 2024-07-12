@@ -116,25 +116,68 @@ static const Key keys[] = {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-                                                                 /* jeff_dwm Keys: */
+                                /* jeff_dwm misc Keys: */
 
         //Modifier              Key             Function          Argument
-        { Win|Shift,            XK_b,           togglebar,        {0} },
+        { Alt,                  XK_Tab,         spawn,            {.v = alttabcmd } },
+        { Win,                  XK_s,           togglesticky,     {0} },
         { Win,                  XK_q,           killclient,       {0} },
+        { Win,                  XK_d,           spawn,            {.v = rofi_launcher_cmd } },
+        { Win,                  XK_w,           spawn,            SHCMD( "BROWSER" ) },
+        { Win,                  XK_c,           spawn,            SHCMD( "CODE_EDITOR" ) },
+        { Win,                  XK_a,           spawn,            SHCMD( "FILE_MANAGER" ) },
         { Win,                  XK_Left,        focusmon,         {.i = -1 } },
         { Win,                  XK_Right,       focusmon,         {.i = +1 } },
-        { Win,                  XK_d,           spawn,            {.v = rofi_launcher_cmd } },
-        { Win,                  XK_Return,      spawn,            {.v = termcmd } },
-        { Control|Shift,        XK_q,           spawn,            {.v = recompilecmd } },
-        { Alt,                  XK_Tab,         spawn,            {.v = alttabcmd } },
-        { Win|Shift,            XK_grave,       spawn,            {.v = scratchpadcmd } },
-        { Win,                  XK_grave,       togglescratch,    {.v = scratchpadcmd } },
+        { Win,                  XK_Return,      spawn,            SHCMD( "TERM" ) },
+        { Win,                  XK_grave,       togglescratch,    SHCMD( "SCRATCHPAD" ) },
+        { Win|Shift,            XK_grave,       spawn,            SHCMD( "SCRATCHPAD" ) },
         { Win|Shift,            XK_u,           focusurgent,      {0} },
-        { Win,                  XK_s,           togglesticky,     {0} },
-        { Win,                  XK_u,           swalstopsel,      {0} },
+        { Win|Shift,            XK_b,           togglebar,        {0} },
         { Win|Shift,            XK_q,           quit,             {1} },
+        { Control|Shift,        XK_q,           spawn,            SHCMD( "RECOMPILE_TERM" ) },
         { Win|Control|Shift,    XK_q,           quit,             {0} },
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+                                /* Media keys: */
+
+        //Modifier              Key             Function          Argument
+        { Win,                  PageUp,         spawn,            SHCMD( "pamixer -i 5" )},
+        { Win,                  PageDown,       spawn,            SHCMD( "pamixer -d 5" )},
+        { Win,                  XK_Scroll_Lock, spawn,            SHCMD( "playerctl next" )},
+        { Win,                  XK_Print,       spawn,            SHCMD( "playerctl previous" )},
+        { Win,                  XK_Home,        spawn,            SHCMD( "playerctl position 10+" )},
+        { Win,                  XK_End,         spawn,            SHCMD( "playerctl position 10-" )},
+        { Win,                  XK_Pause,       spawn,            SHCMD( "playerctl play-pause" )},
+        { Win,                  XK_Insert,      spawn,            SHCMD( "pactl set-sink-mute @DEFAULT_SINK@ toggle" )},
+        { Win,                  XK_Delete,      spawn,            SHCMD( "pactl set-source-mute @DEFAULT_SOURCE@ toggle" )},
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+                                /* Special Keys: */
+
+        // Note: I have only done some as examples, there are MANY more that can be found in
+        // keydefs.h / keydefs.def.h. There are hundreds of unbound keys that exist there,
+        // if your keyboard has them. 
+
+        //Modifier      Key                         Function    Argument
+        { 0,            XK_AudioRaiseVolume,        spawn,      SHCMD("pamixer -i 5" )},                  
+        { 0,            XK_AudioLowerVolume,        spawn,      SHCMD("pamixer -d 5" )},
+        { 0,            XK_AudioNext,               spawn,      SHCMD("playerctl next" )},
+        { 0,            XK_AudioPrev,               spawn,      SHCMD("playerctl previous")},
+        { 0,            XK_AudioPlay,               spawn,      SHCMD("playerctl play")},
+        { 0,            XK_AudioStop,               spawn,      SHCMD("playerctl pause")},
+        { 0,            XK_AudioRewind,             spawn,      SHCMD("playerctl position 10-") },
+        { 0,            XK_AudioForward,            spawn,      SHCMD("playerctl position 10+") },
+        { 0,            XK_AudioMute,               spawn,      SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
+        { 0,            XK_AudioMicMute,            spawn,      SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+
+        // Below are not set up, as it varies a lot between systems. Use a program that works for your specific system.
+        //{ 0,          XK_MonBrightnessUp,         spawn,      SHCMD("")},
+        //{ 0,          XK_MonBrightnessDown,       spawn,      SHCMD("")},
+        //{ 0,          XK_KbdBrightnessUp,         spawn,      SHCMD("")},
+        //{ 0,          XK_KbdBrightnessDown,       spawn,      SHCMD("")},
+        //{ 0,          XK_KbdLightOnOff,           spawn,      SHCMD("")},
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,7 +202,6 @@ static const Button buttons[] = {
                                 /* Left Mouse Button: */
 
         //Click           Key            Button          Function        Argument 
-        { ClkClientWin,   Win|Shift,     LeftClick,      swalmouse,      {0} },
         { ClkLtSymbol,    0,             LeftClick,      setlayout,      {0} },
         { ClkTagBar,      0,             LeftClick,      view,           {0} },
 
@@ -180,7 +222,7 @@ static const Button buttons[] = {
          * to control these separately (i.e. to retain the feature to move a tiled window
          * into a floating position).
          */
-        { ClkClientWin,   Win,          LeftClick,   moveorplace,   {.i = 0} },
+        { ClkClientWin,   Win,          LeftClick,   moveorplace,   {.i = 2} },
         { ClkClientWin,   Win|Control,  LeftClick,   floatandmove,  {.i = 0} },
 
 
@@ -190,7 +232,7 @@ static const Button buttons[] = {
 
         //Click           Key           Button           Function          Argument
         { ClkWinTitle,    0,            MiddleClick,     zoom,             {0} },
-        { ClkStatusText,  0,            MiddleClick,     spawn,            {.v = termcmd } },
+        { ClkStatusText,  0,            MiddleClick,     spawn,            SHCMD( "TERM" ) },
         { ClkClientWin,   Win,          MiddleClick,     togglefloating,   {0} },
 
 
