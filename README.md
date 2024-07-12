@@ -6,7 +6,7 @@ A build of dwm for myself and anyone who wishes to use it too. If you find any i
 
 **Notes before you install:**
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during install
- - For a more custom install process, check install flags: `./install.sh -h` or edit paths in install.sh
+ - For a more custom install process, check install flags (run `./install.sh -h` for more info) or edit paths in install.sh
  - To edit things like your terminal alias before install, edit /jeff_dwm/dwmsrc/resources/jeff_dwm.aliases. This can also be done after install by going to ~/.config/jeff_dwm/jeff_dwm.aliases
 
 ```bash
