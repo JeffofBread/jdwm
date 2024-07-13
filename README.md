@@ -83,6 +83,7 @@ All the original .diff files are located in jeff_dwm/dwmsrc/patches. Needless to
 - placemouse window placement is not the smoothest at the moment
 - Steam toast notifications not floating and screwing up tiling
 - mfacts does not stay on tag change
+- There might be a conflict between dwm-ipc and pertag, where dwm-msg does not dump the correct values. Will look into in the future. 
 
 ## Future
 

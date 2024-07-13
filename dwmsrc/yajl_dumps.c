@@ -129,6 +129,7 @@ dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
       YSTR("vertical_between_windows"); YINT(mon->gappiv);
       YSTR("horizontal_outer"); YINT(mon->gappoh);
       YSTR("vertical_outer"); YINT(mon->gappov);
+      YSTR("enable_gaps"); YINT(mon->enablegaps);
     )
 
     YSTR("tagset"); YMAP(

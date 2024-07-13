@@ -81,7 +81,6 @@ static const int   lockfullscreen = 1;    /* 1 will force focus on the fullscree
 
 // Layouts and Layout Rules
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
-#include <vanitygaps.c>
 static const Layout layouts[] = {
         //  Symbol      Arrange function        Name
         {   "[]=",      tile,                   "Tile"                          },    /* first entry is default */
