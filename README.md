@@ -54,8 +54,6 @@ All the original .diff files are located in jeff_dwm/dwmsrc/patches. Needless to
 - ewmhtags
 - floatbordercolor
 - floatborderwidth
-- focusonnetactive
-- focusurgent
 - fullscreencompilation
 - hidevacanttags
 - ignoretransientwindows

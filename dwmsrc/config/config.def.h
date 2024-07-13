@@ -175,7 +175,6 @@ static const char *alttabcmd[]          = { "rofi", "-no-fixed-num-lines", /*"-n
 static const char  scratchpadname[]     =   "Scratchpad";
 
 // Function Includes
-#include <focusurgent.c>
 #include <shift-tools.c>
 
 // Include Button, Key Bindings, and Key Defenitions

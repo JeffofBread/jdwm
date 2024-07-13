@@ -131,7 +131,6 @@ static const Key keys[] = {
         { Win,                  XK_Return,      spawn,            SHCMD( "TERM" ) },
         { Win,                  XK_grave,       togglescratch,    SHCMD( "SCRATCHPAD" ) },
         { Win|Shift,            XK_grave,       spawn,            SHCMD( "SCRATCHPAD" ) },
-        { Win|Shift,            XK_u,           focusurgent,      {0} },
         { Win|Shift,            XK_b,           togglebar,        {0} },
         { Win|Shift,            XK_q,           quit,             {1} },
         { Control|Shift,        XK_q,           spawn,            SHCMD( "RECOMPILE_TERM" ) },
