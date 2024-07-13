@@ -1134,7 +1134,6 @@ ipc_send_events(Monitor *mons, Monitor **lastselmon, Monitor *selmon)
                      .neverfocus = sel->neverfocus,
                      .isfullscreen = sel->isfullscreen,
                      .ignoretransient = sel->ignoretransient,
-                     .beingmoved = sel->beingmoved,
                      .issticky = sel->issticky,
                      .fakefullscreen = sel->fakefullscreen,
                      .issteam = sel->issteam,

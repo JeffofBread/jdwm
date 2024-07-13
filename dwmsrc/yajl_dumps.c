@@ -89,7 +89,6 @@ dump_client(yajl_gen gen, Client *c)
       YSTR("old_state"); YBOOL(c->oldstate);
       YSTR("is_fullscreen"); YBOOL(c->isfullscreen);
       YSTR("ignore_transient"); YBOOL(c->ignoretransient);
-      YSTR("being_moved"); YBOOL(c->beingmoved);
       YSTR("is_sticky"); YBOOL(c->issticky);
       YSTR("fake_fullscreen"); YBOOL(c->fakefullscreen);
       YSTR("is_steam"); YBOOL(c->issteam);
@@ -327,7 +326,6 @@ dump_client_state(yajl_gen gen, const ClientState *state)
     YSTR("old_state"); YBOOL(state->oldstate);
     YSTR("is_fullscreen"); YBOOL(state->isfullscreen);
     YSTR("ignore_transient"); YBOOL(state->ignoretransient);
-    YSTR("being_moved"); YBOOL(state->beingmoved);
     YSTR("is_sticky"); YBOOL(state->issticky);
     YSTR("fake_fullscreen"); YBOOL(state->fakefullscreen);
     YSTR("is_steam"); YBOOL(state->issteam);

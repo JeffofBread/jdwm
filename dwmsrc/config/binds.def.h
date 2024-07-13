@@ -205,25 +205,12 @@ static const Button buttons[] = {
         { ClkLtSymbol,    0,             LeftClick,      setlayout,      {0} },
         { ClkTagBar,      0,             LeftClick,      view,           {0} },
 
-
         // Used to send focus and the window to a new monitor.
         // Is it simple? Yes. Is it lazy? Yes. Is it the best option? Maybe, but im lazy.
-        { ClkTagBar,    Win,     LeftClick,     tag,     {0} },
-        { ClkTagBar,    Win,     LeftClick,     view,    {0} },
+        { ClkTagBar,      Win,          LeftClick,      tag,            {0} },
+        { ClkTagBar,      Win,          LeftClick,      view,           {0} },
 
-
-        /* placemouse options, choose which feels more natural:
-         *    0 - tiled position is relative to mouse cursor
-         *    1 - tiled postiion is relative to window center
-         *    2 - mouse pointer warps to window center
-         *
-         * The moveorplace uses movemouse or placemouse depending on the floating state
-         * of the selected client. Set up individual keybindings for the two if you want
-         * to control these separately (i.e. to retain the feature to move a tiled window
-         * into a floating position).
-         */
-        { ClkClientWin,   Win,          LeftClick,   moveorplace,   {.i = 2} },
-        { ClkClientWin,   Win|Control,  LeftClick,   floatandmove,  {.i = 0} },
+        { ClkClientWin,   Win|Control,  LeftClick,      floatandmove,   {.i = 0} },
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////

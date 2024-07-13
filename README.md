@@ -63,7 +63,6 @@ All the original .diff files are located in jeff_dwm/dwmsrc/patches. Needless to
 - layoutscroll
 - noborderflicker
 - pertag
-- placemouse (slightly buggy with current implementation, is a TODO)
 - preserveonrestart
 - resizecorners
 - restartsig
