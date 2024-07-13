@@ -2091,6 +2091,7 @@ resizemouse(const Arg *arg)
             selmon->mx + (selmon->ww * selmon->mfact),
             selmon->my + (selmon->wh / 2)
         );
+        selmon->pertag->mfacts[selmon->pertag->curtag] = selmon->mfact;
     }
 
     XUngrabPointer(dpy, CurrentTime);
