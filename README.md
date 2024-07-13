@@ -1,6 +1,6 @@
 # jeff_dwm
 
-A build of [dwm](https://dwm.suckless.org/) for myself and anyone who wishes to use it too. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and **will** change.
+A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and **will** change.
 
 ## Installation
 
