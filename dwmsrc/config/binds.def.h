@@ -209,6 +209,7 @@ static const Button buttons[] = {
         { ClkTagBar,      Win,          LeftClick,      tag,            {0} },
         { ClkTagBar,      Win,          LeftClick,      view,           {0} },
 
+        { ClkClientWin,   Win,          LeftClick,      movemouse,      {0} },
         { ClkClientWin,   Win|Control,  LeftClick,      floatandmove,   {.i = 0} },
 
 
