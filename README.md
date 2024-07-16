@@ -15,7 +15,7 @@ cd jeff_dwm
 ./install.sh
 ```
 
-After your first install, you can use `Ctrl + Shift + Q` to open the recompile script (make sure to correctly define in `/jeff_dwm/dwmsrc/resources/jeff_dwm.aliases`). To reload jeff_dwm press `Super + Shift + Q`. To exit dwm press `Super + Ctrl + Shift + Q`.
+After your first install, you can use `Ctrl + Shift + Q` to open the recompile script (make sure to correctly define in `/jeff_dwm/dwmsrc/resources/jeff_dwm.aliases`). To reload jeff_dwm press `Super + Shift + Q`. To exit dwm press `Super + Ctrl + Shift + Q` or use `Super + P` to open a rofi power menu.
 
 ## Dependencies
 

@@ -165,11 +165,6 @@ static struct argp argp = { options, parse_opt, args_doc, doc };
 // Helper for spawning shell commands in the pre dwm-5.0 fashion
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/bash", "-ic", cmd, NULL } }
 
-// Commands
-static const char *rofi_launcher_cmd[]  = { "rofi", "-no-fixed-num-lines", /*"-normal-window",*/ "-show", "drun", };
-static const char *layoutmenucmd[]      = { "rofi_layoutmenu.sh", NULL };
-static const char *alttabcmd[]          = { "rofi", "-no-fixed-num-lines", /*"-normal-window",*/ "-show", "window", NULL };
-
 // Please make sure this matches the name of your terminal defined as SCRATCHPAD in jeff_dwm.aliases
 static const char  scratchpadname[]     =   "Scratchpad";
 

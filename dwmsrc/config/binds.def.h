@@ -119,21 +119,22 @@ static const Key keys[] = {
                                 /* jeff_dwm misc Keys: */
 
         //Modifier              Key             Function          Argument
-        { Alt,                  XK_Tab,         spawn,            {.v = alttabcmd } },
-        { Win,                  XK_s,           togglesticky,     {0} },
-        { Win,                  XK_q,           killclient,       {0} },
-        { Win,                  XK_d,           spawn,            {.v = rofi_launcher_cmd } },
+        { Alt,                  XK_Tab,         spawn,            SHCMD( "rofi -no-fixed-num-lines -show window" ) }, // Window Switcher    
+        { Win,                  XK_d,           spawn,            SHCMD( "rofi -no-fixed-num-lines -show drun" ) }, // App Launcher
+        { Win,                  XK_p,           spawn,            SHCMD( "rofi -show power-menu -modi power-menu:rofi_powermenu.sh" ) }, // Power Menu
         { Win,                  XK_w,           spawn,            SHCMD( "BROWSER" ) },
         { Win,                  XK_c,           spawn,            SHCMD( "CODE_EDITOR" ) },
         { Win,                  XK_a,           spawn,            SHCMD( "FILE_MANAGER" ) },
-        { Win,                  XK_Left,        focusmon,         {.i = -1 } },
-        { Win,                  XK_Right,       focusmon,         {.i = +1 } },
         { Win,                  XK_Return,      spawn,            SHCMD( "TERM" ) },
         { Win,                  XK_grave,       togglescratch,    SHCMD( "SCRATCHPAD" ) },
         { Win|Shift,            XK_grave,       spawn,            SHCMD( "SCRATCHPAD" ) },
+        { Control|Shift,        XK_q,           spawn,            SHCMD( "RECOMPILE_TERM" ) },
+        { Win,                  XK_Left,        focusmon,         {.i = -1 } },
+        { Win,                  XK_Right,       focusmon,         {.i = +1 } },
+        { Win,                  XK_s,           togglesticky,     {0} },
+        { Win,                  XK_q,           killclient,       {0} },
         { Win|Shift,            XK_b,           togglebar,        {0} },
         { Win|Shift,            XK_q,           quit,             {1} },
-        { Control|Shift,        XK_q,           spawn,            SHCMD( "RECOMPILE_TERM" ) },
         { Win|Control|Shift,    XK_q,           quit,             {0} },
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,15 +142,15 @@ static const Key keys[] = {
                                 /* Media keys: */
 
         //Modifier              Key             Function          Argument
-        { Win,                  PageUp,         spawn,            SHCMD( "pamixer -i 5" )},
-        { Win,                  PageDown,       spawn,            SHCMD( "pamixer -d 5" )},
-        { Win,                  XK_Scroll_Lock, spawn,            SHCMD( "playerctl next" )},
-        { Win,                  XK_Print,       spawn,            SHCMD( "playerctl previous" )},
-        { Win,                  XK_Home,        spawn,            SHCMD( "playerctl position 10+" )},
-        { Win,                  XK_End,         spawn,            SHCMD( "playerctl position 10-" )},
-        { Win,                  XK_Pause,       spawn,            SHCMD( "playerctl play-pause" )},
-        { Win,                  XK_Insert,      spawn,            SHCMD( "pactl set-sink-mute @DEFAULT_SINK@ toggle" )},
-        { Win,                  XK_Delete,      spawn,            SHCMD( "pactl set-source-mute @DEFAULT_SOURCE@ toggle" )},
+        { Win,                  PageUp,         spawn,            SHCMD( "pamixer -i 5" ) },
+        { Win,                  PageDown,       spawn,            SHCMD( "pamixer -d 5" ) },
+        { Win,                  XK_Scroll_Lock, spawn,            SHCMD( "playerctl next" ) },
+        { Win,                  XK_Print,       spawn,            SHCMD( "playerctl previous" ) },
+        { Win,                  XK_Home,        spawn,            SHCMD( "playerctl position 10+" ) },
+        { Win,                  XK_End,         spawn,            SHCMD( "playerctl position 10-" ) },
+        { Win,                  XK_Pause,       spawn,            SHCMD( "playerctl play-pause" ) },
+        { Win,                  XK_Insert,      spawn,            SHCMD( "pactl set-sink-mute @DEFAULT_SINK@ toggle" ) },
+        { Win,                  XK_Delete,      spawn,            SHCMD( "pactl set-source-mute @DEFAULT_SOURCE@ toggle" ) },
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -160,23 +161,28 @@ static const Key keys[] = {
         // if your keyboard has them. 
 
         //Modifier      Key                         Function    Argument
-        { 0,            XK_AudioRaiseVolume,        spawn,      SHCMD("pamixer -i 5" )},                  
-        { 0,            XK_AudioLowerVolume,        spawn,      SHCMD("pamixer -d 5" )},
-        { 0,            XK_AudioNext,               spawn,      SHCMD("playerctl next" )},
-        { 0,            XK_AudioPrev,               spawn,      SHCMD("playerctl previous")},
-        { 0,            XK_AudioPlay,               spawn,      SHCMD("playerctl play")},
-        { 0,            XK_AudioStop,               spawn,      SHCMD("playerctl pause")},
+        { 0,            XK_AudioRaiseVolume,        spawn,      SHCMD("pamixer -i 5" ) },                  
+        { 0,            XK_AudioLowerVolume,        spawn,      SHCMD("pamixer -d 5" ) },
+        { 0,            XK_AudioNext,               spawn,      SHCMD("playerctl next" ) },
+        { 0,            XK_AudioPrev,               spawn,      SHCMD("playerctl previous") },
+        { 0,            XK_AudioPlay,               spawn,      SHCMD("playerctl play") },
+        { 0,            XK_AudioStop,               spawn,      SHCMD("playerctl pause") },
         { 0,            XK_AudioRewind,             spawn,      SHCMD("playerctl position 10-") },
         { 0,            XK_AudioForward,            spawn,      SHCMD("playerctl position 10+") },
-        { 0,            XK_AudioMute,               spawn,      SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle")},
+        { 0,            XK_AudioMute,               spawn,      SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
         { 0,            XK_AudioMicMute,            spawn,      SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
+        { 0,            XK_PowerOff,                spawn,      SHCMD("rofi -show power-menu -modi power-menu:rofi_powermenu.sh") },
+        { 0,            XK_Sleep,                   spawn,      SHCMD("systemctl suspend") }, 
+        { 0,            XK_Standby,                 spawn,      SHCMD("systemctl suspend") },
+        { 0,            XK_Suspend,                 spawn,      SHCMD("systemctl suspend") },
+        { 0,            XK_Hibernate,               spawn,      SHCMD("systemctl hibernate") },
 
         // Below are not set up, as it varies a lot between systems. Use a program that works for your specific system.
-        //{ 0,          XK_MonBrightnessUp,         spawn,      SHCMD("")},
-        //{ 0,          XK_MonBrightnessDown,       spawn,      SHCMD("")},
-        //{ 0,          XK_KbdBrightnessUp,         spawn,      SHCMD("")},
-        //{ 0,          XK_KbdBrightnessDown,       spawn,      SHCMD("")},
-        //{ 0,          XK_KbdLightOnOff,           spawn,      SHCMD("")},
+        //{ 0,          XK_MonBrightnessUp,         spawn,      SHCMD("") },
+        //{ 0,          XK_MonBrightnessDown,       spawn,      SHCMD("") },
+        //{ 0,          XK_KbdBrightnessUp,         spawn,      SHCMD("") },
+        //{ 0,          XK_KbdBrightnessDown,       spawn,      SHCMD("") },
+        //{ 0,          XK_KbdLightOnOff,           spawn,      SHCMD("") },
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -210,7 +216,7 @@ static const Button buttons[] = {
         { ClkTagBar,      Win,          LeftClick,      view,           {0} },
 
         { ClkClientWin,   Win,          LeftClick,      movemouse,      {0} },
-        { ClkClientWin,   Win|Control,  LeftClick,      floatandmove,   {.i = 0} },
+        { ClkClientWin,   Win|Control,  LeftClick,      floatandmove,   {0} },
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,8 +224,7 @@ static const Button buttons[] = {
                                 /* Middle Mouse Button: */
 
         //Click           Key           Button           Function          Argument
-        { ClkWinTitle,    0,            MiddleClick,     zoom,             {0} },
-        { ClkStatusText,  0,            MiddleClick,     spawn,            SHCMD( "TERM" ) },
+        { ClkWinTitle,    0,            MiddleClick,     spawn,            SHCMD( "TERM" ) },
         { ClkClientWin,   Win,          MiddleClick,     togglefloating,   {0} },
 
 
@@ -228,11 +233,9 @@ static const Button buttons[] = {
                                /* Right Mouse Button: */
 
         //Click           Key           Button             Function        Argument
-        { ClkLtSymbol,    0,            RightClick,        spawn,          {.v = layoutmenucmd} },
-        { ClkClientWin,   Win,          RightClick,        resizemouse,    {0} },
-        { ClkTagBar,      Win,          RightClick,        toggletag,      {0} },
+        { ClkLtSymbol,    0,            RightClick,        spawn,          SHCMD( "rofi_layoutmenu.sh" ) },
         { ClkTagBar,      0,            RightClick,        toggleview,     {0} },
-        { ClkTagBar,      Win,          RightClick,        toggletag,      {0} },
+        { ClkClientWin,   Win,          RightClick,        resizemouse,    {0} },
 
 
         // Optional, enables right clicking on the desktop to spawn a jgmenu instance

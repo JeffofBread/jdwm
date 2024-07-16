@@ -2252,6 +2252,8 @@ movemouse(const Arg *arg)
         return;
     if (c->isfullscreen && c->fakefullscreen != 1) /* no support moving fullscreen windows by mouse */
         return;
+    if (c->isfloating != 1) // Dont move windows that aren't floating
+        return;
     restack(selmon);
     ocx = c->x;
     ocy = c->y;
