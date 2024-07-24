@@ -20,6 +20,7 @@
  *
  * To understand everything else, start reading main().
  */
+#include <X11/X.h>
 #include <argp.h>
 #include <errno.h>
 #include <locale.h>
@@ -91,7 +92,7 @@ enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetWMSticky, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetDesktopNames, 
-       NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetLast }; /* EWMH atoms */
+       NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetLast, NetWMWindowTypeDesktop }; /* EWMH atoms */
 enum { Manager, Xembed, XembedInfo, XLast }; /* Xembed atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
@@ -195,6 +196,7 @@ typedef struct {
     int isfloating;
     int monitor;
     int ignoretransient;
+    int unmanaged;
 } Rule;
 
 typedef struct Systray   Systray;
@@ -412,6 +414,7 @@ static Drw *drw;
 static Monitor *mons, *selmon, *lastselmon;
 static Window root, wmcheckwin;
 static int firstrun = 0;
+static int unmanaged = 0;    /* whether the window manager should manage the new window or not */
 
 // IPC
 #include "ipc.h"
@@ -477,6 +480,7 @@ applyrules(Client *c)
             c->ignoretransient = r->ignoretransient;
             c->isfloating = r->isfloating;
             c->tags |= r->tags;
+            unmanaged = r->unmanaged;
             for (m = mons; m && m->num != r->monitor; m = m->next);
             if (m)
                 c->mon = m;
@@ -2102,6 +2106,14 @@ manage(Window w, XWindowAttributes *wa)
 
     c = ecalloc(1, sizeof(Client));
     c->win = w;
+
+	if (getatomprop(c, netatom[NetWMWindowType]) == netatom[NetWMWindowTypeDesktop]) {
+		XMapWindow(dpy, c->win);
+		XLowerWindow(dpy, c->win);
+		free(c);
+		return;
+	}
+
     /* geometry */
     c->x = c->oldx = wa->x;
     c->y = c->oldy = wa->y;
@@ -2120,6 +2132,23 @@ manage(Window w, XWindowAttributes *wa)
         c->mon = selmon;
         applyrules(c);
     }
+
+	if (unmanaged) {
+		XMapWindow(dpy, c->win);
+		if (unmanaged == 1)
+			XRaiseWindow(dpy, c->win);
+		else if (unmanaged == 2)
+			XLowerWindow(dpy, c->win);
+
+		updatewmhints(c);
+		if (!c->neverfocus)
+			XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
+		sendevent(c->win, wmatom[WMTakeFocus], StructureNotifyMask, wmatom[WMTakeFocus], CurrentTime, 0, 0, 0);
+
+		free(c);
+		unmanaged = 0;
+		return;
+	}
 
     updatewindowtype(c);
 
@@ -3049,6 +3078,7 @@ setup(void)
     netatom[NetWMSticky] = XInternAtom(dpy, "_NET_WM_STATE_STICKY", False);
     netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
     netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
+    netatom[NetWMWindowTypeDesktop] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DESKTOP", False);
     netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
 	netatom[NetDesktopViewport] = XInternAtom(dpy, "_NET_DESKTOP_VIEWPORT", False);
 	netatom[NetNumberOfDesktops] = XInternAtom(dpy, "_NET_NUMBER_OF_DESKTOPS", False);

@@ -107,14 +107,20 @@ static const Rule rules[] = {
          *      WM_NAME(STRING) = title
          */
 
+// Unmanaged rule values:
+//   * 0 - the window is managed by the window manager
+//   * 1 - the window will be placed above all other windows
+//   * 2 - the window will be placed below all other windows
+//   * 3 - the window is left as-is (neither lowered nor raised)
+
 
         // The below are my personal examples, feel free to remove them: 
-        /* class                instance    title       tags mask       isfloating       monitor        ignoretransient*/
-        { "Rofi",               NULL,       NULL,       0,              1,              -1,             0 },
-        //{ "discord",            NULL,       NULL,       1,              0,               1,             0 },
-        //{ "firefox",            NULL,       NULL,       2,              0,               1,             0 },
-        //{ "VSCodium",           NULL,       NULL,       1,              0,               0,             0 },
-        //{ "obsidian",           NULL,       NULL,       2,              0,               0,             0 },
+        /* class                instance    title       tags mask       isfloating       monitor        ignoretransient     unmanaged */
+        { "Rofi",               NULL,       NULL,       0,              1,              -1,             0,                  0 },
+        //{ "discord",            NULL,       NULL,       1,              0,               1,             0,                  0 },
+        //{ "firefox",            NULL,       NULL,       2,              0,               1,             0,                  0 },
+        //{ "VSCodium",           NULL,       NULL,       1,              0,               0,             0,                  0 },
+        //{ "obsidian",           NULL,       NULL,       2,              0,               0,             0,                  0 },
 };
 
 
