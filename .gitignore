@@ -15,6 +15,7 @@ build/
 *.bak
 !Makefile
 !.gitignore
+!.gitattributes
 
 ### Ignore user configs
 
