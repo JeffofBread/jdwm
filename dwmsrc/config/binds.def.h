@@ -42,6 +42,8 @@ static const Key keys[] = {
         { Win|Shift,     XK_0,      tag,             {.ui = ~0 } },
         { Win|Shift,     XK_o,      shiftboth,       { .i = +1 } },
         { Win|Shift,     XK_i,      shiftboth,       { .i = -1 } },
+        { Win|Control,   XK_o,      shiftviewclients,{ .i = +1 } },
+        { Win|Control,   XK_i,      shiftviewclients,{ .i = -1 } },
         { Win,           XK_o,      shiftview,       { .i = +1 } },
         { Win,           XK_i,      shiftview,       { .i = -1 } },
         
