@@ -11,15 +11,15 @@ typedef struct IPCClient IPCClient;
  * linked list
  */
 struct IPCClient {
-  int fd;
-  int subscriptions;
+	int fd;
+	int subscriptions;
 
-  char *buffer;
-  uint32_t buffer_size;
+	char *buffer;
+	uint32_t buffer_size;
 
-  struct epoll_event event;
-  IPCClient *next;
-  IPCClient *prev;
+	struct epoll_event event;
+	IPCClient *next;
+	IPCClient *prev;
 };
 
 typedef IPCClient *IPCClientList;
@@ -58,4 +58,4 @@ void ipc_list_remove_client(IPCClientList *list, IPCClient *c);
  */
 IPCClient *ipc_list_get_client(IPCClientList list, int fd);
 
-#endif  // IPC_CLIENT_H_
+#endif // IPC_CLIENT_H_

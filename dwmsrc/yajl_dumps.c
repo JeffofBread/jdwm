@@ -2,36 +2,33 @@
 
 #include <stdint.h>
 
-int
-dump_tag(yajl_gen gen, const char *name, const int tag_mask)
+int dump_tag(yajl_gen gen, const char *name, const int tag_mask)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("bit_mask"); YINT(tag_mask);
     YSTR("name"); YSTR(name);
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_tags(yajl_gen gen, const char *tags[], int tags_len)
+int dump_tags(yajl_gen gen, const char *tags[], int tags_len)
 {
-  // clang-format off
+	// clang-format off
   YARR(
     for (int i = 0; i < tags_len; i++)
       dump_tag(gen, tags[i], 1 << i);
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_client(yajl_gen gen, Client *c)
+int dump_client(yajl_gen gen, Client *c)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("name"); YSTR(c->name);
     YSTR("tags"); YINT(c->tags);
@@ -95,15 +92,14 @@ dump_client(yajl_gen gen, Client *c)
       YSTR("hints_valid"); YBOOL(c->hintsvalid);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
+int dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("master_factor"); YDOUBLE(mon->mfact);
     YSTR("num_master"); YINT(mon->nmaster);
@@ -169,15 +165,14 @@ dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
       YSTR("window_id"); YINT(mon->barwin);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_monitors(yajl_gen gen, Monitor *mons, Monitor *selmon)
+int dump_monitors(yajl_gen gen, Monitor *mons, Monitor *selmon)
 {
-  // clang-format off
+	// clang-format off
   YARR(
     for (Monitor *mon = mons; mon; mon = mon->next) {
       if (mon == selmon)
@@ -186,15 +181,14 @@ dump_monitors(yajl_gen gen, Monitor *mons, Monitor *selmon)
         dump_monitor(gen, mon, 0);
     }
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_layouts(yajl_gen gen, const Layout layouts[], const int layouts_len)
+int dump_layouts(yajl_gen gen, const Layout layouts[], const int layouts_len)
 {
-  // clang-format off
+	// clang-format off
   YARR(
     for (int i = 0; i < layouts_len; i++) {
       YMAP(
@@ -206,30 +200,27 @@ dump_layouts(yajl_gen gen, const Layout layouts[], const int layouts_len)
       )
     }
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_tag_state(yajl_gen gen, TagState state)
+int dump_tag_state(yajl_gen gen, TagState state)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("selected"); YINT(state.selected);
     YSTR("occupied"); YINT(state.occupied);
     YSTR("urgent"); YINT(state.urgent);
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_tag_event(yajl_gen gen, int mon_num, TagState old_state,
-               TagState new_state)
+int dump_tag_event(yajl_gen gen, int mon_num, TagState old_state, TagState new_state)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("tag_change_event"); YMAP(
       YSTR("monitor_number"); YINT(mon_num);
@@ -237,16 +228,14 @@ dump_tag_event(yajl_gen gen, int mon_num, TagState old_state,
       YSTR("new_state"); dump_tag_state(gen, new_state);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_client_focus_change_event(yajl_gen gen, Client *old_client,
-                               Client *new_client, int mon_num)
+int dump_client_focus_change_event(yajl_gen gen, Client *old_client, Client *new_client, int mon_num)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("client_focus_change_event"); YMAP(
       YSTR("monitor_number"); YINT(mon_num);
@@ -254,17 +243,15 @@ dump_client_focus_change_event(yajl_gen gen, Client *old_client,
       YSTR("new_win_id"); new_client == NULL ? YNULL() : YINT(new_client->win);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_layout_change_event(yajl_gen gen, const int mon_num,
-                         const char *old_symbol, const Layout *old_layout,
-                         const char *new_symbol, const Layout *new_layout)
+int dump_layout_change_event(yajl_gen gen, const int mon_num, const char *old_symbol, const Layout *old_layout,
+			     const char *new_symbol, const Layout *new_layout)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("layout_change_event"); YMAP(
       YSTR("monitor_number"); YINT(mon_num);
@@ -274,33 +261,29 @@ dump_layout_change_event(yajl_gen gen, const int mon_num,
       YSTR("new_address"); YINT((uintptr_t)new_layout);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_monitor_focus_change_event(yajl_gen gen, const int last_mon_num,
-                                const int new_mon_num)
+int dump_monitor_focus_change_event(yajl_gen gen, const int last_mon_num, const int new_mon_num)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("monitor_focus_change_event"); YMAP(
       YSTR("old_monitor_number"); YINT(last_mon_num);
       YSTR("new_monitor_number"); YINT(new_mon_num);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_focused_title_change_event(yajl_gen gen, const int mon_num,
-                                const Window client_id, const char *old_name,
-                                const char *new_name)
+int dump_focused_title_change_event(yajl_gen gen, const int mon_num, const Window client_id, const char *old_name,
+				    const char *new_name)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("focused_title_change_event"); YMAP(
       YSTR("monitor_number"); YINT(mon_num);
@@ -309,15 +292,14 @@ dump_focused_title_change_event(yajl_gen gen, const int mon_num,
       YSTR("new_name"); YSTR(new_name);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_client_state(yajl_gen gen, const ClientState *state)
+int dump_client_state(yajl_gen gen, const ClientState *state)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("is_fixed"); YBOOL(state->isfixed);
     YSTR("is_floating"); YBOOL(state->isfloating);
@@ -331,18 +313,15 @@ dump_client_state(yajl_gen gen, const ClientState *state)
     YSTR("is_steam"); YBOOL(state->issteam);
     YSTR("hints_valid"); YBOOL(state->hintsvalid);
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_focused_state_change_event(yajl_gen gen, const int mon_num,
-                                const Window client_id,
-                                const ClientState *old_state,
-                                const ClientState *new_state)
+int dump_focused_state_change_event(yajl_gen gen, const int mon_num, const Window client_id,
+				    const ClientState *old_state, const ClientState *new_state)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("focused_state_change_event"); YMAP(
       YSTR("monitor_number"); YINT(mon_num);
@@ -351,20 +330,19 @@ dump_focused_state_change_event(yajl_gen gen, const int mon_num,
       YSTR("new_state"); dump_client_state(gen, new_state);
     )
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }
 
-int
-dump_error_message(yajl_gen gen, const char *reason)
+int dump_error_message(yajl_gen gen, const char *reason)
 {
-  // clang-format off
+	// clang-format off
   YMAP(
     YSTR("result"); YSTR("error");
     YSTR("reason"); YSTR(reason);
   )
-  // clang-format on
+	// clang-format on
 
-  return 0;
+	return 0;
 }

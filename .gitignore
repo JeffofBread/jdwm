@@ -16,6 +16,7 @@ build/
 !Makefile
 !.gitignore
 !.gitattributes
+!.clang-format
 
 ### Ignore user configs
 

@@ -17,67 +17,64 @@
 // clang-format on
 
 typedef enum IPCMessageType {
-  IPC_TYPE_RUN_COMMAND = 0,
-  IPC_TYPE_GET_MONITORS = 1,
-  IPC_TYPE_GET_TAGS = 2,
-  IPC_TYPE_GET_LAYOUTS = 3,
-  IPC_TYPE_GET_DWM_CLIENT = 4,
-  IPC_TYPE_SUBSCRIBE = 5,
-  IPC_TYPE_EVENT = 6
+	IPC_TYPE_RUN_COMMAND = 0,
+	IPC_TYPE_GET_MONITORS = 1,
+	IPC_TYPE_GET_TAGS = 2,
+	IPC_TYPE_GET_LAYOUTS = 3,
+	IPC_TYPE_GET_DWM_CLIENT = 4,
+	IPC_TYPE_SUBSCRIBE = 5,
+	IPC_TYPE_EVENT = 6
 } IPCMessageType;
 
 typedef enum IPCEvent {
-  IPC_EVENT_TAG_CHANGE = 1 << 0,
-  IPC_EVENT_CLIENT_FOCUS_CHANGE = 1 << 1,
-  IPC_EVENT_LAYOUT_CHANGE = 1 << 2,
-  IPC_EVENT_MONITOR_FOCUS_CHANGE = 1 << 3,
-  IPC_EVENT_FOCUSED_TITLE_CHANGE = 1 << 4,
-  IPC_EVENT_FOCUSED_STATE_CHANGE = 1 << 5
+	IPC_EVENT_TAG_CHANGE = 1 << 0,
+	IPC_EVENT_CLIENT_FOCUS_CHANGE = 1 << 1,
+	IPC_EVENT_LAYOUT_CHANGE = 1 << 2,
+	IPC_EVENT_MONITOR_FOCUS_CHANGE = 1 << 3,
+	IPC_EVENT_FOCUSED_TITLE_CHANGE = 1 << 4,
+	IPC_EVENT_FOCUSED_STATE_CHANGE = 1 << 5
 } IPCEvent;
 
-typedef enum IPCSubscriptionAction {
-  IPC_ACTION_UNSUBSCRIBE = 0,
-  IPC_ACTION_SUBSCRIBE = 1
-} IPCSubscriptionAction;
+typedef enum IPCSubscriptionAction { IPC_ACTION_UNSUBSCRIBE = 0, IPC_ACTION_SUBSCRIBE = 1 } IPCSubscriptionAction;
 
 /**
  * Every IPC packet starts with this structure
  */
 typedef struct dwm_ipc_header {
-  uint8_t magic[IPC_MAGIC_LEN];
-  uint32_t size;
-  uint8_t type;
+	uint8_t magic[IPC_MAGIC_LEN];
+	uint32_t size;
+	uint8_t type;
 } __attribute((packed)) dwm_ipc_header_t;
 
 typedef enum ArgType {
-  ARG_TYPE_NONE = 0,
-  ARG_TYPE_UINT = 1,
-  ARG_TYPE_SINT = 2,
-  ARG_TYPE_FLOAT = 3,
-  ARG_TYPE_PTR = 4,
-  ARG_TYPE_STR = 5
+	ARG_TYPE_NONE = 0,
+	ARG_TYPE_UINT = 1,
+	ARG_TYPE_SINT = 2,
+	ARG_TYPE_FLOAT = 3,
+	ARG_TYPE_PTR = 4,
+	ARG_TYPE_STR = 5
 } ArgType;
 
 /**
  * An IPCCommand function can have either of these function signatures
  */
 typedef union ArgFunction {
-  void (*single_param)(const Arg *);
-  void (*array_param)(const Arg *, int);
+	void (*single_param)(const Arg *);
+	void (*array_param)(const Arg *, int);
 } ArgFunction;
 
 typedef struct IPCCommand {
-  char *name;
-  ArgFunction func;
-  unsigned int argc;
-  ArgType *arg_types;
+	char *name;
+	ArgFunction func;
+	unsigned int argc;
+	ArgType *arg_types;
 } IPCCommand;
 
 typedef struct IPCParsedCommand {
-  char *name;
-  Arg *args;
-  ArgType *arg_types;
-  unsigned int argc;
+	char *name;
+	Arg *args;
+	ArgType *arg_types;
+	unsigned int argc;
 } IPCParsedCommand;
 
 /**
@@ -91,8 +88,7 @@ typedef struct IPCParsedCommand {
  * @return int The file descriptor of the socket if it was successfully created,
  *   -1 otherwise
  */
-int ipc_init(const char *socket_path, const int p_epoll_fd,
-             IPCCommand commands[], const int commands_len);
+int ipc_init(const char *socket_path, const int p_epoll_fd, IPCCommand commands[], const int commands_len);
 
 /**
  * Uninitialize the socket and module. Free allocated memory and restore static
@@ -158,8 +154,7 @@ int ipc_accept_client();
  * @return 0 on success, -1 on error reading message, -2 if reading the message
  * resulted in EAGAIN, EINTR, or EWOULDBLOCK.
  */
-int ipc_read_client(IPCClient *c, IPCMessageType *msg_type, uint32_t *msg_size,
-                    char **msg);
+int ipc_read_client(IPCClient *c, IPCMessageType *msg_type, uint32_t *msg_size, char **msg);
 
 /**
  * Write any pending buffer of the client to the client's socket
@@ -181,8 +176,7 @@ ssize_t ipc_write_client(IPCClient *c);
  * @param msg Message to prepare (not including header). This pointer can be
  *   freed after the function invocation.
  */
-void ipc_prepare_send_message(IPCClient *c, const IPCMessageType msg_type,
-                              const uint32_t msg_size, const char *msg);
+void ipc_prepare_send_message(IPCClient *c, const IPCMessageType msg_type, const uint32_t msg_size, const char *msg);
 
 /**
  * Prepare an error message in the specified client's buffer
@@ -192,8 +186,7 @@ void ipc_prepare_send_message(IPCClient *c, const IPCMessageType msg_type,
  * @param format Format string following vsprintf
  * @param ... Arguments for format string
  */
-void ipc_prepare_reply_failure(IPCClient *c, IPCMessageType msg_type,
-                               const char *format, ...);
+void ipc_prepare_reply_failure(IPCClient *c, IPCMessageType msg_type, const char *format, ...);
 
 /**
  * Prepare a success message in the specified client's buffer
@@ -211,8 +204,7 @@ void ipc_prepare_reply_success(IPCClient *c, IPCMessageType msg_type);
  * @param old_state The old tag state
  * @param new_state The new (now current) tag state
  */
-void ipc_tag_change_event(const int mon_num, TagState old_state,
-                          TagState new_state);
+void ipc_tag_change_event(const int mon_num, TagState old_state, TagState new_state);
 
 /**
  * Send a client_focus_change_event to all subscribers. Should be called only
@@ -222,8 +214,7 @@ void ipc_tag_change_event(const int mon_num, TagState old_state,
  * @param old_client The old DWM client selection (Monitor.oldsel)
  * @param new_client The new (now current) DWM client selection
  */
-void ipc_client_focus_change_event(const int mon_num, Client *old_client,
-                                   Client *new_client);
+void ipc_client_focus_change_event(const int mon_num, Client *old_client, Client *new_client);
 
 /**
  * Send a layout_change_event to all subscribers. Should be called only
@@ -235,9 +226,8 @@ void ipc_client_focus_change_event(const int mon_num, Client *old_client,
  * @param new_symbol The new (now current) layout symbol
  * @param new_layout Address to the new Layout
  */
-void ipc_layout_change_event(const int mon_num, const char *old_symbol,
-                             const Layout *old_layout, const char *new_symbol,
-                             const Layout *new_layout);
+void ipc_layout_change_event(const int mon_num, const char *old_symbol, const Layout *old_layout,
+			     const char *new_symbol, const Layout *new_layout);
 
 /**
  * Send a monitor_focus_change_event to all subscribers. Should be called only
@@ -246,8 +236,7 @@ void ipc_layout_change_event(const int mon_num, const char *old_symbol,
  * @param last_mon_num The index of the previously selected monitor
  * @param new_mon_num The index of the newly selected monitor
  */
-void ipc_monitor_focus_change_event(const int last_mon_num,
-                                    const int new_mon_num);
+void ipc_monitor_focus_change_event(const int last_mon_num, const int new_mon_num);
 
 /**
  * Send a focused_title_change_event to all subscribers. Should only be called
@@ -258,8 +247,8 @@ void ipc_monitor_focus_change_event(const int last_mon_num,
  * @param old_name Old name of the client window
  * @param new_name New name of the client window
  */
-void ipc_focused_title_change_event(const int mon_num, const Window client_id,
-                                    const char *old_name, const char *new_name);
+void ipc_focused_title_change_event(const int mon_num, const Window client_id, const char *old_name,
+				    const char *new_name);
 
 /**
  * Send a focused_state_change_event to all subscribers. Should only be called
@@ -270,9 +259,8 @@ void ipc_focused_title_change_event(const int mon_num, const Window client_id,
  * @param old_state Old state of the client
  * @param new_state New state of the client
  */
-void ipc_focused_state_change_event(const int mon_num, const Window client_id,
-                                    const ClientState *old_state,
-                                    const ClientState *new_state);
+void ipc_focused_state_change_event(const int mon_num, const Window client_id, const ClientState *old_state,
+				    const ClientState *new_state);
 /**
  * Check to see if an event has occured and call the *_change_event functions
  * accordingly
@@ -301,10 +289,8 @@ void ipc_send_events(Monitor *mons, Monitor **lastselmon, Monitor *selmon);
  * @return 0 if event was successfully handled, -1 on any error receiving
  * or handling incoming messages or unhandled epoll event.
  */
-int ipc_handle_client_epoll_event(struct epoll_event *ev, Monitor *mons,
-                                  Monitor **lastselmon, Monitor *selmon,
-                                  const char *tags[], const int tags_len,
-                                  const Layout *layouts, const int layouts_len);
+int ipc_handle_client_epoll_event(struct epoll_event *ev, Monitor *mons, Monitor **lastselmon, Monitor *selmon,
+				  const char *tags[], const int tags_len, const Layout *layouts, const int layouts_len);
 
 /**
  * Handle an epoll event caused by the IPC socket. This function only handles an
