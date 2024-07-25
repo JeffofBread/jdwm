@@ -1293,7 +1293,7 @@ drawbar(Monitor *m)
     if (m == selmon && showstatus) { /* status is only drawn on selected monitor */
         drw_setscheme(drw, scheme[SchemeStatus]);
 		tw = TEXTW(stext) - lrpad / 2;
-        drw_text(drw, m->ww - tw - stw - 2 * sp, -2, tw, bh, lrpad / 2, stext, 0);
+        drw_text(drw, m->ww - tw - stw - 2 * sp, 0, tw, bh, lrpad / 2, stext, 0);
     }
 
     resizebarwin(m);
@@ -1325,7 +1325,7 @@ drawbar(Monitor *m)
 	if (showlayout) {
 		w = TEXTW(m->ltsymbol);
 		drw_setscheme(drw, scheme[SchemeTagsNorm]);
-		x = drw_text(drw, x, -2, w, bh, lrpad / 2, m->ltsymbol, 0);
+		x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 	}
 
     if ((w = m->ww - tw - stw - x) > bh) {
