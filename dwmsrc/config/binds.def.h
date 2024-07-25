@@ -44,7 +44,6 @@ static const Key keys[] = {
         { Win|Shift,     XK_i,      shiftboth,       { .i = -1 } },
         { Win,           XK_o,      shiftview,       { .i = +1 } },
         { Win,           XK_i,      shiftview,       { .i = -1 } },
-        { Win,           XK_n,      togglealttag,    {0} },
         
 
         // Used to send the mouse as well as the window to a new monitor.

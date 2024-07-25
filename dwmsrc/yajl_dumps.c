@@ -155,7 +155,6 @@ dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
       YSTR("symbol"); YMAP(
         YSTR("current"); YSTR(mon->ltsymbol);
         YSTR("old"); YSTR(mon->lastltsymbol);
-        YSTR("alternate_tags"); YINT(mon->alttag);
       )
       YSTR("address"); YMAP(
         YSTR("current"); YINT((uintptr_t)mon->lt[mon->sellt]);

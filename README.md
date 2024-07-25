@@ -41,11 +41,10 @@ These are all optional and easily changeable in their respective config files or
 
 ## Patches
 
-All the original .diff files are located in `jeff_dwm/dwmsrc/patches`. Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together. Not unexpected when adding 37 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember which. Also major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
+All the original .diff files are located in `jeff_dwm/dwmsrc/patches`. Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together. Not unexpected when adding 36 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember which. Also major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
 
 **Patches integrated in jeff_dwm:**
 
-- alternativetags
 - alwayscenter
 - barpadding
 - bartoggle
