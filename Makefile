@@ -1,4 +1,4 @@
-# dwm - dynamic window manager
+# jeff_dwm - jeff's dynamic window manager
 # See LICENSE file for copyright and license details.
 
 #######################################################################################
