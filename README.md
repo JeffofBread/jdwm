@@ -26,6 +26,17 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 - [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent but designed with it in mind)
 - [grep](https://www.gnu.org/software/grep/manual/grep.html) && [sed](https://www.gnu.org/software/sed/manual/sed.html) (install script)
 
+### Arch
+
+```bash
+sudo pacman -S yajl imlib2 gcc rofi grep sed
+```
+or
+
+```bash
+yay -S yajl imlib2 gcc rofi grep sed
+```
+
 ## Recommended Programs
 
 - A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
@@ -36,6 +47,20 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 - [playerctl](https://github.com/altdesktop/playerctl) (Media control binds)
 - [pamixer](https://github.com/cdemoulins/pamixer) (Volume binds)
 - [xbacklight](https://www.x.org/releases/X11R7.6/doc/man/man1/xbacklight.1.xhtml) (For dwmblocks sb-battery screen brightness functionality)
+- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) (For rofi powermenu script)
+
+### Arch
+
+(Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) because its an AUR)
+```bash
+sudo pacman -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight
+```
+
+or
+
+```bash
+yay -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight betterlockscreen
+```
 
 These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
 

@@ -14,7 +14,7 @@ uptime="`uptime -p | sed -e 's/up //g'`"
 # Options
 shutdown='⏻  Shutdown'
 reboot='↺  Reboot'
-lock='\Uf033e  Lock'
+lock='🖵  Lock'
 suspend='⏾  Suspend'
 logout='⏼   Logout'
 yes='✓  Yes'
@@ -70,8 +70,10 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
+	    if [[ -x '/usr/bin/betterlockscreen' ]]; then
+		    betterlockscreen -l
+        else
+            echo -e "Ok, exit" | rofi -dmenu -p "Error: " -mesg "Could not find a lock screen tool! Check jeff_dwm/rofi/scripts/rofi_powermenu.sh for what lock screens were tried."
 		fi
         ;;
     $suspend)
