@@ -1,28 +1,5 @@
-/* See LICENSE file for copyright and license details.
- *
- * dynamic window manager is designed like any other X client as well. It is
- * driven through handling X events. In contrast to other X clients, a window
- * manager selects for SubstructureRedirectMask on the root window, to receive
- * events about window (dis-)appearance. Only one X connection at a time is
- * allowed to select for this event mask.
- *
- * The event handlers of dwm are organized in an array which is accessed
- * whenever a new event has been fetched. This allows event dispatching
- * in O(1) time.
- *
- * Each child of the root window is called a client, except windows which have
- * set the override_redirect flag. Clients are organized in a linked client
- * list on each monitor, the focus history is remembered through a stack list
- * on each monitor. Each client contains a bit array to indicate the tags of a
- * client.
- *
- * Keys and tagging rules are organized as arrays and defined in config.h.
- *
- * To understand everything else, start reading main().
- */
 #include <X11/X.h>
 #include <argp.h>
-#include <errno.h>
 #include <locale.h>
 #include <signal.h>
 #include <stdarg.h>
@@ -63,6 +40,7 @@
 #define TAGSLENGTH              (LENGTH(tags))
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
 #define ColFloat                3
+#define SHCMD(cmd)              { .v = (const char*[]){ "/bin/bash", "-ic", cmd, NULL } }
 
 #define SYSTEM_TRAY_REQUEST_DOCK    0
 /* XEMBED messages */
@@ -417,9 +395,29 @@ static int unmanaged = 0;    /* whether the window manager should manage the new
 
 /* configuration, allows nested code to access above variables */
 #include <config.h>
+#include <shift-tools.c> // Will be integrated soon, TODO
+#include <keydefs.h>
+#include <binds.h>
 #include <autorun.h>
 
 // IPC
+static const char *ipcsockpath = "/tmp/jeff_dwm.sock";
+static IPCCommand ipccommands[] = {
+  IPCCOMMAND(  view,            1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggleview,      1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tag,             1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  toggletag,       1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  tagmon,          1,  {ARG_TYPE_UINT}   ),
+  IPCCOMMAND(  focusmon,        1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  focusstack,      1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  zoom,            1,  {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  incnmaster,      1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  killclient,      1,  {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  togglefloating,  1,  {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  setmfact,        1,  {ARG_TYPE_FLOAT}  ),
+  IPCCOMMAND(  setlayoutsafe,   1,  {ARG_TYPE_PTR}    ),
+  IPCCOMMAND(  quit,            1,  {ARG_TYPE_NONE}   )
+};
 #include "IPCClient.c"
 #include "yajl_dumps.c"
 #include "ipc.c"
@@ -4211,6 +4209,19 @@ zoom(const Arg *arg)
         return;
     pop(c);
 }
+
+// GNU argp parser
+const char *argp_program_version = "jeff_dwm "VERSION;
+const char *argp_program_bug_address = "https://github.com/JeffofBread/jeff_dwm/issues";
+static char doc[] = "A custom build of dwm made by JeffofBread. If you wish to know more, check out the github page at https://github.com/JeffofBread/jeff_dwm";
+static char args_doc[] = "";
+static struct argp_option options[] = {
+  {"first-run", 'F', 0, 0, "Execute dwm along with all programs defined in the array startonce in autostart.h" },
+  {"simple-version", 'v', 0, 0, "Simplified version output"},
+  {"simple-execute", 's', 0, 0, "Basic execute, avoids starting any programs in autostart.h. Only for debug"},
+  { 0 }
+};
+static struct argp argp = { options, parse_opt, args_doc, doc };
 
 static error_t
 parse_opt (int key, char *arg, struct argp_state *state)
