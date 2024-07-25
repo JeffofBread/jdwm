@@ -7,7 +7,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
 **Notes before you install:**
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during install
  - For a more custom install process, check install flags (run `./install.sh -h` for more info) or edit paths in `install.sh`
- - To edit things like your terminal alias before install, edit `/jeff_dwm/dwmsrc/resources/jeff_dwm.aliases`. This can also be done after install by going to `~/.config/jeff_dwm/jeff_dwm.aliases`
+ - To edit things like your terminal alias before install, edit `/jeff_dwm/dwm/resources/jeff_dwm.aliases`. This can also be done after install by going to `~/.config/jeff_dwm/jeff_dwm.aliases`
 
 ```bash
 git clone https://github.com/JeffofBread/jeff_dwm.git
@@ -15,11 +15,11 @@ cd jeff_dwm
 ./install.sh
 ```
 
-After your first install, you can use `Ctrl + Shift + Q` to open the recompile script (make sure to correctly define in `/jeff_dwm/dwmsrc/resources/jeff_dwm.aliases`). To reload jeff_dwm press `Super + Shift + Q`. To exit dwm press `Super + Ctrl + Shift + Q` or use `Super + P` to open a rofi power menu.
+After your first install, you can use `Ctrl + Shift + Q` to open the recompile script (make sure to correctly define in `/jeff_dwm/dwm/resources/jeff_dwm.aliases`). To reload jeff_dwm press `Super + Shift + Q`. To exit dwm press `Super + Ctrl + Shift + Q` or use `Super + P` to open a rofi power menu.
 
 ## Dependencies
 
-- A terminal emulator of some kind (chosen in `/jeff_dwm/dwmsrc/resources/jeff_dwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
+- A terminal emulator of some kind (chosen in `/jeff_dwm/dwm/resources/jeff_dwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in bar)
 - [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments)

@@ -24,8 +24,8 @@ build/
 dwmblocks/config/blocks.h
 
 #jeff_dwm
-dwmsrc/config/autorun.h
-dwmsrc/config/config.h
-dwmsrc/config/binds.h
-dwmsrc/config/keydefs.h
-dwmsrc/scripts/jeff_dwm_setup.sh
+dwm/config/autorun.h
+dwm/config/config.h
+dwm/config/binds.h
+dwm/config/keydefs.h
+dwm/scripts/jeff_dwm_setup.sh

@@ -25,7 +25,7 @@ ROFI_THEMES_INSTALL_DIR="$ROFI_CONFIG_INSTALL_DIR/themes"
 
 JEFF_DWM_VERSION=$(jeff_dwm -v)
 
-JEFF_DWM_DIR="$PARENT_DIR/dwmsrc"
+JEFF_DWM_DIR="$PARENT_DIR/dwm"
 JEFF_DWM_CONFIG_DIR="$JEFF_DWM_DIR/config"
 JEFF_DWM_USER_CONFIG_DIR="$USERS_DIR/.config/jeff_dwm"
 JEFF_DWM_SCRIPTS_DIR="$JEFF_DWM_DIR/scripts"
@@ -249,7 +249,7 @@ print_help(){
     echo "                                 to install jeff_dwm, dwm-msg,"
     echo "                                 and dwmblocks."
     echo "   -ds, --dwm-scripts            Installs all scripts in"
-    echo "                                 /jeff_dwm/dwmsrc/scripts/"
+    echo "                                 /jeff_dwm/dwm/scripts/"
     echo "   -rc, --rofi-config            Installs custom rofi conf"
     echo "   -rt, --rofi-themes            Installs all rofi themes in"
     echo "                                 /jeff_dwm/rofi/themes/"
