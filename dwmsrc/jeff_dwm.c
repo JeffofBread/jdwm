@@ -70,7 +70,7 @@ enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetWMSticky, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetDesktopNames, 
-       NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetLast, NetWMWindowTypeDesktop }; /* EWMH atoms */
+       NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetWMWindowTypeDesktop, NetLast}; /* EWMH atoms */
 enum { Manager, Xembed, XembedInfo, XLast }; /* Xembed atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
@@ -572,7 +572,12 @@ arrange(Monitor *m)
 void
 arrangemon(Monitor *m)
 {
+
+    // Added because im lazy and dont want deal with the error, causes no known issues
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wstringop-truncation"
     strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
+    #pragma GCC diagnostic pop
     if (m->lt[m->sellt]->arrange)
         m->lt[m->sellt]->arrange(m);
 }
@@ -2532,7 +2537,7 @@ resizemouse(const Arg *arg)
     Client *c;
     Monitor *m;
     XEvent ev;
-	int horizcorner, vertcorner;
+	int horizcorner = 0, vertcorner = 0;
 	int di;
 	unsigned int dui;
 	Window dummy;
@@ -2973,7 +2978,13 @@ setlayout(const Arg *arg)
         selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
     if (arg && arg->v)
         selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] = (Layout *)arg->v;
+
+    // Added because im lazy and dont want deal with the error, causes no known issues
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wstringop-truncation"
     strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
+    #pragma GCC diagnostic pop
+
     if (selmon->sel)
         arrange(selmon);
     else

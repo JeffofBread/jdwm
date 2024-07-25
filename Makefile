@@ -40,7 +40,7 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2 ${YA
 DEBUGFLAG = -g  # Default flag, use if you are not debugging dwm
 
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
-CFLAGS   = ${DEBUGFLAG} -std=c99 -pedantic -Wall -O0 -Wno-deprecated-declarations -Wno-implicit-function-declaration ${INCS} ${CPPFLAGS}
+CFLAGS   = ${DEBUGFLAG} -std=c99 -pedantic -Wall -O3 -Wno-deprecated-declarations -Wno-implicit-function-declaration -march=native ${INCS} ${CPPFLAGS}
 LDFLAGS  = ${LIBS}
 
 # compiler and linker
