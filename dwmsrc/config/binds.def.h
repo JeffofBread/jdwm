@@ -120,7 +120,7 @@ static const Key keys[] = {
         //Modifier              Key             Function          Argument
         { Alt,                  XK_Tab,         spawn,            SHCMD( "rofi -no-fixed-num-lines -show window" ) }, // Window Switcher    
         { Win,                  XK_d,           spawn,            SHCMD( "rofi -no-fixed-num-lines -show drun" ) }, // App Launcher
-        { Win,                  XK_p,           spawn,            SHCMD( "rofi -show power-menu -modi power-menu:rofi_powermenu.sh" ) }, // Power Menu
+        { Win,                  XK_p,           spawn,            SHCMD( "rofi_powermenu.sh" ) }, // Power Menu
         { Win,                  XK_w,           spawn,            SHCMD( "BROWSER" ) },
         { Win,                  XK_c,           spawn,            SHCMD( "CODE_EDITOR" ) },
         { Win,                  XK_a,           spawn,            SHCMD( "FILE_MANAGER" ) },
