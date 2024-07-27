@@ -268,6 +268,7 @@ static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
 static void freeicon(Client *c);
+static void fullscreencheck(Client *c);
 static void gaplessgrid(Monitor *m);
 static Atom getatomprop(Client *c, Atom prop);
 static void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
@@ -1593,6 +1594,15 @@ void freeicon(Client *c)
 	}
 }
 
+void fullscreencheck(Client *c)
+{
+	if (!c) return;
+	if (c->fakefullscreen == 0 && c->isfullscreen)
+		togglefakefullscreen(0);
+	else if (c->fakefullscreen == 2)
+		togglefullscreen(0);
+}
+
 void gaplessgrid(Monitor *m)
 {
 	unsigned int i, n;
@@ -2177,7 +2187,7 @@ void manage(Window w, XWindowAttributes *wa)
 	XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
 	setclientstate(c, NormalState);
 	if (c->mon == selmon) {
-		losefullscreen(c);
+		fullscreencheck(selmon->sel);
 		unfocus(selmon->sel, 0);
 	}
 	c->mon->sel = c;
