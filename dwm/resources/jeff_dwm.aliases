@@ -1,5 +1,5 @@
 alias TERM='kitty &>/dev/null'
-alias RECOMPILE_TERM='kitty sh -c "jeff_dwm_recompile.sh" &>/dev/null'
+alias RECOMPILE_TERM='kitty sh -c "exit $(jeff_dwm_recompile.sh)"'
 alias BROWSER='firefox'
 alias FILE_MANAGER='thunar'
 alias CODE_EDITOR='vscodium'
