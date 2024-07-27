@@ -12,7 +12,8 @@ static const char *colors[][4] = {
 	[SchemeSel]  = { color4,        color5,         color2,     color5 },   // Generic scheme for focused clients
 
 	// Bar                  text    background
-	[SchemeStatus]  	= { color3, color1 }, // Statusbar right
+    [SchemeSystray]     = { color3, color1 }, // Systray
+	[SchemeStatus]  	= { color3, color1 }, // Statusbar (dwmblocks)
 	[SchemeTagsSel]  	= { color4, color5 }, // Tagbar left selected
 	[SchemeTagsNorm]  	= { color3, color1 }, // Tagbar left unselected
 	[SchemeInfoSel]  	= { color4, color5 }, // infobar middle selected

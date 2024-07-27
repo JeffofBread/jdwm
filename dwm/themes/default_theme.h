@@ -12,7 +12,8 @@ static const char *colors[][4] = {
 	[SchemeSel]  = { col_gray4,     col_cyan,       col_gray2,      col_cyan  },  // Generic scheme for focused clients
 
 	// Bar                  text       background
-	[SchemeStatus]  	= { col_gray3, col_gray1 }, // Statusbar right
+    [SchemeSystray]     = { col_gray3, col_gray1 }, // Systray
+	[SchemeStatus]  	= { col_gray3, col_gray1 }, // Statusbar (dwmblocks)
 	[SchemeTagsSel]  	= { col_gray4, col_cyan  }, // Tagbar left selected
 	[SchemeTagsNorm]  	= { col_gray3, col_gray1 }, // Tagbar left unselected
 	[SchemeInfoSel]  	= { col_gray4, col_cyan  }, // infobar middle selected
