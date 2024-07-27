@@ -123,6 +123,7 @@ static const Key keys[] = {
         { Alt,                  XK_Tab,         spawn,            SHCMD( "rofi -no-fixed-num-lines -show window -theme " ROFITHEME ) }, // Window Switcher    
         { Win,                  XK_d,           spawn,            SHCMD( "rofi -no-fixed-num-lines -show drun -theme " ROFITHEME ) }, // App Launcher
         { Win,                  XK_p,           spawn,            SHCMD( "rofi_powermenu.sh " ROFITHEME ) }, // Power Menu 
+        { Win,                  XK_k,           spawn,            SHCMD( "rofi -show calc -modi calc -no-show-match -no-sort -theme " ROFITHEME ) }, // Calculator
         { Win,                  XK_w,           spawn,            SHCMD( "BROWSER" ) },
         { Win,                  XK_c,           spawn,            SHCMD( "CODE_EDITOR" ) },
         { Win,                  XK_a,           spawn,            SHCMD( "FILE_MANAGER" ) },
@@ -177,6 +178,7 @@ static const Key keys[] = {
         { 0,            XK_Standby,                 spawn,      SHCMD("systemctl suspend") },
         { 0,            XK_Suspend,                 spawn,      SHCMD("systemctl suspend") },
         { 0,            XK_Hibernate,               spawn,      SHCMD("systemctl hibernate") },
+        { 0,            XK_Calculator,              spawn,      SHCMD( "rofi -show calc -modi calc -no-show-match -no-sort -theme " ROFITHEME ) },
 
         // Below are not set up, as it varies a lot between systems. Use a program that works for your specific system.
         //{ 0,          XK_MonBrightnessUp,         spawn,      SHCMD("") },

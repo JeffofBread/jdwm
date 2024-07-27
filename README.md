@@ -49,18 +49,19 @@ yay -S yajl imlib2 gcc rofi grep sed
 - [pamixer](https://github.com/cdemoulins/pamixer) (Volume binds)
 - [xbacklight](https://www.x.org/releases/X11R7.6/doc/man/man1/xbacklight.1.xhtml) (For dwmblocks sb-battery screen brightness functionality)
 - [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) (For rofi powermenu script)
+- [rofi-calc](https://github.com/svenstaro/rofi-calc/tree/master?tab=readme-ov-file) (Calculator bind)
 
 ### Arch
 
 (Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) because it's an AUR)
 ```bash
-sudo pacman -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight
+sudo pacman -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight rofi-calc
 ```
 
 or
 
 ```bash
-yay -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight betterlockscreen
+yay -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight betterlockscreen rofi-calc
 ```
 
 These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
