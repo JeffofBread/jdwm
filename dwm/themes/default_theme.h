@@ -17,3 +17,6 @@ static const char *colors[][4] = {
 	[SchemeInfoSel]  	= { col_gray4, col_cyan,   "#000000"  }, // infobar middle  selected {text,background,not used but cannot be empty}
 	[SchemeInfoNorm]  	= { col_gray3, col_gray1,  "#000000"  }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
+
+char *wallpapercmd[] = { "feh", "--bg-fill", "/usr/local/share/jeff_dwm/dwm/themes/wallpapers/default/grey.jpg", NULL, };
+#define ROFITHEMEFILE default.rasi

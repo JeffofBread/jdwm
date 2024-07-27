@@ -14,6 +14,11 @@
 #define ICONSIZE                                  20            /* window icon size */
 #define ICONSPACING                               5             /* space between icon and title */
 
+// Include chosen theme here. Feel free to add your own themes, copy an existing one and edit values.
+#include <storm_theme.h>
+//#include <lush_theme.h>
+//#include <default_theme.h>
+
 // Border
 static const unsigned int borderpx              = 0;            /* border pixel of windows */
 static const unsigned int fborderpx             = 5;            /* border pixel of floating windows */
@@ -53,10 +58,6 @@ static const unsigned int snap                  = 32;           /* snap pixel, d
 
 // Bar Font
 static const char *fonts[]                      = { "JetBrainsMono:size=14" };
-
-// Include chosen theme here. Feel free to add your own themes, copy an existing one and edit values.
-#include <jeffs_theme.h>
-//#include <default_theme.h>
 
 // Sticky Icon
 static const XPoint stickyicon[]        = { {0,0}, {4,0}, {4,8}, {2,6}, {0,8}, {0,0} }; /* represents the icon as an array of vertices */

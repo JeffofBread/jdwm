@@ -1,4 +1,4 @@
-// 95% of the credit for this goes to LR-Tech on github for the file 'rounded-common.rasi' file present here,
+// 95% of the credit for this goes to LR-Tech on github for the file 'rounded-common.rasi',
 // which this is based off of. Most of what you see here is LR-Tech's with minor modifications to fit my taste. 
 
 * {
@@ -10,7 +10,7 @@
     font: "JetBrainsMono 12";
 
     background-color:   transparent;
-    text-color:         @white;
+    text-color:         @lightgrey;
 
     margin:     0px;
     padding:    0px;
@@ -84,6 +84,7 @@ element normal active {
 
 element selected normal, element selected active {
     background-color:   @normalgreen;
+    text-color:         @white;
 }
 
 element-icon {

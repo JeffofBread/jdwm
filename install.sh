@@ -28,6 +28,8 @@ JEFF_DWM_VERSION=$(jeff_dwm -v)
 JEFF_DWM_DIR="$PARENT_DIR/dwm"
 JEFF_DWM_CONFIG_DIR="$JEFF_DWM_DIR/config"
 JEFF_DWM_USER_CONFIG_DIR="$USERS_DIR/.config/jeff_dwm"
+JEFF_DWM_WALLPAPER_DIR="$JEFF_DWM_USER_CONFIG_DIR/wallpapers"
+JEFF_DWM_THEMES_DIR="$JEFF_DWM_DIR/themes"
 JEFF_DWM_SCRIPTS_DIR="$JEFF_DWM_DIR/scripts"
 JEFF_DWM_RESOURCES_DIR="$JEFF_DWM_DIR/resources"
 
@@ -59,11 +61,11 @@ jeff_dwm_binaries_install(){
 
 jeff_dwm_configs_link(){
     echo -e "\n|------- jeff_dwm config links -------|\n"
-    if [ -d "$USERS_DIR/.config/jeff_dwm" ]; then
-        echo "$USERS_DIR/.config/jeff_dwm already exists, skipping creation"  
+    if [ -d "$JEFF_DWM_USER_CONFIG_DIR" ]; then
+        echo "$JEFF_DWM_USER_CONFIG_DIR already exists, skipping creation"  
     else
-        echo "Creating jeff_dwm config directory in $USERS_DIR/.config/jeff_dwm"
-        mkdir -p $USERS_DIR/.config/jeff_dwm
+        echo "Creating jeff_dwm config directory in $JEFF_DWM_USER_CONFIG_DIR"
+        mkdir -p $JEFF_DWM_USER_CONFIG_DIR
     fi
 
     check_and_link "$JEFF_DWM_CONFIG_DIR/autorun" "autorun"
@@ -106,7 +108,7 @@ jeff_dwm_scripts_install(){
     if [ -L "$SHARE_DIR/jeff_dwm" ] && [ -d "$SHARE_DIR/jeff_dwm" ]; then
         echo "Symbolic link to $PARENT_DIR in $SHARE_DIR already exists, skipping creation"  
     else
-        echo "Creating symbolic link to $PARENT_DIR in $SHARE_DIR called jeff_dwm"
+        echo "Creating symbolic link to $PARENT_DIR in $SHARE_DIR called /jeff_dwm"
         sudo /bin/sh -c "ln -s $PARENT_DIR $SHARE_DIR/jeff_dwm  &>/dev/null"
     fi
     if [ ! -f $JEFF_DWM_SETUPFILE ]; then
@@ -152,6 +154,15 @@ rofi_theme_install(){
     cd $ROFI_THEMES_DIR && cp -f *.rasi $ROFI_THEMES_INSTALL_DIR 
     echo -e "\nRofi themes are being installed to $ROFI_THEMES_INSTALL_DIR from $ROFI_THEMES_DIR.\nThemes being installed:\n"
     ls | grep -E '\.rasi$' | sed -e 's/^/     #) /'
+    echo ""
+
+    # I know the below solution is shit, im just lazy and this works
+    if [ -L "$ROFI_DIR/roficonfigdir" ] && [ -d "$ROFI_DIR/roficonfigdir" ]; then
+        echo "Symbolic link to $ROFI_CONFIG_INSTALL_DIR in $ROFI_DIR already exists, skipping creation"  
+    else
+        echo "Creating symbolic link to to $ROFI_CONFIG_INSTALL_DIR in $ROFI_DIR called /roficonfigdir"
+        ln -s $ROFI_CONFIG_INSTALL_DIR $ROFI_DIR/roficonfigdir
+    fi
     echo ""
 }
 
@@ -199,6 +210,30 @@ jeff_dwm_desktop_file_install(){
     sudo cp -f $JEFF_DWM_RESOURCES_DIR/jeff_dwm.desktop /usr/share/xsessions/jeff_dwm.desktop
     sudo /bin/sh -c "(echo "$JEFF_DWM_VERSION"; echo "Icon=$JEFF_DWM_RESOURCES_DIR/dwm.png") >> /usr/share/xsessions/jeff_dwm.desktop"
     echo ""
+}
+
+jeff_dwm_wallpapers(){
+    echo -e "\n|-------- jeff_dwm wallpapers --------|\n"
+
+    if [ -d "$JEFF_DWM_WALLPAPER_DIR" ]; then
+        response=n
+        read -p "Would you like to check for wallpaper updates (git pull)? [y/N] " response
+        if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]] then
+            git pull
+        else
+            echo -e "Skipping checking for update"
+        fi 
+    else
+        echo "Cloning jeff_dwm_wallpapers repo into $JEFF_DWM_WALLPAPER_DIR"
+        git clone https://github.com/JeffofBread/jeff_dwm_wallpapers.git $JEFF_DWM_WALLPAPER_DIR
+    fi
+
+    if [ -L "$JEFF_DWM_THEMES_DIR/wallpapers" ] && [ -d "$JEFF_DWM_THEMES_DIR/wallpapers" ]; then
+        echo "Symbolic link to $JEFF_DWM_WALLPAPER_DIR in $JEFF_DWM_THEMES_DIR already exists, skipping creation"  
+    else
+        echo "Creating symbolic link to to $JEFF_DWM_WALLPAPER_DIR in $JEFF_DWM_THEMES_DIR called /wallpapers"
+        ln -s $JEFF_DWM_WALLPAPER_DIR $JEFF_DWM_THEMES_DIR/wallpapers
+    fi
 }
 
 jeff_dwm_aliases(){
@@ -262,6 +297,8 @@ print_help(){
     echo "   -jm, --jeff-dwm-manual        Installs jeff_dwm-$JEFF_DWM_VERSION's manual"
     echo "   -jc, --jeff-dwm-config-dir    Installs a folder under .config for jeff_dwm"
     echo "                                 for helping finding your config files"
+    echo "   -jw, --jeff-dwm-wallpapers    Installs a folder under .config for jeff_dwm's"
+    echo "                                 premade theme's wallpapers"
     echo "   -ja, --jeff-dwm-aliases       Installs custom alias file to bashrc"
     echo ""
 }
@@ -273,7 +310,7 @@ print_usage(){
     echo "       [--rofi-config] [-rt] [--rofi-themes] [-rs] [--rofi-scripts] [-bs]"
     echo "       [--dwmblocks-scripts] [-dm] [--dwm-original-manual] [-jm]"
     echo "       [--jeff-dwm-manual] [-jc] [--jeff-dwm-config-dir] [-ja]"
-    echo "       [--jeff-dwm-aliases]"
+    echo "       [--jeff-dwm-aliases] [-jw] [--jeff-dwm-wallpapers]"
     echo ""   
 }
 
@@ -330,6 +367,11 @@ while [[ $# -gt 0 ]]; do
             DEFAULT_INSTALL=0
             shift
             ;;
+        -jw|--jeff-dwm-wallpapers)  # Only installs wallpapers and its symlink
+            jeff_dwm_wallpapers
+            DEFAULT_INSTALL=0
+            shift
+            ;;
         -ja|--jeff-dwm-aliases)  # Only installs the custom alias file
             jeff_dwm_aliases
             DEFAULT_INSTALL=0
@@ -374,6 +416,7 @@ if [[ $DEFAULT_INSTALL -eq 1 ]]; then
     jeff_dwm_man_page_install
     jeff_dwm_desktop_file_install
     jeff_dwm_configs_link
+    jeff_dwm_wallpapers
     jeff_dwm_aliases
 fi
 

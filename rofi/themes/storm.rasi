@@ -1,0 +1,106 @@
+// 95% of the credit for this goes to LR-Tech on github for the file 'rounded-common.rasi',
+// which this is based off of. Most of what you see here is LR-Tech's with minor modifications to fit my taste. 
+
+* {
+    darkblue:       #16162F;
+    midblue:        #418EB4;
+    lightblue:      #A8CAD3; 
+    nearblack:      #0B0D1E;
+    lightpurple:    #645A6D;
+    orange:         #fa9061;
+    white:          #ffffff;
+
+    font: "JetBrainsMono 12";
+
+    background-color:   transparent;
+    text-color:         @lightblue;
+
+    margin:     0px;
+    padding:    0px;
+    spacing:    0px;
+}
+
+window {
+    location:       center;
+    width:          480;
+    border-radius:  24px;
+    
+    background-color:   @darkblue;
+}
+
+mainbox {
+    padding:    12px;
+}
+
+inputbar {
+    background-color:   @darkblue;
+    border-color:       @midblue;
+
+    border:         2px;
+    border-radius:  16px;
+
+    padding:    8px 16px;
+    spacing:    8px;
+    children:   [ prompt, entry ];
+}
+
+prompt {
+    text-color: @midblue;
+}
+
+entry {
+    placeholder:        "Search";
+    placeholder-color:  @lightblue;
+}
+
+message {
+    margin:             12px 0 0;
+    border-radius:      16px;
+    border-color:       @midblue;
+    background-color:   @darkblue;
+}
+
+textbox {
+    padding:    8px 24px;
+}
+
+listview {
+    background-color:   transparent;
+
+    margin:         12px 0 0;
+    lines:          16;
+    columns:        1;
+    scrollbar:      true;
+    fixed-height:   false;
+    dynamic:        true;
+}
+
+element {
+    padding:        8px 16px;
+    spacing:        8px;
+    border-radius:  16px;
+}
+
+element normal active {
+    text-color: @lightblue;
+}
+
+element selected normal, element selected active {
+    background-color:   @orange;
+    text-color:         @darkblue;
+}
+
+element-icon {
+    size:           1em;
+    vertical-align: 0.5;
+}
+
+element-text {
+    text-color: inherit;
+}
+
+scrollbar {
+  handle-width : 8px;
+  handle-color : @darkblue;
+  padding      : 0 4px;
+}

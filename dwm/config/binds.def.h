@@ -120,9 +120,9 @@ static const Key keys[] = {
                                 /* jeff_dwm misc Keys: */
 
         //Modifier              Key             Function          Argument
-        { Alt,                  XK_Tab,         spawn,            SHCMD( "rofi -no-fixed-num-lines -show window" ) }, // Window Switcher    
-        { Win,                  XK_d,           spawn,            SHCMD( "rofi -no-fixed-num-lines -show drun" ) }, // App Launcher
-        { Win,                  XK_p,           spawn,            SHCMD( "rofi_powermenu.sh" ) }, // Power Menu
+        { Alt,                  XK_Tab,         spawn,            SHCMD( "rofi -no-fixed-num-lines -show window -theme " ROFITHEME ) }, // Window Switcher    
+        { Win,                  XK_d,           spawn,            SHCMD( "rofi -no-fixed-num-lines -show drun -theme " ROFITHEME ) }, // App Launcher
+        { Win,                  XK_p,           spawn,            SHCMD( "rofi_powermenu.sh " ROFITHEME ) }, // Power Menu 
         { Win,                  XK_w,           spawn,            SHCMD( "BROWSER" ) },
         { Win,                  XK_c,           spawn,            SHCMD( "CODE_EDITOR" ) },
         { Win,                  XK_a,           spawn,            SHCMD( "FILE_MANAGER" ) },
@@ -172,7 +172,7 @@ static const Key keys[] = {
         { 0,            XK_AudioForward,            spawn,      SHCMD("playerctl position 10+") },
         { 0,            XK_AudioMute,               spawn,      SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle") },
         { 0,            XK_AudioMicMute,            spawn,      SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
-        { 0,            XK_PowerOff,                spawn,      SHCMD("rofi -show power-menu -modi power-menu:rofi_powermenu.sh") },
+        { 0,            XK_PowerOff,                spawn,      SHCMD("rofi_powermenu.sh " ROFITHEME ) },
         { 0,            XK_Sleep,                   spawn,      SHCMD("systemctl suspend") }, 
         { 0,            XK_Standby,                 spawn,      SHCMD("systemctl suspend") },
         { 0,            XK_Suspend,                 spawn,      SHCMD("systemctl suspend") },
@@ -234,7 +234,7 @@ static const Button buttons[] = {
                                /* Right Mouse Button: */
 
         //Click           Key           Button             Function        Argument
-        { ClkLtSymbol,    0,            RightClick,        spawn,          SHCMD( "rofi_layoutmenu.sh" ) },
+        { ClkLtSymbol,    0,            RightClick,        spawn,          SHCMD( "rofi_layoutmenu.sh " ROFITHEME ) },
         { ClkTagBar,      0,            RightClick,        toggleview,     {0} },
         { ClkClientWin,   Win,          RightClick,        resizemouse,    {0} },
 

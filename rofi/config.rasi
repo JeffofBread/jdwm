@@ -171,5 +171,3 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 */
 }
-
-@theme "jeff_dwm"

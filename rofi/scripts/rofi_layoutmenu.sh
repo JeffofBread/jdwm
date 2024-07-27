@@ -7,7 +7,7 @@ LAYOUTS_JSON=$($GET_LAYOUTS_CMD)
 if jq -V ; then
     ARRAY_LENGTH=$($GET_LAYOUTS_CMD | jq -r 'length')
 else
-    rofi -e "Please install or verify that jq is working." 
+    rofi -e "Please install or verify that jq is working." -theme $1
     exit 0
 fi
 
@@ -24,7 +24,7 @@ main
 choice=$(
     for ((snidx = 0; snidx < ARRAY_LENGTH; snidx++)); do
         echo "${LAYOUT_SYMBOL[snidx]} | ${LAYOUT_NAME[snidx]}"
-    done  | rofi -no-fixed-num-lines -format 'i' -dmenu -i -fuzzy -p "Layout"
+    done  | rofi -no-fixed-num-lines -format 'i' -dmenu -i -fuzzy -p "Layout" -theme $1
 );
 
 dwm-msg run_command setlayoutsafe $((${LAYOUT_ADDRESS[$choice]}))

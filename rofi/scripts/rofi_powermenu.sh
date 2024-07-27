@@ -20,14 +20,16 @@ logout='⏼   Logout'
 yes='✓  Yes'
 no='✗  No'
 
+theme=$1
+
 # Rofi CMD
 rofi_cmd() {
-	rofi -dmenu -i -p "Uptime: $uptime" 
+	rofi -dmenu -i -p "Uptime: $uptime" -theme $theme
 }
 
 # Confirmation CMD
 confirm_cmd() {
-	rofi -dmenu -i -p 'Are you Sure?'
+	rofi -dmenu -i -p 'Are you Sure?' -theme $theme
 }
 
 # Ask for confirmation
@@ -73,7 +75,7 @@ case ${chosen} in
 	    if [[ -x '/usr/bin/betterlockscreen' ]]; then
 		    betterlockscreen -l
         else
-            echo -e "Ok, exit" | rofi -dmenu -p "Error: " -mesg "Could not find a lock screen tool! Check jeff_dwm/rofi/scripts/rofi_powermenu.sh for what lock screens were tried."
+            echo -e "Ok, exit" | rofi -dmenu -p "Error: " -mesg "Could not find a lock screen tool! Check jeff_dwm/rofi/scripts/rofi_powermenu.sh for what lock screens were tried." -theme $theme
 		fi
         ;;
     $suspend)

@@ -50,6 +50,8 @@
 			"/bin/bash", "-ic", cmd, NULL \
 		}                                     \
 	}
+#define ROFITHEMEPATH_(x, y) #x "/" #y
+#define ROFITHEMEPATH(x, y) ROFITHEMEPATH_(x, y)
 
 #define SYSTEM_TRAY_REQUEST_DOCK 0
 /* XEMBED messages */
@@ -435,8 +437,14 @@ static int unmanaged = 0; /* whether the window manager should manage the new wi
 // IPC
 #include "ipc.h"
 
-/* configuration, allows nested code to access above variables */
+// Tertiary config file
 #include <config.h>
+
+// Define complete rofi theme path
+#define ROFITHEMEDIR / usr / local / share / jeff_dwm / rofi / themes
+#define ROFITHEME ROFITHEMEPATH(ROFITHEMEDIR, ROFITHEMEFILE)
+
+// Sub config files
 #include <keydefs.h>
 #include <binds.h>
 #include <autorun.h>
@@ -4139,6 +4147,11 @@ int main(int argc, char *argv[])
 			while (*++p);
 		}
 		firstrun = 0;
+	}
+
+	// Update wallpaper on reload, meant for theme switching
+	if (fork() == 0) {
+		execvp(wallpapercmd[0], wallpapercmd);
 	}
 
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale()) fputs("warning: no locale support\n", stderr);

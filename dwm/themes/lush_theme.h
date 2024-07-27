@@ -20,3 +20,6 @@ static const char *colors[][4] = {
     [SchemeInfoSel]     = { white,          normalgreen,      "#000000"  },   // infobar middle  selected {text,background,not used but cannot be empty}
     [SchemeInfoNorm]    = { white,          normalgreen,      "#000000"  },   // infobar middle  unselected {text,background,not used but cannot be empty}
 };
+
+static char *wallpapercmd[] = { "feh", "--bg-fill", "/usr/local/share/jeff_dwm/dwm/themes/wallpapers/lush/lush1.jpg", "/usr/local/share/jeff_dwm/dwm/themes/wallpapers/lush/lush2.jpg", NULL, };
+#define ROFITHEMEFILE lush.rasi
