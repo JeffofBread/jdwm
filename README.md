@@ -8,7 +8,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during installation.
  - For a more custom install process, check install flags (run `./install.sh -h` for more info) or edit paths in `install.sh`
  - To edit things like your terminal alias before installation, edit `/jeff_dwm/dwm/resources/jeff_dwm.aliases`. This can also be done after installation by going to `~/.config/jeff_dwm/jeff_dwm.aliases`
- - By default on install, `install.sh` will clone [jeff_dwm_wallpapers](https://github.com/JeffofBread/jeff_dwm_wallpapers) into `~/.config/jeff_dwm/wallpapers`. These wallpapers are used by the themes in `jeff_dwm/dwm/themes`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/500536106a862473159736205ca6bbc159019f84/install.sh#L228) and remove/alter the wallpaper commands in the various theme files (`jeff_dwm/dwm/themes`).
+ - By default on install, `install.sh` will clone [jeff_dwm_wallpapers](https://github.com/JeffofBread/jeff_dwm_wallpapers) into `~/.config/jeff_dwm/wallpapers/`. These wallpapers are used by the themes in `jeff_dwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/500536106a862473159736205ca6bbc159019f84/install.sh#L228) and remove/alter the wallpaper commands in the various theme files (`jeff_dwm/dwm/themes/`).
 
 ```bash
 git clone https://github.com/JeffofBread/jeff_dwm.git
