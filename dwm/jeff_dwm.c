@@ -441,7 +441,10 @@ static int unmanaged = 0; /* whether the window manager should manage the new wi
 #include <config.h>
 
 // Define complete rofi theme path
-#define ROFITHEMEDIR / usr / local / share / jeff_dwm / rofi / themes
+// clang-format off
+#define ROFITHEMEDIR /usr/local/share/jeff_dwm/rofi/themes
+// clang-format on
+
 #define ROFITHEME ROFITHEMEPATH(ROFITHEMEDIR, ROFITHEMEFILE)
 
 // Sub config files

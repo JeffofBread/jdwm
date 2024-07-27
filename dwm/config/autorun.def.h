@@ -10,10 +10,7 @@
 
 // For autostarting programs and scripts at dwm startup.
 static const char *const autostart[] = {
-    
-    // Fix some java apps not liking dwm
-    "export", "_JAVA_AWT_WM_NONREPARENTING=1", NULL,
-    "export", "AWT_TOOLKIT=MToolkit", NULL,
+    "jeff_dwm_java.sh", NULL, // Exports java vars to help them java apps play nice with dwm
 
     // Below are examples, not necessary:
     //---------------------------------//
