@@ -1,2 +1,2 @@
 #!/bin/sh
-cd /usr/local/share/jeff_dwm && sudo make install && (read -rp "Build and install completed successfully. Press ENTER to exit terminal..." && exit 0) || (read -rp "Build Failed. Press ENTER to exit terminal..." && exit 1)
+cd /usr/local/share/jeff_dwm && sudo make install && ( exitcode=$? && read -rp "Build and install completed successfully. Press ENTER to exit terminal..." && exit $exitcode) || ( exitcode=$? && read -rp "Build Failed. Press ENTER to exit terminal..." && exit $exitcode)
