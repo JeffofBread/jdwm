@@ -1,4 +1,4 @@
-# jeff_dwm_patches
+# jeff_dwm | Patches branch
  
  This branch solely exists to hold all the patches used in jeff_dwm. None of these are my own, please check out the original authors for license and other information. 
 
