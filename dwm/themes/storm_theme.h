@@ -1,3 +1,5 @@
+// Storm Theme
+
 // Stormy blue and purple theme created by @JeffOfBread
 static const char darkblue[]    = "#16162F";
 static const char midblue[]     = "#418EB4";

@@ -1,3 +1,5 @@
+// Lush Theme
+
 // Lush green theme created by @JeffOfBread
 static const char greygreen[]   = "#2f4a34";
 static const char normalgreen[] = "#253a29";

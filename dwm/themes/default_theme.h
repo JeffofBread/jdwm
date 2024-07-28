@@ -1,3 +1,5 @@
+// Default Theme
+
 // Default-ish dwm colorscheme created by the suckless team, adapted to by @JeffOfBread
 static const char col_gray1[] = "#222222";
 static const char col_gray2[] = "#444444";
