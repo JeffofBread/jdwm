@@ -2,6 +2,9 @@
 
 A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and **will** change.
 
+<img src="https://github.com/JeffofBread/jeff_dwm/blob/screenshots/jeff_dwm_storm.png"> 
+<img src="https://github.com/JeffofBread/jeff_dwm/blob/screenshots/jeff_dwm_lush.png">
+
 ## Installation
 
 **Notes before you install:**
