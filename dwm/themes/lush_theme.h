@@ -1,4 +1,4 @@
-// Lush Theme
+// 🌲 Lush Theme
 
 // Lush green theme created by @JeffOfBread
 static const char greygreen[]   = "#2f4a34";

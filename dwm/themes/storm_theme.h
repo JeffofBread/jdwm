@@ -1,4 +1,4 @@
-// Storm Theme
+// 🌊 Storm Theme
 
 // Stormy blue and purple theme created by @JeffOfBread
 static const char darkblue[]    = "#16162F";
