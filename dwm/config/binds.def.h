@@ -124,6 +124,7 @@ static const Key keys[] = {
         { Win,                  XK_d,           spawn,            SHCMD( "rofi -no-fixed-num-lines -show drun -theme " ROFITHEME ) }, // App Launcher
         { Win,                  XK_p,           spawn,            SHCMD( "rofi_powermenu.sh " ROFITHEME ) }, // Power Menu 
         { Win,                  XK_k,           spawn,            SHCMD( "rofi -show calc -modi calc -no-show-match -no-sort -theme " ROFITHEME ) }, // Calculator
+        { Win,                  XK_h,           spawn,            SHCMD( "rofi_jeff_dwm_theme.sh " ROFITHEME ) },
         { Win,                  XK_w,           spawn,            SHCMD( "BROWSER" ) },
         { Win,                  XK_c,           spawn,            SHCMD( "CODE_EDITOR" ) },
         { Win,                  XK_a,           spawn,            SHCMD( "FILE_MANAGER" ) },
@@ -227,7 +228,8 @@ static const Button buttons[] = {
                                 /* Middle Mouse Button: */
 
         //Click           Key           Button           Function          Argument
-        { ClkWinTitle,    0,            MiddleClick,     spawn,            SHCMD( "TERM" ) },
+        { ClkWinTitle,    0,            MiddleClick,     spawn,            SHCMD( "TERM" ) }, 
+        { ClkLtSymbol,    0,            MiddleClick,     spawn,            SHCMD( "rofi_jeff_dwm_theme.sh " ROFITHEME ) },
         { ClkClientWin,   Win,          MiddleClick,     togglefloating,   {0} },
 
 

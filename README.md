@@ -25,7 +25,7 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in the bar)
 - [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments)
 - [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent, but designed with it in mind)
-- [grep](https://www.gnu.org/software/grep/manual/grep.html) && [sed](https://www.gnu.org/software/sed/manual/sed.html) (install script)
+- [grep](https://www.gnu.org/software/grep/manual/grep.html) && [sed](https://www.gnu.org/software/sed/manual/sed.html) (install and rofi scripts)
 
 ### Arch
 

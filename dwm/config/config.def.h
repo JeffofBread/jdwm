@@ -14,10 +14,10 @@
 #define ICONSIZE                                  20            /* window icon size */
 #define ICONSPACING                               5             /* space between icon and title */
 
-// Include chosen theme here. Feel free to add your own themes, copy an existing one and edit values.
-#include <storm_theme.h>
-//#include <lush_theme.h>
-//#include <default_theme.h>
+// jeff_dwm theme. Please don't remove the comment
+// inline with the include, as it's how the rofi
+// theme switcher finds the include. 
+#include <storm_theme.h> // JEFF_DWM_THEME
 
 // Border
 static const unsigned int borderpx              = 0;            /* border pixel of windows */
