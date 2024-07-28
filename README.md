@@ -150,7 +150,9 @@ Keybind | Action
 
 All the original .diff files are located in [jeff_dwm patches branch](https://github.com/JeffofBread/jeff_dwm/tree/patches). Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together, so the .diff files may not represent exactly what is present in jeff_dwm. These changes are to be expected when adding 36 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember exactly which, though I have tried my best to provide links below. Also, major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
 
-**Patches integrated in jeff_dwm:**
+
+<details><summary><b>Patches integrated in jeff_dwm</b></summary>
+<br>
 
 - [alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)
 - [barpadding](https://dwm.suckless.org/patches/barpadding/)
@@ -188,6 +190,8 @@ All the original .diff files are located in [jeff_dwm patches branch](https://gi
 - [unmanaged](https://github.com/bakkeby/patches/blob/master/dwm/dwm-unmanaged-6.5.diff)
 - [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
 - [winicon](https://dwm.suckless.org/patches/winicon/)
+
+</details>
 
 ## Known Bugs
 
