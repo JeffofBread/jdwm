@@ -3161,7 +3161,11 @@ void shiftview(const Arg *arg)
 	view(&shifted);
 }
 
-/* Navigate to the next/prev tag that has a client, else moves it to the next/prev tag */
+/*
+
+Function is completely fucked, will fix later
+
+ Navigate to the next/prev tag that has a client, else moves it to the next/prev tag
 void shiftviewclients(const Arg *arg)
 {
 	Arg shifted;
@@ -3172,16 +3176,17 @@ void shiftviewclients(const Arg *arg)
 	for (c = selmon->clients; c; c = c->next)
 		if (!(c->tags)) tagmask = tagmask | c->tags;
 
-	if (arg->i > 0) /* left circular shift */
+	if (arg->i > 0) // left circular shift 
 		do {
 			shifted.ui = (shifted.ui << arg->i) | (shifted.ui >> (LENGTH(tags) - arg->i));
 		} while (tagmask && !(shifted.ui & tagmask));
-	else /* right circular shift */
+	else // right circular shift
 		do {
 			shifted.ui = (shifted.ui >> (-arg->i) | shifted.ui << (LENGTH(tags) + arg->i));
 		} while (tagmask && !(shifted.ui & tagmask));
 	view(&shifted);
 }
+*/
 
 void showhide(Client *c)
 {

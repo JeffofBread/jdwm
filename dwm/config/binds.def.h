@@ -42,8 +42,8 @@ static const Key keys[] = {
         { Win|Shift,     XK_0,      tag,             {.ui = ~0 } },
         { Win|Shift,     XK_Up,     shiftboth,       { .i = +1 } },
         { Win|Shift,     XK_Down,   shiftboth,       { .i = -1 } },
-        { Win|Control,   XK_o,      shiftviewclients,{ .i = +1 } }, // Bugged, will fix or remove
-        { Win|Control,   XK_i,      shiftviewclients,{ .i = -1 } }, // Bugged, will fix or remove
+        //{ Win|Control,   XK_o,      shiftviewclients,{ .i = +1 } }, Bugged, will fix or remove
+        //{ Win|Control,   XK_i,      shiftviewclients,{ .i = -1 } }, Bugged, will fix or remove
         { Win,           XK_o,      shiftview,       { .i = +1 } },
         { Win,           XK_i,      shiftview,       { .i = -1 } },
         
@@ -54,15 +54,6 @@ static const Key keys[] = {
         { Win|Shift,     XK_Right,    tagmon,      {.i = +1 } },
         { Win|Shift,     XK_Left,     focusmon,    {.i = -1 } },
         { Win|Shift,     XK_Right,    focusmon,    {.i = +1 } },
-
-
-        // With my implimentation these are redundant, but kept here in case you wish to re-enable them.
-        // As it stands, I send the view with any window sent to another tag, meaning that these and
-        // shiftview/shiftboth do the exact same thing as the below functions. 
-        /*{ Win|Shift,     XK_h,      shiftviewclients,    { .i = -1 }},
-        { Win|Shift,     XK_l,      shiftviewclients,    { .i = +1 }},
-        { Win|Control,   XK_h,      shiftswaptags,       { .i = -1 }},
-        { Win|Controlm   XK_l,      shiftswaptags,       { .i = +1 }},*/
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
