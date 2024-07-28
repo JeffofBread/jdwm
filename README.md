@@ -1,3 +1,42 @@
-# jeff_dwm | Screenshots branch
+# jeff_dwm_patches
+ 
+ This branch solely exists to hold all the patches used in jeff_dwm. None of these are my own, please check out the original authors for license and other information. 
 
-This branch solely exists to hold screenshots of jeff_dwm to be used elsewhere. 
+### Warning, these are the links I **believe** I got them from, though I can not confirm 100%, as I got many of them a while ago, take these links with a grain of salt. 
+
+- [alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)
+- [barpadding](https://dwm.suckless.org/patches/barpadding/)
+- [bartoggle](https://dwm.suckless.org/patches/bartoggle/)
+- [centeredwindowname](https://dwm.suckless.org/patches/centeredwindowname/)
+- [colorbar](https://dwm.suckless.org/patches/colorbar/)
+- [cursorwarp](https://dwm.suckless.org/patches/cursorwarp/)
+- [decorhints](https://dwm.suckless.org/patches/decoration_hints/)
+- [desktopicons](https://github.com/bakkeby/patches/blob/master/dwm/dwm-desktop_icons-6.5.diff)
+- [dragmfacts](https://dwm.suckless.org/patches/dragmfact/)
+- [ewmhtags](https://dwm.suckless.org/patches/ewmhtags/)
+- [floatbordercolor](https://dwm.suckless.org/patches/float_border_color/)
+- [floatborderwidth](https://dwm.suckless.org/patches/floatborderwidth/)
+- [fullscreencompilation](https://github.com/bakkeby/patches/wiki/fullscreen-compilation)
+- [hidevacanttags](https://dwm.suckless.org/patches/hide_vacant_tags/)
+- [ignoretransientwindows](https://dwm.suckless.org/patches/ignore_transient_windows/)
+- [ipc](https://github.com/mihirlad55/dwm-ipc)
+- [layoutscroll](https://dwm.suckless.org/patches/layoutscroll/)
+- [noborderflicker](https://dwm.suckless.org/patches/noborderflicker/)
+- [pertag](https://dwm.suckless.org/patches/pertag/)
+- [preserveonrestart](https://dwm.suckless.org/patches/preserveonrestart/)
+- [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
+- [restartsig](https://dwm.suckless.org/patches/restartsig/)
+- [rotatestack](https://dwm.suckless.org/patches/rotatestack/)
+- [rulerefresher](https://dwm.suckless.org/patches/rulerefresher/)
+- [scratchpad](https://dwm.suckless.org/patches/scratchpad/)
+- [shiftools](https://dwm.suckless.org/patches/shift-tools/)
+- [statuspadding](https://dwm.suckless.org/patches/statuspadding/)
+- [steam](https://dwm.suckless.org/patches/steam/)
+- [sticky](https://dwm.suckless.org/patches/sticky/)
+- [stickyindicator](https://dwm.suckless.org/patches/stickyindicator/)
+- [switchallmonitortags](https://dwm.suckless.org/patches/switch_all_monitor_tags/)
+- [systray](https://dwm.suckless.org/patches/systray/)
+- [underlinetags](https://dwm.suckless.org/patches/underlinetags/)
+- [unmanaged](https://github.com/bakkeby/patches/blob/master/dwm/dwm-unmanaged-6.5.diff)
+- [vanitygaps](https://dwm.suckless.org/patches/vanitygaps/)
+- [winicon](https://dwm.suckless.org/patches/winicon/)

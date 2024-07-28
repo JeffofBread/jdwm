@@ -1,0 +1,63 @@
+From 31b89fe119b4a0298da98891aa37b134facb6311 Mon Sep 17 00:00:00 2001
+From: yasumori <ysmr@protonmail.com>
+Date: Fri, 27 May 2022 00:21:27 -0400
+Subject: [PATCH] This patch allows the user to switch the selected tag of all
+ monitors.
+
+For example, if monitor A is currently on tag 1, and monitor B is on tag 2,
+and the user presses MODKEY+SUPERKEY+3, both monitor A and B will switch to
+tag 3 (without changing the currently selected monitor).
+---
+ config.def.h |  2 ++
+ dwm.c        | 13 +++++++++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index a2ac963..3f504ab 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -46,8 +46,10 @@ static const Layout layouts[] = {
+ 
+ /* key definitions */
+ #define MODKEY Mod1Mask
++#define SUPERKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
++	{ MODKEY|SUPERKEY,              KEY,      viewall,        {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+diff --git a/dwm.c b/dwm.c
+index 5646a5c..28736ee 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -228,6 +228,7 @@ static void updatetitle(Client *c);
+ static void updatewindowtype(Client *c);
+ static void updatewmhints(Client *c);
+ static void view(const Arg *arg);
++static void viewall(const Arg *arg);
+ static Client *wintoclient(Window w);
+ static Monitor *wintomon(Window w);
+ static int xerror(Display *dpy, XErrorEvent *ee);
+@@ -2054,6 +2055,18 @@ view(const Arg *arg)
+ 	arrange(selmon);
+ }
+ 
++void
++viewall(const Arg *arg)
++{
++	Monitor *m;
++
++	for (m = mons; m; m = m->next) {
++		m->tagset[m->seltags] = arg->ui;
++		arrange(m);
++	}
++	focus(NULL);
++}
++
+ Client *
+ wintoclient(Window w)
+ {
+-- 
+2.36.1
+
