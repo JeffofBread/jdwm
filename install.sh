@@ -74,6 +74,13 @@ jeff_dwm_configs_link(){
     check_and_link "$JEFF_DWM_CONFIG_DIR/keydefs" "keydefs"
     check_and_link "$DWM_BLOCKS_CONFIG_DIR/blocks" "blocks"
 
+    if [ -L "$JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir" ] && [ -d "$JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir" ]; then
+        echo "Symbolic link to $JEFF_DWM_USER_CONFIG_DIR in $JEFF_DWM_CONFIG_DIR already exists, skipping creation"  
+    else
+        echo "Creating symbolic link to to $JEFF_DWM_USER_CONFIG_DIR in $JEFF_DWM_CONFIG_DIR called /jeffdwmconfigdir"
+        ln -s $JEFF_DWM_USER_CONFIG_DIR $JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir
+    fi
+    
     echo ""
 }
 
