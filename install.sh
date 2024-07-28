@@ -232,7 +232,7 @@ jeff_dwm_wallpapers(){
         fi 
     else
         echo "Cloning jeff_dwm_wallpapers repo into $JEFF_DWM_WALLPAPER_DIR"
-        git clone https://github.com/JeffofBread/jeff_dwm_wallpapers.git $JEFF_DWM_WALLPAPER_DIR
+        git clone https://github.com/JeffofBread/jeff_dwm.git -b wallpapers $JEFF_DWM_WALLPAPER_DIR
     fi
 
     if [ -L "$JEFF_DWM_THEMES_DIR/wallpapers" ] && [ -d "$JEFF_DWM_THEMES_DIR/wallpapers" ]; then
