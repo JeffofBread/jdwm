@@ -1,4 +1,4 @@
-# jeff_dwm wallpapers
+# jeff_dwm | wallpapers branch
 
 **None of these are my own images or art, and I do not own any copyright or claim to these images.**
 
