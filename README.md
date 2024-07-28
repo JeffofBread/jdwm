@@ -16,9 +16,11 @@ cd jeff_dwm
 ./install.sh
 ```
 
-After your first install, you can use `Ctrl + Shift + Q` to open the recompile script (make sure to correctly defined in `/jeff_dwm/dwm/resources/jeff_dwm.aliases`). To reload jeff_dwm press `Super + Shift + Q`. To exit jeff_dwm press `Super + Ctrl + Shift + Q` or use `Super + P` to open a rofi power menu.
-
 ## Dependencies
+
+These are all programs scripts or jeff_dwm relies on (specified in `()`) in some way or another. To not have them would severely reduce the functionality or result in the whole thing being non-functional.
+
+Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out at discord (jeffofbread), start a discussion here on github, or create a pull request. 
 
 - A terminal emulator of some kind (chosen in `/jeff_dwm/dwm/resources/jeff_dwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
@@ -27,7 +29,7 @@ After your first install, you can use `Ctrl + Shift + Q` to open the recompile s
 - [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent, but designed with it in mind)
 - [grep](https://www.gnu.org/software/grep/manual/grep.html) && [sed](https://www.gnu.org/software/sed/manual/sed.html) (install and rofi scripts)
 
-### Arch
+<details><summary><b>Arch</b></summary>
 
 ```bash
 sudo pacman -S yajl imlib2 gcc rofi grep sed
@@ -38,7 +40,13 @@ or
 yay -S yajl imlib2 gcc rofi grep sed
 ```
 
+</details>
+
 ## Recommended Programs
+
+These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
+
+Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out at discord (jeffofbread), start a discussion here on github, or create a pull request. 
 
 - A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
 - [jq](https://github.com/jqlang/jq) (Rofi layout menu script)
@@ -51,7 +59,7 @@ yay -S yajl imlib2 gcc rofi grep sed
 - [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) (For rofi powermenu script)
 - [rofi-calc](https://github.com/svenstaro/rofi-calc/tree/master?tab=readme-ov-file) (Calculator bind)
 
-### Arch
+<details><summary><b>Arch</b></summary>
 
 (Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) because it's an AUR)
 ```bash
@@ -64,7 +72,76 @@ or
 yay -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight betterlockscreen rofi-calc
 ```
 
-These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
+</details>
+
+## Usage
+
+This is not yet a comprehensive list, just a good place to start. All of the keybinds and button binds are found and edited in `binds.h`. 
+
+<details><summary><b>Keybind Quickstart</b></summary><p><div>
+
+These are just the keybinds I find myself using the most often, though "*quick*" might not be the best descriptor here. In the interest of keeping this a little shorter, I won't include them here, but I would also recommend checking out the media keybinds as well. 
+
+Keybind | Action
+----------------- | ----------
+ <kbd>Win</kbd> + <kbd>Q</kbd> | Kill focused window 
+ <kbd>Win</kbd> + <kbd>1</kbd> .. <kbd>9</kbd> | Navigate to `number` tag on the focused monitor
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> .. <kbd>9</kbd> | Send focused window and view to `number` tag on the focused monitor
+ <kbd>Win</kbd> + <kbd>D</kbd> | Rofi application launcher
+ <kbd>Win</kbd> + <kbd>D</kbd> | Rofi power menu
+ <kbd>Win</kbd> + <kbd>L</kbd> | Rofi layout switcher
+ <kbd>Win</kbd> + <kbd>H</kbd> | Rofi based theme switcher (switches jeff_dwm's and Rofi's theme)
+ <kbd>Alt</kbd> + <kbd>Tab</kbd> | Rofi window switcher
+ <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jeff_dwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
+ <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jeff_dwm.aliases`, by default [VSCodium](https://vscodium.com/))
+ <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jeff_dwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
+ <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another `$SCRATCHPAD` 
+ <kbd>Win</kbd> + <kbd>&leftarrow;</kbd> | Move focus to the next left monitor
+ <kbd>Win</kbd> + <kbd>&rightarrow;</kbd> | Move focus to the next right monitor
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>&leftarrow;</kbd> | Move focused window to next left monitor
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>&rightarrow;</kbd> | Move focused window to next right monitor
+ <kbd>Win</kbd> + <kbd>&uparrow;</kbd> | Move focus up client stack
+ <kbd>Win</kbd> + <kbd>&downarrow;</kbd> | Move focus down client stack
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>&uparrow;</kbd> | Move focused window up a tag
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>&downarrow;</kbd> | Move focused window down a tag
+ <kbd>Win</kbd> + <kbd>F</kbd> | Make the focused window fullscreen, taking up the whole monitor
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> | Fake Fullscreen, makes the focused window respect layout even when, for example, a YouTube video is fullscreen. 
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Reload jeff_dwm, same as sending `kill -HUP $(pidof jeff_dwm)`
+ <kbd>Win</kbd> + <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Quit jeff_dwm, same as sending `kill -TERM $(pidof jeff_dwm)` 
+
+</div></p></details>
+
+<details><summary><b>Media Keybinds</b></summary><p><div>
+
+Keybind | Action
+----------------- | ----------
+ <kbd>Win</kbd> + <kbd>PageUp</kbd> | Increase volume by 5% using [pamixer](https://github.com/cdemoulins/pamixer)
+ <kbd>Win</kbd> + <kbd>PageDown</kbd> | Decrease volume by 5% using [pamixer](https://github.com/cdemoulins/pamixer) 
+ <kbd>Win</kbd> + <kbd>ScrollLock</kbd> | Play the next song in queue using [playerctl](https://github.com/altdesktop/playerctl)
+ <kbd>Win</kbd> + <kbd>Print</kbd> | Play the previous song in queue using [playerctl](https://github.com/altdesktop/playerctl)
+ <kbd>Win</kbd> + <kbd>Home</kbd> | Skip 10 seconds forward using [playerctl](https://github.com/altdesktop/playerctl)
+ <kbd>Win</kbd> + <kbd>Home</kbd> | Rewind 10 seconds backwards using [playerctl](https://github.com/altdesktop/playerctl)
+ <kbd>Win</kbd> + <kbd>Pause</kbd> | Pause/Play media using [playerctl](https://github.com/altdesktop/playerctl)
+ <kbd>Win</kbd> + <kbd>Insert</kbd> | Toggle mute audio output using [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl)
+ <kbd>Win</kbd> + <kbd>Delete</kbd> | Toggle mute microphone using [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl)
+
+</div></p></details>
+
+<details><summary><b>Aliased Program Keybinds</b></summary><p><div>
+
+Keybind | Action
+----------------- | ----------
+ <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jeff_dwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
+ <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jeff_dwm.aliases`, by default [VSCodium](https://vscodium.com/))
+ <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jeff_dwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
+ <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Spawn `$RECOMPILE_TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another `$SCRATCHPAD` 
+
+</div></p></details>
 
 ## Patches
 
@@ -116,5 +193,5 @@ All the original .diff files are located in [jeff_dwm_patches repo](https://gith
 
 ## Future
 
-I still have many plans for changes and features, but currently don't have that much time to put towards this project, so don't expect too many updates, at least not rapid ones. 
+I still have many plans for changes and features, but currently don't have that much time to put towards this project, so don't expect too many updates, at least not rapid ones. If you would like to suggest ideas, features, or contribute, please either reach out at discord (jeffofbread), start a discussion here on github, or create a pull request. 
 
