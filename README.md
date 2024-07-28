@@ -11,7 +11,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during installation.
  - For a more custom install process, check install flags (run `./install.sh -h` for more info) or edit paths in `install.sh`
  - To edit things like your terminal alias before installation, edit `/jeff_dwm/dwm/resources/jeff_dwm.aliases`. This can also be done after installation by going to `~/.config/jeff_dwm/jeff_dwm.aliases`
- - By default on install, `install.sh` will clone [jeff_dwm_wallpapers](https://github.com/JeffofBread/jeff_dwm_wallpapers) into `~/.config/jeff_dwm/wallpapers/`. These wallpapers are used by the themes in `jeff_dwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/500536106a862473159736205ca6bbc159019f84/install.sh#L228) and remove/alter the wallpaper commands in the various theme files (`jeff_dwm/dwm/themes/`).
+ - By default on install, `install.sh` will clone [jeff_dwm' wallpapers branch](https://github.com/JeffofBread/jeff_dwm/tree/wallpapers) into `~/.config/jeff_dwm/wallpapers/`. These wallpapers are used by the themes in `jeff_dwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`jeff_dwm/dwm/themes/`).
 
 ```bash
 git clone https://github.com/JeffofBread/jeff_dwm.git
@@ -148,7 +148,7 @@ Keybind | Action
 
 ## Patches
 
-All the original .diff files are located in [jeff_dwm_patches repo](https://github.com/JeffofBread/jeff_dwm_patches). Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together, so the .diff files may not represent exactly what is present in jeff_dwm. These changes are to be expected when adding 36 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember exactly which, though I have tried my best to provide links below. Also, major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
+All the original .diff files are located in [jeff_dwm patches branch](https://github.com/JeffofBread/jeff_dwm/tree/patches). Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together, so the .diff files may not represent exactly what is present in jeff_dwm. These changes are to be expected when adding 36 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember exactly which, though I have tried my best to provide links below. Also, major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
 
 **Patches integrated in jeff_dwm:**
 
