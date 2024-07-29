@@ -194,48 +194,44 @@ static const Key keys[] = {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin
+// Click can be Tags, LayoutSymbol, StatusText, WindowTitle, ClientWindow, or Desktop
 static const Button buttons[] = {
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
                                 /* Left Mouse Button: */
 
         //Click           Key            Button          Function        Argument 
-        { ClkLtSymbol,    0,             LeftClick,      setlayout,      {0} },
-        { ClkTagBar,      0,             LeftClick,      view,           {0} },
+        { LayoutSymbol,   0,             LeftClick,      setlayout,      {0} },
+        { Tags,           0,             LeftClick,      view,           {0} },
+        { ClientWindow,  Win,            LeftClick,      movemouse,      {0} },
+        { ClientWindow,  Win|Control,    LeftClick,      floatandmove,   {0} },
 
         // Used to send focus and the window to a new monitor.
         // Is it simple? Yes. Is it lazy? Yes. Is it the best option? Maybe, but im lazy.
-        { ClkTagBar,      Win,          LeftClick,      tag,            {0} },
-        { ClkTagBar,      Win,          LeftClick,      view,           {0} },
+        { Tags,          Win,            LeftClick,      tag,            {0} },
+        { Tags,          Win,            LeftClick,      view,           {0} },
 
-        { ClkClientWin,   Win,          LeftClick,      movemouse,      {0} },
-        { ClkClientWin,   Win|Control,  LeftClick,      floatandmove,   {0} },
+        
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
                                 /* Middle Mouse Button: */
 
-        //Click           Key           Button           Function          Argument
-        { ClkWinTitle,    0,            MiddleClick,     spawn,            SHCMD( "TERM" ) }, 
-        { ClkLtSymbol,    0,            MiddleClick,     spawn,            SHCMD( "rofi_jeff_dwm_theme.sh " ROFITHEME ) },
-        { ClkClientWin,   Win,          MiddleClick,     togglefloating,   {0} },
+        //Click          Key             Button           Function        Argument
+        { WindowTitle,   0,              MiddleClick,     spawn,          SHCMD( "TERM" ) }, 
+        { LayoutSymbol,  0,              MiddleClick,     spawn,          SHCMD( "rofi_jeff_dwm_theme.sh " ROFITHEME ) },
+        { ClientWindow,  Win,            MiddleClick,     togglefloating, {0} },
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
                                /* Right Mouse Button: */
 
-        //Click           Key           Button             Function        Argument
-        { ClkLtSymbol,    0,            RightClick,        spawn,          SHCMD( "rofi_layoutmenu.sh " ROFITHEME ) },
-        { ClkTagBar,      0,            RightClick,        toggleview,     {0} },
-        { ClkClientWin,   Win,          RightClick,        resizemouse,    {0} },
-
-
-        // Optional, enables right clicking on the desktop to spawn a jgmenu instance
-        //{ ClkRootWin,     0,            RightClick,        spawn,          {.v = jgmenucmd } },
+        //Click          Key             Button           Function        Argument
+        { LayoutSymbol,  0,              RightClick,      spawn,          SHCMD( "rofi_layoutmenu.sh " ROFITHEME ) },
+        { Tags,          0,              RightClick,      toggleview,     {0} },
+        { ClientWindow,  Win,            RightClick,      resizemouse,    {0} },
 
 };

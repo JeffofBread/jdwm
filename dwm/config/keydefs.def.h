@@ -1,6 +1,6 @@
 #include <X11/XF86keysym.h>
 
-// Key Defenitions
+// Key Definitions
 #define Win Mod4Mask
 #define Alt Mod1Mask
 #define Shift ShiftMask
@@ -10,6 +10,14 @@
 #define RightClick Button3
 #define PageUp XK_Prior
 #define PageDown XK_Next
+
+// Bar Definitions
+#define Tags ClkTagBar
+#define LayoutSymbol ClkLtSymbol
+#define StatusText ClkStatusText
+#define WindowTitle ClkWinTitle
+#define ClientWindow ClkClientWin
+#define Desktop ClkRootWin
 
 /* XFree86 vendor specific keysyms                                                                                      */
 /*----------------------------------------------------------------------------------------------------------------------*/
