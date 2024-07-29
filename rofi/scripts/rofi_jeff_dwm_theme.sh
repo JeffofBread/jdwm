@@ -5,12 +5,20 @@ JEFF_DWM_DIR=/usr/local/share/jeff_dwm
 DWM_DIR=$JEFF_DWM_DIR/dwm
 THEMES_DIR=$DWM_DIR/themes
 CONFIG_DIR=$DWM_DIR/config
-
-# Source jeff_dwm alias file
-shopt -s expand_aliases
-source $CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases
+ALIAS_FOUND=0;
 
 
+if [ -f "$CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases" ]; then
+    shopt -s expand_aliases
+    source $CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases
+    ALIAS_FOUND=1
+fi
+
+
+if [ ! -L "$CONFIG_DIR/jeffdwmconfigdir" ] && [ ! -d "$CONFIG_DIR/jeffdwmconfigdir" ]; then
+    echo "Creating symbolic link to to $HOME/.config/jeff_dwm in $$CONFIG_DIR called /jeffdwmconfigdir"
+    ln -s $HOME/.config/jeff_dwm $CONFIG_DIR/jeffdwmconfigdir
+fi
 
 # Array of theme filenames
 themefilenames=( $(ls $THEMES_DIR/*.h | grep -v ".def.h") )
@@ -72,8 +80,13 @@ if cd /usr/local/share/jeff_dwm && echo $password | sudo -S make install; then
 else
     choice="$(echo -e "Yes\nNo" | rofi -dmenu -p "Error: " -mesg "Unable to compile jeff_dwm. Would you like to see the errors?" -theme $1)"
     if [[ "$choice" == "Yes" ]]; then
-        RECOMPILE_TERM
-        exit 0
+        if [[ $ALIAS_FOUND -eq 0 ]]; then
+            echo -e "Ok" | rofi -dmenu -p "Error: " -mesg "$CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases could not be found, therefore RECOMPILE_TERM could not be opened to view make errors." -theme $1
+            exit 1
+        else 
+            RECOMPILE_TERM
+            exit 0
+        fi
     else
         exit 0
     fi
