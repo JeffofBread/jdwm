@@ -83,8 +83,6 @@ ifeq ($(VERBOSE), 0)
 	Q := @
 endif
 
-all: jeff_dwm dwm-msg dwmblocks
-
 ${JEFF_DWM_BUILD_DIR}/%.o: ${JEFF_DWM_SRC_DIR}/%.c | ${JEFF_DWM_BUILD_DIR}
 	$(PRINTF) "Compile jeff_dwm source  (${CC}) " $@
 	$Q${CC} -c ${CFLAGS} $< -o $@
@@ -150,32 +148,32 @@ dwm-msg_clean:
 	$(PRINTF) "Clean build dir of dwm-msg    " $(JEFF_DWM_BUILD_DIR)
 	$Qrm -f ${JEFF_DWM_BUILD_DIR}/dwm-msg ${JEFF_DWM_BUILD_DIR}/dwm-msg.o
 
-blocks_clean:
+dwmblocks_clean:
 	$(PRINTF) "Clean build dir of dwmblocks  " $(BLOCKS_BUILD_DIR)
 	$Qrm -f ${BLOCKS_BUILD_DIR}/dwmblocks ${BLOCKS_OBJ}
 
-clean: jeff_dwm_clean msg_clean blocks_clean
+clean: jeff_dwm_clean dwm-msg_clean dwmblocks_clean
 
-install: all
-
-# jeff_dwm
+jeff_dwm_install: jeff_dwm
 	$(PRINTF) "Install jeff_dwm binary       " ${DESTDIR}${PREFIX}/jeff_dwm
 	$Qmkdir -p ${DESTDIR}${PREFIX}
 	$Qcp -f ${JEFF_DWM_BUILD_DIR}/jeff_dwm ${DESTDIR}${PREFIX}
 	$Qchmod 755 ${DESTDIR}${PREFIX}/jeff_dwm
 
-# dwm-msg
+dwm-msg_install: dwm-msg
 	$(PRINTF) "Install dwm-msg binary        " ${DESTDIR}${PREFIX}/dwm-msg
 	$Qcp -f ${JEFF_DWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}
 	$Qchmod 755 ${DESTDIR}${PREFIX}/dwm-msg
 
-# dwmblocks
+dwmblocks_install: dwmblocks
 	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/dwmblocks
 	$Qcp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}
 	$Qchmod 755 ${DESTDIR}${PREFIX}/dwmblocks
+
+install: jeff_dwm_install dwm-msg_install dwmblocks_install
 
 uninstall:
 	$(PRINTF) "Removed all jeff_dwm binary files " " jeff_dwm, dwm-msg, dwmblocks"
 	$Qrm -f ${DESTDIR}${PREFIX}/jeff_dwm ${DESTDIR}${PREFIX}/dwm-msg ${DESTDIR}${PREFIX}/dwmblocks
 
-.PHONY: all jeff_dwm_clean dwm-msg_clean blocks_clean clean install uninstall
+.PHONY: jeff_dwm_clean dwm-msg_clean blocks_clean clean jeff_dwm_install dwm-msg_install dwmblocks_install install uninstall
