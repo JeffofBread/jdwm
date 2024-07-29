@@ -4,7 +4,7 @@
 #######################################################################################
 #  Big thanks to FTLabs (https://github.com/FT-Labs) for help with the build dir and  #
 #  thanks much to UtkarshVerma (https://github.com/UtkarshVerma) who is the creator   #
-#  of dwmblocks-async, whos Makefile I shamelessly pulled and learned from.           #
+#  of dwmblocks-async, who's Makefile I shamelessly pulled and learned from.          #
 #######################################################################################
 
 # jeff_dwm version
