@@ -140,6 +140,8 @@ dwmblocks: ${BLOCKS_OBJ} ${BLOCKS_BUILD_DIR}
 	$(PRINTF) "Linking dwmblocks source (${CC}) " ${JEFF_DWM_BUILD_DIR}/dwmblocks
 	$Q${CC} -o ${BLOCKS_BUILD_DIR}/$@ ${BLOCKS_OBJ} ${LDFLAGS}
 
+all: jeff_dwm dwm-msg dwmblocks
+
 jeff_dwm_clean:
 	$(PRINTF) "Clean build dir of jeff_dwm   " $(JEFF_DWM_BUILD_DIR)
 	$Qrm -f ${JEFF_DWM_BUILD_DIR}/jeff_dwm ${JEFF_DWM_OBJ}
@@ -172,8 +174,18 @@ dwmblocks_install: dwmblocks
 
 install: jeff_dwm_install dwm-msg_install dwmblocks_install
 
-uninstall:
-	$(PRINTF) "Removed all jeff_dwm binary files " " jeff_dwm, dwm-msg, dwmblocks"
-	$Qrm -f ${DESTDIR}${PREFIX}/jeff_dwm ${DESTDIR}${PREFIX}/dwm-msg ${DESTDIR}${PREFIX}/dwmblocks
+jeff_dwm_uninstall:
+	$(PRINTF) "Removing jeff_dwm bin file    " ${DESTDIR}${PREFIX}/jeff_dwm
+	$Qrm -f ${DESTDIR}${PREFIX}/jeff_dwm
 
-.PHONY: jeff_dwm_clean dwm-msg_clean blocks_clean clean jeff_dwm_install dwm-msg_install dwmblocks_install install uninstall
+dwm-msg_uninstall:
+	$(PRINTF) "Removing dwm-msg bin file     " ${DESTDIR}${PREFIX}/dwm-msg
+	$Qrm -f ${DESTDIR}${PREFIX}/dwm-msg
+
+dwmblocks_uninstall:
+	$(PRINTF) "Removing dwmblocks bin file   " ${DESTDIR}${PREFIX}/dwmblocks
+	$Qrm -f ${DESTDIR}${PREFIX}/dwmblocks
+
+uninstall: jeff_dwm_uninstall dwm-msg_uninstall dwmblocks_uninstall
+
+.PHONY: all jeff_dwm_clean dwm-msg_clean blocks_clean clean jeff_dwm_install dwm-msg_install dwmblocks_install install jeff_dwm_uninstall dwm-msg_uninstall dwmblocks_uninstall uninstall
