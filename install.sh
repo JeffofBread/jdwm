@@ -219,7 +219,7 @@ jeff_dwm_desktop_file_install(){
     echo ""
 }
 
-jeff_dwm_wallpapers(){
+jeff_dwm_wallpapers_install(){
     echo -e "\n|-------- jeff_dwm wallpapers --------|\n"
 
     if [ -d "$JEFF_DWM_WALLPAPER_DIR" ]; then
@@ -243,7 +243,7 @@ jeff_dwm_wallpapers(){
     fi
 }
 
-jeff_dwm_aliases(){
+jeff_dwm_aliases_install(){
     echo -e "\n|--------- jeff_dwm aliases ----------|\n"
     if [ ! -f "$JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases" ]; then
         if [ ! -f "$JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases" ]; then
@@ -375,12 +375,12 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -jw|--jeff-dwm-wallpapers)  # Only installs wallpapers and its symlink
-            jeff_dwm_wallpapers
+            jeff_dwm_wallpapers_install
             DEFAULT_INSTALL=0
             shift
             ;;
         -ja|--jeff-dwm-aliases)  # Only installs the custom alias file
-            jeff_dwm_aliases
+            jeff_dwm_aliases_install
             DEFAULT_INSTALL=0
             shift
             ;;
@@ -423,8 +423,8 @@ if [[ $DEFAULT_INSTALL -eq 1 ]]; then
     jeff_dwm_man_page_install
     jeff_dwm_desktop_file_install
     jeff_dwm_configs_link
-    jeff_dwm_wallpapers
-    jeff_dwm_aliases
+    jeff_dwm_wallpapers_install
+    jeff_dwm_aliases_install
 fi
 
 echo ""
