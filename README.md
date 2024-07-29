@@ -52,7 +52,7 @@ These are all optional and easily changeable in their respective config files or
 Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out at discord (jeffofbread), start a discussion here on github, or create a pull request. 
 
 - A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
-- [jq](https://github.com/jqlang/jq) (Rofi layout menu script)
+- [jq](https://github.com/jqlang/jq) (rofi layout menu script)
 - [xrandr](https://www.x.org/wiki/Projects/XRandR/) (Monitor resolution, refresh rate, etc. Used in jeff_dwm_setup.sh)
 - [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in jeff_dwm_setup.sh)
 - [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl) (Toggle mute on mic/sink binds)
@@ -90,11 +90,11 @@ Keybind | Action
  <kbd>Win</kbd> + <kbd>Q</kbd> | Kill focused window 
  <kbd>Win</kbd> + <kbd>1</kbd> .. <kbd>9</kbd> | Navigate to `number` tag on the focused monitor
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> .. <kbd>9</kbd> | Send focused window and view to `number` tag on the focused monitor
- <kbd>Win</kbd> + <kbd>D</kbd> | Rofi application launcher
- <kbd>Win</kbd> + <kbd>D</kbd> | Rofi power menu
- <kbd>Win</kbd> + <kbd>L</kbd> | Rofi layout switcher
- <kbd>Win</kbd> + <kbd>H</kbd> | Rofi based theme switcher (switches jeff_dwm's and Rofi's theme)
- <kbd>Alt</kbd> + <kbd>Tab</kbd> | Rofi window switcher
+ <kbd>Win</kbd> + <kbd>D</kbd> | rofi application launcher
+ <kbd>Win</kbd> + <kbd>D</kbd> | rofi power menu
+ <kbd>Win</kbd> + <kbd>L</kbd> | rofi layout switcher
+ <kbd>Win</kbd> + <kbd>H</kbd> | rofi based theme switcher (switches jeff_dwm's and rofi's theme)
+ <kbd>Alt</kbd> + <kbd>Tab</kbd> | rofi window switcher
  <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
  <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jeff_dwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
  <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jeff_dwm.aliases`, by default [VSCodium](https://vscodium.com/))
@@ -137,12 +137,31 @@ Keybind | Action
 Keybind | Action
 ----------------- | ----------
  <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>MMB</kbd> on Window Title | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
  <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jeff_dwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
  <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jeff_dwm.aliases`, by default [VSCodium](https://vscodium.com/))
  <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jeff_dwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
  <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Spawn `$RECOMPILE_TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
  <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another `$SCRATCHPAD` 
+
+</div></p></details>
+
+<details><summary><b>Button Binds</b></summary><p><div>
+
+Button + Keybind | Bar Section | Action
+---------------- | ----------- | ----------
+ <kbd>LMB</kbd> | Layout Symbol | Toggle between most recent layouts
+ <kbd>LMB</kbd> | Tag Number | Send focus to that tag
+ <kbd>LMB</kbd> + <kbd>Win</kbd> | Tag Number | Send focus and focused window to that tag
+ <kbd>LMB</kbd> + <kbd>Win</kbd> | Window | Click and drag floating windows around
+ <kbd>LMB</kbd> + <kbd>Win</kbd> + <kbd>Control</kbd> | Window | Click and drag any non-floating window into floating
+ <kbd>MMB</kbd> | Window Title | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>MMB</kbd> | Layout Symbol | Spawn rofi based theme switcher (switches jeff_dwm's and rofi's theme)
+ <kbd>MMB</kbd> + <kbd>Win</kbd> | Window | Toggle window's floating state
+ <kbd>RMB</kbd> | Layout Symbol | Spawn rofi layout switcher
+ <kbd>RMB</kbd> | Tag Number | Focus that tag as well as your current tag (view both at the same time)
+ <kbd>RMB</kbd> + <kbd>Win</kbd> | Window | Click and drag floating window's edge to resize the window
 
 </div></p></details>
 
