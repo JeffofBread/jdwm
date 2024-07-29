@@ -210,14 +210,6 @@ jeff_dwm_man_page_install(){
     echo ""
 }
 
-dwm_man_page_install(){
-    echo -e "\n|-------------- dwm man --------------|\n"
-    echo -e "Original dwm manual being installed to $DWM_MAN_INSTALL_DIR/man1 from $JEFF_DWM_RESOURCES_DIR/dwm.1"
-    mkdir -p $DWM_MAN_INSTALL_DIR/man1
-    sudo /bin/sh -c "sed "s/VERSION/6.5/g" < $JEFF_DWM_RESOURCES_DIR/dwm.1 > $DWM_MAN_INSTALL_DIR/man1/dwm.1 && chmod 644 $DWM_MAN_INSTALL_DIR/man1/dwm.1"
-    echo ""
-}
-
 jeff_dwm_desktop_file_install(){
     echo -e "\n|--------- jeff_dwm .desktop ---------|\n"
     echo -e "jeff_dwm.desktop being installed to /usr/share/xsessions/"
@@ -309,8 +301,6 @@ print_help(){
     echo "                                 /jeff_dwm/rofi/scripts/"
     echo "   -bs, --dwmblocks-scripts      Installs all dwmblocks scripts"
     echo "                                 in /jeff_dwm/dwmblocks/scripts/"
-    echo "   -dm, --dwm-original-manual    Installs dwm-6.5's original"
-    echo "                                 manual, purely for reference"
     echo "   -jm, --jeff-dwm-manual        Installs jeff_dwm-$JEFF_DWM_VERSION's manual"
     echo "   -jc, --jeff-dwm-config-link   Installs a folder under .config for jeff_dwm"
     echo "                                 for helping finding your config files"
@@ -325,9 +315,8 @@ print_usage(){
     echo "Usage: install.sh [-v] [--version] [-u] [--usage] [-h] [--help] [-d]"
     echo "       [--desktop-file] [-b] [--binaries] [-ds] [--dwm-scripts] [-rc]"
     echo "       [--rofi-config] [-rt] [--rofi-themes] [-rs] [--rofi-scripts] [-bs]"
-    echo "       [--dwmblocks-scripts] [-dm] [--dwm-original-manual] [-jm]"
-    echo "       [--jeff-dwm-manual] [-jc] [--jeff-dwm-config-link] [-ja]"
-    echo "       [--jeff-dwm-aliases] [-jw] [--jeff-dwm-wallpapers]"
+    echo "       [--dwmblocks-scripts] [-jm] [--jeff-dwm-manual] [-jc] [--jeff-dwm-config-link]"
+    echo "       [-ja] [--jeff-dwm-aliases] [-jw] [--jeff-dwm-wallpapers]"
     echo ""   
 }
 
@@ -366,11 +355,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         -bs|--dwmblocks-scripts)  # Only installs dwmblocks scripts
             dwm_blocks_scripts_install
-            DEFAULT_INSTALL=0
-            shift
-            ;;
-        -dm|--dwm-original-manual)  # Only installs original dwm manual
-            dwm_man_page_install
             DEFAULT_INSTALL=0
             shift
             ;;
@@ -429,7 +413,6 @@ if [[ $DEFAULT_INSTALL -eq 1 ]]; then
     rofi_theme_install
     rofi_scripts_install
     dwm_blocks_scripts_install
-    dwm_man_page_install
     jeff_dwm_man_page_install
     jeff_dwm_desktop_file_install
     jeff_dwm_configs_link
