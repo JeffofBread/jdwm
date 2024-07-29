@@ -389,7 +389,7 @@ while [[ $# -gt 0 ]]; do
             DEFAULT_INSTALL=0
             shift
             ;;
-        -v|--version)  # Default case, installs all, same as no arguments
+        -v|--version)  # Prints jeff_dwm's version
             echo "jeff_dwm version: $JEFF_DWM_VERSION"
             exit 0
             ;;
