@@ -329,7 +329,7 @@ POSITIONAL_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -b|--binaries)  # Only install binaries, aka just runs make
+        -b|--binaries)  # Only install binaries, aka just runs make install
             jeff_dwm_binaries_install
             DEFAULT_INSTALL=0
             shift
