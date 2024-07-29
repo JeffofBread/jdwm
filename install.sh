@@ -59,14 +59,19 @@ jeff_dwm_binaries_install(){
     echo ""
 }
 
-jeff_dwm_configs_link(){
-    echo -e "\n|------- jeff_dwm config links -------|\n"
+jeff_dwm_check_config_dir(){
     if [ -d "$JEFF_DWM_USER_CONFIG_DIR" ]; then
         echo "$JEFF_DWM_USER_CONFIG_DIR already exists, skipping creation"  
     else
         echo "Creating jeff_dwm config directory in $JEFF_DWM_USER_CONFIG_DIR"
         mkdir -p $JEFF_DWM_USER_CONFIG_DIR
     fi
+}
+
+jeff_dwm_configs_link(){
+    echo -e "\n|------- jeff_dwm config links -------|\n"
+
+    jeff_dwm_check_config_dir
 
     check_and_link "$JEFF_DWM_CONFIG_DIR/autorun" "autorun"
     check_and_link "$JEFF_DWM_CONFIG_DIR/binds" "binds"
@@ -101,6 +106,8 @@ check_and_link(){
             fi
         fi
     fi
+
+    jeff_dwm_check_config_dir
 
     if [ -L "$JEFF_DWM_USER_CONFIG_DIR/$2.h" ]; then
         echo "Symbolic link to $1.h in $JEFF_DWM_USER_CONFIG_DIR/ already exists, skipping creation"
@@ -245,6 +252,9 @@ jeff_dwm_wallpapers_install(){
 
 jeff_dwm_aliases_install(){
     echo -e "\n|--------- jeff_dwm aliases ----------|\n"
+
+    jeff_dwm_check_config_dir
+
     if [ ! -f "$JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases" ]; then
         if [ ! -f "$JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases" ]; then
             echo -e "Error: $JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases does not exist, nothing to copy"
@@ -302,7 +312,7 @@ print_help(){
     echo "   -dm, --dwm-original-manual    Installs dwm-6.5's original"
     echo "                                 manual, purely for reference"
     echo "   -jm, --jeff-dwm-manual        Installs jeff_dwm-$JEFF_DWM_VERSION's manual"
-    echo "   -jc, --jeff-dwm-config-dir    Installs a folder under .config for jeff_dwm"
+    echo "   -jc, --jeff-dwm-config-link   Installs a folder under .config for jeff_dwm"
     echo "                                 for helping finding your config files"
     echo "   -jw, --jeff-dwm-wallpapers    Installs a folder under .config for jeff_dwm's"
     echo "                                 premade theme's wallpapers"
@@ -316,7 +326,7 @@ print_usage(){
     echo "       [--desktop-file] [-b] [--binaries] [-ds] [--dwm-scripts] [-rc]"
     echo "       [--rofi-config] [-rt] [--rofi-themes] [-rs] [--rofi-scripts] [-bs]"
     echo "       [--dwmblocks-scripts] [-dm] [--dwm-original-manual] [-jm]"
-    echo "       [--jeff-dwm-manual] [-jc] [--jeff-dwm-config-dir] [-ja]"
+    echo "       [--jeff-dwm-manual] [-jc] [--jeff-dwm-config-link] [-ja]"
     echo "       [--jeff-dwm-aliases] [-jw] [--jeff-dwm-wallpapers]"
     echo ""   
 }
@@ -369,7 +379,7 @@ while [[ $# -gt 0 ]]; do
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jc|--jeff-dwm-config-dir)  # Only installs config symlinks
+        -jc|--jeff-dwm-config-link)  # Only installs config symlinks
             jeff_dwm_configs_link
             DEFAULT_INSTALL=0
             shift
