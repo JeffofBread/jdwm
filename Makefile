@@ -73,6 +73,8 @@ ROFI_SCRIPTS_DIR = ${ROFI_DIR}/scripts
 ROFI_THEMES_DIR = ${ROFI_DIR}/themes
 
 # 0 = pretty, 1 = raw make output
+# To run from cli with VERBOSE of 1 just do this:
+# `make VERBOSE=1 command_to_run`
 VERBOSE := 0
 
 # Print format for prettier output
@@ -81,7 +83,7 @@ ifeq ($(VERBOSE), 0)
 	Q := @
 endif
 
-all: jeff_dwm-clean blocks-clean jeff_dwm dwm-msg dwmblocks
+all: jeff_dwm dwm-msg dwmblocks
 
 ${JEFF_DWM_BUILD_DIR}/%.o: ${JEFF_DWM_SRC_DIR}/%.c | ${JEFF_DWM_BUILD_DIR}
 	$(PRINTF) "Compile jeff_dwm source  (${CC}) " $@
@@ -140,13 +142,19 @@ dwmblocks: ${BLOCKS_OBJ} ${BLOCKS_BUILD_DIR}
 	$(PRINTF) "Linking dwmblocks source (${CC}) " ${JEFF_DWM_BUILD_DIR}/dwmblocks
 	$Q${CC} -o ${BLOCKS_BUILD_DIR}/$@ ${BLOCKS_OBJ} ${LDFLAGS}
 
-jeff_dwm-clean:
-	$(PRINTF) "Clean jeff_dwm build directory" $(JEFF_DWM_BUILD_DIR)
-	$Qrm -f ${JEFF_DWM_BUILD_DIR}/jeff_dwm ${JEFF_DWM_BUILD_DIR}/dwm-msg ${JEFF_DWM_OBJ}
+jeff_dwm_clean:
+	$(PRINTF) "Clean build dir of jeff_dwm   " $(JEFF_DWM_BUILD_DIR)
+	$Qrm -f ${JEFF_DWM_BUILD_DIR}/jeff_dwm ${JEFF_DWM_OBJ}
 
-blocks-clean:
-	$(PRINTF) "Clean blocks build directory  " $(BLOCKS_BUILD_DIR)
-	$Qrm -f ${BLOCKS_BUILD_DIR}/dwmblocks
+dwm-msg_clean:
+	$(PRINTF) "Clean build dir of dwm-msg    " $(JEFF_DWM_BUILD_DIR)
+	$Qrm -f ${JEFF_DWM_BUILD_DIR}/dwm-msg ${JEFF_DWM_BUILD_DIR}/dwm-msg.o
+
+blocks_clean:
+	$(PRINTF) "Clean build dir of dwmblocks  " $(BLOCKS_BUILD_DIR)
+	$Qrm -f ${BLOCKS_BUILD_DIR}/dwmblocks ${BLOCKS_OBJ}
+
+clean: jeff_dwm_clean msg_clean blocks_clean
 
 install: all
 
@@ -170,4 +178,4 @@ uninstall:
 	$(PRINTF) "Removed all jeff_dwm binary files " " jeff_dwm, dwm-msg, dwmblocks"
 	$Qrm -f ${DESTDIR}${PREFIX}/jeff_dwm ${DESTDIR}${PREFIX}/dwm-msg ${DESTDIR}${PREFIX}/dwmblocks
 
-.PHONY: all blocks-clean dwm-clean install uninstall
+.PHONY: all jeff_dwm_clean dwm-msg_clean blocks_clean clean install uninstall
