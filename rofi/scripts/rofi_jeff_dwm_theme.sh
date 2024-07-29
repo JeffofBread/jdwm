@@ -13,7 +13,7 @@ source $CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases
 
 
 # Array of theme filenames
-themefilenames=( $(cd $THEMES_DIR && ls *.h | grep -v ".def.h") )
+themefilenames=( $(ls $THEMES_DIR/*.h | grep -v ".def.h") )
 
 # Check for theme header files
 if [[ ! ${#themefilenames[@]} -gt 0 ]]; then
@@ -25,7 +25,7 @@ fi
 # defined on the first line of each file.
 themenames=()
 for (( i=0; i < ${#themefilenames[@]}; i++ )); do
-    tmp=$(sed '1q;d' $THEMES_DIR/${themefilenames[$i]})
+    tmp=$(sed '1q;d' ${themefilenames[$i]})
     themenames[$i]=${tmp:3}
 done
 
