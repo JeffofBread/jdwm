@@ -83,6 +83,8 @@ ifeq ($(VERBOSE), 0)
 	Q := @
 endif
 
+.DEFAULT_GOAL := all
+
 ${JEFF_DWM_BUILD_DIR}/%.o: ${JEFF_DWM_SRC_DIR}/%.c | ${JEFF_DWM_BUILD_DIR}
 	$(PRINTF) "Compile jeff_dwm source  (${CC}) " $@
 	$Q${CC} -c ${CFLAGS} $< -o $@
