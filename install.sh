@@ -23,7 +23,7 @@ ROFI_THEMES_INSTALL_DIR="$ROFI_CONFIG_INSTALL_DIR/themes"
 
 ########################################################
 
-JEFF_DWM_VERSION=$(jeff_dwm -v)
+JEFF_DWM_VERSION=$(grep Makefile -e "VERSION = " | cut -b 11-)
 
 JEFF_DWM_DIR="$PARENT_DIR/dwm"
 JEFF_DWM_CONFIG_DIR="$JEFF_DWM_DIR/config"
