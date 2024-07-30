@@ -103,17 +103,17 @@ Also, if anyone would like to add more package managers or distros to this list,
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in the bar)
 - [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments)
 - [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent, but designed with it in mind)
-- [grep](https://www.gnu.org/software/grep/manual/grep.html) && [sed](https://www.gnu.org/software/sed/manual/sed.html) (install and rofi scripts)
+- [grep](https://www.gnu.org/software/grep/manual/grep.html), [sed](https://www.gnu.org/software/sed/manual/sed.html), and [cut](https://www.gnu.org/software/coreutils/cut) (various scripts)
 
 <details><summary><b>Arch</b></summary>
 
 ```bash
-sudo pacman -S yajl imlib2 gcc rofi grep sed
+sudo pacman -S yajl imlib2 gcc rofi grep sed coreutils
 ```
 or
 
 ```bash
-yay -S yajl imlib2 gcc rofi grep sed
+yay -S yajl imlib2 gcc rofi grep sed coreutils
 ```
 
 </details>
