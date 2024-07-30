@@ -60,6 +60,11 @@ file_uninstaller(){
     done
 }
 
+jeff_dwm_aliases_uninstall(){
+    echo "Removing jeff_dwm's alias file: $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases"
+    sudo rm -f $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases
+}
+
 jeff_dwm_binaries_uninstall(){
     sudo make uninstall
 }
@@ -67,21 +72,6 @@ jeff_dwm_binaries_uninstall(){
 jeff_dwm_rm_config_dir(){
     echo "Removing $JEFF_DWM_CONFIG_DIR/"
     rm -rf $JEFF_DWM_CONFIG_DIR 
-}
-
-jeff_dwm_rm_pathing_symlinks(){
-    echo "Removing various pathing symlinks"
-    sudo rm -f $JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir $JEFF_DWM_THEMES_DIR/wallpapers $ROFI_DIR/roficonfigdir $SHARE_DIR/jeff_dwm
-
-}
-
-jeff_dwm_configs_unlink(){
-    echo "Removing symlinks to autorun.h, binds.h, config.h, keydefs.h, and blocks.h from $JEFF_DWM_USER_CONFIG_DIR"
-    rm -f $JEFF_DWM_USER_CONFIG_DIR/autorun.h $JEFF_DWM_USER_CONFIG_DIR/binds.h $JEFF_DWM_USER_CONFIG_DIR/config.h $JEFF_DWM_USER_CONFIG_DIR/keydefs.h $JEFF_DWM_USER_CONFIG_DIR/blocks.h
-}
-
-jeff_dwm_scripts_uninstall(){
-    file_uninstaller "sh" "$JEFF_DWM_SCRIPTS_DIR" "$BIN_INSTALL_DIR" "jeff_dwm script" "1"
 }
 
 jeff_dwm_desktop_file_uninstall(){
@@ -114,18 +104,28 @@ jeff_dwm_home_dir_uninstall(){
     fi
 }
 
-jeff_dwm_wallpapers_uninstall(){
-    echo "Removing jeff_dwm wallpapers directory: $JEFF_DWM_WALLPAPER_DIR"
-}
-
-jeff_dwm_aliases_uninstall(){
-    echo "Removing jeff_dwm's alias file: $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases"
-    sudo rm -f $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases
-}
-
 jeff_dwm_man_page_uninstall(){
     echo "Removing jeff_dwm's manual: $DWM_MAN_INSTALL_DIR/man1/jeff_dwm.1"
     sudo rm -f $DWM_MAN_INSTALL_DIR/man1/jeff_dwm.1
+}
+
+jeff_dwm_rm_pathing_symlinks(){
+    echo "Removing various pathing symlinks"
+    sudo rm -f $JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir $JEFF_DWM_THEMES_DIR/wallpapers $ROFI_DIR/roficonfigdir $SHARE_DIR/jeff_dwm
+
+}
+
+jeff_dwm_scripts_uninstall(){
+    file_uninstaller "sh" "$JEFF_DWM_SCRIPTS_DIR" "$BIN_INSTALL_DIR" "jeff_dwm script" "1"
+}
+
+jeff_dwm_configs_unlink(){
+    echo "Removing symlinks to autorun.h, binds.h, config.h, keydefs.h, and blocks.h from $JEFF_DWM_USER_CONFIG_DIR"
+    rm -f $JEFF_DWM_USER_CONFIG_DIR/autorun.h $JEFF_DWM_USER_CONFIG_DIR/binds.h $JEFF_DWM_USER_CONFIG_DIR/config.h $JEFF_DWM_USER_CONFIG_DIR/keydefs.h $JEFF_DWM_USER_CONFIG_DIR/blocks.h
+}
+
+jeff_dwm_wallpapers_uninstall(){
+    echo "Removing jeff_dwm wallpapers directory: $JEFF_DWM_WALLPAPER_DIR"
 }
 
 dwmblocks_scripts_uninstall(){
@@ -137,12 +137,12 @@ rofi_config_uninstall(){
     rm -f $ROFI_CONFIG_INSTALL_DIR/config.rasi
 }
 
-rofi_theme_uninstall(){
-    file_uninstaller "rasi" "$ROFI_THEMES_DIR" "$ROFI_THEMES_INSTALL_DIR" "jeff_dwm rofi theme" "0"
-}
-
 rofi_scripts_uninstall(){
     file_uninstaller "sh" "$ROFI_SCRIPTS_DIR" "$BIN_INSTALL_DIR" "rofi script" "1"
+}
+
+rofi_theme_uninstall(){
+    file_uninstaller "rasi" "$ROFI_THEMES_DIR" "$ROFI_THEMES_INSTALL_DIR" "jeff_dwm rofi theme" "0"
 }
 
 print_help(){
