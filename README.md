@@ -33,20 +33,20 @@ Below are some examples of how these can be used and combined:
 <details><summary><b>Example: Only install jeff_dwm scripts</b></summary>
 
 ```bash
-./install -ds
+./install -js
 ```
 ```bash
-./install --dwm-scripts
+./install --jeff-dwm-scripts
 ```
 </details>
 
 <details><summary><b>Example: Only install jeff_dwm scripts, dwmblocks scripts, and rofi scripts</b></summary>
 
 ```bash
-./install -ds -bs -rs
+./install -js -bs -rs
 ```
 ```bash
-./install --dwm-scripts --dwmblocks-scripts --rofi-scripts
+./install --jeff-dwm-scripts --dwmblocks-scripts --rofi-scripts
 ```
 </details>
 
@@ -75,20 +75,20 @@ Below are some examples of how these can be used and combined:
 <details><summary><b>Example: Only uninstall jeff_dwm binaries (`jeff_dwm`, `dwm-msg`, and `dwmblocks`)</b></summary>
 
 ```bash
-./install -b
+./install -jb
 ```
 ```bash
-./install --binaries
+./install --jeff-dwm-binaries
 ```
 </details>
 
 <details><summary><b>Example: Only uninstall jeff_dwm aliases, manual, and desktop file</b></summary>
 
 ```bash
-./install -ja -jm -jd
+./install -ja -jd -jm
 ```
 ```bash
-./install --jeff-dwm-aliases --jeff-dwm-manual --jeff-desktop-file
+./install --jeff-dwm-aliases --jeff-desktop-file --jeff-dwm-manual
 ```
 </details>
 
