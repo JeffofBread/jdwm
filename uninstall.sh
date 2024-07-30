@@ -89,6 +89,31 @@ jeff_dwm_desktop_file_uninstall(){
     sudo rm -f /usr/share/xsessions/jeff_dwm.desktop
 }
 
+jeff_dwm_home_dir_uninstall(){
+    echo ""
+    echo "The only thing left now, to completely remove jeff_dwm, is to remove the"
+    echo "source directory you cloned jeff_dwm into, and which contains this script."
+    echo ""
+    response=n
+    read -p "Would you like this script to do it automatically? [y/N] " response
+    if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]] then
+        response=n
+        echo ""
+        read -p "Ok. To confirm, you would like to remove $PARENT_DIR/ and all its subdirectories? [y/N] " response
+        if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]] then
+            echo -e "\nOk, removing $PARENT_DIR/\nThank you for trying jeff_dwm.\n"
+            rm -rf $PARENT_DIR
+            exit 0
+        else
+            echo -e "\nOk, exiting script. Thank you for trying jeff_dwm.\n"
+            exit 0
+        fi
+    else
+        echo -e "\nOk, exiting script. Thank you for trying jeff_dwm.\n"
+        exit 0
+    fi
+}
+
 jeff_dwm_wallpapers_uninstall(){
     echo "Removing jeff_dwm wallpapers directory: $JEFF_DWM_WALLPAPER_DIR"
 }
@@ -235,6 +260,11 @@ while [[ $# -gt 0 ]]; do
             DEFAULT_UNINSTALL=0
             shift
             ;;
+        -jh|--jeff-dwm-home-dir)  # Removes jeff_dwm home/source directory
+            jeff_dwm_home_dir_uninstall
+            DEFAULT_UNINSTALL=0
+            shift
+            ;;
         -jm|--jeff-dwm-manual)  # Only removes jeff_dwm manual
             jeff_dwm_man_page_uninstall
             DEFAULT_UNINSTALL=0
@@ -306,7 +336,6 @@ done
 if [[ $DEFAULT_UNINSTALL -eq 1 ]]; then
     jeff_dwm_binaries_uninstall
     jeff_dwm_rm_config_dir
-    jeff_dwm_rm_pathing_symlinks
     jeff_dwm_scripts_uninstall
     jeff_dwm_desktop_file_uninstall
     jeff_dwm_man_page_uninstall
@@ -314,6 +343,7 @@ if [[ $DEFAULT_UNINSTALL -eq 1 ]]; then
     rofi_config_uninstall
     rofi_theme_uninstall
     rofi_scripts_uninstall
+    echo "Removing /usr/share/jeff_dwm symlink"
+    rm -f $SHARE_DIR/jeff_dwm
+    jeff_dwm_home_dir_uninstall
 fi
-
-echo ""
