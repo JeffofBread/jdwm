@@ -5,19 +5,92 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
 <img src="https://github.com/JeffofBread/jeff_dwm/blob/screenshots/jeff_dwm_storm.png"> 
 <img src="https://github.com/JeffofBread/jeff_dwm/blob/screenshots/jeff_dwm_lush.png">
 
-## Installation
+## Install
 
 **Notes before you install:**
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during installation.
- - For a more custom install process, check install flags (run `./install.sh -h` for more info) or edit paths in `install.sh`
+ - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified at the start of the script.
  - To edit things like your terminal alias before installation, edit `/jeff_dwm/dwm/resources/jeff_dwm.aliases`. This can also be done after installation by going to `~/.config/jeff_dwm/jeff_dwm.aliases`
- - By default on install, `install.sh` will clone [jeff_dwm' wallpapers branch](https://github.com/JeffofBread/jeff_dwm/tree/wallpapers) into `~/.config/jeff_dwm/wallpapers/`. These wallpapers are used by the themes in `jeff_dwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`jeff_dwm/dwm/themes/`).
+ - By default on install, `install.sh` will clone [jeff_dwm' wallpapers branch](https://github.com/JeffofBread/jeff_dwm/tree/wallpapers) into `~/.config/jeff_dwm/wallpapers/`. These wallpapers are used by the themes in `/jeff_dwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`/jeff_dwm/dwm/themes/`).
 
 ```bash
 git clone https://github.com/JeffofBread/jeff_dwm.git
 cd jeff_dwm
 ./install.sh
 ```
+
+You can also customize your install with installer flags. To see a list of all flags and their purpose, run:
+
+```bash
+./install.sh -h
+```
+```bash
+./install.sh --help
+```
+
+Below are some examples of how these can be used and combined:
+
+<details><summary><b>Example: Only install jeff_dwm scripts</b></summary>
+
+```bash
+./install -ds
+```
+```bash
+./install --dwm-scripts
+```
+</details>
+
+<details><summary><b>Example: Only install jeff_dwm scripts, dwmblocks scripts, and rofi scripts</b></summary>
+
+```bash
+./install -ds -bs -rs
+```
+```bash
+./install --dwm-scripts --dwmblocks-scripts --rofi-scripts
+```
+</details>
+
+## Uninstall
+
+**Notes before you uninstall:**
+ Please make sure you know what is being removed by the script and dont accidentally remove something you intended to keep. The script (by default) will remove all of the what is listed below, but that can be adjuste with flag arguments ().
+ - jeff_dwm binaries (`jeff_dwm`, `dwm-msg`, and `dwmblocks`) from `/usr/local/bin/`
+ - All scripts (with the `.sh` extension) present in `/jeff_dwm/dwm/scripts/`, `/jeff_dwm/dwmblocks/scripts/`, and `/jeff_dwm/rofi/scripts/`, from `/usr/local/bin/`
+ - Any and all files present in `~/.config/jeff_dwm/`
+ - Pathing symlinks (`/usr/local/share/jeff_dwm`, `/jeff_dwm/dwm/config/jeffdwmconfigdir`, `/jeff_dwm/rofi/roficonfigdir`, and `/jeff_dwm/dwm/themes/wallpapers`)
+ - jeff_dwm manual (`/usr/local/share/man/man1/jeff_dwm.1`) and desktop file (`/usr/share/xsessions/jeff_dwm.desktop`)
+ - rofi config (`~/.config/rofi/config.rasi`') and all themes (with `.rasi` extension) present in `/jeff_dwm/rofi/themes/` from `~/.config/rofi/themes/`
+
+You can also customize your uninstall with uninstaller flags. To see a list of all flags and their purpose, run:
+
+```bash
+./uninstall.sh -h
+```
+```bash
+./uninstall.sh --help
+```
+
+Below are some examples of how these can be used and combined:
+
+<details><summary><b>Example: Only uninstall jeff_dwm binaries (`jeff_dwm`, `dwm-msg`, and `dwmblocks`)</b></summary>
+
+```bash
+./install -b
+```
+```bash
+./install --binaries
+```
+</details>
+
+<details><summary><b>Example: Only uninstall jeff_dwm aliases, manual, and desktop file</b></summary>
+
+```bash
+./install -ja -jm -jd
+```
+```bash
+./install --jeff-dwm-aliases --jeff-dwm-manual --jeff-desktop-file
+```
+</details>
 
 ## Dependencies
 
@@ -79,7 +152,7 @@ yay -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight betterlocks
 
 ## Usage
 
-This is not yet a comprehensive list, just a good place to start. All of the keybinds and button binds are found and edited in `binds.h`. 
+This is not yet a comprehensive list, just a good place to start. All of the keybinds and button binds are found and edited in `/jeff_dwm/dwm/config/binds.h`. 
 
 <details><summary><b>Keybind Quickstart</b></summary><p><div>
 
