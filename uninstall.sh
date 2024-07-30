@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Check script is run as non root to get correct paths
 if ! [ $(id -u) != 0 ]; then
