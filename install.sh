@@ -33,9 +33,6 @@ JEFF_DWM_THEMES_DIR="$JEFF_DWM_DIR/themes"
 JEFF_DWM_SCRIPTS_DIR="$JEFF_DWM_DIR/scripts"
 JEFF_DWM_RESOURCES_DIR="$JEFF_DWM_DIR/resources"
 
-JEFF_DWM_SETUPFILE="$JEFF_DWM_SCRIPTS_DIR/jeff_dwm_setup.sh"
-JEFF_DWM_EXAMPLE_SETUPFILE="$JEFF_DWM_SCRIPTS_DIR/jeff_dwm_setup.example"
-
 ########################################################
 
 DWM_BLOCKS_DIR="$PARENT_DIR/dwmblocks"
@@ -79,6 +76,22 @@ check_and_link(){
         echo "Symbolic link to $1.h being created in $JEFF_DWM_USER_CONFIG_DIR/"
         ln -s $1.h $JEFF_DWM_USER_CONFIG_DIR/$2.h &>/dev/null
     fi
+}
+
+copyexamplescripts(){
+    examplefiles=( $(ls $1 | grep ".example") )
+    if [[ ! ${#examplefiles[@]} -gt 0 ]]; then
+        echo -e "No .example files found in $1, skipping copy"
+    fi
+    for (( i=0; i < ${#examplefiles[@]}; i++ )); do
+        shellfile="${examplefiles[$i]::-7}sh"
+        if [[ ! -f "$1/$shellfile" ]]; then
+            echo "Copying ${examplefiles[$i]} to $shellfile in $1"
+            cp $1/${examplefiles[$i]} $1/$shellfile
+        else
+            echo "$shellfile already exists in $1, not copying .example file"
+        fi
+    done
 }
 
 jeff_dwm_aliases_install(){
@@ -173,14 +186,7 @@ jeff_dwm_scripts_install(){
         echo "Creating symbolic link to $PARENT_DIR in $SHARE_DIR called /jeff_dwm"
         sudo /bin/sh -c "ln -s $PARENT_DIR $SHARE_DIR/jeff_dwm  &>/dev/null"
     fi
-    if [ ! -f $JEFF_DWM_SETUPFILE ]; then
-        if [ ! -f $JEFF_DWM_EXAMPLE_SETUPFILE ]; then
-            echo -e "Error: $JEFF_DWM_EXAMPLE_SETUPFILE does not exist, no default config to copy.\n"
-        else
-            echo -e "\nCopying default setup config."
-            cp $JEFF_DWM_EXAMPLE_SETUPFILE $JEFF_DWM_SETUPFILE
-        fi
-    fi
+    copyexamplescripts "$JEFF_DWM_SCRIPTS_DIR"
     echo -e "jeff_dwm scripts are being installed to $BIN_INSTALL_DIR from $JEFF_DWM_SCRIPTS_DIR"
     echo -e "jeff_dwm scripts being installed:\n"
     cd $JEFF_DWM_SCRIPTS_DIR 
@@ -216,6 +222,7 @@ jeff_dwm_wallpapers_install(){
 
 dwm_blocks_scripts_install(){
     echo -e "\n|--------- dwmblocks scripts ---------|\n"
+    copyexamplescripts "$DWM_BLOCKS_SCRIPTS_DIR "
     echo -e "\ndwmblocks scripts are being installed to $BIN_INSTALL_DIR from $DWM_BLOCKS_SCRIPTS_DIR"
     echo -e "dwmblocks scripts being installed:\n"
     cd $DWM_BLOCKS_SCRIPTS_DIR 
@@ -247,6 +254,7 @@ rofi_config_install(){
 
 rofi_scripts_install(){
     echo -e "\n|-------- Rofi scripts install -------|\n"
+    copyexamplescripts "$ROFI_SCRIPTS_DIR"
     echo -e "Rofi scripts are being installed to $BIN_INSTALL_DIR from $ROFI_SCRIPTS_DIR:"
     echo -e "Rofi scripts being installed:\n"
     cd $ROFI_SCRIPTS_DIR 

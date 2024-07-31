@@ -28,4 +28,4 @@ dwm/config/autorun.h
 dwm/config/config.h
 dwm/config/binds.h
 dwm/config/keydefs.h
-dwm/scripts/jeff_dwm_setup.sh
+dwm/scripts/jeff_dwm_autostarts.sh
