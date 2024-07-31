@@ -100,21 +100,23 @@ These are all programs scripts or jeff_dwm relies on (specified in `()`) in some
 Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
 
 - A terminal emulator of some kind (chosen in `/jeff_dwm/dwm/resources/jeff_dwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
+- A desktop notification handler of some kind (I recommend [dunst](https://github.com/dunst-project/dunst))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in the bar)
 - [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments)
+- [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in themes shipped in `/jeff_dwm/dwm/themes/`)
 - [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent, but designed with it in mind)
 - [grep](https://www.gnu.org/software/grep/manual/grep.html), [sed](https://www.gnu.org/software/sed/manual/sed.html), and [cut](https://www.gnu.org/software/coreutils/cut) (various scripts)
 
 <details><summary><b>Arch</b></summary>
 
 ```bash
-sudo pacman -S yajl imlib2 gcc rofi grep sed coreutils
+sudo pacman -S yajl imlib2 gcc feh rofi grep sed coreutils
 ```
 or
 
 ```bash
-yay -S yajl imlib2 gcc rofi grep sed coreutils
+yay -S yajl imlib2 gcc feh rofi grep sed coreutils
 ```
 
 </details>
@@ -129,7 +131,6 @@ Also, if anyone would like to add more package managers or distros to this list,
 - [jq](https://github.com/jqlang/jq) (rofi layout menu script)
 - [xrandr](https://www.x.org/wiki/Projects/XRandR/) (Monitor resolution, refresh rate, etc. Used in jeff_dwm_setup.sh)
 - [dunst](https://github.com/dunst-project/dunst) (Desktop Notifications)
-- [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in jeff_dwm_setup.sh)
 - [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl) (Toggle mute on mic/sink binds)
 - [playerctl](https://github.com/altdesktop/playerctl) (Media control binds)
 - [pamixer](https://github.com/cdemoulins/pamixer) (Volume binds)
@@ -141,13 +142,13 @@ Also, if anyone would like to add more package managers or distros to this list,
 
 (Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) because it's an AUR)
 ```bash
-sudo pacman -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight rofi-calc
+sudo pacman -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight rofi-calc
 ```
 
 or
 
 ```bash
-yay -S jq xorg-xrandr feh libpulse playerctl pamixer xorg-xbacklight betterlockscreen rofi-calc
+yay -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight betterlockscreen rofi-calc
 ```
 
 </details>
