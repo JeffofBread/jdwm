@@ -23,7 +23,7 @@
 window {
     location:       center;
     width:          480;
-    border-radius:  24px;
+    border-radius:  11px;
     
     background-color:   @darkblue;
 }
