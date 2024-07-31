@@ -11,6 +11,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during installation.
  - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified at the start of the script.
  - To edit things like your terminal alias before installation, edit `/jeff_dwm/dwm/resources/jeff_dwm.aliases`. This can also be done after installation by going to `~/.config/jeff_dwm/jeff_dwm.aliases`
+ - To edit what programs autostart with jeff_dwm copy `/jeff_dwm/dwm/scripts/jeff_dwm_autostarts.example` as `/jeff_dwm/dwm/scripts/jeff_dwm_autostarts.sh` and put whatever commands/programs you want started in there. It will be installed along with other scripts to `/usr/local/bin` and run at login.
  - By default on install, `install.sh` will clone [jeff_dwm' wallpapers branch](https://github.com/JeffofBread/jeff_dwm/tree/wallpapers) into `~/.config/jeff_dwm/wallpapers/`. These wallpapers are used by the themes in `/jeff_dwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`/jeff_dwm/dwm/themes/`).
 
 ```bash
@@ -127,6 +128,7 @@ Also, if anyone would like to add more package managers or distros to this list,
 - A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
 - [jq](https://github.com/jqlang/jq) (rofi layout menu script)
 - [xrandr](https://www.x.org/wiki/Projects/XRandR/) (Monitor resolution, refresh rate, etc. Used in jeff_dwm_setup.sh)
+- [dunst](https://github.com/dunst-project/dunst) (Desktop Notifications)
 - [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in jeff_dwm_setup.sh)
 - [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl) (Toggle mute on mic/sink binds)
 - [playerctl](https://github.com/altdesktop/playerctl) (Media control binds)
