@@ -95,7 +95,7 @@ Below are some examples of how these can be used and combined:
 
 ## Dependencies
 
-These are all programs scripts or jeff_dwm relies on (specified in `()`) in some way or another. To not have them would severely reduce the functionality or result in the whole thing being non-functional.
+These are all programs or libraries jeff_dwm relies on (specified in `()`) in some way or another. To not have them would severely reduce the functionality or result in the whole thing being non-functional.
 
 Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
 
@@ -128,7 +128,7 @@ These are all optional and easily changeable in their respective config files or
 Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
 
 - A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
-- [jq](https://github.com/jqlang/jq) (rofi layout menu script)
+- [jq](https://github.com/jqlang/jq) (For rofi layout menu script)
 - [xrandr](https://www.x.org/wiki/Projects/XRandR/) (Monitor resolution, refresh rate, etc)
 - [dunst](https://github.com/dunst-project/dunst) (Desktop Notifications)
 - [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl) (Toggle mute on mic/sink binds)
@@ -290,8 +290,8 @@ All the original .diff files are located in [jeff_dwm patches branch](https://gi
 
 ## Known Bugs
 
-- Steam toast notifications not floating and screwing up tiling.
-- There might be a conflict between dwm-ipc and pertag, where dwm-msg does not dump the correct values. I will look into it in the future. 
+- Steam (specifically toast notifications) causing tiling issues.
+- There might be a conflict between dwm-ipc and pertag, where dwm-msg does not always dump correct values. I will look into it in the future. 
 
 ## Future
 
