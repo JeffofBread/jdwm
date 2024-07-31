@@ -443,7 +443,7 @@ static int unmanaged = 0; /* whether the window manager should manage the new wi
 
 // Define complete rofi theme path
 // clang-format off
-#define ROFITHEMEDIR /usr/local/share/jeff_dwm/rofi/themes
+#define ROFITHEMEDIR /usr/local/share/jdwm/rofi/themes
 // clang-format on
 
 #define ROFITHEME ROFITHEMEPATH(ROFITHEMEDIR, ROFITHEMEFILE)
@@ -454,7 +454,7 @@ static int unmanaged = 0; /* whether the window manager should manage the new wi
 #include <autorun.h>
 
 // IPC
-static const char *ipcsockpath = "/tmp/jeff_dwm.sock";
+static const char *ipcsockpath = "/tmp/jdwm.sock";
 static IPCCommand ipccommands[] = { IPCCOMMAND(view, 1, { ARG_TYPE_UINT }),
 				    IPCCOMMAND(toggleview, 1, { ARG_TYPE_UINT }),
 				    IPCCOMMAND(tag, 1, { ARG_TYPE_UINT }),
@@ -3014,7 +3014,7 @@ void setup(void)
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32, PropModeReplace,
 			(unsigned char *)&wmcheckwin, 1);
 	XChangeProperty(dpy, wmcheckwin, netatom[NetWMName], utf8string, 8, PropModeReplace,
-			(unsigned char *)"jeff_dwm", 8);
+			(unsigned char *)"jdwm", 8);
 	XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32, PropModeReplace, (unsigned char *)&wmcheckwin,
 			1);
 	/* EWMH support per view */
@@ -3235,7 +3235,7 @@ void spawn(const Arg *arg)
 		sa.sa_handler = SIG_DFL;
 		sigaction(SIGCHLD, &sa, NULL);
 		execvp(((char **)arg->v)[0], (char **)arg->v);
-		die("jeff_dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
+		die("jdwm: execvp '%s' failed:", ((char **)arg->v)[0]);
 	}
 }
 
@@ -3573,7 +3573,7 @@ void updatebars(void)
 	XSetWindowAttributes wa = { .override_redirect = True,
 				    .background_pixmap = ParentRelative,
 				    .event_mask = ButtonPressMask | ExposureMask };
-	XClassHint ch = { "jeff_dwm", "jeff_dwm" };
+	XClassHint ch = { "jdwm", "jdwm" };
 	for (m = mons; m; m = m->next) {
 		if (m->barwin) continue;
 		w = m->ww - 2 * sp;
@@ -3826,7 +3826,7 @@ void updatesizehints(Client *c)
 
 void updatestatus(void)
 {
-	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)) && showstatus) strcpy(stext, "jeff_dwm-" VERSION);
+	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)) && showstatus) strcpy(stext, "jdwm-" VERSION);
 	drawbar(selmon);
 	updatesystray();
 }
@@ -3863,7 +3863,7 @@ void updatesystray(void)
 				  systray->win, 0, 0);
 			XSync(dpy, False);
 		} else {
-			fprintf(stderr, "jeff_dwm: unable to obtain system tray.\n");
+			fprintf(stderr, "jdwm: unable to obtain system tray.\n");
 			free(systray);
 			systray = NULL;
 			return;
@@ -4081,7 +4081,7 @@ int xerror(Display *dpy, XErrorEvent *ee)
 	    (ee->request_code == X_GrabKey && ee->error_code == BadAccess) ||
 	    (ee->request_code == X_CopyArea && ee->error_code == BadDrawable))
 		return 0;
-	fprintf(stderr, "jeff_dwm: fatal error: request code=%d, error code=%d\n", ee->request_code, ee->error_code);
+	fprintf(stderr, "jdwm: fatal error: request code=%d, error code=%d\n", ee->request_code, ee->error_code);
 	return xerrorxlib(dpy, ee); /* may call exit */
 }
 
@@ -4094,7 +4094,7 @@ int xerrordummy(Display *dpy, XErrorEvent *ee)
  * is already running. */
 int xerrorstart(Display *dpy, XErrorEvent *ee)
 {
-	die("jeff_dwm: another window manager is already running");
+	die("jdwm: another window manager is already running");
 	return -1;
 }
 
@@ -4108,10 +4108,10 @@ void zoom(const Arg *arg)
 }
 
 // GNU argp parser
-const char *argp_program_version = "jeff_dwm " VERSION;
-const char *argp_program_bug_address = "https://github.com/JeffofBread/jeff_dwm/issues";
+const char *argp_program_version = "jdwm " VERSION;
+const char *argp_program_bug_address = "https://github.com/JeffofBread/jdwm/issues";
 static char doc[] =
-	"A custom build of dwm made by JeffofBread. If you wish to know more, check out the github page at https://github.com/JeffofBread/jeff_dwm";
+	"A custom build of dwm made by JeffofBread. If you wish to know more, check out the github page at https://github.com/JeffofBread/jdwm";
 static char args_doc[] = "";
 static struct argp_option options[] = {
 	{ "first-run", 'F', 0, 0, "Execute dwm along with all programs defined in the array startonce in autostart.h" },
@@ -4173,7 +4173,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale()) fputs("warning: no locale support\n", stderr);
-	if (!(dpy = XOpenDisplay(NULL))) die("jeff_dwm: cannot open display");
+	if (!(dpy = XOpenDisplay(NULL))) die("jdwm: cannot open display");
 	checkotherwm();
 	setup();
 #ifdef __OpenBSD__
@@ -4181,7 +4181,7 @@ int main(int argc, char *argv[])
 #endif /* __OpenBSD__ */
 	scan();
 	run();
-	char *dwm_empty_start[] = { "jeff_dwm", NULL };
+	char *dwm_empty_start[] = { "jdwm", NULL };
 	if (restart) execvp(argv[0], dwm_empty_start);
 	cleanup();
 	XCloseDisplay(dpy);

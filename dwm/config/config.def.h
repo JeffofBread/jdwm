@@ -14,10 +14,10 @@
 #define ICONSIZE                                  20            /* window icon size */
 #define ICONSPACING                               5             /* space between icon and title */
 
-// jeff_dwm theme. Please don't remove the comment
+// jdwm theme. Please don't remove the comment
 // inline with the include, as it's how the rofi
 // theme switcher finds the include. 
-#include <storm_theme.h> // JEFF_DWM_THEME
+#include <storm_theme.h> // JDWM_THEME
 
 // Border
 static const unsigned int borderpx              = 0;            /* border pixel of windows */
@@ -66,7 +66,7 @@ static const XPoint stickyiconbb        = {4,8}; /* defines the bottom right cor
 // Tag Characters
 static const char *tags[]               = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-// Please make sure this matches the name of your terminal defined as SCRATCHPAD in jeff_dwm.aliases.
+// Please make sure this matches the name of your terminal defined as SCRATCHPAD in jdwm.aliases.
 // Example, if you use Kitty or Alacritty, to spawn a scratchpad use the `-T` flag followed by `Scratchpad`.
 // AKA `kitty -T Scratchpad` or `alacritty -T Scratchpad`
 static const char  scratchpadname[]     =   "Scratchpad";
@@ -90,7 +90,7 @@ static const Rule rules[] = {
 //
 // ignoretransient (Bool): Again, self explanitory, for ignoring any window that should be transient, sometimes usefull for Unreal Engine or Jetbrains tools
 //
-// unmanaged (Int): Determines if jeff_dwm should manage the window or not
+// unmanaged (Int): Determines if jdwm should manage the window or not
 //   0 - The window is managed by the window manager
 //   1 - The window will be placed above all other windows
 //   2 - The window will be placed below all other windows

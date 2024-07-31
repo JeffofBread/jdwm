@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=jeff_dwm
+Name=jdwm
 Comment=Jeff's dynamic window manager (dwm) build
-Exec=jeff_dwm --first-run
+Exec=jdwm --first-run
 Type=Application
 Version=

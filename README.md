@@ -1,22 +1,22 @@
-# jeff_dwm
+# jdwm
 
 A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and **will** change.
 
-<img src="https://github.com/JeffofBread/jeff_dwm/blob/screenshots/jeff_dwm_storm.png"> 
-<img src="https://github.com/JeffofBread/jeff_dwm/blob/screenshots/jeff_dwm_lush.png">
+<img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_storm.png"> 
+<img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_lush.png">
 
 ## Install
 
 **Notes before you install:**
  - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during installation.
  - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified at the start of the script.
- - To edit things like your terminal alias before installation, edit `/jeff_dwm/dwm/resources/jeff_dwm.aliases`. This can also be done after installation by going to `~/.config/jeff_dwm/jeff_dwm.aliases`
- - To edit what programs autostart with jeff_dwm copy `/jeff_dwm/dwm/scripts/jeff_dwm_autostarts.example` as `/jeff_dwm/dwm/scripts/jeff_dwm_autostarts.sh` and put whatever commands/programs you want started in there. It will be installed along with other scripts to `/usr/local/bin` and run at login.
- - By default on install, `install.sh` will clone [jeff_dwm' wallpapers branch](https://github.com/JeffofBread/jeff_dwm/tree/wallpapers) into `~/.config/jeff_dwm/wallpapers/`. These wallpapers are used by the themes in `/jeff_dwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jeff_dwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`/jeff_dwm/dwm/themes/`).
+ - To edit things like your terminal alias before installation, edit `/jdwm/dwm/resources/jdwm.aliases`. This can also be done after installation by going to `~/.config/jdwm/jdwm.aliases`
+ - To edit what programs autostart with jdwm copy `/jdwm/dwm/scripts/jdwm_autostarts.example` as `/jdwm/dwm/scripts/jdwm_autostarts.sh` and put whatever commands/programs you want started in there. It will be installed along with other scripts to `/usr/local/bin` and run at login.
+ - By default on install, `install.sh` will clone [jdwm' wallpapers branch](https://github.com/JeffofBread/jdwm/tree/wallpapers) into `~/.config/jdwm/wallpapers/`. These wallpapers are used by the themes in `/jdwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jdwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`/jdwm/dwm/themes/`).
 
 ```bash
-git clone https://github.com/JeffofBread/jeff_dwm.git
-cd jeff_dwm
+git clone https://github.com/JeffofBread/jdwm.git
+cd jdwm
 ./install.sh
 ```
 
@@ -31,23 +31,23 @@ You can also customize your install with installer flags. To see a list of all f
 
 Below are some examples of how these can be used and combined:
 
-<details><summary><b>Example: Only install jeff_dwm scripts</b></summary>
+<details><summary><b>Example: Only install jdwm scripts</b></summary>
 
 ```bash
 ./install -js
 ```
 ```bash
-./install --jeff-dwm-scripts
+./install --jdwm-scripts
 ```
 </details>
 
-<details><summary><b>Example: Only install jeff_dwm scripts, dwmblocks scripts, and rofi scripts</b></summary>
+<details><summary><b>Example: Only install jdwm scripts, dwmblocks scripts, and rofi scripts</b></summary>
 
 ```bash
 ./install -js -bs -rs
 ```
 ```bash
-./install --jeff-dwm-scripts --dwmblocks-scripts --rofi-scripts
+./install --jdwm-scripts --dwmblocks-scripts --rofi-scripts
 ```
 </details>
 
@@ -55,12 +55,12 @@ Below are some examples of how these can be used and combined:
 
 **Notes before you uninstall:**
  Please make sure you know what is being removed by the script and dont accidentally remove something you intended to keep. The script (by default) will remove all of the what is listed below, but that can be adjuste with flag arguments ().
- - jeff_dwm binaries (`jeff_dwm`, `dwm-msg`, and `dwmblocks`) from `/usr/local/bin/`
- - All scripts (with the `.sh` extension) present in `/jeff_dwm/dwm/scripts/`, `/jeff_dwm/dwmblocks/scripts/`, and `/jeff_dwm/rofi/scripts/`, from `/usr/local/bin/`
- - Any and all files present in `~/.config/jeff_dwm/`
- - Pathing symlinks (`/usr/local/share/jeff_dwm`, `/jeff_dwm/dwm/config/jeffdwmconfigdir`, `/jeff_dwm/rofi/roficonfigdir`, and `/jeff_dwm/dwm/themes/wallpapers`)
- - jeff_dwm manual (`/usr/local/share/man/man1/jeff_dwm.1`) and desktop file (`/usr/share/xsessions/jeff_dwm.desktop`)
- - rofi config (`~/.config/rofi/config.rasi`') and all themes (with `.rasi` extension) present in `/jeff_dwm/rofi/themes/` from `~/.config/rofi/themes/`
+ - jdwm binaries (`jdwm`, `dwm-msg`, and `dwmblocks`) from `/usr/local/bin/`
+ - All scripts (with the `.sh` extension) present in `/jdwm/dwm/scripts/`, `/jdwm/dwmblocks/scripts/`, and `/jdwm/rofi/scripts/`, from `/usr/local/bin/`
+ - Any and all files present in `~/.config/jdwm/`
+ - Pathing symlinks (`/usr/local/share/jdwm`, `/jdwm/dwm/config/jdwmconfigdir`, `/jdwm/rofi/roficonfigdir`, and `/jdwm/dwm/themes/wallpapers`)
+ - jdwm manual (`/usr/local/share/man/man1/jdwm.1`) and desktop file (`/usr/share/xsessions/jdwm.desktop`)
+ - rofi config (`~/.config/rofi/config.rasi`') and all themes (with `.rasi` extension) present in `/jdwm/rofi/themes/` from `~/.config/rofi/themes/`
 
 You can also customize your uninstall with uninstaller flags. To see a list of all flags and their purpose, run:
 
@@ -73,38 +73,38 @@ You can also customize your uninstall with uninstaller flags. To see a list of a
 
 Below are some examples of how these can be used and combined:
 
-<details><summary><b>Example: Only uninstall jeff_dwm binaries (`jeff_dwm`, `dwm-msg`, and `dwmblocks`)</b></summary>
+<details><summary><b>Example: Only uninstall jdwm binaries (`jdwm`, `dwm-msg`, and `dwmblocks`)</b></summary>
 
 ```bash
 ./install -jb
 ```
 ```bash
-./install --jeff-dwm-binaries
+./install --jdwm-binaries
 ```
 </details>
 
-<details><summary><b>Example: Only uninstall jeff_dwm aliases, manual, and desktop file</b></summary>
+<details><summary><b>Example: Only uninstall jdwm aliases, manual, and desktop file</b></summary>
 
 ```bash
 ./install -ja -jd -jm
 ```
 ```bash
-./install --jeff-dwm-aliases --jeff-desktop-file --jeff-dwm-manual
+./install --jdwm-aliases --jdwm-desktop-file --jdwm-manual
 ```
 </details>
 
 ## Dependencies
 
-These are all programs or libraries jeff_dwm relies on (specified in `()`) in some way or another. To not have them would severely reduce the functionality or result in the whole thing being non-functional.
+These are all programs or libraries jdwm relies on (specified in `()`) in some way or another. To not have them would severely reduce the functionality or result in the whole thing being non-functional.
 
 Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
 
-- A terminal emulator of some kind (chosen in `/jeff_dwm/dwm/resources/jeff_dwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
+- A terminal emulator of some kind (chosen in `/jdwm/dwm/resources/jdwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
 - A desktop notification handler of some kind (I recommend [dunst](https://github.com/dunst-project/dunst))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in the bar)
 - [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments)
-- [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in themes shipped in `/jeff_dwm/dwm/themes/`)
+- [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in themes shipped in `/jdwm/dwm/themes/`)
 - [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent, but designed with it in mind)
 - [grep](https://www.gnu.org/software/grep/manual/grep.html), [sed](https://www.gnu.org/software/sed/manual/sed.html), and [cut](https://www.gnu.org/software/coreutils/cut) (various scripts)
 
@@ -155,7 +155,7 @@ yay -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight betterloc
 
 ## Usage
 
-This is not yet a comprehensive list, just a good place to start. All of the keybinds and button binds are found and edited in `/jeff_dwm/dwm/config/binds.h`. 
+This is not yet a comprehensive list, just a good place to start. All of the keybinds and button binds are found and edited in `/jdwm/dwm/config/binds.h`. 
 
 <details><summary><b>Keybind Quickstart</b></summary><p><div>
 
@@ -169,13 +169,13 @@ Keybind | Action
  <kbd>Win</kbd> + <kbd>D</kbd> | rofi application launcher
  <kbd>Win</kbd> + <kbd>D</kbd> | rofi power menu
  <kbd>Win</kbd> + <kbd>L</kbd> | rofi layout switcher
- <kbd>Win</kbd> + <kbd>H</kbd> | rofi based theme switcher (switches jeff_dwm's and rofi's theme)
+ <kbd>Win</kbd> + <kbd>H</kbd> | rofi based theme switcher (switches jdwm's and rofi's theme)
  <kbd>Alt</kbd> + <kbd>Tab</kbd> | rofi window switcher
- <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jeff_dwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
- <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jeff_dwm.aliases`, by default [VSCodium](https://vscodium.com/))
- <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jeff_dwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
- <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jdwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
+ <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jdwm.aliases`, by default [VSCodium](https://vscodium.com/))
+ <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jdwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
+ <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another `$SCRATCHPAD` 
  <kbd>Win</kbd> + <kbd>&leftarrow;</kbd> | Move focus to the next left monitor
  <kbd>Win</kbd> + <kbd>&rightarrow;</kbd> | Move focus to the next right monitor
@@ -187,8 +187,8 @@ Keybind | Action
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>&downarrow;</kbd> | Move focused window down a tag
  <kbd>Win</kbd> + <kbd>F</kbd> | Make the focused window fullscreen, taking up the whole monitor
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> | Fake Fullscreen, makes the focused window respect layout even when, for example, a YouTube video is fullscreen. 
- <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Reload jeff_dwm, same as sending `kill -HUP $(pidof jeff_dwm)`
- <kbd>Win</kbd> + <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Quit jeff_dwm, same as sending `kill -TERM $(pidof jeff_dwm)` 
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Reload jdwm, same as sending `kill -HUP $(pidof jdwm)`
+ <kbd>Win</kbd> + <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Quit jdwm, same as sending `kill -TERM $(pidof jdwm)` 
 
 </div></p></details>
 
@@ -212,13 +212,13 @@ Keybind | Action
 
 Keybind | Action
 ----------------- | ----------
- <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>MMB</kbd> on Window Title | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jeff_dwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
- <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jeff_dwm.aliases`, by default [VSCodium](https://vscodium.com/))
- <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jeff_dwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
- <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Spawn `$RECOMPILE_TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>MMB</kbd> on Window Title | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jdwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
+ <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jdwm.aliases`, by default [VSCodium](https://vscodium.com/))
+ <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jdwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
+ <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Spawn `$RECOMPILE_TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another `$SCRATCHPAD` 
 
 </div></p></details>
@@ -232,8 +232,8 @@ Button + Keybind | Bar Section | Action
  <kbd>LMB</kbd> + <kbd>Win</kbd> | Tag Number | Send focus and focused window to that tag
  <kbd>LMB</kbd> + <kbd>Win</kbd> | Window | Click and drag floating windows around
  <kbd>LMB</kbd> + <kbd>Win</kbd> + <kbd>Control</kbd> | Window | Click and drag any non-floating window into floating
- <kbd>MMB</kbd> | Window Title | Spawn `$TERM` (Found in `jeff_dwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>MMB</kbd> | Layout Symbol | Spawn rofi based theme switcher (switches jeff_dwm's and rofi's theme)
+ <kbd>MMB</kbd> | Window Title | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
+ <kbd>MMB</kbd> | Layout Symbol | Spawn rofi based theme switcher (switches jdwm's and rofi's theme)
  <kbd>MMB</kbd> + <kbd>Win</kbd> | Window | Toggle window's floating state
  <kbd>RMB</kbd> | Layout Symbol | Spawn rofi layout switcher
  <kbd>RMB</kbd> | Tag Number | Focus that tag as well as your current tag (view both at the same time)
@@ -243,10 +243,10 @@ Button + Keybind | Bar Section | Action
 
 ## Patches
 
-All the original .diff files are located in [jeff_dwm patches branch](https://github.com/JeffofBread/jeff_dwm/tree/patches). Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together, so the .diff files may not represent exactly what is present in jeff_dwm. These changes are to be expected when adding 36 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember exactly which, though I have tried my best to provide links below. Also, major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
+All the original .diff files are located in [jdwm patches branch](https://github.com/JeffofBread/jdwm/tree/patches). Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together, so the .diff files may not represent exactly what is present in jdwm. These changes are to be expected when adding 36 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember exactly which, though I have tried my best to provide links below. Also, major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
 
 
-<details><summary><b>Patches integrated in jeff_dwm</b></summary>
+<details><summary><b>Patches integrated in jdwm</b></summary>
 <br>
 
 - [alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)

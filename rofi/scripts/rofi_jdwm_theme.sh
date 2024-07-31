@@ -1,27 +1,27 @@
 #!/bin/sh
 
 # Variable to hold themes path
-JEFF_DWM_DIR=/usr/local/share/jeff_dwm
-DWM_DIR=$JEFF_DWM_DIR/dwm
+JDWM_DIR=/usr/local/share/jdwm
+DWM_DIR=$JDWM_DIR/dwm
 THEMES_DIR=$DWM_DIR/themes
 CONFIG_DIR=$DWM_DIR/config
 ALIAS_FOUND=0;
 
 
-if [ -f "$CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases" ]; then
+if [ -f "$CONFIG_DIR/jdwmconfigdir/jdwm.aliases" ]; then
     shopt -s expand_aliases
-    source $CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases
+    source $CONFIG_DIR/jdwmconfigdir/jdwm.aliases
     ALIAS_FOUND=1
 fi
 
 
-if [ ! -L "$CONFIG_DIR/jeffdwmconfigdir" ] && [ ! -d "$CONFIG_DIR/jeffdwmconfigdir" ]; then
-    echo "Creating symbolic link to to $HOME/.config/jeff_dwm in $$CONFIG_DIR called /jeffdwmconfigdir"
-    ln -s $HOME/.config/jeff_dwm $CONFIG_DIR/jeffdwmconfigdir
+if [ ! -L "$CONFIG_DIR/jdwmconfigdir" ] && [ ! -d "$CONFIG_DIR/jdwmconfigdir" ]; then
+    echo "Creating symbolic link to to $HOME/.config/jdwm in $$CONFIG_DIR called /jdwmconfigdir"
+    ln -s $HOME/.config/jdwm $CONFIG_DIR/jdwmconfigdir
 fi
 
 # Array of theme filenames
-themefilenames=( $(ls $THEMES_DIR/*.h | grep -v ".def.h") )
+themefilenames=( $(cd $THEMES_DIR && ls *.h | grep -v ".def.h") )
 
 # Check for theme header files
 if [[ ! ${#themefilenames[@]} -gt 0 ]]; then
@@ -33,7 +33,7 @@ fi
 # defined on the first line of each file.
 themenames=()
 for (( i=0; i < ${#themefilenames[@]}; i++ )); do
-    tmp=$(sed '1q;d' ${themefilenames[$i]})
+    tmp=$(sed '1q;d' $THEMES_DIR/${themefilenames[$i]})
     themenames[$i]=${tmp:3}
 done
 
@@ -64,24 +64,24 @@ if [ ! -f "$CONFIG_DIR/config.h" ]; then
     fi
 fi
 
-# Finds the line in config.h that has `JEFF_DWM_THEME`, which is inline with the include.
+# Finds the line in config.h that has `JDWM_THEME`, which is inline with the include.
 # Though this isn't the best way, it was far simpler than other solutions and not horribly inconvenient.
-sed -i "/JEFF_DWM_THEME/c\#include <${themefilenames[$choice]}> \\/\\/ JEFF_DWM_THEME" $CONFIG_DIR/config.h
+sed -i "/JDWM_THEME/c\#include <${themefilenames[$choice]}> \\/\\/ JDWM_THEME" $CONFIG_DIR/config.h
 
 # Check if user is root, if not ask for a password
 if [ $(id -u) != 0 ]; then
-    password=$( rofi -dmenu -password -p "Password: " -mesg "Needed for compiling and installing jeff_dwm as root." -theme $1 )
+    password=$( rofi -dmenu -password -p "Password: " -mesg "Needed for compiling and installing jdwm as root." -theme $1 )
 fi
 
-# If it compiled, restart jeff_dwm
-if cd /usr/local/share/jeff_dwm && echo $password | sudo -S make install; then
+# If it compiled, restart jdwm
+if cd /usr/local/share/jdwm && echo $password | sudo -S make install; then
     # Restart dwm
-    kill -HUP $(pidof jeff_dwm)
+    kill -HUP $(pidof jdwm)
 else
-    choice="$(echo -e "Yes\nNo" | rofi -dmenu -p "Error: " -mesg "Unable to compile jeff_dwm. Would you like to see the errors?" -theme $1)"
+    choice="$(echo -e "Yes\nNo" | rofi -dmenu -p "Error: " -mesg "Unable to compile jdwm. Would you like to see the errors?" -theme $1)"
     if [[ "$choice" == "Yes" ]]; then
         if [[ $ALIAS_FOUND -eq 0 ]]; then
-            echo -e "Ok" | rofi -dmenu -p "Error: " -mesg "$CONFIG_DIR/jeffdwmconfigdir/jeff_dwm.aliases could not be found, therefore RECOMPILE_TERM could not be opened to view make errors." -theme $1
+            echo -e "Ok" | rofi -dmenu -p "Error: " -mesg "$CONFIG_DIR/jdwmconfigdir/jdwm.aliases could not be found, therefore RECOMPILE_TERM could not be opened to view make errors." -theme $1
             exit 1
         else 
             RECOMPILE_TERM

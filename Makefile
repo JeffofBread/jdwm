@@ -1,4 +1,4 @@
-# jeff_dwm - jeff's dynamic window manager
+# jdwm - jeff's dynamic window manager
 # See LICENSE file for copyright and license details.
 
 #######################################################################################
@@ -7,7 +7,7 @@
 #  of dwmblocks-async, who's Makefile I shamelessly pulled and learned from.          #
 #######################################################################################
 
-# jeff_dwm version
+# jdwm version
 VERSION = 0.1
 
 # paths
@@ -32,7 +32,7 @@ YAJLLIBS = -lyajl
 YAJLINC = /usr/include/yajl
 
 # includes and libs
-INCS = -I${X11INC} -I${FREETYPEINC} -I${JEFF_DWM_SRC_DIR} -I${JEFF_DWM_CONFIG_DIR} -I${JEFF_DWM_THEMES_DIR} -I${JEFF_DWM_RESOURCES_DIR} -I${YAJLINC}
+INCS = -I${X11INC} -I${FREETYPEINC} -I${JDWM_SRC_DIR} -I${JDWM_CONFIG_DIR} -I${JDWM_THEMES_DIR} -I${JDWM_RESOURCES_DIR} -I${YAJLINC}
 LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2 ${YAJLLIBS}
 
 # flags
@@ -46,16 +46,16 @@ LDFLAGS  = ${LIBS}
 # compiler and linker
 CC = cc
 
-# jeff_dwm dirs
-JEFF_DWM_SRC_DIR = ${CURDIR}/dwm
-JEFF_DWM_BUILD_DIR = ${JEFF_DWM_SRC_DIR}/build
-JEFF_DWM_CONFIG_DIR = ${JEFF_DWM_SRC_DIR}/config
-JEFF_DWM_RESOURCES_DIR = ${JEFF_DWM_SRC_DIR}/resources
-JEFF_DWM_THEMES_DIR = ${JEFF_DWM_SRC_DIR}/themes
-JEFF_DWM_SCRIPTS_DIR = ${JEFF_DWM_SRC_DIR}/scripts
+# jdwm dirs
+JDWM_SRC_DIR = ${CURDIR}/dwm
+JDWM_BUILD_DIR = ${JDWM_SRC_DIR}/build
+JDWM_CONFIG_DIR = ${JDWM_SRC_DIR}/config
+JDWM_RESOURCES_DIR = ${JDWM_SRC_DIR}/resources
+JDWM_THEMES_DIR = ${JDWM_SRC_DIR}/themes
+JDWM_SCRIPTS_DIR = ${JDWM_SRC_DIR}/scripts
 
-JEFF_DWM_SRC := drw.c jeff_dwm.c util.c
-JEFF_DWM_OBJ := ${addprefix ${JEFF_DWM_BUILD_DIR}/,${JEFF_DWM_SRC:.c=.o}}
+JDWM_SRC := drw.c jdwm.c util.c
+JDWM_OBJ := ${addprefix ${JDWM_BUILD_DIR}/,${JDWM_SRC:.c=.o}}
 
 # dwmblocks dirs
 BLOCKS_SRC_DIR = ${CURDIR}/dwmblocks
@@ -85,34 +85,34 @@ endif
 
 .DEFAULT_GOAL := all
 
-${JEFF_DWM_BUILD_DIR}/%.o: ${JEFF_DWM_SRC_DIR}/%.c | ${JEFF_DWM_BUILD_DIR}
-	$(PRINTF) "Compile jeff_dwm source  (${CC}) " $@
+${JDWM_BUILD_DIR}/%.o: ${JDWM_SRC_DIR}/%.c | ${JDWM_BUILD_DIR}
+	$(PRINTF) "Compile jdwm source      (${CC}) " $@
 	$Q${CC} -c ${CFLAGS} $< -o $@
 
-${JEFF_DWM_BUILD_DIR}:
-	$(PRINTF) "Make jeff_dwm build directory " $@
-	$Qmkdir -p ${JEFF_DWM_BUILD_DIR}
+${JDWM_BUILD_DIR}:
+	$(PRINTF) "Make jdwm build directory " $@
+	$Qmkdir -p ${JDWM_BUILD_DIR}
 
-${JEFF_DWM_OBJ}: ${JEFF_DWM_CONFIG_DIR}/config.h ${JEFF_DWM_CONFIG_DIR}/binds.h ${JEFF_DWM_CONFIG_DIR}/autorun.h ${JEFF_DWM_CONFIG_DIR}/keydefs.h
+${JDWM_OBJ}: ${JDWM_CONFIG_DIR}/config.h ${JDWM_CONFIG_DIR}/binds.h ${JDWM_CONFIG_DIR}/autorun.h ${JDWM_CONFIG_DIR}/keydefs.h
 
-${JEFF_DWM_CONFIG_DIR}/config.h:
-	$(PRINTF) "Copy jeff_dwm default config  " "cp config.def.h -> config.h"
-	$Qcp ${JEFF_DWM_CONFIG_DIR}/config.def.h $@
+${JDWM_CONFIG_DIR}/config.h:
+	$(PRINTF) "Copy jdwm default config      " "cp config.def.h -> config.h"
+	$Qcp ${JDWM_CONFIG_DIR}/config.def.h $@
 	$Qchmod a=rw $@
 
-${JEFF_DWM_CONFIG_DIR}/binds.h:
-	$(PRINTF) "Copy jeff_dwm default binds   " "cp binds.def.h -> binds.h"
-	$Qcp ${JEFF_DWM_CONFIG_DIR}/binds.def.h $@
+${JDWM_CONFIG_DIR}/binds.h:
+	$(PRINTF) "Copy jdwm default binds       " "cp binds.def.h -> binds.h"
+	$Qcp ${JDWM_CONFIG_DIR}/binds.def.h $@
 	$Qchmod a=rw $@
 
-${JEFF_DWM_CONFIG_DIR}/autorun.h:
-	$(PRINTF) "Copy jeff_dwm default autorun " "cp autorun.def.h -> autorun.h"
-	$Qcp ${JEFF_DWM_CONFIG_DIR}/autorun.def.h $@
+${JDWM_CONFIG_DIR}/autorun.h:
+	$(PRINTF) "Copy jdwm default autorun     " "cp autorun.def.h -> autorun.h"
+	$Qcp ${JDWM_CONFIG_DIR}/autorun.def.h $@
 	$Qchmod a=rw $@
 
-${JEFF_DWM_CONFIG_DIR}/keydefs.h:
-	$(PRINTF) "Copy jeff_dwm default keydefs " "cp keydefs.def.h -> keydefs.h"
-	$Qcp ${JEFF_DWM_CONFIG_DIR}/keydefs.def.h $@
+${JDWM_CONFIG_DIR}/keydefs.h:
+	$(PRINTF) "Copy jdwm default keydefs     " "cp keydefs.def.h -> keydefs.h"
+	$Qcp ${JDWM_CONFIG_DIR}/keydefs.def.h $@
 	$Qchmod a=rw $@
 
 ${BLOCKS_BUILD_DIR}/%.o: ${BLOCKS_SRC_DIR}/%.c | ${BLOCKS_BUILD_DIR}
@@ -130,43 +130,43 @@ ${BLOCKS_CONFIG_DIR}/blocks.h:
 	$Qcp ${BLOCKS_CONFIG_DIR}/blocks.def.h $@
 	$Qchmod a=rw $@
 
-jeff_dwm: ${JEFF_DWM_OBJ} ${JEFF_DWM_BUILD_DIR}
-	$(PRINTF) "Linking jeff_dwm source  (${CC}) " ${JEFF_DWM_BUILD_DIR}/jeff_dwm
-	$Q${CC} -o ${JEFF_DWM_BUILD_DIR}/$@ ${JEFF_DWM_OBJ} ${LDFLAGS}
+jdwm: ${JDWM_OBJ} ${JDWM_BUILD_DIR}
+	$(PRINTF) "Linking jdwm source      (${CC}) " ${JDWM_BUILD_DIR}/jdwm
+	$Q${CC} -o ${JDWM_BUILD_DIR}/$@ ${JDWM_OBJ} ${LDFLAGS}
 
-dwm-msg: ${JEFF_DWM_BUILD_DIR}/dwm-msg.o
-	$(PRINTF) "Linking dwm-msg source   (${CC}) " ${JEFF_DWM_BUILD_DIR}/$@
-	$Q${CC} -o ${JEFF_DWM_BUILD_DIR}/$@ $< ${LDFLAGS}
+dwm-msg: ${JDWM_BUILD_DIR}/dwm-msg.o
+	$(PRINTF) "Linking dwm-msg source   (${CC}) " ${JDWM_BUILD_DIR}/$@
+	$Q${CC} -o ${JDWM_BUILD_DIR}/$@ $< ${LDFLAGS}
 
 dwmblocks: ${BLOCKS_OBJ} ${BLOCKS_BUILD_DIR}
-	$(PRINTF) "Linking dwmblocks source (${CC}) " ${JEFF_DWM_BUILD_DIR}/dwmblocks
+	$(PRINTF) "Linking dwmblocks source (${CC}) " ${JDWM_BUILD_DIR}/dwmblocks
 	$Q${CC} -o ${BLOCKS_BUILD_DIR}/$@ ${BLOCKS_OBJ} ${LDFLAGS}
 
-all: jeff_dwm dwm-msg dwmblocks
+all: jdwm dwm-msg dwmblocks
 
-jeff_dwm_clean:
-	$(PRINTF) "Clean build dir of jeff_dwm   " $(JEFF_DWM_BUILD_DIR)
-	$Qrm -f ${JEFF_DWM_BUILD_DIR}/jeff_dwm ${JEFF_DWM_OBJ}
+jdwm_clean:
+	$(PRINTF) "Clean build dir of jdwm       " $(JDWM_BUILD_DIR)
+	$Qrm -f ${JDWM_BUILD_DIR}/jdwm ${JDWM_OBJ}
 
 dwm-msg_clean:
-	$(PRINTF) "Clean build dir of dwm-msg    " $(JEFF_DWM_BUILD_DIR)
-	$Qrm -f ${JEFF_DWM_BUILD_DIR}/dwm-msg ${JEFF_DWM_BUILD_DIR}/dwm-msg.o
+	$(PRINTF) "Clean build dir of dwm-msg    " $(JDWM_BUILD_DIR)
+	$Qrm -f ${JDWM_BUILD_DIR}/dwm-msg ${JDWM_BUILD_DIR}/dwm-msg.o
 
 dwmblocks_clean:
 	$(PRINTF) "Clean build dir of dwmblocks  " $(BLOCKS_BUILD_DIR)
 	$Qrm -f ${BLOCKS_BUILD_DIR}/dwmblocks ${BLOCKS_OBJ}
 
-clean: jeff_dwm_clean dwm-msg_clean dwmblocks_clean
+clean: jdwm_clean dwm-msg_clean dwmblocks_clean
 
-jeff_dwm_install: jeff_dwm
-	$(PRINTF) "Install jeff_dwm binary       " ${DESTDIR}${PREFIX}/jeff_dwm
+jdwm_install: jdwm
+	$(PRINTF) "Install jdwm binary           " ${DESTDIR}${PREFIX}/jdwm
 	$Qmkdir -p ${DESTDIR}${PREFIX}
-	$Qcp -f ${JEFF_DWM_BUILD_DIR}/jeff_dwm ${DESTDIR}${PREFIX}
-	$Qchmod 755 ${DESTDIR}${PREFIX}/jeff_dwm
+	$Qcp -f ${JDWM_BUILD_DIR}/jdwm ${DESTDIR}${PREFIX}
+	$Qchmod 755 ${DESTDIR}${PREFIX}/jdwm
 
 dwm-msg_install: dwm-msg
 	$(PRINTF) "Install dwm-msg binary        " ${DESTDIR}${PREFIX}/dwm-msg
-	$Qcp -f ${JEFF_DWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}
+	$Qcp -f ${JDWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}
 	$Qchmod 755 ${DESTDIR}${PREFIX}/dwm-msg
 
 dwmblocks_install: dwmblocks
@@ -174,11 +174,11 @@ dwmblocks_install: dwmblocks
 	$Qcp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}
 	$Qchmod 755 ${DESTDIR}${PREFIX}/dwmblocks
 
-install: jeff_dwm_install dwm-msg_install dwmblocks_install
+install: jdwm_install dwm-msg_install dwmblocks_install
 
-jeff_dwm_uninstall:
-	$(PRINTF) "Removing jeff_dwm bin file    " ${DESTDIR}${PREFIX}/jeff_dwm
-	$Qrm -f ${DESTDIR}${PREFIX}/jeff_dwm
+jdwm_uninstall:
+	$(PRINTF) "Removing jdwm bin file    " ${DESTDIR}${PREFIX}/jdwm
+	$Qrm -f ${DESTDIR}${PREFIX}/jdwm
 
 dwm-msg_uninstall:
 	$(PRINTF) "Removing dwm-msg bin file     " ${DESTDIR}${PREFIX}/dwm-msg
@@ -188,6 +188,6 @@ dwmblocks_uninstall:
 	$(PRINTF) "Removing dwmblocks bin file   " ${DESTDIR}${PREFIX}/dwmblocks
 	$Qrm -f ${DESTDIR}${PREFIX}/dwmblocks
 
-uninstall: jeff_dwm_uninstall dwm-msg_uninstall dwmblocks_uninstall
+uninstall: jdwm_uninstall dwm-msg_uninstall dwmblocks_uninstall
 
-.PHONY: all jeff_dwm_clean dwm-msg_clean blocks_clean clean jeff_dwm_install dwm-msg_install dwmblocks_install install jeff_dwm_uninstall dwm-msg_uninstall dwmblocks_uninstall uninstall
+.PHONY: all jdwm_clean dwm-msg_clean blocks_clean clean jdwm_install dwm-msg_install dwmblocks_install install jdwm_uninstall dwm-msg_uninstall dwmblocks_uninstall uninstall

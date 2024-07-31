@@ -1,16 +1,16 @@
-.TH JEFF_DWM 1 jeff_dwm\-VERSION
+.TH JDWM 1 jdwm\-VERSION
 .SH NAME
-jeff_dwm \- jeff's dynamic window manager
+jdwm \- jeff's dynamic window manager
 .SH SYNOPSIS
-.B jeff_dwm
+.B jdwm
 .RB [-Fv?V] [--first-run] [--simple-version] [--help] [--usage] [--version] 
 .SH DESCRIPTION
-dwm is a dynamic window manager for X. jeff_dwm is a custom build of dwm made
-by JeffofBread. To learn more about jeff_dwm go to https://github.com/JeffofBread/jeff_dwm/.
-To learn more about the original window manager jeff_dwm is based off, go to
+dwm is a dynamic window manager for X. jdwm is a custom build of dwm made
+by JeffofBread. To learn more about jdwm go to https://github.com/JeffofBread/jdwm/.
+To learn more about the original window manager jdwm is based off, go to
 https://dwm.suckless.org/.
 .P
-There are 14 different methods for controlling the layout of windows by default in jeff_dwm,
+There are 14 different methods for controlling the layout of windows by default in jdwm,
 tile being the default. It is denoted by the []= symbol on the left side of the bar. These
 various layouts control how windows are moved and sized as more windows are added or
 removed from the desktop. Each desktop and tag can have its own layout controlling only
@@ -29,7 +29,7 @@ underline under the tag icon.
 .SH OPTIONS
 .TP
 .B \-F --first-run
-Tells jeff_dwm to execute itself along with all programs defined in the array
+Tells jdwm to execute itself along with all programs defined in the array
 startonce in autostart.h
 .TP
 .B \-s --simple-execute
@@ -45,10 +45,10 @@ Gives a more complex version output
 Prints a simple help message, very similar to this options section
 .TP
 .B \--usage
-Gives a small message to provide context on how to use jeff_dwm cli arguments
+Gives a small message to provide context on how to use jdwm cli arguments
 .SH Bindings
 There are simply too many keybinds and mousebinds to list them all here, but I will provide the
-most vital ones. To find the rest, check binds.h in your jeff_dwm folder under /dwm/config.
+most vital ones. To find the rest, check binds.h in your jdwm folder under /dwm/config.
 .TP
 .B Super + Enter
 Spawn terminal
@@ -78,16 +78,16 @@ Spawn rofi launcher
 Spawn recompile script
 .TP
 .B Super + Shift + Q
-Restart jeff_dwm
+Restart jdwm
 .TP
 .B Super + CTRL + Shift + Q
-Exit jeff_dwm
+Exit jdwm
 .TP
 .B Super + P
 Run rofi power menu script, where you can choose to either shut down, restart, suspend, hibernate, log out, or lock the screen.
 .SH CUSTOMIZATION
-jeff_dwm is customized by editing autorun.h, binds.h, config.h, script files, and misc configs.
-To apply these changes, either recompile jeff_dwm to apply any .h file changes or run ./install.sh again
+jdwm is customized by editing autorun.h, binds.h, config.h, script files, and misc configs.
+To apply these changes, either recompile jdwm to apply any .h file changes or run ./install.sh again
 to apply all changes.
 .SH SIGNALS
 .TP
@@ -97,7 +97,7 @@ Restart the dwm process.
 .B SIGTERM - 15
 Cleanly terminate the dwm process.
 .SH IPC 
-jeff_dwm has an ipc system through dwm's ipc patch, with some minor tweaks. If you want to know more,
+jdwm has an ipc system through dwm's ipc patch, with some minor tweaks. If you want to know more,
 either check out dwm ipc's git page 
 .B (https://github.com/mihirlad55/dwm-ipc)
 or run
@@ -107,4 +107,4 @@ Some windows do not like to render properly while floating. Either unfloating th
 resizing the window should cause it to render properly. Other issues may stem from file names
 or paths being incorrect. Be careful with config files and script names and extensions. 
 .SH BUGS
-Report all bugs to https://github.com/JeffofBread/jeff_dwm/issues.
+Report all bugs to https://github.com/JeffofBread/jdwm/issues.

@@ -5,7 +5,7 @@
 #
 ## Rofi   : Power Menu
 #
-## Heavily modified for use in jeff_dwm
+## Heavily modified for use in jdwm
 
 
 # CMDs
@@ -75,7 +75,7 @@ case ${chosen} in
 	    if [[ -x '/usr/bin/betterlockscreen' ]]; then
 		    betterlockscreen -l
         else
-            echo -e "Ok, exit" | rofi -dmenu -p "Error: " -mesg "Could not find a lock screen tool! Check jeff_dwm/rofi/scripts/rofi_powermenu.sh for what lock screens were tried." -theme $theme
+            echo -e "Ok, exit" | rofi -dmenu -p "Error: " -mesg "Could not find a lock screen tool! Check jdwm/rofi/scripts/rofi_powermenu.sh for what lock screens were tried." -theme $theme
 		fi
         ;;
     $suspend)

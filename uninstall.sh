@@ -23,14 +23,14 @@ ROFI_THEMES_INSTALL_DIR="$ROFI_CONFIG_INSTALL_DIR/themes"
 
 ########################################################
 
-JEFF_DWM_VERSION=$(jeff_dwm -v)
+JDWM_VERSION=$(jdwm -v)
 
-JEFF_DWM_DIR="$PARENT_DIR/dwm"
-JEFF_DWM_CONFIG_DIR="$JEFF_DWM_DIR/config"
-JEFF_DWM_USER_CONFIG_DIR="$USERS_DIR/.config/jeff_dwm"
-JEFF_DWM_WALLPAPER_DIR="$JEFF_DWM_USER_CONFIG_DIR/wallpapers"
-JEFF_DWM_THEMES_DIR="$JEFF_DWM_DIR/themes"
-JEFF_DWM_SCRIPTS_DIR="$JEFF_DWM_DIR/scripts"
+JDWM_DIR="$PARENT_DIR/dwm"
+JDWM_CONFIG_DIR="$JDWM_DIR/config"
+JDWM_USER_CONFIG_DIR="$USERS_DIR/.config/jdwm"
+JDWM_WALLPAPER_DIR="$JDWM_USER_CONFIG_DIR/wallpapers"
+JDWM_THEMES_DIR="$JDWM_DIR/themes"
+JDWM_SCRIPTS_DIR="$JDWM_DIR/scripts"
 
 ########################################################
 
@@ -39,11 +39,11 @@ DWM_BLOCKS_SCRIPTS_DIR="$DWM_BLOCKS_DIR/scripts"
 
 ########################################################
 
-DWM_MAN_INSTALL_DIR=""
+JDWM_MAN_INSTALL_DIR=""
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    DWM_MAN_INSTALL_DIR="$SHARE_DIR/man"
+    JDWM_MAN_INSTALL_DIR="$SHARE_DIR/man"
 elif [[ "$OSTYPE" == "openbsd"* ]]; then
-    DWM_MAN_INSTALL_DIR="/usr/local/man"
+    JDWM_MAN_INSTALL_DIR="/usr/local/man"
 fi
 
 ########################################################
@@ -58,31 +58,36 @@ file_uninstaller(){
         echo "${files[$i]}" | sed -e 's/^/     #) /'
         sudo rm -f $3/${files[$i]}
     done
-}
-
-jeff_dwm_aliases_uninstall(){
-    echo "Removing jeff_dwm's alias file: $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases"
-    sudo rm -f $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases
-}
-
-jeff_dwm_binaries_uninstall(){
-    sudo make uninstall
-}
-
-jeff_dwm_rm_config_dir(){
-    echo "Removing $JEFF_DWM_CONFIG_DIR/"
-    rm -rf $JEFF_DWM_CONFIG_DIR 
-}
-
-jeff_dwm_desktop_file_uninstall(){
-    echo "Removing jeff_dwm desktop file: /usr/share/xsessions/jeff_dwm.desktop"
-    sudo rm -f /usr/share/xsessions/jeff_dwm.desktop
-}
-
-jeff_dwm_home_dir_uninstall(){
     echo ""
-    echo "The only thing left now, to completely remove jeff_dwm, is to remove the"
-    echo "source directory you cloned jeff_dwm into, and which contains this script."
+}
+
+jdwm_aliases_uninstall(){
+    echo "Removing jdwm's alias file: $JDWM_USER_CONFIG_DIR/jdwm.aliases"
+    sudo rm -f $JDWM_USER_CONFIG_DIR/jdwm.aliases
+    echo ""
+}
+
+jdwm_binaries_uninstall(){
+    sudo make uninstall
+    echo ""
+}
+
+jdwm_rm_config_dir(){
+    echo "Removing $JDWM_USER_CONFIG_DIR/"
+    rm -rf $JDWM_USER_CONFIG_DIR 
+    echo ""
+}
+
+jdwm_desktop_file_uninstall(){
+    echo "Removing jdwm desktop file: /usr/share/xsessions/jdwm.desktop"
+    sudo rm -f /usr/share/xsessions/jdwm.desktop
+    echo ""
+}
+
+jdwm_home_dir_uninstall(){
+    echo ""
+    echo "The only thing left now, to completely remove jdwm, is to remove the"
+    echo "source directory you cloned jdwm into, and which contains this script."
     echo ""
     response=n
     read -p "Would you like this script to do it automatically? [y/N] " response
@@ -91,41 +96,46 @@ jeff_dwm_home_dir_uninstall(){
         echo ""
         read -p "Ok. To confirm, you would like to remove $PARENT_DIR/ and all its subdirectories? [y/N] " response
         if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]] then
-            echo -e "\nOk, removing $PARENT_DIR/\nThank you for trying jeff_dwm.\n"
+            echo -e "\nOk, removing $PARENT_DIR/\nThank you for trying jdwm.\n"
             rm -rf $PARENT_DIR
             exit 0
         else
-            echo -e "\nOk, exiting script. Thank you for trying jeff_dwm.\n"
+            echo -e "\nOk, exiting script. Thank you for trying jdwm.\n"
             exit 0
         fi
     else
-        echo -e "\nOk, exiting script. Thank you for trying jeff_dwm.\n"
+        echo -e "\nOk, exiting script. Thank you for trying jdwm.\n"
         exit 0
     fi
 }
 
-jeff_dwm_man_page_uninstall(){
-    echo "Removing jeff_dwm's manual: $DWM_MAN_INSTALL_DIR/man1/jeff_dwm.1"
-    sudo rm -f $DWM_MAN_INSTALL_DIR/man1/jeff_dwm.1
+jdwm_man_page_uninstall(){
+    echo "Removing jdwm's manual: $JDWM_MAN_INSTALL_DIR/man1/jdwm.1"
+    sudo rm -f $JDWM_MAN_INSTALL_DIR/man1/jdwm.1
+    echo ""
 }
 
-jeff_dwm_rm_pathing_symlinks(){
+jdwm_rm_pathing_symlinks(){
     echo "Removing various pathing symlinks"
-    sudo rm -f $JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir $JEFF_DWM_THEMES_DIR/wallpapers $ROFI_DIR/roficonfigdir $SHARE_DIR/jeff_dwm
+    sudo rm -f $JDWM_CONFIG_DIR/jdwmconfigdir $JDWM_THEMES_DIR/wallpapers $ROFI_DIR/roficonfigdir $SHARE_DIR/jdwm
+    echo ""
 
 }
 
-jeff_dwm_scripts_uninstall(){
-    file_uninstaller "sh" "$JEFF_DWM_SCRIPTS_DIR" "$BIN_INSTALL_DIR" "jeff_dwm script" "1"
+jdwm_scripts_uninstall(){
+    file_uninstaller "sh" "$JDWM_SCRIPTS_DIR" "$BIN_INSTALL_DIR" "jdwm script" "1"
 }
 
-jeff_dwm_configs_unlink(){
-    echo "Removing symlinks to autorun.h, binds.h, config.h, keydefs.h, and blocks.h from $JEFF_DWM_USER_CONFIG_DIR"
-    rm -f $JEFF_DWM_USER_CONFIG_DIR/autorun.h $JEFF_DWM_USER_CONFIG_DIR/binds.h $JEFF_DWM_USER_CONFIG_DIR/config.h $JEFF_DWM_USER_CONFIG_DIR/keydefs.h $JEFF_DWM_USER_CONFIG_DIR/blocks.h
+jdwm_configs_unlink(){
+    echo "Removing symlinks to autorun.h, binds.h, config.h, keydefs.h, and blocks.h from $JDWM_USER_CONFIG_DIR"
+    rm -f $JDWM_USER_CONFIG_DIR/autorun.h $JDWM_USER_CONFIG_DIR/binds.h $JDWM_USER_CONFIG_DIR/config.h $JDWM_USER_CONFIG_DIR/keydefs.h $JDWM_USER_CONFIG_DIR/blocks.h
+    echo ""
 }
 
-jeff_dwm_wallpapers_uninstall(){
-    echo "Removing jeff_dwm wallpapers directory: $JEFF_DWM_WALLPAPER_DIR"
+jdwm_wallpapers_uninstall(){
+    echo "Removing jdwm wallpapers directory: $JDWM_WALLPAPER_DIR"
+    rm -rf $JDWM_WALLPAPER_DIR
+    echo ""
 }
 
 dwmblocks_scripts_uninstall(){
@@ -133,8 +143,9 @@ dwmblocks_scripts_uninstall(){
 }
 
 rofi_config_uninstall(){
-    echo "Removing jeff_dwm's rofi config file: $ROFI_CONFIG_INSTALL_DIR/config.rasi"
+    echo "Removing jdwm's rofi config file: $ROFI_CONFIG_INSTALL_DIR/config.rasi"
     rm -f $ROFI_CONFIG_INSTALL_DIR/config.rasi
+    echo ""
 }
 
 rofi_scripts_uninstall(){
@@ -142,46 +153,46 @@ rofi_scripts_uninstall(){
 }
 
 rofi_theme_uninstall(){
-    file_uninstaller "rasi" "$ROFI_THEMES_DIR" "$ROFI_THEMES_INSTALL_DIR" "jeff_dwm rofi theme" "0"
+    file_uninstaller "rasi" "$ROFI_THEMES_DIR" "$ROFI_THEMES_INSTALL_DIR" "jdwm rofi theme" "0"
 }
 
 print_help(){
     print_usage
-    echo "This uninstall script is designed to help uninstall jeff_dwm and any and"
+    echo "This uninstall script is designed to help uninstall jdwm and any and"
     echo "all other files used by or along side of it. However, it DOES NOT remove"
     echo "any files you installed via a package manager and will not remove most"
     echo "files you might have added yourself. Exceptions include: any files with a"
     echo "'.sh' extension you put in any of the '/scripts' folders, and themes you"
     echo "added to '/rofi/themes' with a '.rasi' extension. All those files WILL be"
-    echo "removed, as they are considered to have been apart of jeff_dwm's install."
+    echo "removed, as they are considered to have been apart of jdwm's install."
     echo "Refer to the script flags to see ways to avoid uninstalling specific sets"
     echo "of scripts or themes."
     echo ""
-    echo "WARNING: By default (no flags) all files related to jeff_dwm will be removed."
+    echo "WARNING: By default (no flags) all files related to jdwm will be removed."
     echo "Please make sure you understand what will be removed, this cannot be un-done."
     echo ""
     echo "Flags (can use one or more, no values necessary):"
     echo ""
     echo "   -h,  --help                        Prints this help and usage message"
     echo ""
-    echo "   -u,  --usage                       Prints jeff_dwm's usage help message"
+    echo "   -u,  --usage                       Prints jdwm's usage help message"
     echo ""
-    echo "   -v,  --version                     Prints jeff_dwm's version, same as"
-    echo "                                      'jeff_dwm -v'"
+    echo "   -v,  --version                     Prints jdwm's version, same as"
+    echo "                                      'jdwm -v'"
     echo ""
-    echo "   -ja, --jeff-dwm-aliases            Removes jeff_dwm alias file from"
-    echo "                                      ~/.config/jeff_dwm/"
+    echo "   -ja, --jdwm-aliases                Removes jdwm alias file from"
+    echo "                                      ~/.config/jdwm/"
     echo ""
-    echo "   -jb, --jeff-dwm-binaries           Uninstalls all jeff_dwm related"
+    echo "   -jb, --jdwm-binaries               Uninstalls all jdwm related"
     echo "                                      binaries from /usr/local/bin/"
     echo ""
-    echo "   -jc, --jeff-dwm-config-dir         Removes jeff_dwm's config directory:"
-    echo "                                      ~/.config/jeff_dwm/"
+    echo "   -jc, --jdwm-config-dir             Removes jdwm's config directory:"
+    echo "                                      ~/.config/jdwm/"
     echo ""
-    echo "   -jd, --jeff-desktop-file           Removes jeff_dwm's desktop file from"
+    echo "   -jd, --jdwm-desktop-file           Removes jdwm's desktop file from"
     echo "                                      /usr/share/xsessions/"
     echo ""
-    echo "   -jh, --jeff-dwm-home-dir           Removes jeff_dwm's entire source"
+    echo "   -jh, --jdwm-home-dir               Removes jdwm's entire source"
     echo "                                      directory. Be very careful with this,"
     echo "                                      make sure you really do want to"
     echo "                                      remove it all. Also note, if you do"
@@ -189,41 +200,41 @@ print_help(){
     echo "                                      zombie files left behind. I do not"
     echo "                                      recommend using this flag."
     echo ""
-    echo "   -jm, --jeff-dwm-manual             Removes jeff_dwn's manual file"
-    echo "                                      from $DWM_MAN_INSTALL_DIR/man1/"
+    echo "   -jm, --jdwm-manual                 Removes jdwn's manual file"
+    echo "                                      from $JDWM_MAN_INSTALL_DIR/man1/"
     echo ""
-    echo "   -jp, --jeff-dwm-pathing-symlinks   Removes jeff_dwm's pathing symlinks"
+    echo "   -jp, --jdwm-pathing-symlinks       Removes jdwm's pathing symlinks"
     echo "                                      used to help it path to needed files"
     echo ""
-    echo "   -js, --jeff-dwm-scripts            Uninstalls jeff_dwm's script files,"
+    echo "   -js, --jdwm-scripts                Uninstalls jdwm's script files,"
     echo "                                      meaning any .sh files found in both"
-    echo "                                      /jeff_dwm/dwm/scripts/ and"
+    echo "                                      /jdwm/dwm/scripts/ and"
     echo "                                      /usr/local/bin/"
     echo ""
-    echo "   -ju, --jeff-dwm-config-unlink      Removes symlinks linking config"
-    echo "                                      header files in /jeff_dwm/dwm/config/"
-    echo "                                      to ~/.config/jeff_dwm/"
+    echo "   -ju, --jdwm-config-unlink          Removes symlinks linking config"
+    echo "                                      header files in /jdwm/dwm/config/"
+    echo "                                      to ~/.config/jdwm/"
     echo ""
-    echo "   -jw, --jeff-dwm-wallpapers         Removes jeff_dwm's wallpapers directory"
-    echo "                                      in ~/.config/jeff_dwm and symlink to it"
-    echo "                                      in /jeff_dwm/dwm/themes/"
+    echo "   -jw, --jdwm-wallpapers             Removes jdwm's wallpapers directory"
+    echo "                                      in ~/.config/jdwm and symlink to it"
+    echo "                                      in /jdwm/dwm/themes/"
     echo ""
-    echo "   -bs, --dwmblocks-scripts           Uninstalls jeff_dwm's dwmblocks"
+    echo "   -bs, --dwmblocks-scripts           Uninstalls jdwm's dwmblocks"
     echo "                                      scripts, meaning any .sh files found"
-    echo "                                      in both /jeff_dwm/dwmblocks/scripts/"
+    echo "                                      in both /jdwm/dwmblocks/scripts/"
     echo "                                      and /usr/local/bin/"
     echo ""
-    echo "   -rc, --rofi-config                 Removes jeff_dwm's rofi config file:"
+    echo "   -rc, --rofi-config                 Removes jdwm's rofi config file:"
     echo "                                      ~/.config/rofi/config.rasi"
     echo ""
-    echo "   -rs, --rofi-scripts                Uninstalls jeff_dwm's rofi scripts,"
+    echo "   -rs, --rofi-scripts                Uninstalls jdwm's rofi scripts,"
     echo "                                      meaning any .sh files found in both"
-    echo "                                      /jeff_dwm/rofi/scripts/ and"
+    echo "                                      /jdwm/rofi/scripts/ and"
     echo "                                      /usr/local/bin/"
     echo ""
-    echo "   -rt, --rofi-themes                 Removes jeff_dwm's rofi themes,"
+    echo "   -rt, --rofi-themes                 Removes jdwm's rofi themes,"
     echo "                                      meaning any .rasi files found in"
-    echo "                                      both /jeff_dwm/rofi/themes/ and"
+    echo "                                      both /jdwm/rofi/themes/ and"
     echo "                                      ~/.config/rofi/themes/"
     echo ""
 }
@@ -231,11 +242,11 @@ print_help(){
 print_usage(){
     echo ""
     echo "Usage: uninstall.sh [-h] [--help] [-u] [--usage] [-v] [--version]"
-    echo "       [-ja] [--jeff-dwm-aliases] [-jb] [--jeff-dwm-binaries]"
-    echo "       [-jc] [--jeff-dwm-config-dir] [-jd] [--jeff-desktop-file]"
-    echo "       [-jh] [--jeff-dwm-home-dir][-jm] [--jeff-dwm-manual] [-jp]"
-    echo "       [--jeff-dwm-pathing-symlinks] [-js] [--jeff-dwm-scripts]"
-    echo "       [-ju] [--jeff-dwm-config-unlink] [-jw] [--jeff-dwm-wallpapers]"
+    echo "       [-ja] [--jdwm-aliases] [-jb] [--jdwm-binaries]"
+    echo "       [-jc] [--jdwm-config-dir] [-jd] [--jdwm-desktop-file]"
+    echo "       [-jh] [--jdwm-home-dir][-jm] [--j-dwm-manual] [-jp]"
+    echo "       [--jdwm-pathing-symlinks] [-js] [--jdwm-scripts]"
+    echo "       [-ju] [--jdwm-config-unlink] [-jw] [--jdwm-wallpapers]"
     echo "       [-bs] [--dwmblocks-scripts] [-rc] [--rofi-config] [-rs]"
     echo "       [--rofi-scripts] [-rt] [--rofi-themes]"
     echo "" 
@@ -249,53 +260,53 @@ POSITIONAL_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -ja|--jeff-dwm-aliases)  # Only removes the custom alias file
-            jeff_dwm_aliases_uninstall
+        -ja|--jdwm-aliases)  # Only removes the custom alias file
+            jdwm_aliases_uninstall
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jb|--jeff-dwm-binaries)  # Only uninstall jeff_dwm binaries, aka just runs make uninstall
-            jeff_dwm_binaries_uninstall
+        -jb|--jdwm-binaries)  # Only uninstall jdwm binaries, aka just runs make uninstall
+            jdwm_binaries_uninstall
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jc|--jeff-dwm-config-dir)  # Only removes the jeff_dwm config dir
-            jeff_dwm_rm_config_dir
+        -jc|--jdwm-config-dir)  # Only removes the jdwm config dir
+            jdwm_rm_config_dir
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jd|--jeff-desktop-file)  # Only removes the .desktop file for jeff_dwm
-            jeff_dwm_desktop_file_uninstall
+        -jd|--jdwm-desktop-file)  # Only removes the .desktop file for jdwm
+            jdwm_desktop_file_uninstall
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jh|--jeff-dwm-home-dir)  # Removes jeff_dwm home/source directory
-            jeff_dwm_home_dir_uninstall
+        -jh|--jdwm-home-dir)  # Removes jdwm home/source directory
+            jdwm_home_dir_uninstall
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jm|--jeff-dwm-manual)  # Only removes jeff_dwm manual
-            jeff_dwm_man_page_uninstall
+        -jm|--jdwm-manual)  # Only removes jdwm manual
+            jdwm_man_page_uninstall
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jp|--jeff-dwm-pathing-symlinks)  # Only removes the jeff_dwm pathing symlinks
-            jeff_dwm_rm_pathing_symlinks
+        -jp|--jdwm-pathing-symlinks)  # Only removes the jdwm pathing symlinks
+            jdwm_rm_pathing_symlinks
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -js|--jeff-dwm-scripts)  # Only uninstall jeff_dwm scripts
-            jeff_dwm_scripts_uninstall
+        -js|--jdwm-scripts)  # Only uninstall jdwm scripts
+            jdwm_scripts_uninstall
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -ju|--jeff-dwm-config-unlink)  # Only removes config header file's symlinks
-            jeff_dwm_configs_unlink
+        -ju|--jdwm-config-unlink)  # Only removes config header file's symlinks
+            jdwm_configs_unlink
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jw|--jeff-dwm-wallpapers)  # Only removes wallpapers and its symlink
-            jeff_dwm_wallpapers_uninstall
+        -jw|--jdwm-wallpapers)  # Only removes wallpapers and its symlink
+            jdwm_wallpapers_uninstall
             DEFAULT_UNINSTALL=0
             shift
             ;;
@@ -327,8 +338,8 @@ while [[ $# -gt 0 ]]; do
             print_usage
             exit 0
             ;;
-        -v|--version)  # Prints jeff_dwm's version
-            echo "jeff_dwm version: $JEFF_DWM_VERSION"
+        -v|--version)  # Prints jdwm's version
+            echo "jdwm version: $JDWM_VERSION"
             exit 0
             ;;
         -*|--*)
@@ -343,16 +354,16 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ $DEFAULT_UNINSTALL -eq 1 ]]; then
-    jeff_dwm_binaries_uninstall
-    jeff_dwm_rm_config_dir
-    jeff_dwm_scripts_uninstall
-    jeff_dwm_desktop_file_uninstall
-    jeff_dwm_man_page_uninstall
+    jdwm_binaries_uninstall
+    jdwm_rm_config_dir
+    jdwm_scripts_uninstall
+    jdwm_desktop_file_uninstall
+    jdwm_man_page_uninstall
     dwmblocks_scripts_uninstall
     rofi_config_uninstall
     rofi_theme_uninstall
     rofi_scripts_uninstall
-    echo "Removing /usr/share/jeff_dwm symlink"
-    rm -f $SHARE_DIR/jeff_dwm
-    jeff_dwm_home_dir_uninstall
+    echo "Removing /usr/share/jdwm symlink"
+    rm -f $SHARE_DIR/jdwm
+    jdwm_home_dir_uninstall
 fi

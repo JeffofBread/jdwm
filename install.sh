@@ -23,15 +23,15 @@ ROFI_THEMES_INSTALL_DIR="$ROFI_CONFIG_INSTALL_DIR/themes"
 
 ########################################################
 
-JEFF_DWM_VERSION=$(grep Makefile -e "VERSION = " | cut -b 11-)
+JDWM_VERSION=$(grep Makefile -e "VERSION = " | cut -b 11-)
 
-JEFF_DWM_DIR="$PARENT_DIR/dwm"
-JEFF_DWM_CONFIG_DIR="$JEFF_DWM_DIR/config"
-JEFF_DWM_USER_CONFIG_DIR="$USERS_DIR/.config/jeff_dwm"
-JEFF_DWM_WALLPAPER_DIR="$JEFF_DWM_USER_CONFIG_DIR/wallpapers"
-JEFF_DWM_THEMES_DIR="$JEFF_DWM_DIR/themes"
-JEFF_DWM_SCRIPTS_DIR="$JEFF_DWM_DIR/scripts"
-JEFF_DWM_RESOURCES_DIR="$JEFF_DWM_DIR/resources"
+JDWM_DIR="$PARENT_DIR/dwm"
+JDWM_CONFIG_DIR="$JDWM_DIR/config"
+JDWM_USER_CONFIG_DIR="$USERS_DIR/.config/jdwm"
+JDWM_WALLPAPER_DIR="$JDWM_USER_CONFIG_DIR/wallpapers"
+JDWM_THEMES_DIR="$JDWM_DIR/themes"
+JDWM_SCRIPTS_DIR="$JDWM_DIR/scripts"
+JDWM_RESOURCES_DIR="$JDWM_DIR/resources"
 
 ########################################################
 
@@ -41,11 +41,11 @@ DWM_BLOCKS_SCRIPTS_DIR="$DWM_BLOCKS_DIR/scripts"
 
 ########################################################
 
-DWM_MAN_INSTALL_DIR=""
+JDWM_MAN_INSTALL_DIR=""
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    DWM_MAN_INSTALL_DIR="$SHARE_DIR/man"
+    JDWM_MAN_INSTALL_DIR="$SHARE_DIR/man"
 elif [[ "$OSTYPE" == "openbsd"* ]]; then
-    DWM_MAN_INSTALL_DIR="/usr/local/man"
+    JDWM_MAN_INSTALL_DIR="/usr/local/man"
 fi
 
 ########################################################
@@ -68,13 +68,13 @@ check_and_link(){
         fi
     fi
 
-    jeff_dwm_check_config_dir
+    jdwm_check_config_dir
 
-    if [ -L "$JEFF_DWM_USER_CONFIG_DIR/$2.h" ]; then
-        echo "Symbolic link to $1.h in $JEFF_DWM_USER_CONFIG_DIR/ already exists, skipping creation"
+    if [ -L "$JDWM_USER_CONFIG_DIR/$2.h" ]; then
+        echo "Symbolic link to $1.h in $JDWM_USER_CONFIG_DIR/ already exists, skipping creation"
     else
-        echo "Symbolic link to $1.h being created in $JEFF_DWM_USER_CONFIG_DIR/"
-        ln -s $1.h $JEFF_DWM_USER_CONFIG_DIR/$2.h &>/dev/null
+        echo "Symbolic link to $1.h being created in $JDWM_USER_CONFIG_DIR/"
+        ln -s $1.h $JDWM_USER_CONFIG_DIR/$2.h &>/dev/null
     fi
 }
 
@@ -94,112 +94,112 @@ copyexamplescripts(){
     done
 }
 
-jeff_dwm_aliases_install(){
-    echo -e "\n|--------- jeff_dwm aliases ----------|\n"
+jdwm_aliases_install(){
+    echo -e "\n|--------- jdwm aliases ----------|\n"
 
-    jeff_dwm_check_config_dir
+    jdwm_check_config_dir
 
-    if [ ! -f "$JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases" ]; then
-        if [ ! -f "$JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases" ]; then
-            echo -e "Error: $JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases does not exist, nothing to copy"
+    if [ ! -f "$JDWM_USER_CONFIG_DIR/jdwm.aliases" ]; then
+        if [ ! -f "$JDWM_RESOURCES_DIR/jdwm.aliases" ]; then
+            echo -e "Error: $JDWM_RESOURCES_DIR/jdwm.aliases does not exist, nothing to copy"
             exit 1
         else 
-            echo -e "$JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases to $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases"
-            cp $JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases
+            echo -e "$JDWM_RESOURCES_DIR/jdwm.aliases to $JDWM_USER_CONFIG_DIR/jdwm.aliases"
+            cp $JDWM_RESOURCES_DIR/jdwm.aliases $JDWM_USER_CONFIG_DIR/jdwm.aliases
         fi
     else 
         response=n
-        read -p "Would you like to overwrite current jeff_dwm.aliases file? [y/N] " response
+        read -p "Would you like to overwrite current jdwm.aliases file? [y/N] " response
         if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]] then
-            echo -e "$JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases to $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases"
-            cp $JEFF_DWM_RESOURCES_DIR/jeff_dwm.aliases $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases
+            echo -e "$JDWM_RESOURCES_DIR/jdwm.aliases to $JDWM_USER_CONFIG_DIR/jdwm.aliases"
+            cp $JDWM_RESOURCES_DIR/jdwm.aliases $JDWM_USER_CONFIG_DIR/jdwm.aliases
         else
-            echo -e "Original jeff_dwm.aliases not overwritten"
+            echo -e "Original jdwm.aliases not overwritten"
         fi
     fi
-    if grep -q jeff_dwm.aliases "$USERS_DIR/.bashrc"; then
-        echo "jeff_dwm.aliases already present in .bashrc, skipping addition"
+    if grep -q jdwm.aliases "$USERS_DIR/.bashrc"; then
+        echo "jdwm.aliases already present in .bashrc, skipping addition"
     else
-        echo "Adding link to $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases in .bashrc"
-        echo -e "\n\n#jeff_dwm aliases\n. $JEFF_DWM_USER_CONFIG_DIR/jeff_dwm.aliases" >> $USERS_DIR/.bashrc
+        echo "Adding link to $JDWM_USER_CONFIG_DIR/jdwm.aliases in .bashrc"
+        echo -e "\n\n#jdwm aliases\n. $JDWM_USER_CONFIG_DIR/jdwm.aliases" >> $USERS_DIR/.bashrc
     fi
     echo ""
 }
 
-jeff_dwm_binaries_install(){
-    echo -e "\n|--------- jeff_dwm binaries ---------|\n"
+jdwm_binaries_install(){
+    echo -e "\n|--------- jdwm binaries ---------|\n"
     sudo make install
     echo ""
 }
 
-jeff_dwm_check_config_dir(){
-    if [ -d "$JEFF_DWM_USER_CONFIG_DIR" ]; then
-        echo "$JEFF_DWM_USER_CONFIG_DIR already exists, skipping creation"  
+jdwm_check_config_dir(){
+    if [ -d "$JDWM_USER_CONFIG_DIR" ]; then
+        echo "$JDWM_USER_CONFIG_DIR already exists, skipping creation"  
     else
-        echo "Creating jeff_dwm config directory in $JEFF_DWM_USER_CONFIG_DIR"
-        mkdir -p $JEFF_DWM_USER_CONFIG_DIR
+        echo "Creating jdwm config directory in $JDWM_USER_CONFIG_DIR"
+        mkdir -p $JDWM_USER_CONFIG_DIR
     fi
 }
 
-jeff_dwm_configs_link(){
-    echo -e "\n|------- jeff_dwm config links -------|\n"
+jdwm_configs_link(){
+    echo -e "\n|------- jdwm config links -------|\n"
 
-    jeff_dwm_check_config_dir
+    jdwm_check_config_dir
 
-    check_and_link "$JEFF_DWM_CONFIG_DIR/autorun" "autorun"
-    check_and_link "$JEFF_DWM_CONFIG_DIR/binds" "binds"
-    check_and_link "$JEFF_DWM_CONFIG_DIR/config" "config"
-    check_and_link "$JEFF_DWM_CONFIG_DIR/keydefs" "keydefs"
+    check_and_link "$JDWM_CONFIG_DIR/autorun" "autorun"
+    check_and_link "$JDWM_CONFIG_DIR/binds" "binds"
+    check_and_link "$JDWM_CONFIG_DIR/config" "config"
+    check_and_link "$JDWM_CONFIG_DIR/keydefs" "keydefs"
     check_and_link "$DWM_BLOCKS_CONFIG_DIR/blocks" "blocks"
 
-    if [ -L "$JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir" ] && [ -d "$JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir" ]; then
-        echo "Symbolic link to $JEFF_DWM_USER_CONFIG_DIR in $JEFF_DWM_CONFIG_DIR already exists, skipping creation"  
+    if [ -L "$JDWM_CONFIG_DIR/jdwmconfigdir" ] && [ -d "$JDWM_CONFIG_DIR/jdwmconfigdir" ]; then
+        echo "Symbolic link to $JDWM_USER_CONFIG_DIR in $JDWM_CONFIG_DIR already exists, skipping creation"  
     else
-        echo "Creating symbolic link to to $JEFF_DWM_USER_CONFIG_DIR in $JEFF_DWM_CONFIG_DIR called /jeffdwmconfigdir"
-        ln -s $JEFF_DWM_USER_CONFIG_DIR $JEFF_DWM_CONFIG_DIR/jeffdwmconfigdir
+        echo "Creating symbolic link to to $JDWM_USER_CONFIG_DIR in $JDWM_CONFIG_DIR called /jdwmconfigdir"
+        ln -s $JDWM_USER_CONFIG_DIR $JDWM_CONFIG_DIR/jdwmconfigdir
     fi
     
     echo ""
 }
 
-jeff_dwm_desktop_file_install(){
-    echo -e "\n|--------- jeff_dwm .desktop ---------|\n"
-    echo -e "jeff_dwm.desktop being installed to /usr/share/xsessions/"
-    sudo cp -f $JEFF_DWM_RESOURCES_DIR/jeff_dwm.desktop /usr/share/xsessions/jeff_dwm.desktop
-    sudo /bin/sh -c "(echo "$JEFF_DWM_VERSION"; echo "Icon=$JEFF_DWM_RESOURCES_DIR/dwm.png") >> /usr/share/xsessions/jeff_dwm.desktop"
+jdwm_desktop_file_install(){
+    echo -e "\n|--------- jdwm .desktop ---------|\n"
+    echo -e "jdwm.desktop being installed to /usr/share/xsessions/"
+    sudo cp -f $JDWM_RESOURCES_DIR/jdwm.desktop /usr/share/xsessions/jdwm.desktop
+    sudo /bin/sh -c "(echo "$JDWM_VERSION"; echo "Icon=$JDWM_RESOURCES_DIR/dwm.png") >> /usr/share/xsessions/jdwm.desktop"
     echo ""
 }
 
-jeff_dwm_man_page_install(){
-    echo -e "\n|------------ jeff_dwm man -----------|\n"
-    echo -e "jeff_dwm manual being installed to $DWM_MAN_INSTALL_DIR/man1 from $JEFF_DWM_RESOURCES_DIR/jeff_dwm.1"
-    mkdir -p $DWM_MAN_INSTALL_DIR/man1
-    sudo /bin/sh -c "sed "s/VERSION/$JEFF_DWM_VERSION/g" < $JEFF_DWM_RESOURCES_DIR/jeff_dwm.1 > $DWM_MAN_INSTALL_DIR/man1/jeff_dwm.1 && chmod 644 $DWM_MAN_INSTALL_DIR/man1/jeff_dwm.1"
+jdwm_man_page_install(){
+    echo -e "\n|------------ jdwm man -----------|\n"
+    echo -e "jdwm manual being installed to $JDWM_MAN_INSTALL_DIR/man1 from $JDWM_RESOURCES_DIR/jdwm.1"
+    mkdir -p $JDWM_MAN_INSTALL_DIR/man1
+    sudo /bin/sh -c "sed "s/VERSION/$JDWM_VERSION/g" < $JDWM_RESOURCES_DIR/jdwm.1 > $JDWM_MAN_INSTALL_DIR/man1/jdwm.1 && chmod 644 $JDWM_MAN_INSTALL_DIR/man1/jdwm.1"
     echo ""
 }
 
-jeff_dwm_scripts_install(){
-    echo -e "\n|---------- jeff_dwm scripts ---------|\n"
-    if [ -L "$SHARE_DIR/jeff_dwm" ] && [ -d "$SHARE_DIR/jeff_dwm" ]; then
+jdwm_scripts_install(){
+    echo -e "\n|---------- jdwm scripts ---------|\n"
+    if [ -L "$SHARE_DIR/jdwm" ] && [ -d "$SHARE_DIR/jdwm" ]; then
         echo "Symbolic link to $PARENT_DIR in $SHARE_DIR already exists, skipping creation"  
     else
-        echo "Creating symbolic link to $PARENT_DIR in $SHARE_DIR called /jeff_dwm"
-        sudo /bin/sh -c "ln -s $PARENT_DIR $SHARE_DIR/jeff_dwm  &>/dev/null"
+        echo "Creating symbolic link to $PARENT_DIR in $SHARE_DIR called /jdwm"
+        sudo /bin/sh -c "ln -s $PARENT_DIR $SHARE_DIR/jdwm  &>/dev/null"
     fi
-    copyexamplescripts "$JEFF_DWM_SCRIPTS_DIR"
-    echo -e "jeff_dwm scripts are being installed to $BIN_INSTALL_DIR from $JEFF_DWM_SCRIPTS_DIR"
-    echo -e "jeff_dwm scripts being installed:\n"
-    cd $JEFF_DWM_SCRIPTS_DIR 
+    copyexamplescripts "$JDWM_SCRIPTS_DIR"
+    echo -e "jdwm scripts are being installed to $BIN_INSTALL_DIR from $JDWM_SCRIPTS_DIR"
+    echo -e "jdwm scripts being installed:\n"
+    cd $JDWM_SCRIPTS_DIR 
     sudo chmod -R 755 ./
     sudo cp -f *.sh $BIN_INSTALL_DIR
     ls | grep -E '\.sh$' | sed -e 's/^/     #) /'
     echo ""
 }
 
-jeff_dwm_wallpapers_install(){
-    echo -e "\n|-------- jeff_dwm wallpapers --------|\n"
+jdwm_wallpapers_install(){
+    echo -e "\n|-------- jdwm wallpapers --------|\n"
 
-    if [ -d "$JEFF_DWM_WALLPAPER_DIR" ]; then
+    if [ -d "$JDWM_WALLPAPER_DIR" ]; then
         response=n
         read -p "Would you like to check for wallpaper updates (git pull)? [y/N] " response
         if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]] then
@@ -208,15 +208,15 @@ jeff_dwm_wallpapers_install(){
             echo -e "Skipping checking for update"
         fi 
     else
-        echo "Cloning jeff_dwm_wallpapers repo into $JEFF_DWM_WALLPAPER_DIR"
-        git clone https://github.com/JeffofBread/jeff_dwm.git -b wallpapers $JEFF_DWM_WALLPAPER_DIR
+        echo "Cloning jdwm_wallpapers repo into $JDWM_WALLPAPER_DIR"
+        git clone https://github.com/JeffofBread/jdwm.git -b wallpapers $JDWM_WALLPAPER_DIR
     fi
 
-    if [ -L "$JEFF_DWM_THEMES_DIR/wallpapers" ] && [ -d "$JEFF_DWM_THEMES_DIR/wallpapers" ]; then
-        echo "Symbolic link to $JEFF_DWM_WALLPAPER_DIR in $JEFF_DWM_THEMES_DIR already exists, skipping creation"  
+    if [ -L "$JDWM_THEMES_DIR/wallpapers" ] && [ -d "$JDWM_THEMES_DIR/wallpapers" ]; then
+        echo "Symbolic link to $JDWM_WALLPAPER_DIR in $JDWM_THEMES_DIR already exists, skipping creation"  
     else
-        echo "Creating symbolic link to to $JEFF_DWM_WALLPAPER_DIR in $JEFF_DWM_THEMES_DIR called /wallpapers"
-        ln -s $JEFF_DWM_WALLPAPER_DIR $JEFF_DWM_THEMES_DIR/wallpapers
+        echo "Creating symbolic link to to $JDWM_WALLPAPER_DIR in $JDWM_THEMES_DIR called /wallpapers"
+        ln -s $JDWM_WALLPAPER_DIR $JDWM_THEMES_DIR/wallpapers
     fi
 }
 
@@ -284,66 +284,66 @@ rofi_theme_install(){
 
 print_help(){
     print_usage
-    echo "This install script is a part of jeff_dwm to assist in installing it"
+    echo "This install script is a part of jdwm to assist in installing it"
     echo "along with any scripts, configs, or other necessary files or extras."
     echo "If you need help installing, want to report an issue, make a suggestion,"
     echo "or simply to take another look at the, codebase, head to"
-    echo "https://github.com/JeffofBread/jeff_dwm. By default (no flags), all"
+    echo "https://github.com/JeffofBread/jdwm. By default (no flags), all"
     echo "installs will be run."
     echo ""
     echo "Flags (can use one or more, no values necessary):"
     echo ""
     echo "   -h,  --help                        Prints this help and usage message"
     echo ""
-    echo "   -u,  --usage                       Prints jeff_dwm's usage help message"
+    echo "   -u,  --usage                       Prints jdwm's usage help message"
     echo ""
-    echo "   -v,  --version                     Prints jeff_dwm's version, same as"
-    echo "                                      'jeff_dwm -v'"
+    echo "   -v,  --version                     Prints jdwm's version, same as"
+    echo "                                      'jdwm -v'"
     echo ""
-    echo "   -ja, --jeff-dwm-aliases            Installs jeff_dwm alias file to"
-    echo "                                      ~/.config/jeff_dwm/"
+    echo "   -ja, --jdwm-aliases                Installs jdwm alias file to"
+    echo "                                      ~/.config/jdwm/"
     echo ""
-    echo "   -jb, --jeff-dwm-binaries           Installs all jeff_dwm related"
+    echo "   -jb, --jdwm-binaries               Installs all jdwm related"
     echo "                                      binaries to /usr/local/bin/ using"
     echo "                                      'sudo make install'"
     echo ""
-    echo "   -jc, --jeff-dwm-config-link        Installs symlinks linking config"
-    echo "                                      header files in /jeff_dwm/dwm/config/"
-    echo "                                      to ~/.config/jeff_dwm/. Not useful to"
-    echo "                                      jeff_dwm, just for the user"
+    echo "   -jc, --jdwm-config-link            Installs symlinks linking config"
+    echo "                                      header files in /jdwm/dwm/config/"
+    echo "                                      to ~/.config/jdwm/. Not useful to"
+    echo "                                      jdwm, just for the user"
     echo ""
-    echo "   -jd, --jeff-desktop-file           Installs jeff_dwm's desktop file to"
+    echo "   -jd, --jdesktop-file               Installs jdwm's desktop file to"
     echo "                                      /usr/share/xsessions/"
     echo ""
-    echo "   -jm, --jeff-dwm-manual             Installs jeff_dwn's-$JEFF_DWM_VERSION manual file"
-    echo "                                      to $DWM_MAN_INSTALL_DIR/man1/"
+    echo "   -jm, --jdwm-manual                 Installs jdwn's-$JDWM_VERSION manual file"
+    echo "                                      to $JDWM_MAN_INSTALL_DIR/man1/"
     echo ""
-    echo "   -js, --jeff-dwm-scripts            Installs jeff_dwm's script files,"
+    echo "   -js, --jdwm-scripts                Installs jdwm's script files,"
     echo "                                      meaning any .sh files found in"
-    echo "                                      /jeff_dwm/dwm/scripts/, to"
+    echo "                                      /jdwm/dwm/scripts/, to"
     echo "                                      /usr/local/bin/"
     echo ""
-    echo "   -jw, --jeff-dwm-wallpapers         Clones jeff_dwm's wallpapers repo to"
-    echo "                                      ~/.config/jeff_dwm/wallpapers and "
-    echo "                                      symlinks to it in /jeff_dwm/dwm/themes/"
+    echo "   -jw, --jdwm-wallpapers             Clones jdwm's wallpapers repo to"
+    echo "                                      ~/.config/jdwm/wallpapers and "
+    echo "                                      symlinks to it in /jdwm/dwm/themes/"
     echo ""
-    echo "   -bs, --dwmblocks-scripts           Installs jeff_dwm's dwmblocks"
+    echo "   -bs, --dwmblocks-scripts           Installs jdwm's dwmblocks"
     echo "                                      script files, meaning any .sh files"
-    echo "                                      found in/jeff_dwm/dwmblocks/scripts/,"
+    echo "                                      found in/jdwm/dwmblocks/scripts/,"
     echo "                                      to /usr/local/bin/"
     echo ""
-    echo "   -rc, --rofi-config                 Installs jeff_dwm's rofi config file"
-    echo "                                      (/jeff_dwm/rofi/config.rasi) to"
+    echo "   -rc, --rofi-config                 Installs jdwm's rofi config file"
+    echo "                                      (/jdwm/rofi/config.rasi) to"
     echo "                                      ~/.config/rofi/config.rasi"
     echo ""
-    echo "   -rs, --rofi-scripts                Installs jeff_dwm's rofi scripts,"
+    echo "   -rs, --rofi-scripts                Installs jdwm's rofi scripts,"
     echo "                                      meaning any .sh files found in"
-    echo "                                      /jeff_dwm/rofi/scripts/, to"
+    echo "                                      /jdwm/rofi/scripts/, to"
     echo "                                      /usr/local/bin/"
     echo ""
-    echo "   -rt, --rofi-themes                 Installs jeff_dwm's rofi themes,"
+    echo "   -rt, --rofi-themes                 Installs jdwm's rofi themes,"
     echo "                                      meaning any .rasi files found in"
-    echo "                                      both /jeff_dwm/rofi/themes/, to"
+    echo "                                      both /jdwm/rofi/themes/, to"
     echo "                                      ~/.config/rofi/themes/"
     echo ""
 }
@@ -351,10 +351,10 @@ print_help(){
 print_usage(){
     echo ""
     echo "Usage: install.sh [-h] [--help] [-u] [--usage] [-v] [--version]"
-    echo "       [-ja] [--jeff-dwm-aliases] [-jb] [--jeff-dwm-binaries]"
-    echo "       [-jc] [--jeff-dwm-config-link ] [-jd] [--jeff-desktop-file]"
-    echo "       [-jm] [--jeff-dwm-manual] [-js] [--jeff-dwm-scripts]"
-    echo "       [-jw] [--jeff-dwm-wallpapers] [-bs] [--dwmblocks-scripts]"
+    echo "       [-ja] [--jdwm-aliases] [-jb] [--jdwm-binaries]"
+    echo "       [-jc] [--jdwm-config-link ] [-jd] [--jdesktop-file]"
+    echo "       [-jm] [--jdwm-manual] [-js] [--jdwm-scripts]"
+    echo "       [-jw] [--jdwm-wallpapers] [-bs] [--dwmblocks-scripts]"
     echo "       [-rc] [--rofi-config] [-rs] [--rofi-scripts] [-rt]"
     echo "       [--rofi-themes]"
     echo ""  
@@ -368,38 +368,38 @@ POSITIONAL_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -ja|--jeff-dwm-aliases)  # Only installs the custom alias file
-            jeff_dwm_aliases_install
+        -ja|--jdwm-aliases)  # Only installs the custom alias file
+            jdwm_aliases_install
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jb|--jeff-dwm-binaries)  # Only install binaries, aka just runs make install
-            jeff_dwm_binaries_install
+        -jb|--jdwm-binaries)  # Only install binaries, aka just runs make install
+            jdwm_binaries_install
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jc|--jeff-dwm-config-link)  # Only installs config symlinks
-            jeff_dwm_configs_link
+        -jc|--jdwm-config-link)  # Only installs config symlinks
+            jdwm_configs_link
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jd|--jeff-dwm-desktop-file)  # Only installs the .desktop file for jeff_dwm
-            jeff_dwm_desktop_file_install
+        -jd|--jdwm-desktop-file)  # Only installs the .desktop file for jdwm
+            jdwm_desktop_file_install
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jm|--jeff-dwm-manual)  # Only installs jeff_dwm manual
-            jeff_dwm_man_page_install
+        -jm|--jdwm-manual)  # Only installs jdwm manual
+            jdwm_man_page_install
             DEFAULT_INSTALL=0
             shift
             ;;
-        -js|--jeff-dwm-scripts)  # Only installs dwm scripts
-            jeff_dwm_scripts_install
+        -js|--jdwm-scripts)  # Only installs dwm scripts
+            jdwm_scripts_install
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jw|--jeff-dwm-wallpapers)  # Only installs wallpapers and its symlink
-            jeff_dwm_wallpapers_install
+        -jw|--jdwm-wallpapers)  # Only installs wallpapers and its symlink
+            jdwm_wallpapers_install
             DEFAULT_INSTALL=0
             shift
             ;;
@@ -423,8 +423,8 @@ while [[ $# -gt 0 ]]; do
             DEFAULT_INSTALL=0
             shift
             ;;
-        -v|--version)  # Prints jeff_dwm's version
-            echo "jeff_dwm version: $JEFF_DWM_VERSION"
+        -v|--version)  # Prints jdwm's version
+            echo "jdwm version: $JDWM_VERSION"
             exit 0
             ;;
         -h|--help)  # Help print message
@@ -447,13 +447,13 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ $DEFAULT_INSTALL -eq 1 ]]; then
-    jeff_dwm_aliases_install
-    jeff_dwm_binaries_install
-    jeff_dwm_desktop_file_install
-    jeff_dwm_configs_link
-    jeff_dwm_man_page_install
-    jeff_dwm_scripts_install
-    jeff_dwm_wallpapers_install
+    jdwm_aliases_install
+    jdwm_binaries_install
+    jdwm_desktop_file_install
+    jdwm_configs_link
+    jdwm_man_page_install
+    jdwm_scripts_install
+    jdwm_wallpapers_install
     dwm_blocks_scripts_install
     rofi_config_install
     rofi_scripts_install

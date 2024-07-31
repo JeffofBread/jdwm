@@ -109,14 +109,14 @@ static const Key keys[] = {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-                                /* jeff_dwm misc Keys: */
+                                /* jdwm misc Keys: */
 
         //Modifier              Key             Function          Argument
         { Alt,                  XK_Tab,         spawn,            SHCMD( "rofi -no-fixed-num-lines -show window -theme " ROFITHEME ) }, // Window Switcher    
         { Win,                  XK_d,           spawn,            SHCMD( "rofi -no-fixed-num-lines -show drun -theme " ROFITHEME ) }, // App Launcher
         { Win,                  XK_p,           spawn,            SHCMD( "rofi_powermenu.sh " ROFITHEME ) }, // Power Menu 
         { Win,                  XK_k,           spawn,            SHCMD( "rofi -show calc -modi calc -no-show-match -no-sort -theme " ROFITHEME ) }, // Calculator
-        { Win,                  XK_h,           spawn,            SHCMD( "rofi_jeff_dwm_theme.sh " ROFITHEME ) },
+        { Win,                  XK_h,           spawn,            SHCMD( "rofi_jdwm_theme.sh " ROFITHEME ) },
         { Win,                  XK_w,           spawn,            SHCMD( "BROWSER" ) },
         { Win,                  XK_c,           spawn,            SHCMD( "CODE_EDITOR" ) },
         { Win,                  XK_a,           spawn,            SHCMD( "FILE_MANAGER" ) },
@@ -221,7 +221,7 @@ static const Button buttons[] = {
 
         //Click          Key             Button           Function        Argument
         { WindowTitle,   0,              MiddleClick,     spawn,          SHCMD( "TERM" ) }, 
-        { LayoutSymbol,  0,              MiddleClick,     spawn,          SHCMD( "rofi_jeff_dwm_theme.sh " ROFITHEME ) },
+        { LayoutSymbol,  0,              MiddleClick,     spawn,          SHCMD( "rofi_jdwm_theme.sh " ROFITHEME ) },
         { ClientWindow,  Win,            MiddleClick,     togglefloating, {0} },
 
 
@@ -230,7 +230,7 @@ static const Button buttons[] = {
                                /* Right Mouse Button: */
 
         //Click          Key             Button           Function        Argument
-        { LayoutSymbol,  0,              RightClick,      spawn,          SHCMD( "rofi_layoutmenu.sh " ROFITHEME ) },
+        { LayoutSymbol,  0,              RightClick,      spawn,          SHCMD( "rofi_jdwm_layoutmenu.sh " ROFITHEME ) },
         { Tags,          0,              RightClick,      toggleview,     {0} },
         { ClientWindow,  Win,            RightClick,      resizemouse,    {0} },
 
