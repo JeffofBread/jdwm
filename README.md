@@ -96,7 +96,7 @@ Below are some examples of how these can be used and combined:
 
 These are all programs scripts or jeff_dwm relies on (specified in `()`) in some way or another. To not have them would severely reduce the functionality or result in the whole thing being non-functional.
 
-Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord [@jeffofbread](discordapp.com/users/361318936626724875), start a discussion here on github, or create a pull request. 
+Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord [@jeffofbread](https://discordapp.com/users/361318936626724875), start a discussion here on github, or create a pull request. 
 
 - A terminal emulator of some kind (chosen in `/jeff_dwm/dwm/resources/jeff_dwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
@@ -122,7 +122,7 @@ yay -S yajl imlib2 gcc rofi grep sed coreutils
 
 These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
 
-Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord [@jeffofbread](discordapp.com/users/361318936626724875), start a discussion here on github, or create a pull request. 
+Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord [@jeffofbread](https://discordapp.com/users/361318936626724875), start a discussion here on github, or create a pull request. 
 
 - A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
 - [jq](https://github.com/jqlang/jq) (rofi layout menu script)
@@ -292,5 +292,5 @@ All the original .diff files are located in [jeff_dwm patches branch](https://gi
 
 ## Future
 
-I still have many plans for changes and features, but currently don't have that much time to put towards this project, so don't expect too many updates, at least not rapid ones. If you would like to suggest ideas, features, or contribute, please either reach out on discord [@jeffofbread](discordapp.com/users/361318936626724875), start a discussion here on github, or create a pull request. 
+I still have many plans for changes and features, but currently don't have that much time to put towards this project, so don't expect too many updates, at least not rapid ones. If you would like to suggest ideas, features, or contribute, please either reach out on discord [@jeffofbread](https://discordapp.com/users/361318936626724875), start a discussion here on github, or create a pull request. 
 
