@@ -1,6 +1,6 @@
-# jeff_dwm | Patches branch
+# jdwm | Patches branch
  
- This branch solely exists to hold all the patches used in jeff_dwm. None of these are my own, please check out the original authors for license and other information. 
+ This branch solely exists to hold all the patches used in jdwm. None of these are my own, please check out the original authors for license and other information. 
 
 ### Warning, these are the links I **believe** I got them from, though I can not confirm 100%, as I got many of them a while ago, take these links with a grain of salt. 
 
