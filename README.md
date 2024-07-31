@@ -129,7 +129,7 @@ Also, if anyone would like to add more package managers or distros to this list,
 
 - A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
 - [jq](https://github.com/jqlang/jq) (rofi layout menu script)
-- [xrandr](https://www.x.org/wiki/Projects/XRandR/) (Monitor resolution, refresh rate, etc. Used in jeff_dwm_setup.sh)
+- [xrandr](https://www.x.org/wiki/Projects/XRandR/) (Monitor resolution, refresh rate, etc)
 - [dunst](https://github.com/dunst-project/dunst) (Desktop Notifications)
 - [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl) (Toggle mute on mic/sink binds)
 - [playerctl](https://github.com/altdesktop/playerctl) (Media control binds)
