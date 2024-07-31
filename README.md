@@ -1,8 +1,8 @@
-# jeff_dwm | wallpapers branch
+# jdwm | wallpapers branch
 
 **None of these are my own images or art, and I do not own any copyright or claim to these images.**
 
-This branch solely exists to hold wallpapers used by default themes shipped with jeff_dwm.
+This branch solely exists to hold wallpapers used by default themes shipped with jdwm.
 
 ### Below are where I found the images, not necessarily their original author (unless specifically specified)
 
