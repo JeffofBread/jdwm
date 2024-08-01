@@ -27,7 +27,6 @@
 - [resizecorners](https://dwm.suckless.org/patches/resizecorners/)
 - [restartsig](https://dwm.suckless.org/patches/restartsig/)
 - [rotatestack](https://dwm.suckless.org/patches/rotatestack/)
-- [rulerefresher](https://dwm.suckless.org/patches/rulerefresher/)
 - [scratchpad](https://dwm.suckless.org/patches/scratchpad/)
 - [shiftools](https://dwm.suckless.org/patches/shift-tools/)
 - [statuspadding](https://dwm.suckless.org/patches/statuspadding/)
