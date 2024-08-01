@@ -115,9 +115,9 @@ jdwm_man_page_uninstall(){
     echo ""
 }
 
-jdwm_rm_pathing_symlinks(){
-    echo "Removing various pathing symlinks"
-    sudo rm -f $JDWM_THEMES_DIR/wallpapers $SHARE_DIR/jdwm
+jdwm_rm_pathing_symlink(){
+    echo "Removing $SHARE_DIR/jdwm"
+    sudo rm -f $SHARE_DIR/jdwm
     echo ""
 
 }
@@ -203,7 +203,7 @@ print_help(){
     echo "   -jm, --jdwm-manual                 Removes jdwn's manual file"
     echo "                                      from $JDWM_MAN_INSTALL_DIR/man1/"
     echo ""
-    echo "   -jp, --jdwm-pathing-symlinks       Removes jdwm's pathing symlinks"
+    echo "   -jp, --jdwm-pathing-symlink        Removes jdwm's pathing symlinks"
     echo "                                      used to help it path to needed files"
     echo ""
     echo "   -js, --jdwm-scripts                Uninstalls jdwm's script files,"
@@ -245,7 +245,7 @@ print_usage(){
     echo "       [-ja] [--jdwm-aliases] [-jb] [--jdwm-binaries]"
     echo "       [-jc] [--jdwm-config-dir] [-jd] [--jdwm-desktop-file]"
     echo "       [-jh] [--jdwm-home-dir][-jm] [--j-dwm-manual] [-jp]"
-    echo "       [--jdwm-pathing-symlinks] [-js] [--jdwm-scripts]"
+    echo "       [--jdwm-pathing-symlink] [-js] [--jdwm-scripts]"
     echo "       [-ju] [--jdwm-config-unlink] [-jw] [--jdwm-wallpapers]"
     echo "       [-bs] [--dwmblocks-scripts] [-rc] [--rofi-config] [-rs]"
     echo "       [--rofi-scripts] [-rt] [--rofi-themes]"
@@ -290,8 +290,8 @@ while [[ $# -gt 0 ]]; do
             DEFAULT_UNINSTALL=0
             shift
             ;;
-        -jp|--jdwm-pathing-symlinks)  # Only removes the jdwm pathing symlinks
-            jdwm_rm_pathing_symlinks
+        -jp|--jdwm-pathing-symlink)  # Only removes the jdwm pathing symlink
+            jdwm_rm_pathing_symlink
             DEFAULT_UNINSTALL=0
             shift
             ;;

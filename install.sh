@@ -204,13 +204,6 @@ jdwm_wallpapers_install(){
         echo "Cloning jdwm_wallpapers repo into $JDWM_WALLPAPER_DIR"
         git clone https://github.com/JeffofBread/jdwm.git -b wallpapers $JDWM_WALLPAPER_DIR
     fi
-
-    if [ -L "$JDWM_THEMES_DIR/wallpapers" ] && [ -d "$JDWM_THEMES_DIR/wallpapers" ]; then
-        echo "Symbolic link to $JDWM_WALLPAPER_DIR in $JDWM_THEMES_DIR already exists, skipping creation"  
-    else
-        echo "Creating symbolic link to to $JDWM_WALLPAPER_DIR in $JDWM_THEMES_DIR called /wallpapers"
-        ln -s $JDWM_WALLPAPER_DIR $JDWM_THEMES_DIR/wallpapers
-    fi
 }
 
 dwm_blocks_scripts_install(){

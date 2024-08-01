@@ -27,6 +27,8 @@
 #include "util.h"
 
 /* macros */
+#define APPEND_(x, y, z) #x #y #z
+#define APPEND(x, y, z) APPEND_(x, y, z)
 #define BUTTONMASK (ButtonPressMask | ButtonReleaseMask)
 #define CLEANMASK(mask)                     \
 	(mask & ~(numlockmask | LockMask) & \
@@ -50,8 +52,17 @@
 			"/bin/bash", "-ic", cmd, NULL \
 		}                                     \
 	}
-
 #define SYSTEM_TRAY_REQUEST_DOCK 0
+
+// Define various paths
+// clang-format off
+#define USERHOMEDIR /home/wyatt
+#define JDWMCONFIGDIR /.config/jdwm/
+#define ROFITHEMEDIR /.config/rofi/themes/
+#define JDWMWALLPAPERDIR APPEND(USERHOMEDIR, JDWMCONFIGDIR, wallpapers)
+#define ROFITHEME APPEND(USERHOMEDIR ,ROFITHEMEDIR, ROFITHEMEFILE)
+// clang-format on
+
 /* XEMBED messages */
 #define XEMBED_EMBEDDED_NOTIFY 0
 #define XEMBED_WINDOW_ACTIVATE 1
@@ -428,16 +439,6 @@ static int unmanaged = 0; /* whether the window manager should manage the new wi
 
 // Tertiary config file
 #include <config.h>
-
-// Define complete rofi theme path
-// clang-format off
-#define ROFITHEMEDIR /home/wyatt/.config/rofi/themes/
-// clang-format on
-
-#define ROFITHEMEPATH_(x, y) #x #y
-#define ROFITHEMEPATH(x, y) ROFITHEMEPATH_(x, y)
-
-#define ROFITHEME ROFITHEMEPATH(ROFITHEMEDIR, ROFITHEMEFILE)
 
 // Sub config files
 #include <keydefs.h>

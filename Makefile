@@ -133,7 +133,7 @@ ${BLOCKS_CONFIG_DIR}/blocks.h:
 jdwm: ${JDWM_OBJ} ${JDWM_BUILD_DIR}
 	@if [ $(shell id -u) = 0 ]; then echo -e "\nMakefile needs to be run as non-root to collect $HOME bash variable. Cancelling make...\n"; exit 1; fi
 	$(PRINTF) "Linking jdwm source      (${CC}) " ${JDWM_BUILD_DIR}/jdwm
-	$Qsed -i "/#define ROFITHEMEDIR/c\#define ROFITHEMEDIR ${HOME}/.config/rofi/themes/" ${JDWM_SRC_DIR}/jdwm.c
+	$Qsed -i "/#define USERHOMEDIR/c\#define USERHOMEDIR ${HOME}" ${JDWM_SRC_DIR}/jdwm.c
 	$Q${CC} -o ${JDWM_BUILD_DIR}/$@ ${JDWM_OBJ} ${LDFLAGS}
 
 dwm-msg: ${JDWM_BUILD_DIR}/dwm-msg.o

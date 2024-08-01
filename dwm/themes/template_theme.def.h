@@ -21,7 +21,9 @@ static const char *colors[][4] = {
 };
 
 // Wallpaper command executed by execvp() on any run or restart
-char *wallpapercmd[] = { "CUSTOM", "WALLPAPER", "CMD", "HERE", NULL };
+// JDWMWALLPAPERDIR is defined automatically as `~/.config/jdwm/wallpapers`, 
+// add it as demonstrated below to get the full path to the image file. 
+char *wallpapercmd[] = { "cmd", "-flag", JDWMWALLPAPERDIR "/path/to/image.png", NULL };
 
 // Name of the rofi theme file (without path, path defined in jdwm.c, should be generic)
 #define ROFITHEMEFILE CUSTOM_ROFI_THEME_FILE_HERE.rasi
