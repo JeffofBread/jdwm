@@ -50,8 +50,6 @@
 			"/bin/bash", "-ic", cmd, NULL \
 		}                                     \
 	}
-#define ROFITHEMEPATH_(x, y) #x "/" #y
-#define ROFITHEMEPATH(x, y) ROFITHEMEPATH_(x, y)
 
 #define SYSTEM_TRAY_REQUEST_DOCK 0
 /* XEMBED messages */
@@ -433,8 +431,11 @@ static int unmanaged = 0; /* whether the window manager should manage the new wi
 
 // Define complete rofi theme path
 // clang-format off
-#define ROFITHEMEDIR /usr/local/share/jdwm/rofi/themes
+#define ROFITHEMEDIR /home/wyatt/.config/rofi/themes/
 // clang-format on
+
+#define ROFITHEMEPATH_(x, y) #x #y
+#define ROFITHEMEPATH(x, y) ROFITHEMEPATH_(x, y)
 
 #define ROFITHEME ROFITHEMEPATH(ROFITHEMEDIR, ROFITHEMEFILE)
 

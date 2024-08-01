@@ -1,2 +1,2 @@
 #!/bin/sh
-cd /usr/local/share/jdwm && sudo make install && ( exitcode=$? && read -rp "Build and install completed successfully. Press ENTER to exit terminal..." && exit $exitcode) || ( exitcode=$? && read -rp "Build Failed. Press ENTER to exit terminal..." && exit $exitcode)
+cd /usr/local/share/jdwm && make install && ( exitcode=$? && read -rp "Build and install completed successfully. Press ENTER to exit terminal..." && exit $exitcode) || ( exitcode=$? && read -rp "Build Failed. Press ENTER to exit terminal..." && exit $exitcode)

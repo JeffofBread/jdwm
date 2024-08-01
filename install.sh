@@ -264,15 +264,6 @@ rofi_theme_install(){
     echo -e "\nRofi themes are being installed to $ROFI_THEMES_INSTALL_DIR from $ROFI_THEMES_DIR.\nThemes being installed:\n"
     ls | grep -E '\.rasi$' | sed -e 's/^/     #) /'
     echo ""
-
-    # I know the below solution is shit, im just lazy and this works
-    if [ -L "$ROFI_DIR/roficonfigdir" ] && [ -d "$ROFI_DIR/roficonfigdir" ]; then
-        echo "Symbolic link to $ROFI_CONFIG_INSTALL_DIR in $ROFI_DIR already exists, skipping creation"  
-    else
-        echo "Creating symbolic link to to $ROFI_CONFIG_INSTALL_DIR in $ROFI_DIR called /roficonfigdir"
-        ln -s $ROFI_CONFIG_INSTALL_DIR $ROFI_DIR/roficonfigdir
-    fi
-    echo ""
 }
 
 print_help(){
