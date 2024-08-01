@@ -66,14 +66,6 @@
 #define VERSION_MINOR 0
 #define XEMBED_EMBEDDED_VERSION (VERSION_MAJOR << 16) | VERSION_MINOR
 
-// Decor hints patch
-#define MWM_HINTS_FLAGS_FIELD 0
-#define MWM_HINTS_DECORATIONS_FIELD 2
-#define MWM_HINTS_DECORATIONS (1 << 1)
-#define MWM_DECOR_ALL (1 << 0)
-#define MWM_DECOR_BORDER (1 << 1)
-#define MWM_DECOR_TITLE (1 << 3)
-
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum {
@@ -372,7 +364,6 @@ static void updateclientlist(void);
 static void updatecurrentdesktop(void);
 static int updategeom(void);
 static void updateicon(Client *c);
-static void updatemotifhints(Client *c);
 static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
 static void updatestatus(void);
@@ -420,7 +411,7 @@ static void (*handler[LASTEvent])(XEvent *) = { [ButtonPress] = buttonpress,
 						[PropertyNotify] = propertynotify,
 						[ResizeRequest] = resizerequest,
 						[UnmapNotify] = unmapnotify };
-static Atom wmatom[WMLast], netatom[NetLast], xatom[XLast], motifatom;
+static Atom wmatom[WMLast], netatom[NetLast], xatom[XLast];
 static int epoll_fd;
 static int dpy_fd;
 static int restart = 0;
@@ -2176,7 +2167,6 @@ void manage(Window w, XWindowAttributes *wa)
 	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2; /*  */
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
 	configure(c); /* propagates border_width, if size doesn't change */
-	updatemotifhints(c);
 	XSelectInput(dpy, w, EnterWindowMask | FocusChangeMask | PropertyChangeMask | StructureNotifyMask);
 	grabbuttons(c, 0);
 	attach(c);
@@ -2425,7 +2415,6 @@ void propertynotify(XEvent *e)
 			if (c == c->mon->sel) drawbar(c->mon);
 		}
 		if (ev->atom == netatom[NetWMWindowType]) updatewindowtype(c);
-		if (ev->atom == motifatom) updatemotifhints(c);
 	}
 }
 
@@ -2992,7 +2981,6 @@ void setup(void)
 	xatom[Xembed] = XInternAtom(dpy, "_XEMBED", False);
 	xatom[XembedInfo] = XInternAtom(dpy, "_XEMBED_INFO", False);
 	netatom[NetClientInfo] = XInternAtom(dpy, "_NET_CLIENT_INFO", False);
-	motifatom = XInternAtom(dpy, "_MOTIF_WM_HINTS", False);
 	/* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
@@ -3687,42 +3675,6 @@ void updateicon(Client *c)
 {
 	freeicon(c);
 	c->icon = geticonprop(c->win, &c->icw, &c->ich);
-}
-
-void updatemotifhints(Client *c)
-{
-	Atom real;
-	int format;
-	unsigned char *p = NULL;
-	unsigned long n, extra;
-	unsigned long *motif;
-	int width, height;
-
-	if (!decorhints) return;
-
-	if (XGetWindowProperty(dpy, c->win, motifatom, 0L, 5L, False, motifatom, &real, &format, &n, &extra, &p) ==
-		    Success &&
-	    p != NULL) {
-		motif = (unsigned long *)p;
-		if (motif[MWM_HINTS_FLAGS_FIELD] & MWM_HINTS_DECORATIONS) {
-			width = WIDTH(c);
-			height = HEIGHT(c);
-
-			if (motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_ALL ||
-			    motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_BORDER ||
-			    motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_TITLE)
-				if (c->isfloating) {
-					c->bw = c->oldbw = fborderpx;
-				} else {
-					c->bw = c->oldbw = borderpx;
-				}
-			else
-				c->bw = c->oldbw = 0;
-
-			resize(c, c->x, c->y, width - (2 * c->bw), height - (2 * c->bw), 0);
-		}
-		XFree(p);
-	}
 }
 
 void updatenumlockmask(void)

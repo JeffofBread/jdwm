@@ -124,7 +124,6 @@ static const Rule rules[] = {
 static const float mfact          = 0.5;  /* factor of master area size [0.05..0.95]      */
 static const int   nmaster        = 1;    /* number of clients in master area             */
 static const int   resizehints    = 1;    /* 1 means respect size hints in tiled resizals */
-static const int   decorhints     = 1;    /* 1 means respect decoration hints             */
 static const int   lockfullscreen = 1;    /* 1 will force focus on the fullscreen window  */
 static const unsigned int gappih  = 10;   /* horiz inner gap between windows */
 static const unsigned int gappiv  = 10;   /* vert inner gap between windows */

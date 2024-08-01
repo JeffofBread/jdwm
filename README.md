@@ -243,7 +243,7 @@ Button + Keybind | Bar Section | Action
 
 ## Patches
 
-All the original .diff files are located in [jdwm patches branch](https://github.com/JeffofBread/jdwm/tree/patches). Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together, so the .diff files may not represent exactly what is present in jdwm. These changes are to be expected when adding 35 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember exactly which, though I have tried my best to provide links below. Also, major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
+All the original .diff files are located in [jdwm patches branch](https://github.com/JeffofBread/jdwm/tree/patches). Needless to say that a lot of tweaks had to be made to many of these patches when implemented to make them all work together, so the .diff files may not represent exactly what is present in jdwm. These changes are to be expected when adding 34 patches on top of each other, and is not a fault of the original authors. Also, many of these patches were pulled from [bakkeby's](https://github.com/bakkeby) incredible [flexipatch](https://github.com/bakkeby/dwm-flexipatch), but I frankly don't remember exactly which, though I have tried my best to provide links below. Also, major thanks to [bakkeby](https://github.com/bakkeby) and [FT-Labs](https://github.com/FT-Labs) for help with a few problems as well as for making their own builds of dwm, which I shamelessly pulled from.
 
 
 <details><summary><b>Patches integrated in jdwm</b></summary>
@@ -255,7 +255,6 @@ All the original .diff files are located in [jdwm patches branch](https://github
 - [centeredwindowname](https://dwm.suckless.org/patches/centeredwindowname/)
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
 - [cursorwarp](https://dwm.suckless.org/patches/cursorwarp/)
-- [decorhints](https://dwm.suckless.org/patches/decoration_hints/)
 - [desktopicons](https://github.com/bakkeby/patches/blob/master/dwm/dwm-desktop_icons-6.5.diff)
 - [dragmfacts](https://dwm.suckless.org/patches/dragmfact/)
 - [ewmhtags](https://dwm.suckless.org/patches/ewmhtags/)
