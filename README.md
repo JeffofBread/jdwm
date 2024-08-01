@@ -10,7 +10,6 @@
 - [centeredwindowname](https://dwm.suckless.org/patches/centeredwindowname/)
 - [colorbar](https://dwm.suckless.org/patches/colorbar/)
 - [cursorwarp](https://dwm.suckless.org/patches/cursorwarp/)
-- [decorhints](https://dwm.suckless.org/patches/decoration_hints/)
 - [desktopicons](https://github.com/bakkeby/patches/blob/master/dwm/dwm-desktop_icons-6.5.diff)
 - [dragmfacts](https://dwm.suckless.org/patches/dragmfact/)
 - [ewmhtags](https://dwm.suckless.org/patches/ewmhtags/)
