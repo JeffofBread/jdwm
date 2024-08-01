@@ -128,7 +128,7 @@ jdwm_aliases_install(){
 
 jdwm_binaries_install(){
     echo -e "\n|--------- jdwm binaries ---------|\n"
-    sudo make install
+    make install   
     echo ""
 }
 
