@@ -58,7 +58,7 @@ Below are some examples of how these can be used and combined:
  - jdwm binaries (`jdwm`, `dwm-msg`, and `dwmblocks`) from `/usr/local/bin/`
  - All scripts (with the `.sh` extension) present in `/jdwm/dwm/scripts/`, `/jdwm/dwmblocks/scripts/`, and `/jdwm/rofi/scripts/`, from `/usr/local/bin/`
  - Any and all files present in `~/.config/jdwm/`
- - Pathing symlinks (`/usr/local/share/jdwm`, `/jdwm/dwm/config/jdwmconfigdir`, `/jdwm/rofi/roficonfigdir`, and `/jdwm/dwm/themes/wallpapers`)
+ - Pathing symlinks (`/usr/local/share/jdwm`, `/jdwm/rofi/roficonfigdir`, and `/jdwm/dwm/themes/wallpapers`)
  - jdwm manual (`/usr/local/share/man/man1/jdwm.1`) and desktop file (`/usr/share/xsessions/jdwm.desktop`)
  - rofi config (`~/.config/rofi/config.rasi`') and all themes (with `.rasi` extension) present in `/jdwm/rofi/themes/` from `~/.config/rofi/themes/`
 

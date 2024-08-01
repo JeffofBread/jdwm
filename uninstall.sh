@@ -117,7 +117,7 @@ jdwm_man_page_uninstall(){
 
 jdwm_rm_pathing_symlinks(){
     echo "Removing various pathing symlinks"
-    sudo rm -f $JDWM_CONFIG_DIR/jdwmconfigdir $JDWM_THEMES_DIR/wallpapers $ROFI_DIR/roficonfigdir $SHARE_DIR/jdwm
+    sudo rm -f $JDWM_THEMES_DIR/wallpapers $ROFI_DIR/roficonfigdir $SHARE_DIR/jdwm
     echo ""
 
 }

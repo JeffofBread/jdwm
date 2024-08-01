@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Variable to hold themes path
+JDWM_USER_CONFIG_DIR=$HOME/.config/jdwm
 JDWM_DIR=/usr/local/share/jdwm
 DWM_DIR=$JDWM_DIR/dwm
 THEMES_DIR=$DWM_DIR/themes
@@ -8,16 +9,10 @@ CONFIG_DIR=$DWM_DIR/config
 ALIAS_FOUND=0;
 
 
-if [ -f "$CONFIG_DIR/jdwmconfigdir/jdwm.aliases" ]; then
+if [ -f "$JDWM_USER_CONFIG_DIR/jdwm.aliases" ]; then
     shopt -s expand_aliases
-    source $CONFIG_DIR/jdwmconfigdir/jdwm.aliases
+    source $JDWM_USER_CONFIG_DIR/jdwm.aliases
     ALIAS_FOUND=1
-fi
-
-
-if [ ! -L "$CONFIG_DIR/jdwmconfigdir" ] && [ ! -d "$CONFIG_DIR/jdwmconfigdir" ]; then
-    echo "Creating symbolic link to to $HOME/.config/jdwm in $$CONFIG_DIR called /jdwmconfigdir"
-    ln -s $HOME/.config/jdwm $CONFIG_DIR/jdwmconfigdir
 fi
 
 # Array of theme filenames
@@ -81,7 +76,7 @@ else
     choice="$(echo -e "Yes\nNo" | rofi -dmenu -p "Error: " -mesg "Unable to compile jdwm. Would you like to see the errors?" -theme $1)"
     if [[ "$choice" == "Yes" ]]; then
         if [[ $ALIAS_FOUND -eq 0 ]]; then
-            echo -e "Ok" | rofi -dmenu -p "Error: " -mesg "$CONFIG_DIR/jdwmconfigdir/jdwm.aliases could not be found, therefore RECOMPILE_TERM could not be opened to view make errors." -theme $1
+            echo -e "Ok" | rofi -dmenu -p "Error: " -mesg "$JDWM_USER_CONFIG_DIR/jdwm.aliases could not be found, therefore RECOMPILE_TERM could not be opened to view make errors." -theme $1
             exit 1
         else 
             RECOMPILE_TERM

@@ -151,13 +151,6 @@ jdwm_configs_link(){
     check_and_link "$JDWM_CONFIG_DIR/config" "config"
     check_and_link "$JDWM_CONFIG_DIR/keydefs" "keydefs"
     check_and_link "$DWM_BLOCKS_CONFIG_DIR/blocks" "blocks"
-
-    if [ -L "$JDWM_CONFIG_DIR/jdwmconfigdir" ] && [ -d "$JDWM_CONFIG_DIR/jdwmconfigdir" ]; then
-        echo "Symbolic link to $JDWM_USER_CONFIG_DIR in $JDWM_CONFIG_DIR already exists, skipping creation"  
-    else
-        echo "Creating symbolic link to to $JDWM_USER_CONFIG_DIR in $JDWM_CONFIG_DIR called /jdwmconfigdir"
-        ln -s $JDWM_USER_CONFIG_DIR $JDWM_CONFIG_DIR/jdwmconfigdir
-    fi
     
     echo ""
 }
