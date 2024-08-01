@@ -160,19 +160,21 @@ clean: jdwm_clean dwm-msg_clean dwmblocks_clean
 
 jdwm_install: jdwm
 	$(PRINTF) "Install jdwm binary           " ${DESTDIR}${PREFIX}/jdwm
-	$Qmkdir -p ${DESTDIR}${PREFIX}
-	$Qcp -f ${JDWM_BUILD_DIR}/jdwm ${DESTDIR}${PREFIX}
-	$Qchmod 755 ${DESTDIR}${PREFIX}/jdwm
+	$Qsudo mkdir -p ${DESTDIR}${PREFIX}
+	$Qsudo cp -f ${JDWM_BUILD_DIR}/jdwm ${DESTDIR}${PREFIX}
+	$Qsudo chmod 755 ${DESTDIR}${PREFIX}/jdwm
 
 dwm-msg_install: dwm-msg
 	$(PRINTF) "Install dwm-msg binary        " ${DESTDIR}${PREFIX}/dwm-msg
-	$Qcp -f ${JDWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}
-	$Qchmod 755 ${DESTDIR}${PREFIX}/dwm-msg
+	$Qsudo mkdir -p ${DESTDIR}${PREFIX}
+	$Qsudo cp -f ${JDWM_BUILD_DIR}/dwm-msg ${DESTDIR}${PREFIX}
+	$Qsudo chmod 755 ${DESTDIR}${PREFIX}/dwm-msg
 
 dwmblocks_install: dwmblocks
 	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/dwmblocks
-	$Qcp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}
-	$Qchmod 755 ${DESTDIR}${PREFIX}/dwmblocks
+	$Qsudo mkdir -p ${DESTDIR}${PREFIX}
+	$Qsudo cp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}
+	$Qsudo chmod 755 ${DESTDIR}${PREFIX}/dwmblocks
 
 install: jdwm_install dwm-msg_install dwmblocks_install
 
