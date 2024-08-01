@@ -182,15 +182,15 @@ install: jdwm_install dwm-msg_install dwmblocks_install
 
 jdwm_uninstall:
 	$(PRINTF) "Removing jdwm bin file    " ${DESTDIR}${PREFIX}/jdwm
-	$Qrm -f ${DESTDIR}${PREFIX}/jdwm
+	$Qsudo rm -f ${DESTDIR}${PREFIX}/jdwm
 
 dwm-msg_uninstall:
 	$(PRINTF) "Removing dwm-msg bin file     " ${DESTDIR}${PREFIX}/dwm-msg
-	$Qrm -f ${DESTDIR}${PREFIX}/dwm-msg
+	$Qsudo rm -f ${DESTDIR}${PREFIX}/dwm-msg
 
 dwmblocks_uninstall:
 	$(PRINTF) "Removing dwmblocks bin file   " ${DESTDIR}${PREFIX}/dwmblocks
-	$Qrm -f ${DESTDIR}${PREFIX}/dwmblocks
+	$Qsudo rm -f ${DESTDIR}${PREFIX}/dwmblocks
 
 uninstall: jdwm_uninstall dwm-msg_uninstall dwmblocks_uninstall
 

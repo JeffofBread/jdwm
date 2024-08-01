@@ -68,7 +68,7 @@ jdwm_aliases_uninstall(){
 }
 
 jdwm_binaries_uninstall(){
-    sudo make uninstall
+    make uninstall
     echo ""
 }
 
