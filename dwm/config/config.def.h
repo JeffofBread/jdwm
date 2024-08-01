@@ -100,8 +100,10 @@ static const Rule rules[] = {
         // The below are my personal examples, feel free to remove them: 
         /* class                instance    title       tags mask       isfloating       monitor        ignoretransient     unmanaged */
         { "Rofi",               NULL,       NULL,       0,              1,              -1,             0,                  0 },
+        //{ "Protonvpn",          NULL,       NULL,       0,              1,              -1,             0,                  0 },
         //{ "discord",            NULL,       NULL,       1,              0,               1,             0,                  0 },
-        //{ "firefox",            NULL,       NULL,       2,              0,               1,             0,                  0 },
+        //{ "Spotify",            NULL,       NULL,       2,              0,               1,             0,                  0 },
+        //{ "firefox",            NULL,       NULL,       4,              0,               1,             0,                  0 },
         //{ "VSCodium",           NULL,       NULL,       1,              0,               0,             0,                  0 },
         //{ "obsidian",           NULL,       NULL,       2,              0,               0,             0,                  0 },
 };
