@@ -12,6 +12,9 @@ PARENT_DIR=$(pwd)
 BIN_INSTALL_DIR="/usr/local/bin"
 SHARE_DIR="/usr/local/share"
 USERS_DIR=$HOME
+REQ_DEPS_MISSING=0
+OPT_DEPS_MISSING=0
+SKIP_DEPS=0
 
 ########################################################
 
@@ -76,6 +79,75 @@ check_and_link(){
         echo "Symbolic link to $1.h being created in $JDWM_USER_CONFIG_DIR/"
         ln -s $1.h $JDWM_USER_CONFIG_DIR/$2.h &>/dev/null
     fi
+}
+
+check_dep(){
+    if ! cmd="$(type -p "$1")" || [[ -z $cmd ]]; then
+        echo "Dependency '$1' not found, please install. Here is a link to help: $2"
+        if [[ $3 -eq 1 ]]; then
+            REQ_DEPS_MISSING=$(( $REQ_DEPS_MISSING + 1 ))
+        else
+            OPT_DEPS_MISSING=$(( $OPT_DEPS_MISSING + 1 ))
+        fi
+    else 
+        echo "Dependency '$1' successfully found"
+    fi
+}
+
+check_opt_deps(){
+    check_dep "jq" "https://github.com/jqlang/jq" "0"
+    check_dep "xrandr" "https://www.x.org/wiki/Projects/XRandR/" "0"
+    check_dep "dunst" "https://github.com/dunst-project/dunst" "0"
+    check_dep "pactl" "https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl" "0"
+    check_dep "playerctl" "https://github.com/altdesktop/playerctl" "0"
+    check_dep "pamixer" "https://github.com/cdemoulins/pamixer" "0"
+    check_dep "xbacklight" "https://www.x.org/releases/X11R7.6/doc/man/man1/xbacklight.1.xhtml" "0"
+    check_dep "betterlockscreen" "https://github.com/betterlockscreen/betterlockscreen" "0"
+    echo "rofi calc is untestable without launching the rofi window itself, therefor is avoided in this script" "0"
+    echo "Please check yourself with the command 'rofi -show calc -modi calc -no-show-match -no-sort'" "0"
+
+    if [[ $OPT_DEPS_MISSING -eq 0 ]]; then
+        echo -e "\nNo optional dependencies missing\n"
+    elif [[ $OPT_DEPS_MISSING -eq 1 ]]; then
+        echo -e "\nOptional dependency missing, please make sure you understand what features are effected this missing dependency."
+        echo -e "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#recommended-programs\n"
+    else
+        echo -e "\nMultiple optional dependencies missing, please make sure you understand what features are effected by these missing dependencies."
+        echo -e "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#recommended-programs\n"
+    fi
+}
+
+check_req_deps(){
+    check_dep "feh" "https://feh.finalrewind.org/" "1"
+    check_dep "rofi" "https://github.com/davatorium/rofi" "1"
+    check_dep "grep" "https://www.gnu.org/software/grep/manual/grep.html" "1"
+    check_dep "sed" "https://www.gnu.org/software/sed/manual/sed.html" "1"
+    check_dep "cut" "https://www.gnu.org/software/coreutils/cut" "1"
+
+    if [[ $REQ_DEPS_MISSING -eq 0 ]]; then
+        echo -e "\nNo required dependencies missing. Continuing install\n"
+    elif [[ $REQ_DEPS_MISSING -eq 1 ]]; then
+        echo -e "\nRequired dependency missing, please install it. Critical functions may not work otherwise."
+        echo "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#dependencies"
+        echo -e "Cancelling install...\n"
+        exit 1
+    else
+        echo -e "\nRequired dependencies missing, please install these. Critical functions may not work otherwise."
+        echo "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#dependencies"
+        echo -e "Cancelling install...\n"
+        exit 1
+    fi
+}
+
+check_deps(){
+    echo -e "\n|------ jdwm dependencies --------|\n"
+    if [[ $SKIP_DEPS -eq 1 ]]; then
+        echo -e "\nSkipping checking for dependencies, be warned, could lead to errors if missing dependencies aren't found"
+    else
+        check_req_deps
+        check_opt_deps
+    fi
+    echo ""
 }
 
 copyexamplescripts(){
@@ -277,6 +349,12 @@ print_help(){
     echo "   -v,  --version                     Prints jdwm's version, same as"
     echo "                                      'jdwm -v'"
     echo ""
+    echo "   -d,  --check-dependencies          Checks for the presence of any"
+    echo "                                      requried or optional dependencies"
+    echo ""
+    echo "   -sd, --skip-dependencies           Skips checking for any requried"
+    echo "                                      or optional dependencies"
+    echo ""
     echo "   -ja, --jdwm-aliases                Installs jdwm alias file to"
     echo "                                      ~/.config/jdwm/"
     echo ""
@@ -328,6 +406,7 @@ print_help(){
 print_usage(){
     echo ""
     echo "Usage: install.sh [-h] [--help] [-u] [--usage] [-v] [--version]"
+    echo "       [-d] [--check-dependencies] [-sd] [--skip-dependencies]"
     echo "       [-ja] [--jdwm-aliases] [-jb] [--jdwm-binaries]"
     echo "       [-jc] [--jdwm-config-link ] [-jd] [--jdesktop-file]"
     echo "       [-jm] [--jdwm-manual] [-js] [--jdwm-scripts]"
@@ -345,6 +424,15 @@ POSITIONAL_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case $1 in
+        -d|--check-dependencies)  # Check dependencies
+            check_deps
+            DEFAULT_INSTALL=0
+            shift
+            ;;
+        -sd|--skip-dependencies)  # Ignore dependencies check
+            SKIP_DEPS=1
+            shift
+            ;;
         -ja|--jdwm-aliases)  # Only installs the custom alias file
             jdwm_aliases_install
             DEFAULT_INSTALL=0
@@ -424,6 +512,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ $DEFAULT_INSTALL -eq 1 ]]; then
+    check_deps
     jdwm_aliases_install
     jdwm_binaries_install
     jdwm_desktop_file_install
