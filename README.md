@@ -137,6 +137,9 @@ Also, if anyone would like to add more package managers or distros to this list,
 - [xbacklight](https://www.x.org/releases/X11R7.6/doc/man/man1/xbacklight.1.xhtml) (For dwmblocks sb-battery screen brightness functionality)
 - [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) (For rofi powermenu script)
 - [rofi-calc](https://github.com/svenstaro/rofi-calc/tree/master?tab=readme-ov-file) (Calculator bind)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/) (jdwm.aliases, used as the default browser)
+- [VSCodium](https://vscodium.com/) (jdwm.aliases, used as the default text editor)
+- [Thunar](https://docs.xfce.org/xfce/thunar/start) (jdwm.aliases, used as the default file browser)
 
 <details><summary><b>Arch</b></summary>
 

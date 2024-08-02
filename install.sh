@@ -83,14 +83,19 @@ check_and_link(){
 
 check_dep(){
     if ! cmd="$(type -p "$1")" || [[ -z $cmd ]]; then
-        echo "Dependency '$1' not found, please install. Here is a link to help: $2"
         if [[ $3 -eq 1 ]]; then
+            echo "Required dependency '$1' not found, please install. Here is a link to help: $2"
             REQ_DEPS_MISSING=$(( $REQ_DEPS_MISSING + 1 ))
         else
+            echo "Optional dependency '$1' not found, please install. Here is a link to help: $2"
             OPT_DEPS_MISSING=$(( $OPT_DEPS_MISSING + 1 ))
         fi
     else 
-        echo "Dependency '$1' successfully found"
+        if [[ $3 -eq 1 ]]; then
+            echo "Required dependency '$1' successfully found"
+        else 
+            echo "Optional dependency '$1' successfully found"
+        fi
     fi
 }
 
@@ -103,17 +108,21 @@ check_opt_deps(){
     check_dep "pamixer" "https://github.com/cdemoulins/pamixer" "0"
     check_dep "xbacklight" "https://www.x.org/releases/X11R7.6/doc/man/man1/xbacklight.1.xhtml" "0"
     check_dep "betterlockscreen" "https://github.com/betterlockscreen/betterlockscreen" "0"
-    echo "rofi calc is untestable without launching the rofi window itself, therefor is avoided in this script" "0"
-    echo "Please check yourself with the command 'rofi -show calc -modi calc -no-show-match -no-sort'" "0"
+    check_dep "firefox" "https://www.mozilla.org/en-US/firefox/new/" "0"
+    check_dep "vscodium" "https://vscodium.com/" "0"
+    check_dep "thunar" "https://docs.xfce.org/xfce/thunar/start" "0"
+
+    echo -e "\nrofi calc is untestable without launching the rofi window itself, therefor is avoided in this script"
+    echo "Please check yourself with the command 'rofi -show calc -modi calc -no-show-match -no-sort'"
 
     if [[ $OPT_DEPS_MISSING -eq 0 ]]; then
-        echo -e "\nNo optional dependencies missing\n"
+        echo -e "\nNo optional dependencies missing"
     elif [[ $OPT_DEPS_MISSING -eq 1 ]]; then
         echo -e "\nOptional dependency missing, please make sure you understand what features are effected this missing dependency."
-        echo -e "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#recommended-programs\n"
+        echo -e "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#recommended-programs"
     else
         echo -e "\nMultiple optional dependencies missing, please make sure you understand what features are effected by these missing dependencies."
-        echo -e "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#recommended-programs\n"
+        echo -e "To learn more, please check https://github.com/JeffofBread/jdwm/tree/master?tab=readme-ov-file#recommended-programs"
     fi
 }
 
@@ -525,5 +534,3 @@ if [[ $DEFAULT_INSTALL -eq 1 ]]; then
     rofi_scripts_install
     rofi_theme_install
 fi
-
-echo ""
