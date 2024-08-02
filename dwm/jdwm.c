@@ -225,7 +225,6 @@ struct Systray {
 
 struct arguments {
 	char *args[1];
-	int firstrun;
 };
 
 /* function declarations */
@@ -4028,7 +4027,6 @@ static char args_doc[] = "";
 static struct argp_option options[] = {
 	{ "first-run", 'F', 0, 0, "Execute dwm along with all programs defined in the array startonce in autostart.h" },
 	{ "simple-version", 'v', 0, 0, "Simplified version output" },
-	{ "simple-execute", 's', 0, 0, "Basic execute, avoids starting any programs in autostart.h. Only for debug" },
 	{ 0 }
 };
 static struct argp argp = { options, parse_opt, args_doc, doc };
@@ -4039,9 +4037,6 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
 	switch (key) {
 	case 'F':
 		firstrun = 1;
-		break;
-	case 's':
-		firstrun = -1;
 		break;
 	case 'v':
 		printf("%s", VERSION);
@@ -4065,7 +4060,6 @@ int main(int argc, char *argv[])
 {
 	// GNU arg parser
 	struct arguments arguments;
-	arguments.firstrun = 0;
 	argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
 	if (firstrun) {
