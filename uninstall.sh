@@ -62,8 +62,9 @@ file_uninstaller(){
 }
 
 jdwm_aliases_uninstall(){
-    echo "Removing jdwm's alias file: $JDWM_USER_CONFIG_DIR/jdwm.aliases"
+    echo "Removing jdwm's alias file: $JDWM_USER_CONFIG_DIR/jdwm.aliases and its reference in $USERS_DIR/.bashrc"
     sudo rm -f $JDWM_USER_CONFIG_DIR/jdwm.aliases
+    sed -i '/jdwm.aliases/d' $USERS_DIR/.bashrc
     echo ""
 }
 
