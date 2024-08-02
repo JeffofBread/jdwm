@@ -255,6 +255,8 @@ print_usage(){
 
 ########################################################
 
+echo ""
+
 DEFAULT_UNINSTALL=1
 
 POSITIONAL_ARGS=()
