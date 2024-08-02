@@ -8,7 +8,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
 ## Install
 
 **Notes before you install:**
- - Make sure you have all the necessary [dependencies](#dependencies), or issues could occur during installation.
+ - Make sure you have all the necessary [required dependencies](#required-dependencies), or issues could occur during installation.
  - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified at the start of the script.
  - To edit things like your terminal alias before installation, edit `/jdwm/dwm/resources/jdwm.aliases`. This can also be done after installation by going to `~/.config/jdwm/jdwm.aliases`
  - To edit what programs autostart with jdwm copy `/jdwm/dwm/scripts/jdwm_autostarts.example` as `/jdwm/dwm/scripts/jdwm_autostarts.sh` and put whatever commands/programs you want started in there. It will be installed along with other scripts to `/usr/local/bin` and run at login.
@@ -93,7 +93,7 @@ Below are some examples of how these can be used and combined:
 ```
 </details>
 
-## Dependencies
+## Required Dependencies
 
 These are all programs or libraries jdwm relies on (specified in `()`) in some way or another. To not have them would severely reduce the functionality or result in the whole thing being non-functional.
 
@@ -121,7 +121,7 @@ yay -S yajl imlib2 gcc feh rofi grep sed coreutils
 
 </details>
 
-## Recommended Programs
+## Optional Dependencies
 
 These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
 
@@ -143,15 +143,15 @@ Also, if anyone would like to add more package managers or distros to this list,
 
 <details><summary><b>Arch</b></summary>
 
-(Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) because it's an AUR)
+(Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) and [VSCodium](https://vscodium.com/) because they are AURs)
 ```bash
-sudo pacman -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight rofi-calc
+sudo pacman -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight rofi-calc firefox thunar
 ```
 
 or
 
 ```bash
-yay -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight betterlockscreen rofi-calc
+yay -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight betterlockscreen rofi-calc firefox vscodium-bin thunar
 ```
 
 </details>
