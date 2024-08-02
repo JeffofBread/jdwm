@@ -202,7 +202,7 @@ jdwm_aliases_install(){
         echo "jdwm.aliases already present in .bashrc, skipping addition"
     else
         echo "Adding link to $JDWM_USER_CONFIG_DIR/jdwm.aliases in .bashrc"
-        echo -e "\n\n#jdwm.aliases\n. $JDWM_USER_CONFIG_DIR/jdwm.aliases" >> $USERS_DIR/.bashrc
+        echo -e "\n#jdwm.aliases\n. $JDWM_USER_CONFIG_DIR/jdwm.aliases" >> $USERS_DIR/.bashrc
     fi
     echo ""
 }
