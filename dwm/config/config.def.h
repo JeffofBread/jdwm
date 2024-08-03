@@ -99,9 +99,9 @@ static const Rule rules[] = {
 
         // The below are my personal examples, feel free to remove them: 
         /* class                instance    title           tags mask       isfloating       monitor        ignoretransient     unmanaged */
+        { NULL,                 NULL,       scratchpadname, 0,              1,              -1,             0,                  0 }, // Used for scratchpad, don't remove
         { "Rofi",               NULL,       NULL,           0,              1,              -1,             0,                  0 },
         { "Protonvpn",          NULL,       NULL,           0,              1,              -1,             0,                  0 },
-        { NULL,                 NULL,       scratchpadname, 0,              1,              -1,             0,                  0 },
         //{ "discord",            NULL,       NULL,          1,              0,               1,             0,                  0 },
         //{ "Spotify",            NULL,       NULL,          2,              0,               1,             0,                  0 },
         //{ "firefox",            NULL,       NULL,          4,              0,               1,             0,                  0 },

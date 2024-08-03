@@ -2820,7 +2820,7 @@ void setfullscreen(Client *c, int fullscreen)
 	if (savestate && !(c->oldstate & (1 << 1))) {
 		c->oldbw = c->bw;
 		c->oldstate = c->isfloating | (1 << 1);
-        c->oldfx = c->x;
+		c->oldfx = c->x;
 		c->oldfy = c->y;
 		c->oldfw = c->w;
 		c->oldfh = c->h;
@@ -2837,14 +2837,14 @@ void setfullscreen(Client *c, int fullscreen)
          * height and width may be larger than the monitor's window area, so we cap that by
          * ensuring max / min values. */
 		if (c->isfloating) {
-		    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
-		    c->bw = fborderpx;
-		    configure(c);
-		    int borderdiff = (fborderpx - borderpx) * 2;
-		    resize(c, c->oldfx, c->oldfy, c->oldfw - borderdiff, c->oldfh - borderdiff, 0);
+			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
+			c->bw = fborderpx;
+			configure(c);
+			int borderdiff = (fborderpx - borderpx) * 2;
+			resize(c, c->oldfx, c->oldfy, c->oldfw - borderdiff, c->oldfh - borderdiff, 0);
 			restack(c->mon);
 		} else
-		    arrange(c->mon);
+			arrange(c->mon);
 	} else
 		resizeclient(c, c->x, c->y, c->w, c->h);
 
