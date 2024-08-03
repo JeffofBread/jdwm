@@ -3231,7 +3231,6 @@ void sigterm(int unused)
 void spawn(const Arg *arg)
 {
 	struct sigaction sa;
-	selmon->tagset[selmon->seltags] &= ~scratchtag;
 	if (fork() == 0) {
 		if (dpy) close(ConnectionNumber(dpy));
 		setsid();
