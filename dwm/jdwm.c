@@ -56,7 +56,6 @@
 
 // Define various paths
 // clang-format off
-#define USERHOMEDIR
 #define JDWMCONFIGDIR /.config/jdwm/
 #define ROFITHEMEDIR /.config/rofi/themes/
 #define JDWMWALLPAPERDIR APPEND(USERHOMEDIR, JDWMCONFIGDIR, wallpapers)

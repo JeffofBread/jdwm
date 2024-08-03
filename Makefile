@@ -39,7 +39,7 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2 ${YA
 # DEBUGFLAG = -ggdb # Debug flag to allow you to debug dwm with gdb
 DEBUGFLAG = -g  # Default flag, use if you are not debugging dwm
 
-CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" -DUSERHOMEDIR=\"${HOME}\" ${XINERAMAFLAGS}
 CFLAGS   = ${DEBUGFLAG} -std=c99 -pedantic -Wall -O3 -Wno-unused-function -Wno-deprecated-declarations -march=native ${INCS} ${CPPFLAGS}
 LDFLAGS  = ${LIBS}
 
@@ -133,7 +133,6 @@ ${BLOCKS_CONFIG_DIR}/blocks.h:
 jdwm: ${JDWM_OBJ} ${JDWM_BUILD_DIR}
 	@if [ $(shell id -u) = 0 ]; then echo -e "\nMakefile needs to be run as non-root to collect $HOME bash variable. Cancelling make...\n"; exit 1; fi
 	$(PRINTF) "Linking jdwm source      (${CC}) " ${JDWM_BUILD_DIR}/jdwm
-	$Qsed -i "/#define USERHOMEDIR/c\#define USERHOMEDIR ${HOME}" ${JDWM_SRC_DIR}/jdwm.c
 	$Q${CC} -o ${JDWM_BUILD_DIR}/$@ ${JDWM_OBJ} ${LDFLAGS}
 
 dwm-msg: ${JDWM_BUILD_DIR}/dwm-msg.o
