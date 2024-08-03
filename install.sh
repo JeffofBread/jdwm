@@ -71,14 +71,8 @@ check_and_link(){
         fi
     fi
 
-    jdwm_check_config_dir
-
-    if [ -L "$JDWM_USER_CONFIG_DIR/$2.h" ]; then
-        echo "Symbolic link to $1.h in $JDWM_USER_CONFIG_DIR/ already exists, skipping creation"
-    else
-        echo "Symbolic link to $1.h being created in $JDWM_USER_CONFIG_DIR/"
-        ln -s $1.h $JDWM_USER_CONFIG_DIR/$2.h &>/dev/null
-    fi
+    echo "Symbolic link to $1.h being created in $JDWM_USER_CONFIG_DIR/"
+    ln -s $1.h $JDWM_USER_CONFIG_DIR/$2.h &>/dev/null
 }
 
 check_dep(){
@@ -223,8 +217,8 @@ jdwm_check_config_dir(){
     fi
 }
 
-jdwm_configs_link(){
-    echo -e "\n|------- jdwm config links -------|\n"
+jdwm_link(){
+    echo -e "\n|--------- jdwm symlinks ---------|\n"
 
     jdwm_check_config_dir
 
@@ -233,6 +227,13 @@ jdwm_configs_link(){
     check_and_link "$JDWM_CONFIG_DIR/config" "config"
     check_and_link "$JDWM_CONFIG_DIR/keydefs" "keydefs"
     check_and_link "$DWM_BLOCKS_CONFIG_DIR/blocks" "blocks"
+
+    if [ -L "$SHARE_DIR/jdwm" ] && [ -d "$SHARE_DIR/jdwm" ]; then
+        sudo rm -f $SHARE_DIR/jdwm
+    fi
+
+    echo "Symbolic link to $PARENT_DIR being created in $SHARE_DIR"
+    sudo ln -s $PARENT_DIR $SHARE_DIR/jdwm  &>/dev/null
     
     echo ""
 }
@@ -255,12 +256,6 @@ jdwm_man_page_install(){
 
 jdwm_scripts_install(){
     echo -e "\n|---------- jdwm scripts ---------|\n"
-    if [ -L "$SHARE_DIR/jdwm" ] && [ -d "$SHARE_DIR/jdwm" ]; then
-        echo "Symbolic link to $PARENT_DIR in $SHARE_DIR already exists, skipping creation"  
-    else
-        echo "Creating symbolic link to $PARENT_DIR in $SHARE_DIR called /jdwm"
-        sudo /bin/sh -c "ln -s $PARENT_DIR $SHARE_DIR/jdwm  &>/dev/null"
-    fi
     copyexamplescripts "$JDWM_SCRIPTS_DIR"
     echo -e "jdwm scripts are being installed to $BIN_INSTALL_DIR from $JDWM_SCRIPTS_DIR"
     echo -e "jdwm scripts being installed:\n"
@@ -372,13 +367,14 @@ print_help(){
     echo "                                      binaries to /usr/local/bin/ using"
     echo "                                      'sudo make install'"
     echo ""
-    echo "   -jc, --jdwm-config-link            Installs symlinks linking config"
-    echo "                                      header files in /jdwm/dwm/config/"
-    echo "                                      to ~/.config/jdwm/. Not useful to"
-    echo "                                      jdwm, just for the user"
-    echo ""
     echo "   -jd, --jdesktop-file               Installs jdwm's desktop file to"
     echo "                                      /usr/share/xsessions/"
+    echo ""
+    echo "   -jl, --jdwm-link                   Installs symlinks linking config"
+    echo "                                      header files in /jdwm/dwm/config/"
+    echo "                                      to ~/.config/jdwm/. Also creates"
+    echo "                                      symlink to jdwm source directory"
+    echo "                                      as '/usr/share/jdwm'"
     echo ""
     echo "   -jm, --jdwm-manual                 Installs jdwn's-$JDWM_VERSION manual file"
     echo "                                      to $JDWM_MAN_INSTALL_DIR/man1/"
@@ -418,7 +414,7 @@ print_usage(){
     echo "Usage: install.sh [-h] [--help] [-u] [--usage] [-v] [--version]"
     echo "       [-d] [--check-dependencies] [-sd] [--skip-dependencies]"
     echo "       [-ja] [--jdwm-aliases] [-jb] [--jdwm-binaries]"
-    echo "       [-jc] [--jdwm-config-link ] [-jd] [--jdesktop-file]"
+    echo "       [-jd] [--jdesktop-file] [-jl] [--jdwm-link]"
     echo "       [-jm] [--jdwm-manual] [-js] [--jdwm-scripts]"
     echo "       [-jw] [--jdwm-wallpapers] [-bs] [--dwmblocks-scripts]"
     echo "       [-rc] [--rofi-config] [-rs] [--rofi-scripts] [-rt]"
@@ -453,13 +449,13 @@ while [[ $# -gt 0 ]]; do
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jc|--jdwm-config-link)  # Only installs config symlinks
-            jdwm_configs_link
+        -jd|--jdwm-desktop-file)  # Only installs the .desktop file for jdwm
+            jdwm_desktop_file_install
             DEFAULT_INSTALL=0
             shift
             ;;
-        -jd|--jdwm-desktop-file)  # Only installs the .desktop file for jdwm
-            jdwm_desktop_file_install
+        -jl|--jdwm-link)  # Only installs jdwm symlinks
+            jdwm_link
             DEFAULT_INSTALL=0
             shift
             ;;
@@ -526,7 +522,7 @@ if [[ $DEFAULT_INSTALL -eq 1 ]]; then
     jdwm_aliases_install
     jdwm_binaries_install
     jdwm_desktop_file_install
-    jdwm_configs_link
+    jdwm_link
     jdwm_man_page_install
     jdwm_scripts_install
     jdwm_wallpapers_install
