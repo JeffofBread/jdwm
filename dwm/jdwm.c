@@ -2149,7 +2149,6 @@ void manage(Window w, XWindowAttributes *wa)
 	selmon->tagset[selmon->seltags] &= ~scratchtag;
 	if (!strcmp(c->name, scratchpadname)) {
 		c->mon->tagset[c->mon->seltags] |= c->tags = scratchtag;
-		c->isfloating = True;
 	}
 
 	if (!c->isfloating) c->isfloating = c->oldstate = trans != None || c->isfixed;
@@ -2821,6 +2820,10 @@ void setfullscreen(Client *c, int fullscreen)
 	if (savestate && !(c->oldstate & (1 << 1))) {
 		c->oldbw = c->bw;
 		c->oldstate = c->isfloating | (1 << 1);
+        c->oldfx = c->x;
+		c->oldfy = c->y;
+		c->oldfw = c->w;
+		c->oldfh = c->h;
 		c->bw = 0;
 		c->isfloating = 1;
 		resizeclient(c, c->mon->mx, c->mon->my, c->mon->mw, c->mon->mh);
@@ -2834,14 +2837,14 @@ void setfullscreen(Client *c, int fullscreen)
          * height and width may be larger than the monitor's window area, so we cap that by
          * ensuring max / min values. */
 		if (c->isfloating) {
-			c->x = MAX(c->mon->wx, c->oldx);
-			c->y = MAX(c->mon->wy, c->oldy);
-			c->w = MIN(c->mon->ww - c->x - 2 * c->bw, c->oldw);
-			c->h = MIN(c->mon->wh - c->y - 2 * c->bw, c->oldh);
-			resizeclient(c, c->x, c->y, c->w, c->h);
+		    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
+		    c->bw = fborderpx;
+		    configure(c);
+		    int borderdiff = (fborderpx - borderpx) * 2;
+		    resize(c, c->oldfx, c->oldfy, c->oldfw - borderdiff, c->oldfh - borderdiff, 0);
 			restack(c->mon);
 		} else
-			arrange(c->mon);
+		    arrange(c->mon);
 	} else
 		resizeclient(c, c->x, c->y, c->w, c->h);
 
