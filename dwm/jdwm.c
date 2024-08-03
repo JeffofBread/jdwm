@@ -2839,9 +2839,7 @@ void setfullscreen(Client *c, int fullscreen)
          * height and width may be larger than the monitor's window area, so we cap that by
          * ensuring max / min values. */
 		if (c->isfloating) {
-			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
 			c->bw = fborderpx;
-			configure(c);
 			int borderdiff = (fborderpx - borderpx) * 2;
 			resize(c, c->oldfx, c->oldfy, c->oldfw - borderdiff, c->oldfh - borderdiff, 0);
 			restack(c->mon);
