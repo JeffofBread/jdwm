@@ -2164,7 +2164,7 @@ void manage(Window w, XWindowAttributes *wa)
 
 	wc.border_width = c->bw;
 	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
-	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2; /*  */
+	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
 	configure(c); /* propagates border_width, if size doesn't change */
 	XSelectInput(dpy, w, EnterWindowMask | FocusChangeMask | PropertyChangeMask | StructureNotifyMask);
