@@ -10,6 +10,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 #include <yajl/yajl_gen.h>
+#include <argp.h>
 
 #define IPC_MAGIC "JDWM-IPC"
 // clang-format off
@@ -64,6 +65,10 @@ typedef struct jdwm_ipc_header {
 	uint32_t size;
 	uint8_t type;
 } __attribute((packed)) jdwm_ipc_header_t;
+
+struct arguments {
+	char *args[100];
+};
 
 static int recv_message(uint8_t *msg_type, uint32_t *reply_size, uint8_t **reply)
 {
@@ -464,6 +469,41 @@ static void print_usage(const char *name)
 	puts("");
 }
 
+// GNU argp parser
+const char *argp_program_version = "jdwm-msg " VERSION;
+const char *argp_program_bug_address = "https://github.com/JeffofBread/jdwm/issues";
+static char doc[] =
+	"A custom build of dwm-msg (from dwm ipc patch) made by JeffofBread. If you wish to know more, check out jdwm's github page at https://github.com/JeffofBread/jdwm or dwm ipc's github page at https://github.com/mihirlad55/dwm-ipc";
+static char args_doc[] = "";
+static struct argp_option options[] = {
+	{ "simple-version", 'v', 0, 0, "Simplified version output" },
+	{ 0 }
+};
+
+static error_t parse_opt(int key, char *arg, struct argp_state *state)
+{
+	struct arguments *arguments = state->input;
+	switch (key) {
+	    case 'v':
+		    printf("%s", VERSION);
+		    exit(EXIT_SUCCESS);
+		    break;
+	    case ARGP_KEY_ARG: // Case if too many args
+		    if (state->arg_num >= 0) argp_usage(state);
+		    arguments->args[state->arg_num] = arg;
+		    break;
+		//case ARGP_KEY_END: // Case if too few args
+		    //if (state->arg_num < 2)
+		    //argp_usage (state);
+		    //break;
+	    default:
+		    return ARGP_ERR_UNKNOWN;
+	}
+	return 0;
+}
+
+static struct argp argp = { options, parse_opt, args_doc, doc };
+
 int main(int argc, char *argv[])
 {
 	const char *prog_name = argv[0];
@@ -474,51 +514,9 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	int i = 1;
-	if (i < argc && strcmp(argv[i], "--ignore-reply") == 0) {
-		ignore_reply = 1;
-		i++;
-	}
-
-	if (i >= argc) usage_error(prog_name, "Expected an argument, got none");
-
-	if (strcmp(argv[i], "help") == 0)
-		print_usage(prog_name);
-	else if (strcmp(argv[i], "run_command") == 0) {
-		if (++i >= argc) usage_error(prog_name, "No command specified");
-		// Command name
-		char *command = argv[i];
-		// Command arguments are everything after command name
-		char **command_args = argv + ++i;
-		// Number of command arguments
-		int command_argc = argc - i;
-		run_command(command, command_args, command_argc);
-	} else if (strcmp(argv[i], "get_monitors") == 0) {
-		get_monitors();
-	} else if (strcmp(argv[i], "get_tags") == 0) {
-		get_tags();
-	} else if (strcmp(argv[i], "get_layouts") == 0) {
-		get_layouts();
-	} else if (strcmp(argv[i], "get_dwm_client") == 0) {
-		if (++i < argc) {
-			if (is_unsigned_int(argv[i])) {
-				Window win = atol(argv[i]);
-				get_dwm_client(win);
-			} else
-				usage_error(prog_name, "Expected unsigned integer argument");
-		} else
-			usage_error(prog_name, "Expected the window id");
-	} else if (strcmp(argv[i], "subscribe") == 0) {
-		if (++i < argc) {
-			for (int j = i; j < argc; j++) subscribe(argv[j]);
-		} else
-			usage_error(prog_name, "Expected event name");
-		// Keep listening for events forever
-		while (1) {
-			print_socket_reply();
-		}
-	} else
-		usage_error(prog_name, "Invalid argument '%s'", argv[i]);
+	// GNU arg parser
+	struct arguments arguments;
+	argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
 	return 0;
 }
