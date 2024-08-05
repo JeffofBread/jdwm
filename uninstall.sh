@@ -367,6 +367,6 @@ if [[ $DEFAULT_UNINSTALL -eq 1 ]]; then
     rofi_theme_uninstall
     rofi_scripts_uninstall
     echo "Removing /usr/share/jdwm symlink"
-    rm -f $SHARE_DIR/jdwm
+    sudo rm -f $SHARE_DIR/jdwm
     jdwm_home_dir_uninstall
 fi
