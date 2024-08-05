@@ -357,6 +357,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ $DEFAULT_UNINSTALL -eq 1 ]]; then
+    jdwm_aliases_uninstall
     jdwm_binaries_uninstall
     jdwm_rm_config_dir
     jdwm_scripts_uninstall
