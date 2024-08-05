@@ -249,7 +249,7 @@ jdwm_desktop_file_install(){
 jdwm_man_page_install(){
     echo -e "\n|------------ jdwm man -----------|\n"
     echo -e "jdwm manual being installed to $JDWM_MAN_INSTALL_DIR/man1 from $JDWM_RESOURCES_DIR/jdwm.1"
-    mkdir -p $JDWM_MAN_INSTALL_DIR/man1
+    sudo mkdir -p $JDWM_MAN_INSTALL_DIR/man1
     sudo /bin/sh -c "sed "s/VERSION/$JDWM_VERSION/g" < $JDWM_RESOURCES_DIR/jdwm.1 > $JDWM_MAN_INSTALL_DIR/man1/jdwm.1 && chmod 644 $JDWM_MAN_INSTALL_DIR/man1/jdwm.1"
     echo ""
 }
@@ -331,7 +331,7 @@ rofi_theme_install(){
     echo -e "\n|-------- Rofi theme install ---------|\n"
     mkdir -p $ROFI_THEMES_INSTALL_DIR 
     cd $ROFI_THEMES_DIR && cp -f *.rasi $ROFI_THEMES_INSTALL_DIR 
-    echo -e "\nRofi themes are being installed to $ROFI_THEMES_INSTALL_DIR from $ROFI_THEMES_DIR.\nThemes being installed:\n"
+    echo -e "Rofi themes are being installed to $ROFI_THEMES_INSTALL_DIR from $ROFI_THEMES_DIR.\nThemes being installed:\n"
     ls | grep -E '\.rasi$' | sed -e 's/^/     #) /'
     echo ""
 }
