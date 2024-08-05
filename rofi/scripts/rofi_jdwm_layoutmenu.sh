@@ -1,7 +1,7 @@
 #!/bin/sh
 # Thanks to mateusz.kita on discord for helping me with some of the bash/rofi here
 
-GET_LAYOUTS_CMD="dwm-msg get_layouts"
+GET_LAYOUTS_CMD="jdwm-msg get_layouts"
 LAYOUTS_JSON=$($GET_LAYOUTS_CMD)
 
 if jq -V ; then
@@ -27,4 +27,4 @@ choice=$(
     done  | rofi -no-fixed-num-lines -format 'i' -dmenu -i -fuzzy -p "Layout" -theme $1
 );
 
-dwm-msg run_command setlayoutsafe $((${LAYOUT_ADDRESS[$choice]}))
+jdwm-msg run_command setlayoutsafe $((${LAYOUT_ADDRESS[$choice]}))

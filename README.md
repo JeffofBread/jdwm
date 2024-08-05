@@ -55,7 +55,7 @@ Below are some examples of how these can be used and combined:
 
 **Notes before you uninstall:**
  Please make sure you know what is being removed by the script and dont accidentally remove something you intended to keep. The script (by default) will remove all of the what is listed below, but that can be adjuste with flag arguments ().
- - jdwm binaries (`jdwm`, `dwm-msg`, and `dwmblocks`) from `/usr/local/bin/`
+ - jdwm binaries (`jdwm`, `jdwm-msg`, and `dwmblocks`) from `/usr/local/bin/`
  - All scripts (with the `.sh` extension) present in `/jdwm/dwm/scripts/`, `/jdwm/dwmblocks/scripts/`, and `/jdwm/rofi/scripts/`, from `/usr/local/bin/`
  - Any and all files present in `~/.config/jdwm/`
  - Pathing symlink `/usr/local/share/jdwm`
@@ -73,7 +73,7 @@ You can also customize your uninstall with uninstaller flags. To see a list of a
 
 Below are some examples of how these can be used and combined:
 
-<details><summary><b>Example: Only uninstall jdwm binaries (`jdwm`, `dwm-msg`, and `dwmblocks`)</b></summary>
+<details><summary><b>Example: Only uninstall jdwm binaries (`jdwm`, `jdwm-msg`, and `dwmblocks`)</b></summary>
 
 ```bash
 ./install -jb
@@ -292,7 +292,7 @@ All the original .diff files are located in [jdwm patches branch](https://github
 ## Known Bugs
 
 - Steam (specifically toast notifications) causing tiling issues.
-- There might be a conflict between dwm-ipc and pertag, where dwm-msg does not always dump correct values. I will look into it in the future. 
+- There might be a conflict between dwm-ipc and pertag, where jdwm-msg does not always dump correct values. I will look into it in the future. 
 
 ## Future
 

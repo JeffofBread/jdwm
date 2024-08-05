@@ -8,9 +8,9 @@
 #include "IPCClient.h"
 
 // clang-format off
-#define IPC_MAGIC "DWM-IPC"
-#define IPC_MAGIC_ARR { 'D', 'W', 'M', '-', 'I', 'P', 'C'}
-#define IPC_MAGIC_LEN 7 // Not including null char
+#define IPC_MAGIC "JDWM-IPC"
+#define IPC_MAGIC_ARR { 'J', 'D', 'W', 'M', '-', 'I', 'P', 'C'}
+#define IPC_MAGIC_LEN 8 // Not including null char
 
 #define IPCCOMMAND(FUNC, ARGC, TYPES)                                          \
   { #FUNC, {FUNC }, ARGC, (ArgType[ARGC])TYPES }
@@ -40,11 +40,11 @@ typedef enum IPCSubscriptionAction { IPC_ACTION_UNSUBSCRIBE = 0, IPC_ACTION_SUBS
 /**
  * Every IPC packet starts with this structure
  */
-typedef struct dwm_ipc_header {
+typedef struct jdwm_ipc_header {
 	uint8_t magic[IPC_MAGIC_LEN];
 	uint32_t size;
 	uint8_t type;
-} __attribute((packed)) dwm_ipc_header_t;
+} __attribute((packed)) jdwm_ipc_header_t;
 
 typedef enum ArgType {
 	ARG_TYPE_NONE = 0,

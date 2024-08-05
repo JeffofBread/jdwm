@@ -55,7 +55,7 @@ run_cmd() {
 			pactl set-sink-mute @DEFAULT_SINK@ 0
 			systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
-            dwm-msg run_command quit
+            jdwm-msg run_command quit
 		fi
 	else
 		exit 0

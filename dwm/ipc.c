@@ -92,7 +92,7 @@ static int ipc_create_socket(const char *filename)
 static int ipc_recv_message(int fd, uint8_t *msg_type, uint32_t *reply_size, uint8_t **reply)
 {
 	uint32_t read_bytes = 0;
-	const int32_t to_read = sizeof(dwm_ipc_header_t);
+	const int32_t to_read = sizeof(jdwm_ipc_header_t);
 	char header[to_read];
 	char *walk = header;
 
@@ -916,9 +916,9 @@ ssize_t ipc_write_client(IPCClient *c)
 
 void ipc_prepare_send_message(IPCClient *c, const IPCMessageType msg_type, const uint32_t msg_size, const char *msg)
 {
-	dwm_ipc_header_t header = { .magic = IPC_MAGIC_ARR, .type = msg_type, .size = msg_size };
+	jdwm_ipc_header_t header = { .magic = IPC_MAGIC_ARR, .type = msg_type, .size = msg_size };
 
-	uint32_t header_size = sizeof(dwm_ipc_header_t);
+	uint32_t header_size = sizeof(jdwm_ipc_header_t);
 	uint32_t packet_size = header_size + msg_size;
 
 	if (c->buffer == NULL)

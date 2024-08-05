@@ -11,11 +11,11 @@
 #include <unistd.h>
 #include <yajl/yajl_gen.h>
 
-#define IPC_MAGIC "DWM-IPC"
+#define IPC_MAGIC "JDWM-IPC"
 // clang-format off
-#define IPC_MAGIC_ARR { 'D', 'W', 'M', '-', 'I', 'P', 'C' }
+#define IPC_MAGIC_ARR { 'J', 'D', 'W', 'M', '-', 'I', 'P', 'C' }
 // clang-format on
-#define IPC_MAGIC_LEN 7 // Not including null char
+#define IPC_MAGIC_LEN 8 // Not including null char
 
 #define IPC_EVENT_TAG_CHANGE "tag_change_event"
 #define IPC_EVENT_CLIENT_FOCUS_CHANGE "client_focus_change_event"
@@ -59,16 +59,16 @@ typedef enum IPCMessageType {
 } IPCMessageType;
 
 // Every IPC message must begin with this
-typedef struct dwm_ipc_header {
+typedef struct jdwm_ipc_header {
 	uint8_t magic[IPC_MAGIC_LEN];
 	uint32_t size;
 	uint8_t type;
-} __attribute((packed)) dwm_ipc_header_t;
+} __attribute((packed)) jdwm_ipc_header_t;
 
 static int recv_message(uint8_t *msg_type, uint32_t *reply_size, uint8_t **reply)
 {
 	uint32_t read_bytes = 0;
-	const int32_t to_read = sizeof(dwm_ipc_header_t);
+	const int32_t to_read = sizeof(jdwm_ipc_header_t);
 	char header[to_read];
 	char *walk = header;
 
@@ -193,9 +193,9 @@ static void connect_to_socket()
 
 static int send_message(IPCMessageType msg_type, uint32_t msg_size, uint8_t *msg)
 {
-	dwm_ipc_header_t header = { .magic = IPC_MAGIC_ARR, .size = msg_size, .type = msg_type };
+	jdwm_ipc_header_t header = { .magic = IPC_MAGIC_ARR, .size = msg_size, .type = msg_type };
 
-	size_t header_size = sizeof(dwm_ipc_header_t);
+	size_t header_size = sizeof(jdwm_ipc_header_t);
 	size_t total_size = header_size + msg_size;
 
 	uint8_t buffer[total_size];
