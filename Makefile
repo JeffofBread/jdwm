@@ -39,7 +39,7 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2 ${YA
 # DEBUGFLAG = -ggdb # Debug flag to allow you to debug dwm with gdb
 DEBUGFLAG = -g  # Default flag, use if you are not debugging dwm
 
-CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" -DUSERHOMEDIR=\"${HOME}\" ${XINERAMAFLAGS}
+CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" -DROFITHEMEDIR=\"${HOME}/.config/rofi/themes/\" ${XINERAMAFLAGS} -DJDWMWALLPAPERDIR=\"${HOME}/.config/jdwm/wallpapers\" ${XINERAMAFLAGS}
 CFLAGS   = ${DEBUGFLAG} -std=c99 -pedantic -Wall -O3 -Wno-unused-function -Wno-deprecated-declarations -flto=auto -mtune=native -march=native ${INCS} ${CPPFLAGS}
 LDFLAGS  = ${LIBS}
 

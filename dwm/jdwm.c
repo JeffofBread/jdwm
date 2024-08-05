@@ -27,8 +27,8 @@
 #include "util.h"
 
 /* macros */
-#define APPEND_(x, y, z) #x #y #z
-#define APPEND(x, y, z) APPEND_(x, y, z)
+#define APPEND_(x, y) #x #y
+#define APPEND(x, y) APPEND_(x, y)
 #define BUTTONMASK (ButtonPressMask | ButtonReleaseMask)
 #define CLEANMASK(mask)                     \
 	(mask & ~(numlockmask | LockMask) & \
@@ -56,10 +56,7 @@
 
 // Define various paths
 // clang-format off
-#define JDWMCONFIGDIR /.config/jdwm/
-#define ROFITHEMEDIR /.config/rofi/themes/
-#define JDWMWALLPAPERDIR APPEND(USERHOMEDIR, JDWMCONFIGDIR, wallpapers)
-#define ROFITHEME APPEND(USERHOMEDIR ,ROFITHEMEDIR, ROFITHEMEFILE)
+#define ROFITHEME APPEND(ROFITHEMEDIR, ROFITHEMEFILE)
 // clang-format on
 
 /* XEMBED messages */
