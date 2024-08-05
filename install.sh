@@ -285,7 +285,7 @@ jdwm_wallpapers_install(){
 
 dwm_blocks_scripts_install(){
     echo -e "\n|--------- dwmblocks scripts ---------|\n"
-    copyexamplescripts "$DWM_BLOCKS_SCRIPTS_DIR "
+    copyexamplescripts "$DWM_BLOCKS_SCRIPTS_DIR"
     echo -e "\ndwmblocks scripts are being installed to $BIN_INSTALL_DIR from $DWM_BLOCKS_SCRIPTS_DIR"
     echo -e "dwmblocks scripts being installed:\n"
     cd $DWM_BLOCKS_SCRIPTS_DIR 
