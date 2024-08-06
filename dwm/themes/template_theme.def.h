@@ -1,3 +1,5 @@
+// This first line will be what shows when you run jdwm's rofi theme selector
+
 // Template theme for you to create your own theme
 static const char color1[] = "COLOR1 HEXCODE";
 static const char color2[] = "COLOR2 HEXCODE";
