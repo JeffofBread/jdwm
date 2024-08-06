@@ -134,7 +134,6 @@ Also, if anyone would like to add more package managers or distros to this list,
 - [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl) (Toggle mute on mic/sink binds)
 - [playerctl](https://github.com/altdesktop/playerctl) (Media control binds)
 - [pamixer](https://github.com/cdemoulins/pamixer) (Volume binds)
-- [xbacklight](https://www.x.org/releases/X11R7.6/doc/man/man1/xbacklight.1.xhtml) (For dwmblocks sb-battery screen brightness functionality)
 - [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) (For rofi powermenu script)
 - [rofi-calc](https://github.com/svenstaro/rofi-calc/tree/master?tab=readme-ov-file) (Calculator bind)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/) (jdwm.aliases, used as the default browser)
@@ -145,13 +144,13 @@ Also, if anyone would like to add more package managers or distros to this list,
 
 (Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) and [VSCodium](https://vscodium.com/) because they are AURs)
 ```bash
-sudo pacman -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight rofi-calc firefox thunar
+sudo pacman -S jq xorg-xrandr dunst libpulse playerctl pamixer rofi-calc firefox thunar
 ```
 
 or
 
 ```bash
-yay -S jq xorg-xrandr dunst libpulse playerctl pamixer xorg-xbacklight betterlockscreen rofi-calc firefox vscodium-bin thunar
+yay -S jq xorg-xrandr dunst libpulse playerctl pamixer betterlockscreen rofi-calc firefox vscodium-bin thunar
 ```
 
 </details>

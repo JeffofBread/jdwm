@@ -100,7 +100,6 @@ check_opt_deps(){
     check_dep "pactl" "https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl" "0"
     check_dep "playerctl" "https://github.com/altdesktop/playerctl" "0"
     check_dep "pamixer" "https://github.com/cdemoulins/pamixer" "0"
-    check_dep "xbacklight" "https://www.x.org/releases/X11R7.6/doc/man/man1/xbacklight.1.xhtml" "0"
     check_dep "betterlockscreen" "https://github.com/betterlockscreen/betterlockscreen" "0"
     check_dep "firefox" "https://www.mozilla.org/en-US/firefox/new/" "0"
     check_dep "vscodium" "https://vscodium.com/" "0"
