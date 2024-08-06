@@ -10,6 +10,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 #include <yajl/yajl_gen.h>
+#include <argp.h>
 
 #define IPC_MAGIC "JDWM-IPC"
 // clang-format off
@@ -64,6 +65,11 @@ typedef struct jdwm_ipc_header {
 	uint32_t size;
 	uint8_t type;
 } __attribute((packed)) jdwm_ipc_header_t;
+
+struct arguments {
+	char *args[10];
+    int subscribe, runcommand;
+};
 
 static int recv_message(uint8_t *msg_type, uint32_t *reply_size, uint8_t **reply)
 {
@@ -419,54 +425,81 @@ static int subscribe(const char *event)
 	return 0;
 }
 
-static void usage_error(const char *prog_name, const char *format, ...)
+// GNU argp parser
+const char *argp_program_version = "jdwm-msg " VERSION;
+const char *argp_program_bug_address = "https://github.com/JeffofBread/jdwm/issues";
+static char doc[] =
+	"A custom build of dwm-msg (from dwm ipc patch) made by JeffofBread. If you wish to know more, check out jdwm's github page at https://github.com/JeffofBread/jdwm or dwm ipc's github page at https://github.com/mihirlad55/dwm-ipc";
+static char args_doc[] = "";
+static struct argp_option options[] = {
+	{ "simple-version", 'v', 0, 0, "Simplified version output" },
+    { "ignore-reply", 'i', 0, 0, "Dont print reply messages from subscribe and run command" },
+    { "get-monitors", 'm', 0, 0, "Get a list of all jdwm's monitors properties" },
+    { "get-tags", 't', 0, 0, "Get a list of all jdwm's tags" },
+    { "get-layouts", 'l', 0, 0, "Get a list of all jdwm's layouts" },
+    { "get-client", 'c', "CLIENTID", 0, "Get jdwm's properties for a given client" },
+    { "run-command", 'r', 0, 0, "Run jdwm commands" },
+    { "subscribe", 's', 0, 0, "Subscribe to jdwm events. Value can be any of the following: " 
+    IPC_EVENT_TAG_CHANGE ", " IPC_EVENT_LAYOUT_CHANGE ", " IPC_EVENT_CLIENT_FOCUS_CHANGE ", " IPC_EVENT_MONITOR_FOCUS_CHANGE 
+    ", " IPC_EVENT_FOCUSED_TITLE_CHANGE ", and " IPC_EVENT_FOCUSED_STATE_CHANGE },
+	{ 0 }
+};
+
+static error_t parse_opt(int key, char *arg, struct argp_state *state)
 {
-	va_list args;
-	va_start(args, format);
-
-	fprintf(stderr, "Error: ");
-	vfprintf(stderr, format, args);
-	fprintf(stderr, "\nusage: %s <command> [...]\n", prog_name);
-	fprintf(stderr, "Try '%s help'\n", prog_name);
-
-	va_end(args);
-	exit(1);
+    struct arguments *arguments = state->input;
+    switch (key) {
+        case 'v':
+            printf("%s", VERSION);
+            exit(EXIT_SUCCESS);
+            break;
+        case 'i':
+            ignore_reply = 1;
+            break;
+        case 'm':
+            get_monitors();
+            exit(EXIT_SUCCESS);
+            break;
+        case 't':
+            get_tags();
+            exit(EXIT_SUCCESS);
+            break;
+        case 'l':
+            get_layouts();
+            exit(EXIT_SUCCESS);
+            break;
+        case 'c':
+            if (is_unsigned_int(arg)) {
+                Window win = atol(arg);
+                get_dwm_client(win);
+            } else
+                printf("\nError: the value of '%s' is not compatable with '-c' or '--get-client', which requires an unsigned int.\n\n", arg);
+            break;
+        case 's':
+            arguments->subscribe = 1;
+            break;
+        case 'r':
+            arguments->runcommand = 1;
+            break;
+        case ARGP_KEY_ARG:
+            if (state->arg_num >= 8)
+            argp_usage (state);
+            arguments->args[state->arg_num] = arg;
+            break;
+        case ARGP_KEY_END:
+            if (state->arg_num < 1)
+            argp_usage (state);
+            break;
+        default:
+            return ARGP_ERR_UNKNOWN;
+    }
+    return 0;
 }
 
-static void print_usage(const char *name)
-{
-	printf("usage: %s [options] <command> [...]\n", name);
-	puts("");
-	puts("Commands:");
-	puts("  run_command <name> [args...]    Run an IPC command");
-	puts("");
-	puts("  get_monitors                    Get monitor properties");
-	puts("");
-	puts("  get_tags                        Get list of tags");
-	puts("");
-	puts("  get_layouts                     Get list of layouts");
-	puts("");
-	puts("  get_dwm_client <window_id>      Get dwm client proprties");
-	puts("");
-	puts("  subscribe [events...]           Subscribe to specified events");
-	puts("                                  Options: " IPC_EVENT_TAG_CHANGE ",");
-	puts("                                  " IPC_EVENT_LAYOUT_CHANGE ",");
-	puts("                                  " IPC_EVENT_CLIENT_FOCUS_CHANGE ",");
-	puts("                                  " IPC_EVENT_MONITOR_FOCUS_CHANGE ",");
-	puts("                                  " IPC_EVENT_FOCUSED_TITLE_CHANGE ",");
-	puts("                                  " IPC_EVENT_FOCUSED_STATE_CHANGE);
-	puts("");
-	puts("  help                            Display this message");
-	puts("");
-	puts("Options:");
-	puts("  --ignore-reply                  Don't print reply messages from");
-	puts("                                  run_command and subscribe.");
-	puts("");
-}
+static struct argp argp = { options, parse_opt, args_doc, doc };
 
 int main(int argc, char *argv[])
 {
-	const char *prog_name = argv[0];
 
 	connect_to_socket();
 	if (sock_fd == -1) {
@@ -474,51 +507,31 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	int i = 1;
-	if (i < argc && strcmp(argv[i], "--ignore-reply") == 0) {
-		ignore_reply = 1;
-		i++;
-	}
+	// GNU arg parser
+	struct arguments arguments;
+    arguments.subscribe = 0;
+    arguments.runcommand = 0;
+	argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
-	if (i >= argc) usage_error(prog_name, "Expected an argument, got none");
+    if (arguments.subscribe && arguments.runcommand){
+        printf( "\nError: Cannot run commands AND subscribe to events at the same time\n\n");
+        exit(EXIT_FAILURE);
+    }
 
-	if (strcmp(argv[i], "help") == 0)
-		print_usage(prog_name);
-	else if (strcmp(argv[i], "run_command") == 0) {
-		if (++i >= argc) usage_error(prog_name, "No command specified");
-		// Command name
-		char *command = argv[i];
-		// Command arguments are everything after command name
-		char **command_args = argv + ++i;
-		// Number of command arguments
-		int command_argc = argc - i;
-		run_command(command, command_args, command_argc);
-	} else if (strcmp(argv[i], "get_monitors") == 0) {
-		get_monitors();
-	} else if (strcmp(argv[i], "get_tags") == 0) {
-		get_tags();
-	} else if (strcmp(argv[i], "get_layouts") == 0) {
-		get_layouts();
-	} else if (strcmp(argv[i], "get_dwm_client") == 0) {
-		if (++i < argc) {
-			if (is_unsigned_int(argv[i])) {
-				Window win = atol(argv[i]);
-				get_dwm_client(win);
-			} else
-				usage_error(prog_name, "Expected unsigned integer argument");
-		} else
-			usage_error(prog_name, "Expected the window id");
-	} else if (strcmp(argv[i], "subscribe") == 0) {
-		if (++i < argc) {
-			for (int j = i; j < argc; j++) subscribe(argv[j]);
-		} else
-			usage_error(prog_name, "Expected event name");
-		// Keep listening for events forever
-		while (1) {
-			print_socket_reply();
-		}
-	} else
-		usage_error(prog_name, "Invalid argument '%s'", argv[i]);
+    if (arguments.runcommand){
+        if (argc < 3)
+            printf("\nError: No command specified\n\n");
+        else {
+		    run_command(argv[2], (char **)(argv + 3), (argc - 3));
+            exit(EXIT_SUCCESS);
+        }
+    } else if (arguments.subscribe){
+        for (int i = 2; i < argc; i++){
+            subscribe(argv[i]);
+        }
+        while(1)
+            print_socket_reply();
+    } 
 
 	return 0;
 }

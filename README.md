@@ -103,7 +103,7 @@ Also, if anyone would like to add more package managers or distros to this list,
 - A desktop notification handler of some kind (I recommend [dunst](https://github.com/dunst-project/dunst))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in the bar)
-- [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments)
+- [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments in jdwm and jdwm-msg)
 - [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in themes shipped in `/jdwm/dwm/themes/`)
 - [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent, but designed with it in mind)
 - [grep](https://www.gnu.org/software/grep/manual/grep.html), [sed](https://www.gnu.org/software/sed/manual/sed.html), and [cut](https://www.gnu.org/software/coreutils/cut) (various scripts)
