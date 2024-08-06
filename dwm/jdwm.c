@@ -4102,8 +4102,8 @@ int main(int argc, char *argv[])
 #endif /* __OpenBSD__ */
 	scan();
 	run();
-	char *dwm_empty_start[] = { "jdwm", NULL };
-	if (restart) execvp(argv[0], dwm_empty_start);
+	char *jdwm_empty_start[] = { "jdwm", NULL };
+	if (restart) execvp(argv[0], jdwm_empty_start);
 	cleanup();
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
