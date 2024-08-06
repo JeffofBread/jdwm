@@ -68,7 +68,7 @@ typedef struct jdwm_ipc_header {
 
 struct arguments {
 	char *args[10];
-    int subscribe, runcommand;
+	int subscribe, runcommand;
 };
 
 static int recv_message(uint8_t *msg_type, uint32_t *reply_size, uint8_t **reply)
@@ -433,67 +433,67 @@ static char doc[] =
 static char args_doc[] = "";
 static struct argp_option options[] = {
 	{ "simple-version", 'v', 0, 0, "Simplified version output" },
-    { "ignore-reply", 'i', 0, 0, "Dont print reply messages from subscribe and run command" },
-    { "get-monitors", 'm', 0, 0, "Get a list of all jdwm's monitors properties" },
-    { "get-tags", 't', 0, 0, "Get a list of all jdwm's tags" },
-    { "get-layouts", 'l', 0, 0, "Get a list of all jdwm's layouts" },
-    { "get-client", 'c', "CLIENTID", 0, "Get jdwm's properties for a given client" },
-    { "run-command", 'r', 0, 0, "Run jdwm commands" },
-    { "subscribe", 's', 0, 0, "Subscribe to jdwm events. Value can be any of the following: " 
-    IPC_EVENT_TAG_CHANGE ", " IPC_EVENT_LAYOUT_CHANGE ", " IPC_EVENT_CLIENT_FOCUS_CHANGE ", " IPC_EVENT_MONITOR_FOCUS_CHANGE 
-    ", " IPC_EVENT_FOCUSED_TITLE_CHANGE ", and " IPC_EVENT_FOCUSED_STATE_CHANGE },
+	{ "ignore-reply", 'i', 0, 0, "Dont print reply messages from subscribe and run command" },
+	{ "get-monitors", 'm', 0, 0, "Get a list of all jdwm's monitors properties" },
+	{ "get-tags", 't', 0, 0, "Get a list of all jdwm's tags" },
+	{ "get-layouts", 'l', 0, 0, "Get a list of all jdwm's layouts" },
+	{ "get-client", 'c', "CLIENTID", 0, "Get jdwm's properties for a given client" },
+	{ "run-command", 'r', 0, 0, "Run jdwm commands" },
+	{ "subscribe", 's', 0, 0,
+	  "Subscribe to jdwm events. Value can be any of the following: " IPC_EVENT_TAG_CHANGE
+	  ", " IPC_EVENT_LAYOUT_CHANGE ", " IPC_EVENT_CLIENT_FOCUS_CHANGE ", " IPC_EVENT_MONITOR_FOCUS_CHANGE
+	  ", " IPC_EVENT_FOCUSED_TITLE_CHANGE ", and " IPC_EVENT_FOCUSED_STATE_CHANGE },
 	{ 0 }
 };
 
 static error_t parse_opt(int key, char *arg, struct argp_state *state)
 {
-    struct arguments *arguments = state->input;
-    switch (key) {
-        case 'v':
-            printf("%s", VERSION);
-            exit(EXIT_SUCCESS);
-            break;
-        case 'i':
-            ignore_reply = 1;
-            break;
-        case 'm':
-            get_monitors();
-            exit(EXIT_SUCCESS);
-            break;
-        case 't':
-            get_tags();
-            exit(EXIT_SUCCESS);
-            break;
-        case 'l':
-            get_layouts();
-            exit(EXIT_SUCCESS);
-            break;
-        case 'c':
-            if (is_unsigned_int(arg)) {
-                Window win = atol(arg);
-                get_dwm_client(win);
-            } else
-                printf("\nError: the value of '%s' is not compatable with '-c' or '--get-client', which requires an unsigned int.\n\n", arg);
-            break;
-        case 's':
-            arguments->subscribe = 1;
-            break;
-        case 'r':
-            arguments->runcommand = 1;
-            break;
-        case ARGP_KEY_ARG:
-            if (state->arg_num >= 8)
-            argp_usage (state);
-            arguments->args[state->arg_num] = arg;
-            break;
-        case ARGP_KEY_END:
-            if (state->arg_num < 1)
-            argp_usage (state);
-            break;
-        default:
-            return ARGP_ERR_UNKNOWN;
-    }
-    return 0;
+	struct arguments *arguments = state->input;
+	switch (key) {
+	case 'v':
+		printf("%s", VERSION);
+		exit(EXIT_SUCCESS);
+		break;
+	case 'i':
+		ignore_reply = 1;
+		break;
+	case 'm':
+		get_monitors();
+		exit(EXIT_SUCCESS);
+		break;
+	case 't':
+		get_tags();
+		exit(EXIT_SUCCESS);
+		break;
+	case 'l':
+		get_layouts();
+		exit(EXIT_SUCCESS);
+		break;
+	case 'c':
+		if (is_unsigned_int(arg)) {
+			Window win = atol(arg);
+			get_dwm_client(win);
+		} else
+			printf("\nError: the value of '%s' is not compatable with '-c' or '--get-client', which requires an unsigned int.\n\n",
+			       arg);
+		break;
+	case 's':
+		arguments->subscribe = 1;
+		break;
+	case 'r':
+		arguments->runcommand = 1;
+		break;
+	case ARGP_KEY_ARG:
+		if (state->arg_num >= 8) argp_usage(state);
+		arguments->args[state->arg_num] = arg;
+		break;
+	case ARGP_KEY_END:
+		if (state->arg_num < 1) argp_usage(state);
+		break;
+	default:
+		return ARGP_ERR_UNKNOWN;
+	}
+	return 0;
 }
 
 static struct argp argp = { options, parse_opt, args_doc, doc };
@@ -509,29 +509,28 @@ int main(int argc, char *argv[])
 
 	// GNU arg parser
 	struct arguments arguments;
-    arguments.subscribe = 0;
-    arguments.runcommand = 0;
+	arguments.subscribe = 0;
+	arguments.runcommand = 0;
 	argp_parse(&argp, argc, argv, 0, 0, &arguments);
 
-    if (arguments.subscribe && arguments.runcommand){
-        printf( "\nError: Cannot run commands AND subscribe to events at the same time\n\n");
-        exit(EXIT_FAILURE);
-    }
+	if (arguments.subscribe && arguments.runcommand) {
+		printf("\nError: Cannot run commands AND subscribe to events at the same time\n\n");
+		exit(EXIT_FAILURE);
+	}
 
-    if (arguments.runcommand){
-        if (argc < 3)
-            printf("\nError: No command specified\n\n");
-        else {
-		    run_command(argv[2], (char **)(argv + 3), (argc - 3));
-            exit(EXIT_SUCCESS);
-        }
-    } else if (arguments.subscribe){
-        for (int i = 2; i < argc; i++){
-            subscribe(argv[i]);
-        }
-        while(1)
-            print_socket_reply();
-    } 
+	if (arguments.runcommand) {
+		if (argc < 3)
+			printf("\nError: No command specified\n\n");
+		else {
+			run_command(argv[2], (char **)(argv + 3), (argc - 3));
+			exit(EXIT_SUCCESS);
+		}
+	} else if (arguments.subscribe) {
+		for (int i = 2; i < argc; i++) {
+			subscribe(argv[i]);
+		}
+		while (1) print_socket_reply();
+	}
 
 	return 0;
 }

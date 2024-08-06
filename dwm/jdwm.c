@@ -2816,12 +2816,12 @@ void setfullscreen(Client *c, int fullscreen)
 	if (savestate && !(c->oldstate & (1 << 1))) {
 		c->oldbw = c->bw;
 		c->oldstate = c->isfloating | (1 << 1);
-        if (c->isfloating) {
-            c->oldfx = c->x;
-		    c->oldfy = c->y;
-		    c->oldfw = c->w;
-		    c->oldfh = c->h;
-        }
+		if (c->isfloating) {
+			c->oldfx = c->x;
+			c->oldfy = c->y;
+			c->oldfw = c->w;
+			c->oldfh = c->h;
+		}
 		c->bw = 0;
 		c->isfloating = 1;
 		resizeclient(c, c->mon->mx, c->mon->my, c->mon->mw, c->mon->mh);
