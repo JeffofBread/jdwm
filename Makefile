@@ -183,7 +183,7 @@ jdwm_uninstall:
 	$(PRINTF) "Removing jdwm bin file        " ${DESTDIR}${PREFIX}/jdwm
 	$Qsudo rm -f ${DESTDIR}${PREFIX}/jdwm
 
-dwm-msg_uninstall:
+jdwm-msg_uninstall:
 	$(PRINTF) "Removing jdwm-msg bin file    " ${DESTDIR}${PREFIX}/jdwm-msg
 	$Qsudo rm -f ${DESTDIR}${PREFIX}/jdwm-msg
 
