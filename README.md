@@ -121,6 +121,14 @@ yay -S yajl imlib2 gcc feh rofi grep sed coreutils
 
 </details>
 
+<details><summary><b>Ubuntu</b></summary>
+
+```bash
+sudo apt install git build-essential libx11-dev libxinerama-dev libxft-dev libyajl-dev libimlib2-dev feh rofi grep sed coreutils
+```
+
+</details>
+
 ## Optional Dependencies
 
 These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
@@ -152,6 +160,20 @@ or
 ```bash
 yay -S jq xorg-xrandr dunst libpulse playerctl pamixer betterlockscreen rofi-calc firefox vscodium-bin thunar
 ```
+
+</details>
+
+<details><summary><b>Ubuntu</b></summary>
+
+```bash
+sudo apt install jq libxrandr2 dunst pulseaudio-utils playerctl pamixer firefox thunar
+```
+
+The below will require manual (or similar) instillation:
+- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
+- [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
+- [VSCodium (deb package)](https://vscodium.com/#install-on-debian-ubuntu-deb-package) or alternatively, [VSCodium (Snap)](https://vscodium.com/#install-with-snap-linux). I recommend avoiding the snap package and instead installing the .deb package. 
+
 
 </details>
 
