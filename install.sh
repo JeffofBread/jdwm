@@ -102,7 +102,7 @@ check_opt_deps(){
     check_dep "pamixer" "https://github.com/cdemoulins/pamixer" "0"
     check_dep "betterlockscreen" "https://github.com/betterlockscreen/betterlockscreen" "0"
     check_dep "firefox" "https://www.mozilla.org/en-US/firefox/new/" "0"
-    check_dep "vscodium" "https://vscodium.com/" "0"
+    check_dep "codium" "https://vscodium.com/" "0"
     check_dep "thunar" "https://docs.xfce.org/xfce/thunar/start" "0"
 
     echo -e "\nrofi calc is untestable without launching the rofi window itself, therefor is avoided in this script"
