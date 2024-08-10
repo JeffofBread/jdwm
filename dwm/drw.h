@@ -1,4 +1,11 @@
-/* See LICENSE file for copyright and license details. */
+/**
+ * @file drw.h
+ * @author JeffOfBread (https://github.com/JeffofBread) & https://suckless.org/
+ * @brief Header for drw.c; Part of [libsl](https://git.suckless.org/libsl/files.html), a shared library created by suckless to help draw text and other objects to the screen in X11 for their various programs
+ * @see https://git.suckless.org/libsl/files.html
+ * @version @VERSION
+ * @copyright Refer to jdwm's LICENSE file: https://github.com/JeffofBread/jdwm/blob/master/LICENSE
+ */
 
 typedef struct {
 	Cursor cursor;

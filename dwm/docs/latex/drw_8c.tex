@@ -1,0 +1,156 @@
+\doxysection{dwm/drw.c File Reference}
+\hypertarget{drw_8c}{}\label{drw_8c}\index{dwm/drw.c@{dwm/drw.c}}
+
+
+Part of \href{https://git.suckless.org/libsl/files.html}{\texttt{ libsl}}, a shared library created by suckless to help draw text and other objects to the screen in X11 for their various programs.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$X11/\+Xlib.\+h$>$}\newline
+{\ttfamily \#include $<$X11/\+Xft/\+Xft.\+h$>$}\newline
+{\ttfamily \#include $<$Imlib2.\+h$>$}\newline
+{\ttfamily \#include "{}drw.\+h"{}}\newline
+{\ttfamily \#include "{}util.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{drw_8c_af26b5c057e0b592959a3bb4e76e2308c}\label{drw_8c_af26b5c057e0b592959a3bb4e76e2308c} 
+\#define {\bfseries UTF\+\_\+\+INVALID}~0x\+FFFD
+\item 
+\Hypertarget{drw_8c_a46222f1fe1539100dd532c3466b53cdb}\label{drw_8c_a46222f1fe1539100dd532c3466b53cdb} 
+\#define {\bfseries UTF\+\_\+\+SIZ}~4
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static long \mbox{\hyperlink{drw_8c_a069582e0b808e85129e116862cb51f34}{utf8decodebyte}} (const char c, size\+\_\+t \texorpdfstring{$\ast$}{*}i)
+\begin{DoxyCompactList}\small\item\em Internal function to decode a single byte of UTF-\/8. \end{DoxyCompactList}\item 
+\Hypertarget{drw_8c_a343b8be32e1bc81cda24410aed0bb139}\label{drw_8c_a343b8be32e1bc81cda24410aed0bb139} 
+static size\+\_\+t {\bfseries utf8validate} (long \texorpdfstring{$\ast$}{*}u, size\+\_\+t i)
+\item 
+\Hypertarget{drw_8c_a5484922443db58c35a1b4725ca6782be}\label{drw_8c_a5484922443db58c35a1b4725ca6782be} 
+static size\+\_\+t {\bfseries utf8decode} (const char \texorpdfstring{$\ast$}{*}c, long \texorpdfstring{$\ast$}{*}u, size\+\_\+t clen)
+\item 
+\Hypertarget{drw_8c_a3d36ef3d87e0b4e25730261df49a1292}\label{drw_8c_a3d36ef3d87e0b4e25730261df49a1292} 
+\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+create} (Display \texorpdfstring{$\ast$}{*}dpy, int screen, Window root, unsigned int w, unsigned int h)
+\item 
+\Hypertarget{drw_8c_ae5c3c60013736d2f6b5b3a6302314ae8}\label{drw_8c_ae5c3c60013736d2f6b5b3a6302314ae8} 
+void {\bfseries drw\+\_\+resize} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, unsigned int w, unsigned int h)
+\item 
+\Hypertarget{drw_8c_a1fd89d1b2b8a2f3eb3ec0b13fa5d1dce}\label{drw_8c_a1fd89d1b2b8a2f3eb3ec0b13fa5d1dce} 
+void {\bfseries drw\+\_\+free} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw)
+\item 
+\Hypertarget{drw_8c_a3ea5e2f1dfb29e7375e017330fa8d8e2}\label{drw_8c_a3ea5e2f1dfb29e7375e017330fa8d8e2} 
+Picture {\bfseries drw\+\_\+picture\+\_\+create\+\_\+resized} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, char \texorpdfstring{$\ast$}{*}src, unsigned int srcw, unsigned int srch, unsigned int dstw, unsigned int dsth)
+\item 
+\Hypertarget{drw_8c_a66a3ad6c7f263e4d00841b863fcc693e}\label{drw_8c_a66a3ad6c7f263e4d00841b863fcc693e} 
+static \mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*} {\bfseries xfont\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}fontname, Fc\+Pattern \texorpdfstring{$\ast$}{*}fontpattern)
+\item 
+\Hypertarget{drw_8c_a9a80478ebadb7d4829f6078540328435}\label{drw_8c_a9a80478ebadb7d4829f6078540328435} 
+static void {\bfseries xfont\+\_\+free} (\mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*}font)
+\item 
+\Hypertarget{drw_8c_a7fad62c890d4e08b198a38bd684ae14a}\label{drw_8c_a7fad62c890d4e08b198a38bd684ae14a} 
+\mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+fontset\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}fonts\mbox{[}$\,$\mbox{]}, size\+\_\+t fontcount)
+\item 
+\Hypertarget{drw_8c_aab34f5dc6abb36e5410de462521db833}\label{drw_8c_aab34f5dc6abb36e5410de462521db833} 
+void {\bfseries drw\+\_\+fontset\+\_\+free} (\mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*}font)
+\item 
+\Hypertarget{drw_8c_ac1b7e1be92463828fadc8dea0544366e}\label{drw_8c_ac1b7e1be92463828fadc8dea0544366e} 
+void {\bfseries drw\+\_\+clr\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, Clr \texorpdfstring{$\ast$}{*}dest, const char \texorpdfstring{$\ast$}{*}clrname)
+\item 
+\Hypertarget{drw_8c_a36497484cffae2d0ec7db55b768c61a3}\label{drw_8c_a36497484cffae2d0ec7db55b768c61a3} 
+Clr \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+scm\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}clrnames\mbox{[}$\,$\mbox{]}, size\+\_\+t clrcount)
+\item 
+\Hypertarget{drw_8c_ac5c28b9c38419452205cae1335fd56ec}\label{drw_8c_ac5c28b9c38419452205cae1335fd56ec} 
+void {\bfseries drw\+\_\+setfontset} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, \mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*}set)
+\item 
+\Hypertarget{drw_8c_a2f176825bc385f8ed8f0aa1ae34e8f68}\label{drw_8c_a2f176825bc385f8ed8f0aa1ae34e8f68} 
+void {\bfseries drw\+\_\+setscheme} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, Clr \texorpdfstring{$\ast$}{*}scm)
+\item 
+\Hypertarget{drw_8c_adc4dfd59c057bb0dc7e997da653f8683}\label{drw_8c_adc4dfd59c057bb0dc7e997da653f8683} 
+void {\bfseries drw\+\_\+rect} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert)
+\item 
+\Hypertarget{drw_8c_a40df39337fb56a6b8219b25e854e61d9}\label{drw_8c_a40df39337fb56a6b8219b25e854e61d9} 
+void {\bfseries drw\+\_\+polygon} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, int ow, int oh, int sw, int sh, const XPoint \texorpdfstring{$\ast$}{*}points, int npoints, int shape, int filled)
+\item 
+\Hypertarget{drw_8c_aabb2da8848bda0b1511164d299e49fbf}\label{drw_8c_aabb2da8848bda0b1511164d299e49fbf} 
+int {\bfseries drw\+\_\+text} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char \texorpdfstring{$\ast$}{*}text, int invert)
+\item 
+\Hypertarget{drw_8c_a77ff78275981c9b81f4aae2e48e3f839}\label{drw_8c_a77ff78275981c9b81f4aae2e48e3f839} 
+void {\bfseries drw\+\_\+pic} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, unsigned int w, unsigned int h, Picture pic)
+\item 
+\Hypertarget{drw_8c_a7c2efcdf6ce625e6f826276f66455944}\label{drw_8c_a7c2efcdf6ce625e6f826276f66455944} 
+void {\bfseries drw\+\_\+map} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, Window win, int x, int y, unsigned int w, unsigned int h)
+\item 
+\Hypertarget{drw_8c_a8d11af66c0fda0a2bac66da29452d377}\label{drw_8c_a8d11af66c0fda0a2bac66da29452d377} 
+unsigned int {\bfseries drw\+\_\+fontset\+\_\+getwidth} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}text)
+\item 
+\Hypertarget{drw_8c_a595b1a7b1c7af0be6f40733ff5e8db35}\label{drw_8c_a595b1a7b1c7af0be6f40733ff5e8db35} 
+unsigned int {\bfseries drw\+\_\+fontset\+\_\+getwidth\+\_\+clamp} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}text, unsigned int n)
+\item 
+\Hypertarget{drw_8c_ac6478858177bb8bc57f901c07b41b975}\label{drw_8c_ac6478858177bb8bc57f901c07b41b975} 
+void {\bfseries drw\+\_\+font\+\_\+getexts} (\mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*}font, const char \texorpdfstring{$\ast$}{*}text, unsigned int len, unsigned int \texorpdfstring{$\ast$}{*}w, unsigned int \texorpdfstring{$\ast$}{*}h)
+\item 
+\Hypertarget{drw_8c_a536664e08393b057775580da7781ed29}\label{drw_8c_a536664e08393b057775580da7781ed29} 
+\mbox{\hyperlink{structCur}{Cur}} \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+cur\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int shape)
+\item 
+\Hypertarget{drw_8c_a9f206351080c8daed7ed617ea85b088c}\label{drw_8c_a9f206351080c8daed7ed617ea85b088c} 
+void {\bfseries drw\+\_\+cur\+\_\+free} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, \mbox{\hyperlink{structCur}{Cur}} \texorpdfstring{$\ast$}{*}cursor)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{drw_8c_a5dc09171cb0c651883d9e9df71e92a29}\label{drw_8c_a5dc09171cb0c651883d9e9df71e92a29} 
+static const unsigned char {\bfseries utfbyte} \mbox{[}UTF\+\_\+\+SIZ+1\mbox{]} = \{ 0x80, 0, 0x\+C0, 0x\+E0, 0x\+F0 \}
+\item 
+\Hypertarget{drw_8c_aa45b00eabaff507e7ac6d73cfe2d4d60}\label{drw_8c_aa45b00eabaff507e7ac6d73cfe2d4d60} 
+static const unsigned char {\bfseries utfmask} \mbox{[}UTF\+\_\+\+SIZ+1\mbox{]} = \{ 0x\+C0, 0x80, 0x\+E0, 0x\+F0, 0x\+F8 \}
+\item 
+\Hypertarget{drw_8c_aad36c8a9a5e2e9139caedf69dbd75868}\label{drw_8c_aad36c8a9a5e2e9139caedf69dbd75868} 
+static const long {\bfseries utfmin} \mbox{[}UTF\+\_\+\+SIZ+1\mbox{]} = \{ 0, 0, 0x80, 0x800, 0x10000 \}
+\item 
+\Hypertarget{drw_8c_aab409f42a377abca7133302496834f88}\label{drw_8c_aab409f42a377abca7133302496834f88} 
+static const long {\bfseries utfmax} \mbox{[}UTF\+\_\+\+SIZ+1\mbox{]} = \{ 0x10\+FFFF, 0x7F, 0x7\+FF, 0x\+FFFF, 0x10\+FFFF \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Part of \href{https://git.suckless.org/libsl/files.html}{\texttt{ libsl}}, a shared library created by suckless to help draw text and other objects to the screen in X11 for their various programs. 
+
+\begin{DoxyAuthor}{Author}
+Jeff\+Of\+Bread (\href{https://github.com/JeffofBread}{\texttt{ https\+://github.\+com/\+Jeffof\+Bread}}) \& \href{https://suckless.org/}{\texttt{ https\+://suckless.\+org/}} 
+\end{DoxyAuthor}
+\begin{DoxySeeAlso}{See also}
+\href{https://git.suckless.org/libsl/files.html}{\texttt{ https\+://git.\+suckless.\+org/libsl/files.\+html}} 
+\end{DoxySeeAlso}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+Refer to jdwm\textquotesingle{}s LICENSE file\+: \href{https://github.com/JeffofBread/jdwm/blob/master/LICENSE}{\texttt{ https\+://github.\+com/\+Jeffof\+Bread/jdwm/blob/master/\+LICENSE}} 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{drw_8c_a069582e0b808e85129e116862cb51f34}\index{drw.c@{drw.c}!utf8decodebyte@{utf8decodebyte}}
+\index{utf8decodebyte@{utf8decodebyte}!drw.c@{drw.c}}
+\doxysubsubsection{\texorpdfstring{utf8decodebyte()}{utf8decodebyte()}}
+{\footnotesize\ttfamily \label{drw_8c_a069582e0b808e85129e116862cb51f34} 
+static long utf8decodebyte (\begin{DoxyParamCaption}\item[{const char}]{c}{, }\item[{size\+\_\+t \texorpdfstring{$\ast$}{*}}]{i}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Internal function to decode a single byte of UTF-\/8. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Single input char of UTF-\/8 \\
+\hline
+{\em i} & Pointer to hold size of \textquotesingle{}c\textquotesingle{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+long Character less than the bits of the mask 
+\end{DoxyReturn}

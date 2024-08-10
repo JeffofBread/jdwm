@@ -1,0 +1,556 @@
+\doxysection{dwm/ipc.h File Reference}
+\hypertarget{ipc_8h}{}\label{ipc_8h}\index{dwm/ipc.h@{dwm/ipc.h}}
+
+
+Header for ipc.\+c; Part jdwm\textquotesingle{}s IPC (Inter Process Communication) system, originally written by Mihir Lad as the \href{https://github.com/mihirlad55/dwm-ipc}{\texttt{ \textquotesingle{}dwm-\/ipc\textquotesingle{} patch}}  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$sys/epoll.\+h$>$}\newline
+{\ttfamily \#include $<$yajl\+\_\+gen.\+h$>$}\newline
+{\ttfamily \#include "{}IPCClient.\+h"{}}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structjdwm__ipc__header}{jdwm\+\_\+ipc\+\_\+header}}
+\item 
+union \mbox{\hyperlink{unionArgFunction}{Arg\+Function}}
+\item 
+struct \mbox{\hyperlink{structIPCCommand}{IPCCommand}}
+\item 
+struct \mbox{\hyperlink{structIPCParsedCommand}{IPCParsed\+Command}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{ipc_8h_ac46d871903248b1e101ba6bbcafd4675}\label{ipc_8h_ac46d871903248b1e101ba6bbcafd4675} 
+\#define {\bfseries IPC\+\_\+\+MAGIC}~"{}JDWM-\/IPC"{}
+\item 
+\Hypertarget{ipc_8h_ada54a53ce1bf72d23e9112eccaa4a0de}\label{ipc_8h_ada54a53ce1bf72d23e9112eccaa4a0de} 
+\#define {\bfseries IPC\+\_\+\+MAGIC\+\_\+\+ARR}~\{ \textquotesingle{}J\textquotesingle{}, \textquotesingle{}D\textquotesingle{}, \textquotesingle{}W\textquotesingle{}, \textquotesingle{}M\textquotesingle{}, \textquotesingle{}-\/\textquotesingle{}, \textquotesingle{}I\textquotesingle{}, \textquotesingle{}P\textquotesingle{}, \textquotesingle{}C\textquotesingle{}\}
+\item 
+\Hypertarget{ipc_8h_a57447e902c9945c68b21dad72bf4ef98}\label{ipc_8h_a57447e902c9945c68b21dad72bf4ef98} 
+\#define {\bfseries IPC\+\_\+\+MAGIC\+\_\+\+LEN}~8
+\item 
+\Hypertarget{ipc_8h_af12bed8356c828451ce09fa429aba97a}\label{ipc_8h_af12bed8356c828451ce09fa429aba97a} 
+\#define {\bfseries IPCCOMMAND}(FUNC,  ARGC,  TYPES)~  \{ \#FUNC, \{FUNC \}, ARGC, (Arg\+Type\mbox{[}ARGC\mbox{]})TYPES \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{ipc_8h_a45a84fb44692f15eb76eff3193727de4}\label{ipc_8h_a45a84fb44692f15eb76eff3193727de4} 
+typedef enum IPCMessage\+Type {\bfseries IPCMessage\+Type}
+\item 
+\Hypertarget{ipc_8h_ab78263754430f62fdcd3a146037171f0}\label{ipc_8h_ab78263754430f62fdcd3a146037171f0} 
+typedef enum IPCEvent {\bfseries IPCEvent}
+\item 
+\Hypertarget{ipc_8h_a850b5cdf61645b92af9fbed1ff41b5f4}\label{ipc_8h_a850b5cdf61645b92af9fbed1ff41b5f4} 
+typedef enum IPCSubscription\+Action {\bfseries IPCSubscription\+Action}
+\item 
+\Hypertarget{ipc_8h_a246e45803b9d68d3258bf9d68b7394e5}\label{ipc_8h_a246e45803b9d68d3258bf9d68b7394e5} 
+typedef enum Arg\+Type {\bfseries Arg\+Type}
+\item 
+typedef union Arg\+Function \mbox{\hyperlink{ipc_8h_ae2b6ed51a975e7b6e4ad751f5cae9706}{Arg\+Function}}
+\item 
+\Hypertarget{ipc_8h_a8592a8fa887a65c801906d8d4f16f0c3}\label{ipc_8h_a8592a8fa887a65c801906d8d4f16f0c3} 
+typedef struct IPCCommand {\bfseries IPCCommand}
+\item 
+\Hypertarget{ipc_8h_a3d6a3cb57eaf43554f88e902d2130079}\label{ipc_8h_a3d6a3cb57eaf43554f88e902d2130079} 
+typedef struct IPCParsed\+Command {\bfseries IPCParsed\+Command}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{ipc_8h_a48e91f88d0248d6aa3f873c1b6fbb6c8}\label{ipc_8h_a48e91f88d0248d6aa3f873c1b6fbb6c8} 
+enum {\bfseries IPCMessage\+Type} \{ \newline
+{\bfseries IPC\+\_\+\+TYPE\+\_\+\+RUN\+\_\+\+COMMAND} = 0
+, {\bfseries IPC\+\_\+\+TYPE\+\_\+\+GET\+\_\+\+MONITORS} = 1
+, {\bfseries IPC\+\_\+\+TYPE\+\_\+\+GET\+\_\+\+TAGS} = 2
+, {\bfseries IPC\+\_\+\+TYPE\+\_\+\+GET\+\_\+\+LAYOUTS} = 3
+, \newline
+{\bfseries IPC\+\_\+\+TYPE\+\_\+\+GET\+\_\+\+DWM\+\_\+\+CLIENT} = 4
+, {\bfseries IPC\+\_\+\+TYPE\+\_\+\+SUBSCRIBE} = 5
+, {\bfseries IPC\+\_\+\+TYPE\+\_\+\+EVENT} = 6
+ \}
+\item 
+\Hypertarget{ipc_8h_af94e0f1d26bef71f6a7ec55a44aa68a4}\label{ipc_8h_af94e0f1d26bef71f6a7ec55a44aa68a4} 
+enum {\bfseries IPCEvent} \{ \newline
+{\bfseries IPC\+\_\+\+EVENT\+\_\+\+TAG\+\_\+\+CHANGE} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 0
+, {\bfseries IPC\+\_\+\+EVENT\+\_\+\+CLIENT\+\_\+\+FOCUS\+\_\+\+CHANGE} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 1
+, {\bfseries IPC\+\_\+\+EVENT\+\_\+\+LAYOUT\+\_\+\+CHANGE} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 2
+, {\bfseries IPC\+\_\+\+EVENT\+\_\+\+MONITOR\+\_\+\+FOCUS\+\_\+\+CHANGE} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 3
+, \newline
+{\bfseries IPC\+\_\+\+EVENT\+\_\+\+FOCUSED\+\_\+\+TITLE\+\_\+\+CHANGE} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 4
+, {\bfseries IPC\+\_\+\+EVENT\+\_\+\+FOCUSED\+\_\+\+STATE\+\_\+\+CHANGE} = 1 \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} 5
+ \}
+\item 
+\Hypertarget{ipc_8h_a876341ba0af966249e133148cb9a40c6}\label{ipc_8h_a876341ba0af966249e133148cb9a40c6} 
+enum {\bfseries IPCSubscription\+Action} \{ {\bfseries IPC\+\_\+\+ACTION\+\_\+\+UNSUBSCRIBE} = 0
+, {\bfseries IPC\+\_\+\+ACTION\+\_\+\+SUBSCRIBE} = 1
+ \}
+\item 
+\Hypertarget{ipc_8h_a58d8da4a4f5529031f00c7a6b9eeb5e1}\label{ipc_8h_a58d8da4a4f5529031f00c7a6b9eeb5e1} 
+enum {\bfseries Arg\+Type} \{ \newline
+{\bfseries ARG\+\_\+\+TYPE\+\_\+\+NONE} = 0
+, {\bfseries ARG\+\_\+\+TYPE\+\_\+\+UINT} = 1
+, {\bfseries ARG\+\_\+\+TYPE\+\_\+\+SINT} = 2
+, {\bfseries ARG\+\_\+\+TYPE\+\_\+\+FLOAT} = 3
+, \newline
+{\bfseries ARG\+\_\+\+TYPE\+\_\+\+PTR} = 4
+, {\bfseries ARG\+\_\+\+TYPE\+\_\+\+STR} = 5
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structjdwm__ipc__header}{jdwm\+\_\+ipc\+\_\+header}} \mbox{\hyperlink{ipc_8h_ab9bbc573d3f40e11f9a96b3b1b90f11d}{\+\_\+\+\_\+attribute}} ((packed)) jdwm\+\_\+ipc\+\_\+header\+\_\+t
+\item 
+int \mbox{\hyperlink{ipc_8h_a0075a47c0fd4b8176a483263b656aa55}{ipc\+\_\+init}} (const char \texorpdfstring{$\ast$}{*}socket\+\_\+path, const int p\+\_\+epoll\+\_\+fd, \mbox{\hyperlink{structIPCCommand}{IPCCommand}} commands\mbox{[}$\,$\mbox{]}, const int commands\+\_\+len)
+\item 
+void \mbox{\hyperlink{ipc_8h_a5cd86734203d73e9a1ed798b28aac43f}{ipc\+\_\+cleanup}} ()
+\item 
+int \mbox{\hyperlink{ipc_8h_aaf6a34c4926a5daeb5e86a3810df1927}{ipc\+\_\+get\+\_\+sock\+\_\+fd}} ()
+\item 
+\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{ipc_8h_a3547c5a2191240ab550d351548bf74da}{ipc\+\_\+get\+\_\+client}} (int fd)
+\item 
+int \mbox{\hyperlink{ipc_8h_a7b06b9405d28f83b70abef476c96586b}{ipc\+\_\+is\+\_\+client\+\_\+registered}} (int fd)
+\item 
+int \mbox{\hyperlink{ipc_8h_a2691ad7177c992404f030ec077caf951}{ipc\+\_\+drop\+\_\+client}} (\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}c)
+\item 
+int \mbox{\hyperlink{ipc_8h_ac4cf9ef8e563e9ab39dca46e91bef9dd}{ipc\+\_\+accept\+\_\+client}} ()
+\item 
+int \mbox{\hyperlink{ipc_8h_a7fc2b53d563fbe5b5cd2d18ed896515a}{ipc\+\_\+read\+\_\+client}} (\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}c, IPCMessage\+Type \texorpdfstring{$\ast$}{*}msg\+\_\+type, uint32\+\_\+t \texorpdfstring{$\ast$}{*}msg\+\_\+size, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}msg)
+\item 
+ssize\+\_\+t \mbox{\hyperlink{ipc_8h_a17a7e48abf6934919ddfa34a6b59190b}{ipc\+\_\+write\+\_\+client}} (\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}c)
+\item 
+void \mbox{\hyperlink{ipc_8h_a3f8724e9a4d13f3f740424b4bd2cd320}{ipc\+\_\+prepare\+\_\+send\+\_\+message}} (\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}c, const IPCMessage\+Type msg\+\_\+type, const uint32\+\_\+t msg\+\_\+size, const char \texorpdfstring{$\ast$}{*}msg)
+\item 
+void \mbox{\hyperlink{ipc_8h_a6efdf4e155c8f0affd6a54036b4583ba}{ipc\+\_\+prepare\+\_\+reply\+\_\+failure}} (\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}c, IPCMessage\+Type msg\+\_\+type, const char \texorpdfstring{$\ast$}{*}format,...)
+\item 
+void \mbox{\hyperlink{ipc_8h_a4de330d510471cdc8ab4e81ce6b454ec}{ipc\+\_\+prepare\+\_\+reply\+\_\+success}} (\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}c, IPCMessage\+Type msg\+\_\+type)
+\item 
+void \mbox{\hyperlink{ipc_8h_ab979bf45647a6ba3a6a0430c7c44f496}{ipc\+\_\+tag\+\_\+change\+\_\+event}} (const int mon\+\_\+num, \mbox{\hyperlink{structTagState}{Tag\+State}} old\+\_\+state, \mbox{\hyperlink{structTagState}{Tag\+State}} new\+\_\+state)
+\item 
+void \mbox{\hyperlink{ipc_8h_a5e7ab9e5a64ea61eb21caccb81bb2634}{ipc\+\_\+client\+\_\+focus\+\_\+change\+\_\+event}} (const int mon\+\_\+num, \mbox{\hyperlink{structClient}{Client}} \texorpdfstring{$\ast$}{*}old\+\_\+client, \mbox{\hyperlink{structClient}{Client}} \texorpdfstring{$\ast$}{*}new\+\_\+client)
+\item 
+void \mbox{\hyperlink{ipc_8h_ac93313ec475fade29aa3f6182624da88}{ipc\+\_\+layout\+\_\+change\+\_\+event}} (const int mon\+\_\+num, const char \texorpdfstring{$\ast$}{*}old\+\_\+symbol, const \mbox{\hyperlink{structLayout}{Layout}} \texorpdfstring{$\ast$}{*}old\+\_\+layout, const char \texorpdfstring{$\ast$}{*}new\+\_\+symbol, const \mbox{\hyperlink{structLayout}{Layout}} \texorpdfstring{$\ast$}{*}new\+\_\+layout)
+\item 
+void \mbox{\hyperlink{ipc_8h_a30f10dd1fb42c40505a0bb0e554e1f1a}{ipc\+\_\+monitor\+\_\+focus\+\_\+change\+\_\+event}} (const int last\+\_\+mon\+\_\+num, const int new\+\_\+mon\+\_\+num)
+\item 
+void \mbox{\hyperlink{ipc_8h_aa641e7730c197a51c3e68fca7cc07ee5}{ipc\+\_\+focused\+\_\+title\+\_\+change\+\_\+event}} (const int mon\+\_\+num, const Window client\+\_\+id, const char \texorpdfstring{$\ast$}{*}old\+\_\+name, const char \texorpdfstring{$\ast$}{*}new\+\_\+name)
+\item 
+void \mbox{\hyperlink{ipc_8h_aafbc9c45dbce577a3a62275f72d63867}{ipc\+\_\+focused\+\_\+state\+\_\+change\+\_\+event}} (const int mon\+\_\+num, const Window client\+\_\+id, const \mbox{\hyperlink{structClientState}{Client\+State}} \texorpdfstring{$\ast$}{*}old\+\_\+state, const \mbox{\hyperlink{structClientState}{Client\+State}} \texorpdfstring{$\ast$}{*}new\+\_\+state)
+\item 
+void \mbox{\hyperlink{ipc_8h_a501706e7a2244abe719cefa19a6cfb04}{ipc\+\_\+send\+\_\+events}} (\mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}mons, \mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}lastselmon, \mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}selmon)
+\item 
+int \mbox{\hyperlink{ipc_8h_ac2e89d3423dd343b78dd422ec54e6dce}{ipc\+\_\+handle\+\_\+client\+\_\+epoll\+\_\+event}} (struct epoll\+\_\+event \texorpdfstring{$\ast$}{*}ev, \mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}mons, \mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}lastselmon, \mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}selmon, const char \texorpdfstring{$\ast$}{*}tags\mbox{[}$\,$\mbox{]}, const int tags\+\_\+len, const \mbox{\hyperlink{structLayout}{Layout}} \texorpdfstring{$\ast$}{*}layouts, const int layouts\+\_\+len)
+\item 
+int \mbox{\hyperlink{ipc_8h_a90ff3f5975686c3cefb6da204077fc9d}{ipc\+\_\+handle\+\_\+socket\+\_\+epoll\+\_\+event}} (struct epoll\+\_\+event \texorpdfstring{$\ast$}{*}ev)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{ipc_8h_a1e581a400f37a540e2038c951a637f0d}\label{ipc_8h_a1e581a400f37a540e2038c951a637f0d} 
+uint8\+\_\+t {\bfseries magic} \mbox{[}IPC\+\_\+\+MAGIC\+\_\+\+LEN\mbox{]}
+\item 
+\Hypertarget{ipc_8h_ab2c6b258f02add8fdf4cfc7c371dd772}\label{ipc_8h_ab2c6b258f02add8fdf4cfc7c371dd772} 
+uint32\+\_\+t {\bfseries size}
+\item 
+\Hypertarget{ipc_8h_a1d127017fb298b889f4ba24752d08b8e}\label{ipc_8h_a1d127017fb298b889f4ba24752d08b8e} 
+uint8\+\_\+t {\bfseries type}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header for ipc.\+c; Part jdwm\textquotesingle{}s IPC (Inter Process Communication) system, originally written by Mihir Lad as the \href{https://github.com/mihirlad55/dwm-ipc}{\texttt{ \textquotesingle{}dwm-\/ipc\textquotesingle{} patch}} 
+
+\begin{DoxyAuthor}{Author}
+Jeff\+Of\+Bread (\href{https://github.com/JeffofBread}{\texttt{ https\+://github.\+com/\+Jeffof\+Bread}}) \& Mihir Lad (\href{mailto:contact@mihirlad.com}{\texttt{ contact@mihirlad.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxySeeAlso}{See also}
+\href{https://git.suckless.org/libsl/files.html}{\texttt{ https\+://git.\+suckless.\+org/libsl/files.\+html}} 
+\end{DoxySeeAlso}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+Refer to jdwm\textquotesingle{}s LICENSE file\+: \href{https://github.com/JeffofBread/jdwm/blob/master/LICENSE}{\texttt{ https\+://github.\+com/\+Jeffof\+Bread/jdwm/blob/master/\+LICENSE}} 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{ipc_8h_ae2b6ed51a975e7b6e4ad751f5cae9706}\index{ipc.h@{ipc.h}!ArgFunction@{ArgFunction}}
+\index{ArgFunction@{ArgFunction}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ArgFunction}{ArgFunction}}
+{\footnotesize\ttfamily \label{ipc_8h_ae2b6ed51a975e7b6e4ad751f5cae9706} 
+typedef union Arg\+Function Arg\+Function}
+
+An IPCCommand function can have either of these function signatures 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{ipc_8h_ab9bbc573d3f40e11f9a96b3b1b90f11d}\index{ipc.h@{ipc.h}!\_\_attribute@{\_\_attribute}}
+\index{\_\_attribute@{\_\_attribute}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{\_\_attribute()}{\_\_attribute()}}
+{\footnotesize\ttfamily \label{ipc_8h_ab9bbc573d3f40e11f9a96b3b1b90f11d} 
+struct \mbox{\hyperlink{structjdwm__ipc__header}{jdwm\+\_\+ipc\+\_\+header}} \+\_\+\+\_\+attribute (\begin{DoxyParamCaption}\item[{(packed)}]{}{}\end{DoxyParamCaption})}
+
+Every IPC packet starts with this structure \Hypertarget{ipc_8h_ac4cf9ef8e563e9ab39dca46e91bef9dd}\index{ipc.h@{ipc.h}!ipc\_accept\_client@{ipc\_accept\_client}}
+\index{ipc\_accept\_client@{ipc\_accept\_client}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_accept\_client()}{ipc\_accept\_client()}}
+{\footnotesize\ttfamily \label{ipc_8h_ac4cf9ef8e563e9ab39dca46e91bef9dd} 
+int ipc\+\_\+accept\+\_\+client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Accept an IPC Client requesting to connect to the socket and add it to the list of clients
+
+\begin{DoxyReturn}{Returns}
+File descriptor of new client, -\/1 on error 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_a5cd86734203d73e9a1ed798b28aac43f}\index{ipc.h@{ipc.h}!ipc\_cleanup@{ipc\_cleanup}}
+\index{ipc\_cleanup@{ipc\_cleanup}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_cleanup()}{ipc\_cleanup()}}
+{\footnotesize\ttfamily \label{ipc_8h_a5cd86734203d73e9a1ed798b28aac43f} 
+void ipc\+\_\+cleanup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Uninitialize the socket and module. Free allocated memory and restore static variables to their state before ipc\+\_\+init \Hypertarget{ipc_8h_a5e7ab9e5a64ea61eb21caccb81bb2634}\index{ipc.h@{ipc.h}!ipc\_client\_focus\_change\_event@{ipc\_client\_focus\_change\_event}}
+\index{ipc\_client\_focus\_change\_event@{ipc\_client\_focus\_change\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_client\_focus\_change\_event()}{ipc\_client\_focus\_change\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_a5e7ab9e5a64ea61eb21caccb81bb2634} 
+void ipc\+\_\+client\+\_\+focus\+\_\+change\+\_\+event (\begin{DoxyParamCaption}\item[{const int}]{mon\+\_\+num}{, }\item[{\mbox{\hyperlink{structClient}{Client}} \texorpdfstring{$\ast$}{*}}]{old\+\_\+client}{, }\item[{\mbox{\hyperlink{structClient}{Client}} \texorpdfstring{$\ast$}{*}}]{new\+\_\+client}{}\end{DoxyParamCaption})}
+
+Send a client\+\_\+focus\+\_\+change\+\_\+event to all subscribers. Should be called only when the client focus changes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mon\+\_\+num} & The index of the monitor (Monitor.\+num property) \\
+\hline
+{\em old\+\_\+client} & The old DWM client selection (Monitor.\+oldsel) \\
+\hline
+{\em new\+\_\+client} & The new (now current) DWM client selection \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a2691ad7177c992404f030ec077caf951}\index{ipc.h@{ipc.h}!ipc\_drop\_client@{ipc\_drop\_client}}
+\index{ipc\_drop\_client@{ipc\_drop\_client}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_drop\_client()}{ipc\_drop\_client()}}
+{\footnotesize\ttfamily \label{ipc_8h_a2691ad7177c992404f030ec077caf951} 
+int ipc\+\_\+drop\+\_\+client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}}]{c}{}\end{DoxyParamCaption})}
+
+Disconnect an IPCClient from the socket and remove the client from the list of known connected clients
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Address of IPCClient\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the client\textquotesingle{}s file descriptor was closed successfully, the result of executing close() on the file descriptor otherwise. 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_aafbc9c45dbce577a3a62275f72d63867}\index{ipc.h@{ipc.h}!ipc\_focused\_state\_change\_event@{ipc\_focused\_state\_change\_event}}
+\index{ipc\_focused\_state\_change\_event@{ipc\_focused\_state\_change\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_focused\_state\_change\_event()}{ipc\_focused\_state\_change\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_aafbc9c45dbce577a3a62275f72d63867} 
+void ipc\+\_\+focused\+\_\+state\+\_\+change\+\_\+event (\begin{DoxyParamCaption}\item[{const int}]{mon\+\_\+num}{, }\item[{const Window}]{client\+\_\+id}{, }\item[{const \mbox{\hyperlink{structClientState}{Client\+State}} \texorpdfstring{$\ast$}{*}}]{old\+\_\+state}{, }\item[{const \mbox{\hyperlink{structClientState}{Client\+State}} \texorpdfstring{$\ast$}{*}}]{new\+\_\+state}{}\end{DoxyParamCaption})}
+
+Send a focused\+\_\+state\+\_\+change\+\_\+event to all subscribers. Should only be called if a selected client has a state change.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mon\+\_\+num} & Index of the client\textquotesingle{}s monitor \\
+\hline
+{\em client\+\_\+id} & Window XID of client \\
+\hline
+{\em old\+\_\+state} & Old state of the client \\
+\hline
+{\em new\+\_\+state} & New state of the client \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_aa641e7730c197a51c3e68fca7cc07ee5}\index{ipc.h@{ipc.h}!ipc\_focused\_title\_change\_event@{ipc\_focused\_title\_change\_event}}
+\index{ipc\_focused\_title\_change\_event@{ipc\_focused\_title\_change\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_focused\_title\_change\_event()}{ipc\_focused\_title\_change\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_aa641e7730c197a51c3e68fca7cc07ee5} 
+void ipc\+\_\+focused\+\_\+title\+\_\+change\+\_\+event (\begin{DoxyParamCaption}\item[{const int}]{mon\+\_\+num}{, }\item[{const Window}]{client\+\_\+id}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{old\+\_\+name}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{new\+\_\+name}{}\end{DoxyParamCaption})}
+
+Send a focused\+\_\+title\+\_\+change\+\_\+event to all subscribers. Should only be called if a selected client has a title change.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mon\+\_\+num} & Index of the client\textquotesingle{}s monitor \\
+\hline
+{\em client\+\_\+id} & Window XID of client \\
+\hline
+{\em old\+\_\+name} & Old name of the client window \\
+\hline
+{\em new\+\_\+name} & New name of the client window \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a3547c5a2191240ab550d351548bf74da}\index{ipc.h@{ipc.h}!ipc\_get\_client@{ipc\_get\_client}}
+\index{ipc\_get\_client@{ipc\_get\_client}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_get\_client()}{ipc\_get\_client()}}
+{\footnotesize\ttfamily \label{ipc_8h_a3547c5a2191240ab550d351548bf74da} 
+\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*} ipc\+\_\+get\+\_\+client (\begin{DoxyParamCaption}\item[{int}]{fd}{}\end{DoxyParamCaption})}
+
+Get address to IPCClient with specified file descriptor
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & File descriptor of IPC Client\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Address to IPCClient with specified file descriptor, -\/1 otherwise 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_aaf6a34c4926a5daeb5e86a3810df1927}\index{ipc.h@{ipc.h}!ipc\_get\_sock\_fd@{ipc\_get\_sock\_fd}}
+\index{ipc\_get\_sock\_fd@{ipc\_get\_sock\_fd}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_get\_sock\_fd()}{ipc\_get\_sock\_fd()}}
+{\footnotesize\ttfamily \label{ipc_8h_aaf6a34c4926a5daeb5e86a3810df1927} 
+int ipc\+\_\+get\+\_\+sock\+\_\+fd (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Get the file descriptor of the IPC socket
+
+\begin{DoxyReturn}{Returns}
+int File descriptor of IPC socket, -\/1 if socket not created. 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_ac2e89d3423dd343b78dd422ec54e6dce}\index{ipc.h@{ipc.h}!ipc\_handle\_client\_epoll\_event@{ipc\_handle\_client\_epoll\_event}}
+\index{ipc\_handle\_client\_epoll\_event@{ipc\_handle\_client\_epoll\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_handle\_client\_epoll\_event()}{ipc\_handle\_client\_epoll\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_ac2e89d3423dd343b78dd422ec54e6dce} 
+int ipc\+\_\+handle\+\_\+client\+\_\+epoll\+\_\+event (\begin{DoxyParamCaption}\item[{struct epoll\+\_\+event \texorpdfstring{$\ast$}{*}}]{ev}{, }\item[{\mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}}]{mons}{, }\item[{\mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{lastselmon}{, }\item[{\mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}}]{selmon}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{tags}{\mbox{[}$\,$\mbox{]}, }\item[{const int}]{tags\+\_\+len}{, }\item[{const \mbox{\hyperlink{structLayout}{Layout}} \texorpdfstring{$\ast$}{*}}]{layouts}{, }\item[{const int}]{layouts\+\_\+len}{}\end{DoxyParamCaption})}
+
+Handle an epoll event caused by a registered IPC client. Read, process, and handle any received messages from clients. Write pending buffer to client if the client is ready to receive messages. Drop clients that have sent an EPOLLHUP.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ev} & Associated epoll event returned by epoll\+\_\+wait \\
+\hline
+{\em mons} & Address of Monitor pointing to start of linked list \\
+\hline
+{\em selmon} & Address of selected Monitor \\
+\hline
+{\em lastselmon} & Address of pointer to previously selected monitor \\
+\hline
+{\em tags} & Array of tag names \\
+\hline
+{\em tags\+\_\+len} & Length of tags array \\
+\hline
+{\em layouts} & Array of available layouts \\
+\hline
+{\em layouts\+\_\+len} & Length of layouts array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if event was successfully handled, -\/1 on any error receiving or handling incoming messages or unhandled epoll event. 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_a90ff3f5975686c3cefb6da204077fc9d}\index{ipc.h@{ipc.h}!ipc\_handle\_socket\_epoll\_event@{ipc\_handle\_socket\_epoll\_event}}
+\index{ipc\_handle\_socket\_epoll\_event@{ipc\_handle\_socket\_epoll\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_handle\_socket\_epoll\_event()}{ipc\_handle\_socket\_epoll\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_a90ff3f5975686c3cefb6da204077fc9d} 
+int ipc\+\_\+handle\+\_\+socket\+\_\+epoll\+\_\+event (\begin{DoxyParamCaption}\item[{struct epoll\+\_\+event \texorpdfstring{$\ast$}{*}}]{ev}{}\end{DoxyParamCaption})}
+
+Handle an epoll event caused by the IPC socket. This function only handles an EPOLLIN event indicating a new client requesting to connect to the socket.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ev} & Associated epoll event returned by epoll\+\_\+wait\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0, if the event was successfully handled, -\/1 if not an EPOLLIN event or if a new IPC client connection request could not be accepted. 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_a0075a47c0fd4b8176a483263b656aa55}\index{ipc.h@{ipc.h}!ipc\_init@{ipc\_init}}
+\index{ipc\_init@{ipc\_init}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_init()}{ipc\_init()}}
+{\footnotesize\ttfamily \label{ipc_8h_a0075a47c0fd4b8176a483263b656aa55} 
+int ipc\+\_\+init (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{socket\+\_\+path}{, }\item[{const int}]{p\+\_\+epoll\+\_\+fd}{, }\item[{\mbox{\hyperlink{structIPCCommand}{IPCCommand}}}]{commands}{\mbox{[}$\,$\mbox{]}, }\item[{const int}]{commands\+\_\+len}{}\end{DoxyParamCaption})}
+
+Initialize the IPC socket and the IPC module
+
+
+\begin{DoxyParams}{Parameters}
+{\em socket\+\_\+path} & Path to create the socket at \\
+\hline
+{\em epoll\+\_\+fd} & File descriptor for epoll \\
+\hline
+{\em commands} & Address of IPCCommands array defined in config.\+h \\
+\hline
+{\em commands\+\_\+len} & Length of commands\mbox{[}\mbox{]} array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The file descriptor of the socket if it was successfully created, -\/1 otherwise 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_a7b06b9405d28f83b70abef476c96586b}\index{ipc.h@{ipc.h}!ipc\_is\_client\_registered@{ipc\_is\_client\_registered}}
+\index{ipc\_is\_client\_registered@{ipc\_is\_client\_registered}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_is\_client\_registered()}{ipc\_is\_client\_registered()}}
+{\footnotesize\ttfamily \label{ipc_8h_a7b06b9405d28f83b70abef476c96586b} 
+int ipc\+\_\+is\+\_\+client\+\_\+registered (\begin{DoxyParamCaption}\item[{int}]{fd}{}\end{DoxyParamCaption})}
+
+Check if an IPC client exists with the specified file descriptor
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & File descriptor\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 1 if client exists, 0 otherwise 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_ac93313ec475fade29aa3f6182624da88}\index{ipc.h@{ipc.h}!ipc\_layout\_change\_event@{ipc\_layout\_change\_event}}
+\index{ipc\_layout\_change\_event@{ipc\_layout\_change\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_layout\_change\_event()}{ipc\_layout\_change\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_ac93313ec475fade29aa3f6182624da88} 
+void ipc\+\_\+layout\+\_\+change\+\_\+event (\begin{DoxyParamCaption}\item[{const int}]{mon\+\_\+num}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{old\+\_\+symbol}{, }\item[{const \mbox{\hyperlink{structLayout}{Layout}} \texorpdfstring{$\ast$}{*}}]{old\+\_\+layout}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{new\+\_\+symbol}{, }\item[{const \mbox{\hyperlink{structLayout}{Layout}} \texorpdfstring{$\ast$}{*}}]{new\+\_\+layout}{}\end{DoxyParamCaption})}
+
+Send a layout\+\_\+change\+\_\+event to all subscribers. Should be called only when there has been a layout change.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mon\+\_\+num} & The index of the monitor (Monitor.\+num property) \\
+\hline
+{\em old\+\_\+symbol} & The old layout symbol \\
+\hline
+{\em old\+\_\+layout} & Address to the old Layout \\
+\hline
+{\em new\+\_\+symbol} & The new (now current) layout symbol \\
+\hline
+{\em new\+\_\+layout} & Address to the new Layout \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a30f10dd1fb42c40505a0bb0e554e1f1a}\index{ipc.h@{ipc.h}!ipc\_monitor\_focus\_change\_event@{ipc\_monitor\_focus\_change\_event}}
+\index{ipc\_monitor\_focus\_change\_event@{ipc\_monitor\_focus\_change\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_monitor\_focus\_change\_event()}{ipc\_monitor\_focus\_change\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_a30f10dd1fb42c40505a0bb0e554e1f1a} 
+void ipc\+\_\+monitor\+\_\+focus\+\_\+change\+\_\+event (\begin{DoxyParamCaption}\item[{const int}]{last\+\_\+mon\+\_\+num}{, }\item[{const int}]{new\+\_\+mon\+\_\+num}{}\end{DoxyParamCaption})}
+
+Send a monitor\+\_\+focus\+\_\+change\+\_\+event to all subscribers. Should be called only when the monitor focus changes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+\_\+mon\+\_\+num} & The index of the previously selected monitor \\
+\hline
+{\em new\+\_\+mon\+\_\+num} & The index of the newly selected monitor \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a6efdf4e155c8f0affd6a54036b4583ba}\index{ipc.h@{ipc.h}!ipc\_prepare\_reply\_failure@{ipc\_prepare\_reply\_failure}}
+\index{ipc\_prepare\_reply\_failure@{ipc\_prepare\_reply\_failure}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_prepare\_reply\_failure()}{ipc\_prepare\_reply\_failure()}}
+{\footnotesize\ttfamily \label{ipc_8h_a6efdf4e155c8f0affd6a54036b4583ba} 
+void ipc\+\_\+prepare\+\_\+reply\+\_\+failure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}}]{c}{, }\item[{IPCMessage\+Type}]{msg\+\_\+type}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{format}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+Prepare an error message in the specified client\textquotesingle{}s buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Client to prepare message for \\
+\hline
+{\em msg\+\_\+type} & Type of message \\
+\hline
+{\em format} & Format string following vsprintf \\
+\hline
+{\em ...} & Arguments for format string \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a4de330d510471cdc8ab4e81ce6b454ec}\index{ipc.h@{ipc.h}!ipc\_prepare\_reply\_success@{ipc\_prepare\_reply\_success}}
+\index{ipc\_prepare\_reply\_success@{ipc\_prepare\_reply\_success}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_prepare\_reply\_success()}{ipc\_prepare\_reply\_success()}}
+{\footnotesize\ttfamily \label{ipc_8h_a4de330d510471cdc8ab4e81ce6b454ec} 
+void ipc\+\_\+prepare\+\_\+reply\+\_\+success (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}}]{c}{, }\item[{IPCMessage\+Type}]{msg\+\_\+type}{}\end{DoxyParamCaption})}
+
+Prepare a success message in the specified client\textquotesingle{}s buffer
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Client to prepare message for \\
+\hline
+{\em msg\+\_\+type} & Type of message \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a3f8724e9a4d13f3f740424b4bd2cd320}\index{ipc.h@{ipc.h}!ipc\_prepare\_send\_message@{ipc\_prepare\_send\_message}}
+\index{ipc\_prepare\_send\_message@{ipc\_prepare\_send\_message}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_prepare\_send\_message()}{ipc\_prepare\_send\_message()}}
+{\footnotesize\ttfamily \label{ipc_8h_a3f8724e9a4d13f3f740424b4bd2cd320} 
+void ipc\+\_\+prepare\+\_\+send\+\_\+message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}}]{c}{, }\item[{const IPCMessage\+Type}]{msg\+\_\+type}{, }\item[{const uint32\+\_\+t}]{msg\+\_\+size}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{msg}{}\end{DoxyParamCaption})}
+
+Prepare a message in the specified client\textquotesingle{}s buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Client to prepare message for \\
+\hline
+{\em msg\+\_\+type} & Type of message to prepare \\
+\hline
+{\em msg\+\_\+size} & Size of the message in bytes. Should not exceed MAX\+\_\+\+MESSAGE\+\_\+\+SIZE \\
+\hline
+{\em msg} & Message to prepare (not including header). This pointer can be freed after the function invocation. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a7fc2b53d563fbe5b5cd2d18ed896515a}\index{ipc.h@{ipc.h}!ipc\_read\_client@{ipc\_read\_client}}
+\index{ipc\_read\_client@{ipc\_read\_client}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_read\_client()}{ipc\_read\_client()}}
+{\footnotesize\ttfamily \label{ipc_8h_a7fc2b53d563fbe5b5cd2d18ed896515a} 
+int ipc\+\_\+read\+\_\+client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}}]{c}{, }\item[{IPCMessage\+Type \texorpdfstring{$\ast$}{*}}]{msg\+\_\+type}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{msg\+\_\+size}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{msg}{}\end{DoxyParamCaption})}
+
+Read an incoming message from an accepted IPC client
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Address of IPCClient \\
+\hline
+{\em msg\+\_\+type} & Address to IPCMessage\+Type variable which will be assigned the message type of the received message \\
+\hline
+{\em msg\+\_\+size} & Address to uint32\+\_\+t variable which will be assigned the size of the received message \\
+\hline
+{\em msg} & Address to char\texorpdfstring{$\ast$}{*} variable which will be assigned the address of the received message. This must be freed using free().\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on error reading message, -\/2 if reading the message resulted in EAGAIN, EINTR, or EWOULDBLOCK. 
+\end{DoxyReturn}
+\Hypertarget{ipc_8h_a501706e7a2244abe719cefa19a6cfb04}\index{ipc.h@{ipc.h}!ipc\_send\_events@{ipc\_send\_events}}
+\index{ipc\_send\_events@{ipc\_send\_events}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_send\_events()}{ipc\_send\_events()}}
+{\footnotesize\ttfamily \label{ipc_8h_a501706e7a2244abe719cefa19a6cfb04} 
+void ipc\+\_\+send\+\_\+events (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}}]{mons}{, }\item[{\mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{lastselmon}{, }\item[{\mbox{\hyperlink{structMonitor}{Monitor}} \texorpdfstring{$\ast$}{*}}]{selmon}{}\end{DoxyParamCaption})}
+
+Check to see if an event has occured and call the \texorpdfstring{$\ast$}{*}\+\_\+change\+\_\+event functions accordingly
+
+
+\begin{DoxyParams}{Parameters}
+{\em mons} & Address of Monitor pointing to start of linked list \\
+\hline
+{\em lastselmon} & Address of pointer to previously selected monitor \\
+\hline
+{\em selmon} & Address of selected Monitor \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_ab979bf45647a6ba3a6a0430c7c44f496}\index{ipc.h@{ipc.h}!ipc\_tag\_change\_event@{ipc\_tag\_change\_event}}
+\index{ipc\_tag\_change\_event@{ipc\_tag\_change\_event}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_tag\_change\_event()}{ipc\_tag\_change\_event()}}
+{\footnotesize\ttfamily \label{ipc_8h_ab979bf45647a6ba3a6a0430c7c44f496} 
+void ipc\+\_\+tag\+\_\+change\+\_\+event (\begin{DoxyParamCaption}\item[{const int}]{mon\+\_\+num}{, }\item[{\mbox{\hyperlink{structTagState}{Tag\+State}}}]{old\+\_\+state}{, }\item[{\mbox{\hyperlink{structTagState}{Tag\+State}}}]{new\+\_\+state}{}\end{DoxyParamCaption})}
+
+Send a tag\+\_\+change\+\_\+event to all subscribers. Should be called only when there has been a tag state change.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mon\+\_\+num} & The index of the monitor (Monitor.\+num property) \\
+\hline
+{\em old\+\_\+state} & The old tag state \\
+\hline
+{\em new\+\_\+state} & The new (now current) tag state \\
+\hline
+\end{DoxyParams}
+\Hypertarget{ipc_8h_a17a7e48abf6934919ddfa34a6b59190b}\index{ipc.h@{ipc.h}!ipc\_write\_client@{ipc\_write\_client}}
+\index{ipc\_write\_client@{ipc\_write\_client}!ipc.h@{ipc.h}}
+\doxysubsubsection{\texorpdfstring{ipc\_write\_client()}{ipc\_write\_client()}}
+{\footnotesize\ttfamily \label{ipc_8h_a17a7e48abf6934919ddfa34a6b59190b} 
+ssize\+\_\+t ipc\+\_\+write\+\_\+client (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structIPCClient}{IPCClient}} \texorpdfstring{$\ast$}{*}}]{c}{}\end{DoxyParamCaption})}
+
+Write any pending buffer of the client to the client\textquotesingle{}s socket
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Client whose buffer to write\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of bytes written \texorpdfstring{$>$}{>}= 0, -\/1 otherwise. errno will still be set from the write operation. 
+\end{DoxyReturn}

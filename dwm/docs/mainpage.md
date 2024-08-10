@@ -1,0 +1,3 @@
+# WARNINGS
+
+This documentation, specifically regarding some of the more esoteric original suckless dwm functions, may not be 100% reliable. I have tried my best to document what I can as best I can, but I am no expert at C and can almost guarantee I have made mistakes or misunderstood parts of the code. Take this documentation as guidance, not gospel. If you find any issues or would like to make any recommendations, please feel free to reach out to me on discord @jeffofbread, or open an issue on [the github page](https://github.com/JeffofBread/jdwm). With all that in mind, I wish you the best of luck, you will probably need it. 

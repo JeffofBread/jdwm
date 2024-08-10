@@ -1,0 +1,19 @@
+\doxysection{blocks.\+def.\+h}
+\hypertarget{blocks_8def_8h_source}{}\label{blocks_8def_8h_source}\index{dwmblocks/config/blocks.def.h@{dwmblocks/config/blocks.def.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//Modify\ this\ file\ to\ change\ what\ commands\ output\ to\ your\ statusbar,\ and\ recompile\ using\ the\ make\ command.}}
+\DoxyCodeLine{00002\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structBlock}{Block}}\ blocks[]\ =\ \{}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ \ Icon\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Command\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Update\ Interval\ \ \ \ \ \ \ \ \ Update\ Signal}}
+\DoxyCodeLine{00004\ \ \ \ \ \{\ \textcolor{stringliteral}{"{}No\ blocks\ on,\ check\ dwmblocks/config/blocks.h\ |\ "{}},\ \textcolor{stringliteral}{"{}"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},\ \ \ \textcolor{comment}{//\ Remove\ after\ customization}}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{comment}{//\{\ "{}\ Ram:\ "{},\ \ \ \ \ \ \ \ \ "{}free\ -\/h\ |\ awk\ '/\string^Mem/\ \{\ print\ \$3\(\backslash\)"{}/\(\backslash\)"{}\$2\ \}'\ |\ sed\ s/i//g"{},\ \ \ \ \ \ 30,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},\ \ \ //\ Ram\ /\ Memory}}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{comment}{//\{\ "{}\ "{},\ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}date\ '+\%B\ \%d\ (\%a)\ \%H:\%M'"{},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},\ \ \ //\ Date\ (Month\ Day\ (Day\ Name)\ 24h-\/time)}}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{comment}{//\{\ "{}\ CPU\ Usage:\ "{},\ \ \ "{}echo\ ''\$[100-\/\$(vmstat\ 1\ 2|tail\ -\/1|awk\ '\{print\ \$15\}')]\%"{},\ \ \ \ \ \ \ 5,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},\ \ \ //\ Cpu\ usage}}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{//\{\ "{}\ "{},\ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}"{},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},\ \ \ //\ Trailing\ spacer}}
+\DoxyCodeLine{00009\ \};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//sets\ delimeter\ between\ status\ commands.\ NULL\ character\ ('\(\backslash\)0')\ means\ no\ delimeter.}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ delim[]\ =\ \textcolor{stringliteral}{"{}\ |"{}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ delimLen\ =\ 5;}
+
+\end{DoxyCode}

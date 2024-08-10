@@ -1,0 +1,114 @@
+\doxysection{dwm/drw.h File Reference}
+\hypertarget{drw_8h}{}\label{drw_8h}\index{dwm/drw.h@{dwm/drw.h}}
+
+
+Header for drw.\+c; Part of \href{https://git.suckless.org/libsl/files.html}{\texttt{ libsl}}, a shared library created by suckless to help draw text and other objects to the screen in X11 for their various programs.  
+
+
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structCur}{Cur}}
+\item 
+struct \mbox{\hyperlink{structFnt}{Fnt}}
+\item 
+struct \mbox{\hyperlink{structDrw}{Drw}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{drw_8h_a7e5c756aed5c62eb0aea13cbc65b0bc1}\label{drw_8h_a7e5c756aed5c62eb0aea13cbc65b0bc1} 
+typedef struct Fnt {\bfseries Fnt}
+\item 
+\Hypertarget{drw_8h_ae15d6084555a118b7ae518c529e4107b}\label{drw_8h_ae15d6084555a118b7ae518c529e4107b} 
+typedef Xft\+Color {\bfseries Clr}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{drw_8h_a06fc87d81c62e9abb8790b6e5713c55b}\label{drw_8h_a06fc87d81c62e9abb8790b6e5713c55b} 
+enum \{ {\bfseries Col\+Fg}
+, {\bfseries Col\+Bg}
+, {\bfseries Col\+Border}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{drw_8h_a6606710a293218bcfed70449a7f64c24}\label{drw_8h_a6606710a293218bcfed70449a7f64c24} 
+\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+create} (Display \texorpdfstring{$\ast$}{*}dpy, int screen, Window win, unsigned int w, unsigned int h)
+\item 
+\Hypertarget{drw_8h_ae5c3c60013736d2f6b5b3a6302314ae8}\label{drw_8h_ae5c3c60013736d2f6b5b3a6302314ae8} 
+void {\bfseries drw\+\_\+resize} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, unsigned int w, unsigned int h)
+\item 
+\Hypertarget{drw_8h_a1fd89d1b2b8a2f3eb3ec0b13fa5d1dce}\label{drw_8h_a1fd89d1b2b8a2f3eb3ec0b13fa5d1dce} 
+void {\bfseries drw\+\_\+free} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw)
+\item 
+\Hypertarget{drw_8h_a7fad62c890d4e08b198a38bd684ae14a}\label{drw_8h_a7fad62c890d4e08b198a38bd684ae14a} 
+\mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+fontset\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}fonts\mbox{[}$\,$\mbox{]}, size\+\_\+t fontcount)
+\item 
+\Hypertarget{drw_8h_ae3f1d9216e6793fe0c08d02c49d84d34}\label{drw_8h_ae3f1d9216e6793fe0c08d02c49d84d34} 
+void {\bfseries drw\+\_\+fontset\+\_\+free} (\mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*}set)
+\item 
+\Hypertarget{drw_8h_a8d11af66c0fda0a2bac66da29452d377}\label{drw_8h_a8d11af66c0fda0a2bac66da29452d377} 
+unsigned int {\bfseries drw\+\_\+fontset\+\_\+getwidth} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}text)
+\item 
+\Hypertarget{drw_8h_a595b1a7b1c7af0be6f40733ff5e8db35}\label{drw_8h_a595b1a7b1c7af0be6f40733ff5e8db35} 
+unsigned int {\bfseries drw\+\_\+fontset\+\_\+getwidth\+\_\+clamp} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}text, unsigned int n)
+\item 
+\Hypertarget{drw_8h_ac6478858177bb8bc57f901c07b41b975}\label{drw_8h_ac6478858177bb8bc57f901c07b41b975} 
+void {\bfseries drw\+\_\+font\+\_\+getexts} (\mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*}font, const char \texorpdfstring{$\ast$}{*}text, unsigned int len, unsigned int \texorpdfstring{$\ast$}{*}w, unsigned int \texorpdfstring{$\ast$}{*}h)
+\item 
+\Hypertarget{drw_8h_ac1b7e1be92463828fadc8dea0544366e}\label{drw_8h_ac1b7e1be92463828fadc8dea0544366e} 
+void {\bfseries drw\+\_\+clr\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, Clr \texorpdfstring{$\ast$}{*}dest, const char \texorpdfstring{$\ast$}{*}clrname)
+\item 
+\Hypertarget{drw_8h_a36497484cffae2d0ec7db55b768c61a3}\label{drw_8h_a36497484cffae2d0ec7db55b768c61a3} 
+Clr \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+scm\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, const char \texorpdfstring{$\ast$}{*}clrnames\mbox{[}$\,$\mbox{]}, size\+\_\+t clrcount)
+\item 
+\Hypertarget{drw_8h_a536664e08393b057775580da7781ed29}\label{drw_8h_a536664e08393b057775580da7781ed29} 
+\mbox{\hyperlink{structCur}{Cur}} \texorpdfstring{$\ast$}{*} {\bfseries drw\+\_\+cur\+\_\+create} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int shape)
+\item 
+\Hypertarget{drw_8h_a9f206351080c8daed7ed617ea85b088c}\label{drw_8h_a9f206351080c8daed7ed617ea85b088c} 
+void {\bfseries drw\+\_\+cur\+\_\+free} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, \mbox{\hyperlink{structCur}{Cur}} \texorpdfstring{$\ast$}{*}cursor)
+\item 
+\Hypertarget{drw_8h_ac5c28b9c38419452205cae1335fd56ec}\label{drw_8h_ac5c28b9c38419452205cae1335fd56ec} 
+void {\bfseries drw\+\_\+setfontset} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, \mbox{\hyperlink{structFnt}{Fnt}} \texorpdfstring{$\ast$}{*}set)
+\item 
+\Hypertarget{drw_8h_a2f176825bc385f8ed8f0aa1ae34e8f68}\label{drw_8h_a2f176825bc385f8ed8f0aa1ae34e8f68} 
+void {\bfseries drw\+\_\+setscheme} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, Clr \texorpdfstring{$\ast$}{*}scm)
+\item 
+\Hypertarget{drw_8h_a4bce29592e31d8fec379caa233c89736}\label{drw_8h_a4bce29592e31d8fec379caa233c89736} 
+Picture {\bfseries drw\+\_\+picture\+\_\+create\+\_\+resized} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, char \texorpdfstring{$\ast$}{*}src, unsigned int src\+\_\+w, unsigned int src\+\_\+h, unsigned int dst\+\_\+w, unsigned int dst\+\_\+h)
+\item 
+\Hypertarget{drw_8h_adc4dfd59c057bb0dc7e997da653f8683}\label{drw_8h_adc4dfd59c057bb0dc7e997da653f8683} 
+void {\bfseries drw\+\_\+rect} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert)
+\item 
+\Hypertarget{drw_8h_a40df39337fb56a6b8219b25e854e61d9}\label{drw_8h_a40df39337fb56a6b8219b25e854e61d9} 
+void {\bfseries drw\+\_\+polygon} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, int ow, int oh, int sw, int sh, const XPoint \texorpdfstring{$\ast$}{*}points, int npoints, int shape, int filled)
+\item 
+\Hypertarget{drw_8h_aabb2da8848bda0b1511164d299e49fbf}\label{drw_8h_aabb2da8848bda0b1511164d299e49fbf} 
+int {\bfseries drw\+\_\+text} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char \texorpdfstring{$\ast$}{*}text, int invert)
+\item 
+\Hypertarget{drw_8h_a77ff78275981c9b81f4aae2e48e3f839}\label{drw_8h_a77ff78275981c9b81f4aae2e48e3f839} 
+void {\bfseries drw\+\_\+pic} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, int x, int y, unsigned int w, unsigned int h, Picture pic)
+\item 
+\Hypertarget{drw_8h_a7c2efcdf6ce625e6f826276f66455944}\label{drw_8h_a7c2efcdf6ce625e6f826276f66455944} 
+void {\bfseries drw\+\_\+map} (\mbox{\hyperlink{structDrw}{Drw}} \texorpdfstring{$\ast$}{*}drw, Window win, int x, int y, unsigned int w, unsigned int h)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header for drw.\+c; Part of \href{https://git.suckless.org/libsl/files.html}{\texttt{ libsl}}, a shared library created by suckless to help draw text and other objects to the screen in X11 for their various programs. 
+
+\begin{DoxyAuthor}{Author}
+Jeff\+Of\+Bread (\href{https://github.com/JeffofBread}{\texttt{ https\+://github.\+com/\+Jeffof\+Bread}}) \& \href{https://suckless.org/}{\texttt{ https\+://suckless.\+org/}} 
+\end{DoxyAuthor}
+\begin{DoxySeeAlso}{See also}
+\href{https://git.suckless.org/libsl/files.html}{\texttt{ https\+://git.\+suckless.\+org/libsl/files.\+html}} 
+\end{DoxySeeAlso}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyCopyright}{Copyright}
+Refer to jdwm\textquotesingle{}s LICENSE file\+: \href{https://github.com/JeffofBread/jdwm/blob/master/LICENSE}{\texttt{ https\+://github.\+com/\+Jeffof\+Bread/jdwm/blob/master/\+LICENSE}} 
+\end{DoxyCopyright}

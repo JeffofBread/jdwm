@@ -1,0 +1,354 @@
+\doxysection{yajl\+\_\+dumps.\+c}
+\hypertarget{yajl__dumps_8c_source}{}\label{yajl__dumps_8c_source}\index{dwm/yajl\_dumps.c@{dwm/yajl\_dumps.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}yajl\_dumps.h"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keywordtype}{int}\ dump\_tag(yajl\_gen\ gen,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *name,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ tag\_mask)}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00008\ \ \ YMAP(}
+\DoxyCodeLine{00009\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}bit\_mask"{}});\ YINT(tag\_mask);}
+\DoxyCodeLine{00010\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}name"{}});\ YSTR(name);}
+\DoxyCodeLine{00011\ \ \ )}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00015\ \}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{int}\ dump\_tags(yajl\_gen\ gen,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *tags[],\ \textcolor{keywordtype}{int}\ tags\_len)}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00020\ \ \ YARR(}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ tags\_len;\ i++)}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ dump\_tag(gen,\ tags[i],\ 1\ <<\ i);}
+\DoxyCodeLine{00023\ \ \ )}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00027\ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{int}\ dump\_client(yajl\_gen\ gen,\ \mbox{\hyperlink{structClient}{Client}}\ *c)}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00032\ \ \ YMAP(}
+\DoxyCodeLine{00033\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}name"{}});\ YSTR(c-\/>name);}
+\DoxyCodeLine{00034\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}tags"{}});\ YINT(c-\/>tags);}
+\DoxyCodeLine{00035\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}window\_id"{}});\ YINT(c-\/>win);}
+\DoxyCodeLine{00036\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_number"{}});\ YINT(c-\/>mon-\/>num);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}geometry"{}});\ YMAP(}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}current"{}});\ YMAP\ (}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}x"{}});\ YINT(c-\/>x);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}y"{}});\ YINT(c-\/>y);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}width"{}});\ YINT(c-\/>w);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}height"{}});\ YINT(c-\/>h);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old"{}});\ YMAP(}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}x"{}});\ YINT(c-\/>oldx);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}y"{}});\ YINT(c-\/>oldy);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}width"{}});\ YINT(c-\/>oldw);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}height"{}});\ YINT(c-\/>oldh);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00051\ \ \ \ \ )}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ YSTR("{}size\_hints"{});\ YMAP(}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ YSTR("{}base"{});\ YMAP(}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ YSTR("{}width"{});\ YINT(c-\/>basew);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ YSTR("{}height"{});\ YINT(c-\/>baseh);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ YSTR("{}step"{});\ YMAP(}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ YSTR("{}width"{});\ YINT(c-\/>incw);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ YSTR("{}height"{});\ YINT(c-\/>inch);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ YSTR("{}max"{});\ YMAP(}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ YSTR("{}width"{});\ YINT(c-\/>maxw);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ YSTR("{}height"{});\ YINT(c-\/>maxh);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ YSTR("{}min"{});\ YMAP(}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ YSTR("{}width"{});\ YINT(c-\/>minw);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ YSTR("{}height"{});\ YINT(c-\/>minh);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ YSTR("{}aspect\_ratio"{});\ YMAP(}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ YSTR("{}min"{});\ YDOUBLE(c-\/>mina);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ YSTR("{}max"{});\ YDOUBLE(c-\/>maxa);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00074\ \ \ \ \ )}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ YSTR("{}border\_width"{});\ YMAP(}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ YSTR("{}current"{});\ YINT(c-\/>bw);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ YSTR("{}old"{});\ YINT(c-\/>oldbw);}
+\DoxyCodeLine{00079\ \ \ \ \ )}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ YSTR("{}states"{});\ YMAP(}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ YSTR("{}is\_fixed"{});\ YBOOL(c-\/>isfixed);}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ YSTR("{}is\_floating"{});\ YBOOL(c-\/>isfloating);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ YSTR("{}is\_urgent"{});\ YBOOL(c-\/>isurgent);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ YSTR("{}never\_focus"{});\ YBOOL(c-\/>neverfocus);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ YSTR("{}old\_state"{});\ YBOOL(c-\/>oldstate);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ YSTR("{}is\_fullscreen"{});\ YBOOL(c-\/>isfullscreen);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ YSTR("{}ignore\_transient"{});\ YBOOL(c-\/>ignoretransient);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ YSTR("{}is\_sticky"{});\ YBOOL(c-\/>issticky);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ YSTR("{}fake\_fullscreen"{});\ YBOOL(c-\/>fakefullscreen);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ YSTR("{}is\_steam"{});\ YBOOL(c-\/>issteam);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ YSTR("{}hints\_valid"{});\ YBOOL(c-\/>hintsvalid);}
+\DoxyCodeLine{00093\ \ \ \ \ )}
+\DoxyCodeLine{00094\ \ \ )}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{int}\ dump\_monitor(yajl\_gen\ gen,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ *mon,\ \textcolor{keywordtype}{int}\ is\_selected)}
+\DoxyCodeLine{00101\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00103\ \ \ YMAP(}
+\DoxyCodeLine{00104\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}master\_factor"{}});\ YDOUBLE(mon-\/>mfact);}
+\DoxyCodeLine{00105\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}num\_master"{}});\ YINT(mon-\/>nmaster);}
+\DoxyCodeLine{00106\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}num"{}});\ YINT(mon-\/>num);}
+\DoxyCodeLine{00107\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}is\_selected"{}});\ YBOOL(is\_selected);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_geometry"{}});\ YMAP(}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}x"{}});\ YINT(mon-\/>mx);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}y"{}});\ YINT(mon-\/>my);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}width"{}});\ YINT(mon-\/>mw);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}height"{}});\ YINT(mon-\/>mh);}
+\DoxyCodeLine{00114\ \ \ \ \ )}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}window\_geometry"{}});\ YMAP(}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}x"{}});\ YINT(mon-\/>wx);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}y"{}});\ YINT(mon-\/>wy);}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}width"{}});\ YINT(mon-\/>ww);}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}height"{}});\ YINT(mon-\/>wh);}
+\DoxyCodeLine{00121\ \ \ \ \ )}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}window\_gaps"{}});\ YMAP(}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}horizontal\_between\_windows"{}});\ YINT(mon-\/>gappih);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}vertical\_between\_windows"{}});\ YINT(mon-\/>gappiv);}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}horizontal\_outer"{}});\ YINT(mon-\/>gappoh);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}vertical\_outer"{}});\ YINT(mon-\/>gappov);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}enable\_gaps"{}});\ YINT(mon-\/>enablegaps);}
+\DoxyCodeLine{00129\ \ \ \ \ )}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}tagset"{}});\ YMAP(}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}current"{}});\ \ YINT(mon-\/>tagset[mon-\/>seltags]);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old"{}});\ YINT(mon-\/>tagset[mon-\/>seltags\ \string^\ 1]);}
+\DoxyCodeLine{00134\ \ \ \ \ )}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}tag\_state"{}});\ dump\_tag\_state(gen,\ mon-\/>tagstate);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}clients"{}});\ YMAP(}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}selected"{}});\ YINT(mon-\/>sel\ ?\ mon-\/>sel-\/>win\ :\ 0);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}stack"{}});\ YARR(}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{structClient}{Client}}*\ c\ =\ mon-\/>stack;\ c;\ c\ =\ c-\/>snext)}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ YINT(c-\/>win);}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}all"{}});\ YARR(}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{structClient}{Client}}*\ c\ =\ mon-\/>clients;\ c;\ c\ =\ c-\/>next)}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ YINT(c-\/>win);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00148\ \ \ \ \ )}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ YSTR("{}layout"{});\ YMAP(}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ YSTR("{}symbol"{});\ YMAP(}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ YSTR("{}current"{});\ YSTR(mon-\/>ltsymbol);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ YSTR("{}old"{});\ YSTR(mon-\/>lastltsymbol);}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ YSTR("{}address"{});\ YMAP(}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ YSTR("{}current"{});\ YINT((uintptr\_t)mon-\/>lt[mon-\/>sellt]);}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ YSTR("{}old"{});\ YINT((uintptr\_t)mon-\/>lt[mon-\/>sellt\ \string^\ 1]);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00159\ \ \ \ \ )}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ YSTR("{}bar"{});\ YMAP(}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ YSTR("{}y"{});\ YINT(mon-\/>by);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ YSTR("{}is\_shown"{});\ YBOOL(mon-\/>showbar);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ YSTR("{}is\_top"{});\ YBOOL(mon-\/>topbar);}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ YSTR("{}window\_id"{});\ YINT(mon-\/>barwin);}
+\DoxyCodeLine{00166\ \ \ \ \ )}
+\DoxyCodeLine{00167\ \ \ )}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00171\ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{keywordtype}{int}\ dump\_monitors(yajl\_gen\ gen,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ *mons,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ *selmon)}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00176\ \ \ YARR(}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{structMonitor}{Monitor}}\ *mon\ =\ mons;\ mon;\ mon\ =\ mon-\/>next)\ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (mon\ ==\ selmon)}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ dump\_monitor(gen,\ mon,\ 1);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ dump\_monitor(gen,\ mon,\ 0);}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ \ \ )}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00187\ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{keywordtype}{int}\ dump\_layouts(yajl\_gen\ gen,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structLayout}{Layout}}\ layouts[],\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ layouts\_len)}
+\DoxyCodeLine{00190\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00192\ \ \ YARR(}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ layouts\_len;\ i++)\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ YMAP(}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ for\ a\ NULL\ pointer.\ The\ cycle\ layouts\ patch\ adds\ an\ entry\ at}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ end\ of\ the\ layouts\ array\ with\ a\ NULL\ pointer\ for\ the\ symbol}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}symbol"{}});\ YSTR((layouts[i].symbol\ ?\ layouts[i].symbol\ :\ \textcolor{stringliteral}{"{}"{}}));}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}address"{}});\ YINT((uintptr\_t)(layouts\ +\ i));}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}name"{}});\ YSTR((layouts[i].name\ ?\ layouts[i].name\ :\ \textcolor{stringliteral}{"{}"{}}));}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ )}
+\DoxyCodeLine{00201\ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \ \ )}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00206\ \}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \textcolor{keywordtype}{int}\ dump\_tag\_state(yajl\_gen\ gen,\ \mbox{\hyperlink{structTagState}{TagState}}\ state)}
+\DoxyCodeLine{00209\ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00211\ \ \ YMAP(}
+\DoxyCodeLine{00212\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}selected"{}});\ YINT(state.selected);}
+\DoxyCodeLine{00213\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}occupied"{}});\ YINT(state.occupied);}
+\DoxyCodeLine{00214\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}urgent"{}});\ YINT(state.urgent);}
+\DoxyCodeLine{00215\ \ \ )}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00219\ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \textcolor{keywordtype}{int}\ dump\_tag\_event(yajl\_gen\ gen,\ \textcolor{keywordtype}{int}\ mon\_num,\ \mbox{\hyperlink{structTagState}{TagState}}\ old\_state,\ \mbox{\hyperlink{structTagState}{TagState}}\ new\_state)}
+\DoxyCodeLine{00222\ \{}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00224\ \ \ YMAP(}
+\DoxyCodeLine{00225\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}tag\_change\_event"{}});\ YMAP(}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_number"{}});\ YINT(mon\_num);}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_state"{}});\ dump\_tag\_state(gen,\ old\_state);}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}new\_state"{}});\ dump\_tag\_state(gen,\ new\_state);}
+\DoxyCodeLine{00229\ \ \ \ \ )}
+\DoxyCodeLine{00230\ \ \ )}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00234\ \}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \textcolor{keywordtype}{int}\ dump\_client\_focus\_change\_event(yajl\_gen\ gen,\ \mbox{\hyperlink{structClient}{Client}}\ *old\_client,\ \mbox{\hyperlink{structClient}{Client}}\ *new\_client,\ \textcolor{keywordtype}{int}\ mon\_num)}
+\DoxyCodeLine{00237\ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00239\ \ \ YMAP(}
+\DoxyCodeLine{00240\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}client\_focus\_change\_event"{}});\ YMAP(}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_number"{}});\ YINT(mon\_num);}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_win\_id"{}});\ old\_client\ ==\ NULL\ ?\ YNULL()\ :\ YINT(old\_client-\/>win);}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}new\_win\_id"{}});\ new\_client\ ==\ NULL\ ?\ YNULL()\ :\ YINT(new\_client-\/>win);}
+\DoxyCodeLine{00244\ \ \ \ \ )}
+\DoxyCodeLine{00245\ \ \ )}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00249\ \}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \textcolor{keywordtype}{int}\ dump\_layout\_change\_event(yajl\_gen\ gen,\ const\ \textcolor{keywordtype}{int}\ mon\_num,\ const\ \textcolor{keywordtype}{char}\ *old\_symbol,\ const\ \mbox{\hyperlink{structLayout}{Layout}}\ *old\_layout,}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ \textcolor{keywordtype}{char}\ *new\_symbol,\ const\ \mbox{\hyperlink{structLayout}{Layout}}\ *new\_layout)}
+\DoxyCodeLine{00253\ \{}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00255\ \ \ YMAP(}
+\DoxyCodeLine{00256\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}layout\_change\_event"{}});\ YMAP(}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_number"{}});\ YINT(mon\_num);}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_symbol"{}});\ YSTR(old\_symbol);}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_address"{}});\ YINT((uintptr\_t)old\_layout);}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}new\_symbol"{}});\ YSTR(new\_symbol);}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}new\_address"{}});\ YINT((uintptr\_t)new\_layout);}
+\DoxyCodeLine{00262\ \ \ \ \ )}
+\DoxyCodeLine{00263\ \ \ )}
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00267\ \}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{keywordtype}{int}\ dump\_monitor\_focus\_change\_event(yajl\_gen\ gen,\ const\ \textcolor{keywordtype}{int}\ last\_mon\_num,\ const\ \textcolor{keywordtype}{int}\ new\_mon\_num)}
+\DoxyCodeLine{00270\ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00272\ \ \ YMAP(}
+\DoxyCodeLine{00273\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_focus\_change\_event"{}});\ YMAP(}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_monitor\_number"{}});\ YINT(last\_mon\_num);}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}new\_monitor\_number"{}});\ YINT(new\_mon\_num);}
+\DoxyCodeLine{00276\ \ \ \ \ )}
+\DoxyCodeLine{00277\ \ \ )}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00281\ \}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \textcolor{keywordtype}{int}\ dump\_focused\_title\_change\_event(yajl\_gen\ gen,\ const\ \textcolor{keywordtype}{int}\ mon\_num,\ const\ Window\ client\_id,\ const\ \textcolor{keywordtype}{char}\ *old\_name,}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ \textcolor{keywordtype}{char}\ *new\_name)}
+\DoxyCodeLine{00285\ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00287\ \ \ YMAP(}
+\DoxyCodeLine{00288\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}focused\_title\_change\_event"{}});\ YMAP(}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_number"{}});\ YINT(mon\_num);}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}client\_window\_id"{}});\ YINT(client\_id);}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_name"{}});\ YSTR(old\_name);}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}new\_name"{}});\ YSTR(new\_name);}
+\DoxyCodeLine{00293\ \ \ \ \ )}
+\DoxyCodeLine{00294\ \ \ )}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00298\ \}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \textcolor{keywordtype}{int}\ dump\_client\_state(yajl\_gen\ gen,\ const\ \mbox{\hyperlink{structClientState}{ClientState}}\ *state)}
+\DoxyCodeLine{00301\ \{}
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00303\ \ \ YMAP(}
+\DoxyCodeLine{00304\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}is\_fixed"{}});\ YBOOL(state-\/>isfixed);}
+\DoxyCodeLine{00305\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}is\_floating"{}});\ YBOOL(state-\/>isfloating);}
+\DoxyCodeLine{00306\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}is\_urgent"{}});\ YBOOL(state-\/>isurgent);}
+\DoxyCodeLine{00307\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}never\_focus"{}});\ YBOOL(state-\/>neverfocus);}
+\DoxyCodeLine{00308\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_state"{}});\ YBOOL(state-\/>oldstate);}
+\DoxyCodeLine{00309\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}is\_fullscreen"{}});\ YBOOL(state-\/>isfullscreen);}
+\DoxyCodeLine{00310\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}ignore\_transient"{}});\ YBOOL(state-\/>ignoretransient);}
+\DoxyCodeLine{00311\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}is\_sticky"{}});\ YBOOL(state-\/>issticky);}
+\DoxyCodeLine{00312\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}fake\_fullscreen"{}});\ YBOOL(state-\/>fakefullscreen);}
+\DoxyCodeLine{00313\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}is\_steam"{}});\ YBOOL(state-\/>issteam);}
+\DoxyCodeLine{00314\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}hints\_valid"{}});\ YBOOL(state-\/>hintsvalid);}
+\DoxyCodeLine{00315\ \ \ )}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00319\ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \textcolor{keywordtype}{int}\ dump\_focused\_state\_change\_event(yajl\_gen\ gen,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mon\_num,\ \textcolor{keyword}{const}\ Window\ client\_id,}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structClientState}{ClientState}}\ *old\_state,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structClientState}{ClientState}}\ *new\_state)}
+\DoxyCodeLine{00323\ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00325\ \ \ YMAP(}
+\DoxyCodeLine{00326\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}focused\_state\_change\_event"{}});\ YMAP(}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}monitor\_number"{}});\ YINT(mon\_num);}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}client\_window\_id"{}});\ YINT(client\_id);}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}old\_state"{}});\ dump\_client\_state(gen,\ old\_state);}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}new\_state"{}});\ dump\_client\_state(gen,\ new\_state);}
+\DoxyCodeLine{00331\ \ \ \ \ )}
+\DoxyCodeLine{00332\ \ \ )}
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{00336\ \}}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \textcolor{keywordtype}{int}\ dump\_error\_message(yajl\_gen\ gen,\ const\ \textcolor{keywordtype}{char}\ *reason)}
+\DoxyCodeLine{00339\ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00341\ \ \ YMAP(}
+\DoxyCodeLine{00342\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}result"{}});\ YSTR(\textcolor{stringliteral}{"{}error"{}});}
+\DoxyCodeLine{00343\ \ \ \ \ YSTR(\textcolor{stringliteral}{"{}reason"{}});\ YSTR(reason);}
+\DoxyCodeLine{00344\ \ \ )}
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00348\ \}}
+
+\end{DoxyCode}

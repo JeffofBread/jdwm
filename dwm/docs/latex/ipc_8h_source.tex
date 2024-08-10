@@ -1,0 +1,126 @@
+\doxysection{ipc.\+h}
+\hypertarget{ipc_8h_source}{}\label{ipc_8h_source}\index{dwm/ipc.h@{dwm/ipc.h}}
+\mbox{\hyperlink{ipc_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ IPC\_H\_}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ IPC\_H\_}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <sys/epoll.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <yajl\_gen.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}IPCClient.h"{}}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ IPC\_MAGIC\ "{}JDWM-\/IPC"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ IPC\_MAGIC\_ARR\ \{\ 'J',\ 'D',\ 'W',\ 'M',\ '-\/',\ 'I',\ 'P',\ 'C'\}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ IPC\_MAGIC\_LEN\ 8\ }\textcolor{comment}{//\ Not\ including\ null\ char}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ IPCCOMMAND(FUNC,\ ARGC,\ TYPES)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \{\ \#FUNC,\ \{FUNC\ \},\ ARGC,\ (ArgType[ARGC])TYPES\ \}}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ IPCMessageType\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ IPC\_TYPE\_RUN\_COMMAND\ =\ 0,}
+\DoxyCodeLine{00031\ \ \ \ \ IPC\_TYPE\_GET\_MONITORS\ =\ 1,}
+\DoxyCodeLine{00032\ \ \ \ \ IPC\_TYPE\_GET\_TAGS\ =\ 2,}
+\DoxyCodeLine{00033\ \ \ \ \ IPC\_TYPE\_GET\_LAYOUTS\ =\ 3,}
+\DoxyCodeLine{00034\ \ \ \ \ IPC\_TYPE\_GET\_DWM\_CLIENT\ =\ 4,}
+\DoxyCodeLine{00035\ \ \ \ \ IPC\_TYPE\_SUBSCRIBE\ =\ 5,}
+\DoxyCodeLine{00036\ \ \ \ \ IPC\_TYPE\_EVENT\ =\ 6}
+\DoxyCodeLine{00037\ \}\ IPCMessageType;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ IPCEvent\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ IPC\_EVENT\_TAG\_CHANGE\ =\ 1\ <<\ 0,}
+\DoxyCodeLine{00041\ \ \ \ \ IPC\_EVENT\_CLIENT\_FOCUS\_CHANGE\ =\ 1\ <<\ 1,}
+\DoxyCodeLine{00042\ \ \ \ \ IPC\_EVENT\_LAYOUT\_CHANGE\ =\ 1\ <<\ 2,}
+\DoxyCodeLine{00043\ \ \ \ \ IPC\_EVENT\_MONITOR\_FOCUS\_CHANGE\ =\ 1\ <<\ 3,}
+\DoxyCodeLine{00044\ \ \ \ \ IPC\_EVENT\_FOCUSED\_TITLE\_CHANGE\ =\ 1\ <<\ 4,}
+\DoxyCodeLine{00045\ \ \ \ \ IPC\_EVENT\_FOCUSED\_STATE\_CHANGE\ =\ 1\ <<\ 5}
+\DoxyCodeLine{00046\ \}\ IPCEvent;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ IPCSubscriptionAction\ \{\ IPC\_ACTION\_UNSUBSCRIBE\ =\ 0,\ IPC\_ACTION\_SUBSCRIBE\ =\ 1\ \}\ IPCSubscriptionAction;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structjdwm__ipc__header}{jdwm\_ipc\_header}}\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ uint8\_t\ magic[IPC\_MAGIC\_LEN];}
+\DoxyCodeLine{00055\ \ \ \ \ uint32\_t\ size;}
+\DoxyCodeLine{00056\ \ \ \ \ uint8\_t\ type;}
+\DoxyCodeLine{00057\ \}\ \mbox{\hyperlink{ipc_8h_ab9bbc573d3f40e11f9a96b3b1b90f11d}{\_\_attribute}}((packed))\ jdwm\_ipc\_header\_t;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ ArgType\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ ARG\_TYPE\_NONE\ =\ 0,}
+\DoxyCodeLine{00061\ \ \ \ \ ARG\_TYPE\_UINT\ =\ 1,}
+\DoxyCodeLine{00062\ \ \ \ \ ARG\_TYPE\_SINT\ =\ 2,}
+\DoxyCodeLine{00063\ \ \ \ \ ARG\_TYPE\_FLOAT\ =\ 3,}
+\DoxyCodeLine{00064\ \ \ \ \ ARG\_TYPE\_PTR\ =\ 4,}
+\DoxyCodeLine{00065\ \ \ \ \ ARG\_TYPE\_STR\ =\ 5}
+\DoxyCodeLine{00066\ \}\ ArgType;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\mbox{\hyperlink{unionArgFunction}{ArgFunction}}\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ void\ (*single\_param)(\textcolor{keyword}{const}\ \mbox{\hyperlink{unionArg}{Arg}}\ *);}
+\DoxyCodeLine{00073\ \ \ \ \ void\ (*array\_param)(\textcolor{keyword}{const}\ \mbox{\hyperlink{unionArg}{Arg}}\ *,\ int);}
+\DoxyCodeLine{00074\ \}\ \mbox{\hyperlink{ipc_8h_ae2b6ed51a975e7b6e4ad751f5cae9706}{ArgFunction}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structIPCCommand}{IPCCommand}}\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{char}\ *name;}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{unionArgFunction}{ArgFunction}}\ func;}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ argc;}
+\DoxyCodeLine{00080\ \ \ \ \ ArgType\ *arg\_types;}
+\DoxyCodeLine{00081\ \}\ \mbox{\hyperlink{structIPCCommand}{IPCCommand}};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structIPCParsedCommand}{IPCParsedCommand}}\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{char}\ *name;}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{unionArg}{Arg}}\ *args;}
+\DoxyCodeLine{00086\ \ \ \ \ ArgType\ *arg\_types;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ argc;}
+\DoxyCodeLine{00088\ \}\ \mbox{\hyperlink{structIPCParsedCommand}{IPCParsedCommand}};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_a0075a47c0fd4b8176a483263b656aa55}{ipc\_init}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *socket\_path,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ p\_epoll\_fd,\ \mbox{\hyperlink{structIPCCommand}{IPCCommand}}\ commands[],\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ commands\_len);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_a5cd86734203d73e9a1ed798b28aac43f}{ipc\_cleanup}}();}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00114\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_aaf6a34c4926a5daeb5e86a3810df1927}{ipc\_get\_sock\_fd}}();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00123\ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *\mbox{\hyperlink{ipc_8h_a3547c5a2191240ab550d351548bf74da}{ipc\_get\_client}}(\textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00132\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_a7b06b9405d28f83b70abef476c96586b}{ipc\_is\_client\_registered}}(\textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00143\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_a2691ad7177c992404f030ec077caf951}{ipc\_drop\_client}}(\mbox{\hyperlink{structIPCClient}{IPCClient}}\ *c);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00151\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_ac4cf9ef8e563e9ab39dca46e91bef9dd}{ipc\_accept\_client}}();}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00167\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_a7fc2b53d563fbe5b5cd2d18ed896515a}{ipc\_read\_client}}(\mbox{\hyperlink{structIPCClient}{IPCClient}}\ *c,\ IPCMessageType\ *msg\_type,\ uint32\_t\ *msg\_size,\ \textcolor{keywordtype}{char}\ **msg);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00177\ ssize\_t\ \mbox{\hyperlink{ipc_8h_a17a7e48abf6934919ddfa34a6b59190b}{ipc\_write\_client}}(\mbox{\hyperlink{structIPCClient}{IPCClient}}\ *c);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00189\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_a3f8724e9a4d13f3f740424b4bd2cd320}{ipc\_prepare\_send\_message}}(\mbox{\hyperlink{structIPCClient}{IPCClient}}\ *c,\ \textcolor{keyword}{const}\ IPCMessageType\ msg\_type,\ \textcolor{keyword}{const}\ uint32\_t\ msg\_size,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *msg);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00199\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_a6efdf4e155c8f0affd6a54036b4583ba}{ipc\_prepare\_reply\_failure}}(\mbox{\hyperlink{structIPCClient}{IPCClient}}\ *c,\ IPCMessageType\ msg\_type,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *format,\ ...);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00207\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_a4de330d510471cdc8ab4e81ce6b454ec}{ipc\_prepare\_reply\_success}}(\mbox{\hyperlink{structIPCClient}{IPCClient}}\ *c,\ IPCMessageType\ msg\_type);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00217\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_ab979bf45647a6ba3a6a0430c7c44f496}{ipc\_tag\_change\_event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mon\_num,\ \mbox{\hyperlink{structTagState}{TagState}}\ old\_state,\ \mbox{\hyperlink{structTagState}{TagState}}\ new\_state);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00227\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_a5e7ab9e5a64ea61eb21caccb81bb2634}{ipc\_client\_focus\_change\_event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mon\_num,\ \mbox{\hyperlink{structClient}{Client}}\ *old\_client,\ \mbox{\hyperlink{structClient}{Client}}\ *new\_client);}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00239\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_ac93313ec475fade29aa3f6182624da88}{ipc\_layout\_change\_event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mon\_num,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *old\_symbol,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structLayout}{Layout}}\ *old\_layout,}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *new\_symbol,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structLayout}{Layout}}\ *new\_layout);}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00249\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_a30f10dd1fb42c40505a0bb0e554e1f1a}{ipc\_monitor\_focus\_change\_event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ last\_mon\_num,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ new\_mon\_num);}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00260\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_aa641e7730c197a51c3e68fca7cc07ee5}{ipc\_focused\_title\_change\_event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mon\_num,\ \textcolor{keyword}{const}\ Window\ client\_id,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *old\_name,}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *new\_name);}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00272\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_aafbc9c45dbce577a3a62275f72d63867}{ipc\_focused\_state\_change\_event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ mon\_num,\ \textcolor{keyword}{const}\ Window\ client\_id,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structClientState}{ClientState}}\ *old\_state,}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structClientState}{ClientState}}\ *new\_state);}
+\DoxyCodeLine{00282\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{ipc_8h_a501706e7a2244abe719cefa19a6cfb04}{ipc\_send\_events}}(\mbox{\hyperlink{structMonitor}{Monitor}}\ *mons,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ **lastselmon,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ *selmon);}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00302\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_ac2e89d3423dd343b78dd422ec54e6dce}{ipc\_handle\_client\_epoll\_event}}(\textcolor{keyword}{struct}\ epoll\_event\ *ev,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ *mons,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ **lastselmon,\ \mbox{\hyperlink{structMonitor}{Monitor}}\ *selmon,}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *tags[],\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ tags\_len,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structLayout}{Layout}}\ *layouts,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ layouts\_len);}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00314\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{ipc_8h_a90ff3f5975686c3cefb6da204077fc9d}{ipc\_handle\_socket\_epoll\_event}}(\textcolor{keyword}{struct}\ epoll\_event\ *ev);}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ IPC\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

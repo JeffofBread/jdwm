@@ -9,6 +9,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
 
 **Notes before you install:**
  - Make sure you have all the necessary [required dependencies](#required-dependencies), or issues could occur during installation.
+ - jdwm is only compatable with X11, not Wayland. Please make sure you use X11.
  - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified at the start of the script.
  - To edit things like your terminal alias before installation, edit `/jdwm/dwm/resources/jdwm.aliases`. This can also be done after installation by going to `~/.config/jdwm/jdwm.aliases`
  - To edit what programs autostart with jdwm copy `/jdwm/dwm/scripts/jdwm_autostarts.example` as `/jdwm/dwm/scripts/jdwm_autostarts.sh` and put whatever commands/programs you want started in there. It will be installed along with other scripts to `/usr/local/bin` and run at login.

@@ -1,0 +1,156 @@
+\doxysection{config.\+h}
+\hypertarget{config_8h_source}{}\label{config_8h_source}\index{dwm/config/config.h@{dwm/config/config.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ \ \ \ \_\_\ \ \_\_\ \ \ \_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ \ \ \_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ \ \ |\ \ \(\backslash\)/\ \ |\ (\_)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\ |\ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ \ \ |\ \(\backslash\)\ \ /\ |\ \ \_\ \ \ \_\_\_\ \ \ \ \_\_\_\ \ \ \ \_\_\_\ \ |\ |\ |\ |\ \ \ \_\_\ \_\ \ \ \_\ \_\_\ \ \ \ \ \_\_\_\ \ \ \ \_\_\_\ \ \ \ \_\ \ \ \_\ \ \ \_\_\_\ \ \ //}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ \ \ |\ |\(\backslash\)/|\ |\ |\ |\ /\ \_\_|\ \ /\ \_\_|\ \ /\ \_\ \(\backslash\)\ |\ |\ |\ |\ \ /\ \_`\ |\ |\ '\_\ \(\backslash\)\ \ \ /\ \_\ \(\backslash\)\ \ /\ \_\ \(\backslash\)\ \ |\ |\ |\ |\ /\ \_\_|\ \ //}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \ \ |\ |\ \ |\ |\ |\ |\ \(\backslash\)\_\_\ \(\backslash\)\ |\ (\_\_\ \ |\ \ \_\_/\ |\ |\ |\ |\ |\ (\_|\ |\ |\ |\ |\ |\ |\ \ \_\_/\ |\ (\_)\ |\ |\ |\_|\ |\ \(\backslash\)\_\_\ \(\backslash\)\ \ //}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \ \ |\_|\ \ |\_|\ |\_|\ |\_\_\_/\ \ \(\backslash\)\_\_\_|\ \ \(\backslash\)\_\_\_|\ |\_|\ |\_|\ \ \(\backslash\)\_\_,\_|\ |\_|\ |\_|\ \ \(\backslash\)\_\_\_|\ \ \(\backslash\)\_\_\_/\ \ \ \(\backslash\)\_\_,\_|\ |\_\_\_/\ \ //}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Window\ Icons}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ ICONSIZE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 20\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ window\ icon\ size\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ ICONSPACING\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 5\ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{/*\ space\ between\ icon\ and\ title\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ jdwm\ theme.\ Please\ don't\ remove\ the\ comment}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ inline\ with\ the\ include,\ as\ it's\ how\ the\ rofi}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ theme\ switcher\ finds\ the\ include.\ }}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <storm\_theme.h>}\ \textcolor{comment}{//\ JDWM\_THEME}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ Border}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ borderpx\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ border\ pixel\ of\ windows\ */}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ fborderpx\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 5;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ border\ pixel\ of\ floating\ windows\ */}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ Bar/Status\ padding}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ vertpad\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 10;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ vertical\ padding\ of\ bar\ */}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ vertpadbar\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ vertical\ padding\ for\ statusbar\ */}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ sidepad\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 10;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ horizontal\ padding\ of\ bar\ */}}
+\DoxyCodeLine{00030\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ horizpadbar\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ horizontal\ padding\ for\ statusbar\ */}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ Tag\ underline}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ulineall\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 1\ to\ show\ underline\ on\ all\ tags,\ 0\ for\ just\ the\ active\ ones\ */}}
+\DoxyCodeLine{00034\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ulinepad\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 5;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ horizontal\ padding\ between\ the\ underline\ and\ tag\ */}}
+\DoxyCodeLine{00035\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ulinestroke\ \ \ \ \ \ \ \ \ \ \ =\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ thickness\ /\ height\ of\ the\ underline\ */}}
+\DoxyCodeLine{00036\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ ulinevoffset\ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ how\ far\ above\ the\ bottom\ of\ the\ bar\ the\ line\ should\ appear\ */}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ Bar\ feature\ toggles}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ showsystray\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ no\ systray\ */}}
+\DoxyCodeLine{00040\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ showbar\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ no\ bar\ */}}
+\DoxyCodeLine{00041\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ topbar\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ bottom\ bar\ */}}
+\DoxyCodeLine{00042\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ showtitle\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ no\ title\ */}}
+\DoxyCodeLine{00043\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ showtags\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ no\ tags\ */}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ showlayout\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ no\ layout\ indicator\ */}}
+\DoxyCodeLine{00045\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ showstatus\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ no\ status\ bar\ */}}
+\DoxyCodeLine{00046\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ showfloating\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ means\ no\ floating\ indicator\ */}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ Systray}}
+\DoxyCodeLine{00049\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ systraypinning\ \ \ \ \ \ \ \ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0:\ sloppy\ systray\ follows\ selected\ monitor,\ >0:\ pin\ systray\ to\ monitor\ X\ */}}
+\DoxyCodeLine{00050\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ systrayonleft\ \ \ \ \ \ \ \ \ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0:\ systray\ in\ the\ right\ corner,\ >0:\ systray\ on\ left\ of\ status\ text\ */}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ systrayspacing\ \ \ \ \ \ \ \ =\ 3;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ systray\ spacing\ */}}
+\DoxyCodeLine{00052\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ systraypinningfailfirst\ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 1:\ if\ pinning\ fails,\ display\ systray\ on\ the\ first\ monitor,\ False:\ display\ systray\ on\ the\ last\ monitor*/}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ Misc}}
+\DoxyCodeLine{00055\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ raisefloatwinfoc\ \ \ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ whether\ to\ raise\ floating\ window\ on\ focus,\ mainly\ to\ help\ deal\ with\ overlapping\ windows\ */}}
+\DoxyCodeLine{00056\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ centeredwindowname\ \ \ \ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ 0\ is\ default\ dwm\ behavior,\ 1\ centers\ the\ name\ on\ the\ monitor\ width\ (not\ the\ bars),\ and\ over\ 1\ is\ a\ lazy\ toggle\ off\ for\ the\ window\ name\ */}}
+\DoxyCodeLine{00057\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ snap\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 32;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ snap\ pixel,\ don't\ see\ a\ reason\ you\ would\ need\ to\ change\ this\ */}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ Bar\ Font}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *fonts[]\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{\ \textcolor{stringliteral}{"{}JetBrainsMono:size=14"{}}\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ Sticky\ Icon}}
+\DoxyCodeLine{00063\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ XPoint\ stickyicon[]\ \ \ \ \ \ \ \ =\ \{\ \{0,0\},\ \{4,0\},\ \{4,8\},\ \{2,6\},\ \{0,8\},\ \{0,0\}\ \};\ \textcolor{comment}{/*\ represents\ the\ icon\ as\ an\ array\ of\ vertices\ */}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ XPoint\ stickyiconbb\ \ \ \ \ \ \ \ =\ \{4,8\};\ \textcolor{comment}{/*\ defines\ the\ bottom\ right\ corner\ of\ the\ polygon's\ bounding\ box\ (speeds\ up\ scaling)\ */}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ Tag\ Characters}}
+\DoxyCodeLine{00067\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *tags[]\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{\ \textcolor{stringliteral}{"{}1"{}},\ \textcolor{stringliteral}{"{}2"{}},\ \textcolor{stringliteral}{"{}3"{}},\ \textcolor{stringliteral}{"{}4"{}},\ \textcolor{stringliteral}{"{}5"{}},\ \textcolor{stringliteral}{"{}6"{}},\ \textcolor{stringliteral}{"{}7"{}},\ \textcolor{stringliteral}{"{}8"{}},\ \textcolor{stringliteral}{"{}9"{}}\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ Please\ make\ sure\ this\ matches\ the\ name\ of\ your\ terminal\ defined\ as\ SCRATCHPAD\ in\ jdwm.aliases.}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ Example,\ if\ you\ use\ Kitty\ or\ Alacritty,\ to\ spawn\ a\ scratchpad\ use\ the\ \`{}-\/T`\ flag\ followed\ by\ \`{}Scratchpad`.}}
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ AKA\ \`{}kitty\ -\/T\ Scratchpad`\ or\ \`{}alacritty\ -\/T\ Scratchpad`}}
+\DoxyCodeLine{00072\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ \ scratchpadname[]\ \ \ \ \ =\ \ \ \textcolor{stringliteral}{"{}Scratchpad"{}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ Window\ Rules}}
+\DoxyCodeLine{00075\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structRule}{Rule}}\ rules[]\ =\ \{}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ Using\ \`{}xprop`\ you\ can\ find\ the\ instance,\ class,\ and\ title\ of\ any\ client:}}
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ \ \ WM\_CLASS(STRING)\ =\ instance,\ class}}
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ \ \ WM\_NAME(STRING)\ =\ title}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ Tag\ mask\ (Unsigned\ Int):\ What\ tag\ a\ window\ will\ reside\ in\ when\ spawned\ or\ updated}}
+\DoxyCodeLine{00082\ \textcolor{comment}{//}}
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ isfloating\ (Bool):\ Pretty\ self\ explanitory,\ whether\ the\ window\ should\ be\ floating\ by\ default/when\ spawned}}
+\DoxyCodeLine{00084\ \textcolor{comment}{//}}
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ monitor\ (Int):\ Determines\ what\ monitor\ a\ window\ will\ reside\ on\ when\ spawned\ or\ updated}}
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ \ -\/1\ -\/\ No\ monitor\ specified}}
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ \ \ 0\ -\/\ Monitor\ 0}}
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ \ \ 1\ -\/\ Monitor\ 1}}
+\DoxyCodeLine{00089\ \textcolor{comment}{//\ \ \ \ \ \ \ ..etc}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//}}
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ ignoretransient\ (Bool):\ Again,\ self\ explanitory,\ for\ ignoring\ any\ window\ that\ should\ be\ transient,\ sometimes\ usefull\ for\ Unreal\ Engine\ or\ Jetbrains\ tools}}
+\DoxyCodeLine{00092\ \textcolor{comment}{//}}
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ unmanaged\ (Int):\ Determines\ if\ jdwm\ should\ manage\ the\ window\ or\ not}}
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ \ \ 0\ -\/\ The\ window\ is\ managed\ by\ the\ window\ manager}}
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ \ \ 1\ -\/\ The\ window\ will\ be\ placed\ above\ all\ other\ windows}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ \ \ 2\ -\/\ The\ window\ will\ be\ placed\ below\ all\ other\ windows}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ \ \ 3\ -\/\ The\ window\ is\ left\ as-\/is\ (neither\ lowered\ nor\ raised)}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ The\ below\ are\ my\ personal\ examples,\ feel\ free\ to\ remove\ them:\ }}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ class\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ instance\ \ \ \ title\ \ \ \ \ \ \ \ \ \ \ tags\ mask\ \ \ \ \ \ \ isfloating\ \ \ \ \ \ \ monitor\ \ \ \ \ \ \ \ ignoretransient\ \ \ \ \ unmanaged\ */}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}Rofi"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/1,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \{\ \textcolor{stringliteral}{"{}Protonvpn"{}},\ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/1,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \{\ NULL,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ scratchpadname,\ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/1,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\{\ "{}discord"{},\ \ \ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\{\ "{}Spotify"{},\ \ \ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ 2,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\{\ "{}firefox"{},\ \ \ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ 4,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\{\ "{}VSCodium"{},\ \ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ 1,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\{\ "{}obsidian"{},\ \ \ \ \ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ 2,\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \},}}
+\DoxyCodeLine{00110\ \};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00114\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\ \ \ \ \ \ \ \ \_\_\ \_\ \ \ \_\ \ \ \_\ \ \ \ \_\_\_\ \ \ \ \_\ \ \ \_\ \ |\ |\_\ \ \ \_\_\_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\ \ \ \ \ \ \ /\ \_`\ |\ |\ |\ |\ |\ \ /\ \_\ \(\backslash\)\ \ |\ |\ |\ |\ |\ \_\_|\ /\ \_\_|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00117\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ |\_\_\_\_\ \ |\ (\_|\ |\ |\ |\_|\ |\ |\ (\_)\ |\ |\ |\_|\ |\ |\ |\_\ \ \(\backslash\)\_\_\ \(\backslash\)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\_\_\_\_\_\_|\ \ \(\backslash\)\_\_,\_|\ \ \(\backslash\)\_\_,\ |\ \ \(\backslash\)\_\_\_/\ \ \ \(\backslash\)\_\_,\_|\ \ \(\backslash\)\_\_|\ |\_\_\_/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_/\ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00120\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\_\_\_/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00121\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ //}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{comment}{//\ Layout\ Variables}}
+\DoxyCodeLine{00125\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ mfact\ \ \ \ \ \ \ \ \ \ =\ 0.5;\ \ \textcolor{comment}{/*\ factor\ of\ master\ area\ size\ [0.05..0.95]\ \ \ \ \ \ */}}
+\DoxyCodeLine{00126\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \ \ nmaster\ \ \ \ \ \ \ \ =\ 1;\ \ \ \ \textcolor{comment}{/*\ number\ of\ clients\ in\ master\ area\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00127\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \ \ resizehints\ \ \ \ =\ 1;\ \ \ \ \textcolor{comment}{/*\ 1\ means\ respect\ size\ hints\ in\ tiled\ resizals\ */}}
+\DoxyCodeLine{00128\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \ \ lockfullscreen\ =\ 1;\ \ \ \ \textcolor{comment}{/*\ 1\ will\ force\ focus\ on\ the\ fullscreen\ window\ \ */}}
+\DoxyCodeLine{00129\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ gappih\ \ =\ 10;\ \ \ \textcolor{comment}{/*\ horiz\ inner\ gap\ between\ windows\ */}}
+\DoxyCodeLine{00130\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ gappiv\ \ =\ 10;\ \ \ \textcolor{comment}{/*\ vert\ inner\ gap\ between\ windows\ */}}
+\DoxyCodeLine{00131\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ gappoh\ \ =\ 10;\ \ \ \textcolor{comment}{/*\ horiz\ outer\ gap\ between\ windows\ and\ screen\ edge\ */}}
+\DoxyCodeLine{00132\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ gappov\ \ =\ 10;\ \ \ \textcolor{comment}{/*\ vert\ outer\ gap\ between\ windows\ and\ screen\ edge\ */}}
+\DoxyCodeLine{00133\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ smartgaps\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0;\ \ \ \ \textcolor{comment}{/*\ 1\ means\ no\ outer\ gap\ when\ there\ is\ only\ one\ window\ */}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{comment}{//\ Layouts\ and\ Layout\ Rules}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#define\ FORCE\_VSPLIT\ 1\ \ }\textcolor{comment}{/*\ nrowgrid\ layout:\ force\ two\ clients\ to\ always\ split\ vertically\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00137\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structLayout}{Layout}}\ layouts[]\ =\ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Symbol\ \ \ \ \ \ Arrange\ function\ \ \ \ \ \ \ \ Name}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}[]="{}},\ \ \ \ \ \ tile,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Tile"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},\ \ \ \ \textcolor{comment}{/*\ first\ entry\ is\ default\ */}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}[M]"{}},\ \ \ \ \ \ monocle,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Monocle"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}[@]"{}},\ \ \ \ \ \ spiral,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Spiral"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}[\(\backslash\)\(\backslash\)]"{}},\ \ \ \ \ dwindle,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Dwindle"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}H[]"{}},\ \ \ \ \ \ deck,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Deck"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}TTT"{}},\ \ \ \ \ \ bstack,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}B-\/Stack"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}==="{}},\ \ \ \ \ \ bstackhoriz,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}B-\/Stack\ Horizontal"{}}\ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}HHH"{}},\ \ \ \ \ \ grid,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Grid"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}\#\#\#"{}},\ \ \ \ \ \ nrowgrid,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Narrow\ Grid"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}-\/-\/-\/"{}},\ \ \ \ \ \ horizgrid,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Horizontal\ Grid"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}:::"{}},\ \ \ \ \ \ gaplessgrid,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Gapless\ Grid"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}|M|"{}},\ \ \ \ \ \ centeredmaster,\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Centered\ Master"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}>M>"{}},\ \ \ \ \ \ centeredfloatingmaster,\ \textcolor{stringliteral}{"{}Centered\ Floating\ Master"{}}\ \ \ \ \ \ \},}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \{\ \ \ \textcolor{stringliteral}{"{}><>"{}},\ \ \ \ \ \ NULL,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Floating"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},\ \ \ \ \textcolor{comment}{/*\ no\ layout\ function\ means\ floating\ behavior\ */}}
+\DoxyCodeLine{00153\ \};}
+
+\end{DoxyCode}

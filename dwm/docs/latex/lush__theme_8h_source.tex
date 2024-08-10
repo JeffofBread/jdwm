@@ -1,0 +1,38 @@
+\doxysection{lush\+\_\+theme.\+h}
+\hypertarget{lush__theme_8h_source}{}\label{lush__theme_8h_source}\index{dwm/themes/lush\_theme.h@{dwm/themes/lush\_theme.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ 🌲\ Lush\ Theme}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ Lush\ green\ theme\ created\ by\ @JeffOfBread}}
+\DoxyCodeLine{00004\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ greygreen[]\ \ \ =\ \textcolor{stringliteral}{"{}\#2f4a34"{}};}
+\DoxyCodeLine{00005\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ normalgreen[]\ =\ \textcolor{stringliteral}{"{}\#253a29"{}};}
+\DoxyCodeLine{00006\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ darkgreen[]\ \ \ =\ \textcolor{stringliteral}{"{}\#111b13"{}};}
+\DoxyCodeLine{00007\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ bluegreen[]\ \ \ =\ \textcolor{stringliteral}{"{}\#1e453e"{}};}
+\DoxyCodeLine{00008\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ grey[]\ \ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}\#25272a"{}};}
+\DoxyCodeLine{00009\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ white[]\ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}\#e1e0db"{}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *colors[][4]\ =\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ Clients\ \ \ \ \ \ \ foreground\ \ \ \ \ background\ \ \ \ border\ \ \ \ \ \ float}}
+\DoxyCodeLine{00014\ \ \ \ \ [SchemeNorm]\ =\ \{\ darkgreen,\ \ \ \ \ grey,\ \ \ \ \ \ \ \ \ darkgreen,\ \ darkgreen\ \},\ \ \ \ \textcolor{comment}{//\ Generic\ scheme\ for\ unfocused\ clients}}
+\DoxyCodeLine{00015\ \ \ \ \ [SchemeSel]\ \ =\ \{\ greygreen,\ \ \ \ \ grey,\ \ \ \ \ \ \ \ \ greygreen,\ \ greygreen\ \},\ \ \ \ \textcolor{comment}{//\ Generic\ scheme\ for\ focused\ clients}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Bar\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ text\ \ \ \ \ \ \ \ background}}
+\DoxyCodeLine{00018\ \ \ \ \ [SchemeSystray]\ \ \ \ \ =\ \{\ white,\ \ \ \ \ \ normalgreen\ \},\ \ \ \textcolor{comment}{//\ Systray}}
+\DoxyCodeLine{00019\ \ \ \ \ [SchemeStatus]\ \ \ \ \ \ =\ \{\ white,\ \ \ \ \ \ normalgreen\ \},\ \ \ \textcolor{comment}{//\ Statusbar\ (dwmblocks)}}
+\DoxyCodeLine{00020\ \ \ \ \ [SchemeTagsSel]\ \ \ \ \ =\ \{\ white,\ \ \ \ \ \ normalgreen\ \},\ \ \ \textcolor{comment}{//\ Tagbar\ left\ selected}}
+\DoxyCodeLine{00021\ \ \ \ \ [SchemeTagsNorm]\ \ \ \ =\ \{\ white,\ \ \ \ \ \ normalgreen\ \},\ \ \ \textcolor{comment}{//\ Tagbar\ left\ unselected}}
+\DoxyCodeLine{00022\ \ \ \ \ [SchemeInfoSel]\ \ \ \ \ =\ \{\ white,\ \ \ \ \ \ normalgreen\ \},\ \ \ \textcolor{comment}{//\ infobar\ middle\ selected}}
+\DoxyCodeLine{00023\ \ \ \ \ [SchemeInfoNorm]\ \ \ \ =\ \{\ white,\ \ \ \ \ \ normalgreen\ \},\ \ \ \textcolor{comment}{//\ infobar\ middle\ unselected}}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ Wallpaper\ command\ executed\ by\ execvp()\ on\ any\ run\ or\ restart}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ JDWMWALLPAPERDIR\ is\ defined\ automatically\ as\ \`{}\string~/.config/jdwm/wallpapers`,\ }}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ add\ it\ as\ demonstrated\ below\ to\ get\ the\ full\ path\ to\ the\ image\ file.\ }}
+\DoxyCodeLine{00029\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ *wallpapercmd[]\ =\ \{\ \textcolor{stringliteral}{"{}feh"{}},\ \textcolor{stringliteral}{"{}-\/-\/bg-\/fill"{}},\ JDWMWALLPAPERDIR\ \textcolor{stringliteral}{"{}/lush/lush1.jpg"{}},\ JDWMWALLPAPERDIR\ \textcolor{stringliteral}{"{}/lush/lush2.jpg"{}},\ NULL\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ Name\ of\ the\ rofi\ theme\ file\ (without\ path,\ path\ defined\ in\ jdwm.c,\ should\ be\ generic)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ ROFITHEMEFILE\ lush.rasi}}
+
+\end{DoxyCode}

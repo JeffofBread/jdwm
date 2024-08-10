@@ -1,0 +1,37 @@
+\doxysection{IPCClient.\+h}
+\hypertarget{IPCClient_8h_source}{}\label{IPCClient_8h_source}\index{dwm/IPCClient.h@{dwm/IPCClient.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IPC\_CLIENT\_H\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IPC\_CLIENT\_H\_}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <sys/epoll.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structIPCClient}{IPCClient}}\ \mbox{\hyperlink{structIPCClient}{IPCClient}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structIPCClient}{IPCClient}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ fd;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ subscriptions;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{char}\ *buffer;}
+\DoxyCodeLine{00018\ \ \ \ \ uint32\_t\ buffer\_size;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{struct\ }epoll\_event\ event;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *next;}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *prev;}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *\mbox{\hyperlink{structIPCClient}{IPCClientList}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00035\ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *ipc\_client\_new(\textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ ipc\_list\_add\_client(\mbox{\hyperlink{structIPCClient}{IPCClientList}}\ *list,\ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *nc);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ ipc\_list\_remove\_client(\mbox{\hyperlink{structIPCClient}{IPCClientList}}\ *list,\ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *c);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00059\ \mbox{\hyperlink{structIPCClient}{IPCClient}}\ *ipc\_list\_get\_client(\mbox{\hyperlink{structIPCClient}{IPCClientList}}\ list,\ \textcolor{keywordtype}{int}\ fd);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ IPC\_CLIENT\_H\_}}
+
+\end{DoxyCode}

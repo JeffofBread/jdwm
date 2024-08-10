@@ -1,0 +1,39 @@
+\doxysection{storm\+\_\+theme.\+h}
+\hypertarget{storm__theme_8h_source}{}\label{storm__theme_8h_source}\index{dwm/themes/storm\_theme.h@{dwm/themes/storm\_theme.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ 🌊\ Storm\ Theme}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ Stormy\ blue\ and\ purple\ theme\ created\ by\ @JeffOfBread}}
+\DoxyCodeLine{00004\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ darkblue[]\ \ \ \ =\ \textcolor{stringliteral}{"{}\#16162F"{}};}
+\DoxyCodeLine{00005\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ midblue[]\ \ \ \ \ =\ \textcolor{stringliteral}{"{}\#418EB4"{}};}
+\DoxyCodeLine{00006\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ lightblue[]\ \ \ =\ \textcolor{stringliteral}{"{}\#A8CAD3"{}};\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ nearblack[]\ \ \ =\ \textcolor{stringliteral}{"{}\#0B0D1E"{}};}
+\DoxyCodeLine{00008\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ lightpurple[]\ =\ \textcolor{stringliteral}{"{}\#645A6D"{}};}
+\DoxyCodeLine{00009\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ orange[]\ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}\#fa9061"{}};}
+\DoxyCodeLine{00010\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ white[]\ \ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}\#ffffff"{}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *colors[][4]\ =\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ Clients\ \ \ \ \ \ \ foreground\ \ \ \ \ background\ \ \ \ \ \ border\ \ \ \ \ \ \ \ \ \ float}}
+\DoxyCodeLine{00015\ \ \ \ \ [SchemeNorm]\ =\ \{\ nearblack,\ \ \ \ \ nearblack,\ \ \ \ \ \ darkblue,\ \ \ \ \ \ \ darkblue\ \ \},\ \ \ \ \textcolor{comment}{//\ Generic\ scheme\ for\ unfocused\ clients}}
+\DoxyCodeLine{00016\ \ \ \ \ [SchemeSel]\ \ =\ \{\ nearblack,\ \ \ \ \ nearblack,\ \ \ \ \ \ lightblue,\ \ \ \ \ \ lightblue\ \},\ \ \ \ \textcolor{comment}{//\ Generic\ scheme\ for\ focused\ clients}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Bar\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ text\ \ \ \ \ \ \ \ background}}
+\DoxyCodeLine{00019\ \ \ \ \ [SchemeSystray]\ \ \ \ \ =\ \{\ lightblue,\ \ darkblue\ \},\ \ \ \textcolor{comment}{//\ Systray}}
+\DoxyCodeLine{00020\ \ \ \ \ [SchemeStatus]\ \ \ \ \ \ =\ \{\ lightblue,\ \ darkblue\ \},\ \ \ \textcolor{comment}{//\ Statusbar\ (dwmblocks)}}
+\DoxyCodeLine{00021\ \ \ \ \ [SchemeTagsSel]\ \ \ \ \ =\ \{\ orange,\ \ \ \ \ darkblue\ \},\ \ \ \textcolor{comment}{//\ Tagbar\ left\ selected}}
+\DoxyCodeLine{00022\ \ \ \ \ [SchemeTagsNorm]\ \ \ \ =\ \{\ lightblue,\ \ darkblue\ \},\ \ \ \textcolor{comment}{//\ Tagbar\ left\ unselected}}
+\DoxyCodeLine{00023\ \ \ \ \ [SchemeInfoSel]\ \ \ \ \ =\ \{\ lightblue,\ \ darkblue\ \},\ \ \ \textcolor{comment}{//\ infobar\ middle\ selected}}
+\DoxyCodeLine{00024\ \ \ \ \ [SchemeInfoNorm]\ \ \ \ =\ \{\ lightblue,\ \ darkblue\ \},\ \ \ \textcolor{comment}{//\ infobar\ middle\ unselected\ }}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ Wallpaper\ command\ executed\ by\ execvp()\ on\ any\ run\ or\ restart}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ JDWMWALLPAPERDIR\ is\ defined\ automatically\ as\ \`{}\string~/.config/jdwm/wallpapers`,\ }}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ add\ it\ as\ demonstrated\ below\ to\ get\ the\ full\ path\ to\ the\ image\ file.\ }}
+\DoxyCodeLine{00030\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ *wallpapercmd[]\ =\ \{\ \textcolor{stringliteral}{"{}feh"{}},\ \textcolor{stringliteral}{"{}-\/-\/bg-\/fill"{}},\ JDWMWALLPAPERDIR\ \textcolor{stringliteral}{"{}/storm/storm.png"{}},\ NULL\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ Name\ of\ the\ rofi\ theme\ file\ (without\ path,\ path\ defined\ in\ jdwm.c,\ should\ be\ generic)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ ROFITHEMEFILE\ storm.rasi}}
+
+\end{DoxyCode}

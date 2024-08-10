@@ -1,4 +1,12 @@
-/* See LICENSE file for copyright and license details. */
+/**
+ * @file drw.c
+ * @author JeffOfBread (https://github.com/JeffofBread) & https://suckless.org/
+ * @brief Part of [libsl](https://git.suckless.org/libsl/files.html), a shared library created by suckless to help draw text and other objects to the screen in X11 for their various programs
+ * @see https://git.suckless.org/libsl/files.html
+ * @version @VERSION
+ * @copyright Refer to jdwm's LICENSE file: https://github.com/JeffofBread/jdwm/blob/master/LICENSE
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,6 +25,13 @@ static const unsigned char utfmask[UTF_SIZ + 1] = { 0xC0, 0x80, 0xE0, 0xF0, 0xF8
 static const long utfmin[UTF_SIZ + 1] = { 0, 0, 0x80, 0x800, 0x10000 };
 static const long utfmax[UTF_SIZ + 1] = { 0x10FFFF, 0x7F, 0x7FF, 0xFFFF, 0x10FFFF };
 
+/**
+ * @brief Internal function to decode a single byte of UTF-8
+ * 
+ * @param c Single input char of UTF-8
+ * @param i Pointer to hold size of 'c'
+ * @return long Character less than the bits of the mask
+ */
 static long utf8decodebyte(const char c, size_t *i)
 {
 	for (*i = 0; *i < (UTF_SIZ + 1); ++(*i))
