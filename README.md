@@ -111,12 +111,12 @@ Also, if anyone would like to add more package managers or distros to this list,
 <details><summary><b>Arch</b></summary>
 
 ```bash
-sudo pacman -S yajl imlib2 gcc feh rofi grep sed coreutils
+sudo pacman -S git make gcc libx11 libxinerama libxft yajl imlib2 feh rofi grep sed coreutils
 ```
 or
 
 ```bash
-yay -S yajl imlib2 gcc feh rofi grep sed coreutils
+yay -S git make gcc libx11 libxinerama libxft yajl imlib2 feh rofi grep sed coreutils
 ```
 
 </details>
