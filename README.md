@@ -171,6 +171,19 @@ yay -S jq xorg-xrandr dunst libpulse playerctl pamixer betterlockscreen rofi-cal
 
 </details>
 
+<details><summary><b>Debian</b></summary>
+
+```bash
+sudo apt install jq libxrandr2 dunst pulseaudio-utils playerctl pamixer firefox-esr thunar
+```
+
+The below will require manual (or similar) instillation:
+- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
+- [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
+- [VSCodium (deb package)](https://vscodium.com/#install-on-debian-ubuntu-deb-package)
+
+</details>
+
 <details><summary><b>Ubuntu</b></summary>
 
 ```bash
@@ -182,19 +195,6 @@ The below will require manual (or similar) instillation:
 - [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
 - [VSCodium (deb package)](https://vscodium.com/#install-on-debian-ubuntu-deb-package) or alternatively, [VSCodium (Snap)](https://vscodium.com/#install-with-snap-linux). I recommend avoiding the snap package and instead installing the .deb package. 
 
-
-</details>
-
-<details><summary><b>Debian</b></summary>
-
-```bash
-sudo apt install jq libxrandr2 dunst pulseaudio-utils playerctl pamixer firefox-esr thunar
-```
-
-The below will require manual (or similar) instillation:
-- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
-- [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
-- [VSCodium (deb package)](https://vscodium.com/#install-on-debian-ubuntu-deb-package)
 
 </details>
 
