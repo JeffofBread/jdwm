@@ -129,6 +129,14 @@ sudo apt install git build-essential libx11-dev libxinerama-dev libxft-dev libya
 
 </details>
 
+<details><summary><b>Fedora</b></summary>
+
+```bash
+sudo dnf install git gcc make libX11-devel libXinerama-devel libXft-devel yajl-devel imlib2-devel feh rofi grep sed coreutils
+```
+
+</details>
+
 ## Optional Dependencies
 
 These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
@@ -187,6 +195,19 @@ The below will require manual (or similar) instillation:
 - [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
 - [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
 - [VSCodium (deb package)](https://vscodium.com/#install-on-debian-ubuntu-deb-package)
+
+</details>
+
+<details><summary><b>Fedora</b></summary>
+
+```bash
+sudo dnf install jq xrandr dunst pulseaudio-utils playerctl pamixer firefox thunar
+```
+
+The below will require manual (or similar) instillation:
+- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
+- [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
+- [VSCodium](https://vscodium.com/#install-on-fedora-rhel-centos-rockylinux-opensuse-rpm-package)
 
 </details>
 
