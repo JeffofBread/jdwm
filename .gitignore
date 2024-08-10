@@ -18,7 +18,6 @@ build/
 !.gitignore
 !.gitattributes
 !.clang-format
-!Doxyfile
 
 ### Ignore user configs
 

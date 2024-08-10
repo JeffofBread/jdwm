@@ -1,12 +1,3 @@
-/**
- * @file ipc.h
- * @author JeffOfBread (https://github.com/JeffofBread) & Mihir Lad (contact@mihirlad.com)
- * @brief Header for ipc.c; Part jdwm's IPC (Inter Process Communication) system, originally written by Mihir Lad as the ['dwm-ipc' patch](https://github.com/mihirlad55/dwm-ipc)
- * @see https://github.com/mihirlad55/dwm-ipc
- * @version @VERSION
- * @copyright Refer to jdwm's LICENSE file: https://github.com/JeffofBread/jdwm/blob/master/LICENSE
- */
-
 #ifndef IPC_H_
 #define IPC_H_
 
