@@ -28,8 +28,8 @@ fi
 # defined on the first line of each file.
 themenames=()
 for (( i=0; i < ${#themefilenames[@]}; i++ )); do
-    tmp=$(sed '1q;d' $THEMES_DIR/${themefilenames[$i]})
-    themenames[$i]=${tmp:3}
+    tmp=$(grep -hnr "// ROFI JDWM THEME SWITCHER TITLE: " $THEMES_DIR/${themefilenames[$i]})
+    themenames[$i]=${tmp:37}
 done
 
 # Rofi chooser using all the formatted theme names

@@ -1,5 +1,3 @@
-// 🌲 Lush Theme
-
 // Lush green theme created by @JeffOfBread
 static const char greygreen[]   = "#2f4a34";
 static const char normalgreen[] = "#253a29";
@@ -8,6 +6,7 @@ static const char bluegreen[]   = "#1e453e";
 static const char grey[]        = "#25272a";
 static const char white[]       = "#e1e0db";
 
+// ROFI JDWM THEME SWITCHER TITLE: 🌲 Lush Theme
 
 static const char *colors[][4] = {
     // Clients       foreground     background    border      float

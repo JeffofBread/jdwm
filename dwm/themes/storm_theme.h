@@ -1,5 +1,3 @@
-// 🌊 Storm Theme
-
 // Stormy blue and purple theme created by @JeffOfBread
 static const char darkblue[]    = "#16162F";
 static const char midblue[]     = "#418EB4";
@@ -8,6 +6,8 @@ static const char nearblack[]   = "#0B0D1E";
 static const char lightpurple[] = "#645A6D";
 static const char orange[]      = "#fa9061";
 static const char white[]       = "#ffffff";
+
+// ROFI JDWM THEME SWITCHER TITLE: 🌊 Storm Theme
 
 static const char *colors[][4] = {
 

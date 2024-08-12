@@ -1,11 +1,11 @@
-// This first line will be what shows when you run jdwm's rofi theme selector
-
 // Template theme for you to create your own theme
 static const char color1[] = "COLOR1 HEXCODE";
 static const char color2[] = "COLOR2 HEXCODE";
 static const char color3[] = "COLOR3 HEXCODE";
 static const char color4[] = "COLOR4 HEXCODE";
 static const char color5[] = "COLOR5 HEXCODE";
+
+// ROFI JDWM THEME SWITCHER TITLE: put your title and icon here
 
 static const char *colors[][4] = {
 
