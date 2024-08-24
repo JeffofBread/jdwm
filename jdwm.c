@@ -54,11 +54,6 @@
 	}
 #define SYSTEM_TRAY_REQUEST_DOCK 0
 
-// Define various paths
-// clang-format off
-#define ROFITHEME APPEND(ROFITHEMEDIR, ROFITHEMEFILE)
-// clang-format on
-
 /* XEMBED messages */
 #define XEMBED_EMBEDDED_NOTIFY 0
 #define XEMBED_WINDOW_ACTIVATE 1
@@ -4086,11 +4081,6 @@ int main(int argc, char *argv[])
 			while (*++p);
 		}
 		firstrun = 0;
-	}
-
-	// Update wallpaper on reload, meant for theme switching
-	if (fork() == 0) {
-		execvp(wallpapercmd[0], wallpapercmd);
 	}
 
 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale()) fputs("warning: no locale support\n", stderr);

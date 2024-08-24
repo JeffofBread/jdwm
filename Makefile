@@ -12,6 +12,7 @@ VERSION = 0.1
 
 # paths
 PREFIX = /usr/local/bin
+MANPREFIX = ${PREFIX}/share/man
 
 X11INC = /usr/X11R6/include
 X11LIB = /usr/X11R6/lib
@@ -26,20 +27,21 @@ FREETYPEINC = /usr/include/freetype2
 
 # OpenBSD (uncomment)
 #FREETYPEINC = ${X11INC}/freetype2
+#MANPREFIX = ${PREFIX}/man
 
 # yajl
 YAJLLIBS = -lyajl
 YAJLINC = /usr/include/yajl
 
 # includes and libs
-INCS = -I${X11INC} -I${FREETYPEINC} -I${JDWM_SRC_DIR} -I${JDWM_CONFIG_DIR} -I${JDWM_THEMES_DIR} -I${JDWM_RESOURCES_DIR} -I${YAJLINC}
+INCS = -I${X11INC} -I${FREETYPEINC} -I${JDWM_CONFIG_DIR} -I${YAJLINC}
 LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender -lImlib2 ${YAJLLIBS}
 
 # flags
 # DEBUGFLAG = -ggdb # Debug flag to allow you to debug dwm with gdb
 DEBUGFLAG = -g  # Default flag, use if you are not debugging dwm
 
-CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" -DROFITHEMEDIR=\"${HOME}/.config/rofi/themes/\" ${XINERAMAFLAGS} -DJDWMWALLPAPERDIR=\"${HOME}/.config/jdwm/wallpapers\" ${XINERAMAFLAGS}
+CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_XOPEN_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS} ${XINERAMAFLAGS}
 CFLAGS   = ${DEBUGFLAG} -std=c99 -pedantic -Wall -O3 -Wno-unused-function -Wno-deprecated-declarations -flto=auto -mtune=native -march=native ${INCS} ${CPPFLAGS}
 LDFLAGS  = ${LIBS}
 
@@ -47,150 +49,80 @@ LDFLAGS  = ${LIBS}
 CC = cc
 
 # jdwm dirs
-JDWM_SRC_DIR = ${CURDIR}/dwm
-JDWM_BUILD_DIR = ${JDWM_SRC_DIR}/build
-JDWM_CONFIG_DIR = ${JDWM_SRC_DIR}/config
-JDWM_RESOURCES_DIR = ${JDWM_SRC_DIR}/resources
-JDWM_THEMES_DIR = ${JDWM_SRC_DIR}/themes
-JDWM_SCRIPTS_DIR = ${JDWM_SRC_DIR}/scripts
+JDWM_BUILD_DIR = ${CURDIR}/build
+JDWM_CONFIG_DIR = ${CURDIR}/config
+JDWM_RESOURCES_DIR = ${CURDIR}/resources
 
 JDWM_SRC := drw.c jdwm.c util.c
 JDWM_OBJ := ${addprefix ${JDWM_BUILD_DIR}/,${JDWM_SRC:.c=.o}}
 
-# dwmblocks dirs
-BLOCKS_SRC_DIR = ${CURDIR}/dwmblocks
-BLOCKS_BUILD_DIR = ${BLOCKS_SRC_DIR}/build
-BLOCKS_CONFIG_DIR = ${BLOCKS_SRC_DIR}/config
-BLOCKS_RESOURCES_DIR = ${BLOCKS_SRC_DIR}/resources
-BLOCKS_SCRIPTS_DIR = ${BLOCKS_SRC_DIR}/scripts
-
-BLOCKS_SRC := dwmblocks.c
-BLOCKS_OBJ := ${addprefix ${BLOCKS_BUILD_DIR}/,${BLOCKS_SRC:.c=.o}}
-
-# rofi diirs
-ROFI_DIR = ${CURDIR}/rofi
-ROFI_SCRIPTS_DIR = ${ROFI_DIR}/scripts
-ROFI_THEMES_DIR = ${ROFI_DIR}/themes
-
-# 0 = pretty, 1 = raw make output
-# To run from cli with VERBOSE of 1 just do this:
-# `make VERBOSE=1 command_to_run`
-VERBOSE := 0
-
-# Print format for prettier output
-PRINTF := @printf "%-21s  |  %s\n"
-ifeq ($(VERBOSE), 0)
-	Q := @
-endif
-
 .DEFAULT_GOAL := all
 
-${JDWM_BUILD_DIR}/%.o: ${JDWM_SRC_DIR}/%.c | ${JDWM_BUILD_DIR}
-	$(PRINTF) "Compile jdwm source      (${CC}) " $@
-	$Q${CC} -c ${CFLAGS} $< -o $@
+${JDWM_BUILD_DIR}/%.o: %.c | ${JDWM_BUILD_DIR}
+	${CC} -c ${CFLAGS} $< -o $@
 
 ${JDWM_BUILD_DIR}:
-	$(PRINTF) "Make jdwm build directory " $@
-	$Qmkdir -p ${JDWM_BUILD_DIR}
+	mkdir -p ${JDWM_BUILD_DIR}
 
 ${JDWM_OBJ}: ${JDWM_CONFIG_DIR}/config.h ${JDWM_CONFIG_DIR}/binds.h ${JDWM_CONFIG_DIR}/autorun.h ${JDWM_CONFIG_DIR}/keydefs.h
 
 ${JDWM_CONFIG_DIR}/config.h:
-	$(PRINTF) "Copy jdwm default config      " "cp config.def.h -> config.h"
-	$Qcp ${JDWM_CONFIG_DIR}/config.def.h $@
-	$Qchmod a=rw $@
+	cp ${JDWM_CONFIG_DIR}/config.def.h $@
+	chmod a=rw $@
 
 ${JDWM_CONFIG_DIR}/binds.h:
-	$(PRINTF) "Copy jdwm default binds       " "cp binds.def.h -> binds.h"
-	$Qcp ${JDWM_CONFIG_DIR}/binds.def.h $@
-	$Qchmod a=rw $@
+	cp ${JDWM_CONFIG_DIR}/binds.def.h $@
+	chmod a=rw $@
 
 ${JDWM_CONFIG_DIR}/autorun.h:
-	$(PRINTF) "Copy jdwm default autorun     " "cp autorun.def.h -> autorun.h"
-	$Qcp ${JDWM_CONFIG_DIR}/autorun.def.h $@
-	$Qchmod a=rw $@
+	cp ${JDWM_CONFIG_DIR}/autorun.def.h $@
+	chmod a=rw $@
 
 ${JDWM_CONFIG_DIR}/keydefs.h:
-	$(PRINTF) "Copy jdwm default keydefs     " "cp keydefs.def.h -> keydefs.h"
-	$Qcp ${JDWM_CONFIG_DIR}/keydefs.def.h $@
-	$Qchmod a=rw $@
-
-${BLOCKS_BUILD_DIR}/%.o: ${BLOCKS_SRC_DIR}/%.c | ${BLOCKS_BUILD_DIR}
-	$(PRINTF) "Compile dwmblocks source (${CC}) " $@
-	$Q${CC} -c ${CFLAGS} $< -o $@
-
-${BLOCKS_BUILD_DIR}:
-	$(PRINTF) "Make blocks build directory   " $@
-	$Qmkdir -p ${BLOCKS_BUILD_DIR}
-
-${BLOCKS_OBJ}: ${BLOCKS_CONFIG_DIR}/blocks.h
-
-${BLOCKS_CONFIG_DIR}/blocks.h:
-	$(PRINTF) "Copy dwmblocks default config " "cp blocks.def.h -> blocks.h"
-	$Qcp ${BLOCKS_CONFIG_DIR}/blocks.def.h $@
-	$Qchmod a=rw $@
+	cp ${JDWM_CONFIG_DIR}/keydefs.def.h $@
+	chmod a=rw $@
 
 jdwm: ${JDWM_OBJ} ${JDWM_BUILD_DIR}
-	@if [ $(shell id -u) = 0 ]; then echo -e "\nMakefile needs to be run as non-root to collect $HOME bash variable. Cancelling make...\n"; exit 1; fi
-	$(PRINTF) "Linking jdwm source      (${CC}) " ${JDWM_BUILD_DIR}/jdwm
-	$Q${CC} -o ${JDWM_BUILD_DIR}/$@ ${JDWM_OBJ} ${LDFLAGS}
+	${CC} -o ${JDWM_BUILD_DIR}/$@ ${JDWM_OBJ} ${LDFLAGS}
 
 jdwm-msg: ${JDWM_BUILD_DIR}/jdwm-msg.o
-	$(PRINTF) "Linking jdwm-msg source  (${CC}) " ${JDWM_BUILD_DIR}/$@
-	$Q${CC} -o ${JDWM_BUILD_DIR}/$@ $< ${LDFLAGS}
+	${CC} -o ${JDWM_BUILD_DIR}/$@ $< ${LDFLAGS}
 
-dwmblocks: ${BLOCKS_OBJ} ${BLOCKS_BUILD_DIR}
-	$(PRINTF) "Linking dwmblocks source (${CC}) " ${JDWM_BUILD_DIR}/dwmblocks
-	$Q${CC} -o ${BLOCKS_BUILD_DIR}/$@ ${BLOCKS_OBJ} ${LDFLAGS}
-
-all: jdwm jdwm-msg dwmblocks
+all: jdwm jdwm-msg 
 
 jdwm_clean:
-	$(PRINTF) "Clean build dir of jdwm       " $(JDWM_BUILD_DIR)
-	$Qrm -f ${JDWM_BUILD_DIR}/jdwm ${JDWM_OBJ}
+	rm -f ${JDWM_BUILD_DIR}/jdwm ${JDWM_OBJ}
 
 jdwm-msg_clean:
-	$(PRINTF) "Clean build dir of jdwm-msg   " $(JDWM_BUILD_DIR)
-	$Qrm -f ${JDWM_BUILD_DIR}/jdwm-msg ${JDWM_BUILD_DIR}/jdwm-msg.o
+	rm -f ${JDWM_BUILD_DIR}/jdwm-msg ${JDWM_BUILD_DIR}/jdwm-msg.o
 
-dwmblocks_clean:
-	$(PRINTF) "Clean build dir of dwmblocks  " $(BLOCKS_BUILD_DIR)
-	$Qrm -f ${BLOCKS_BUILD_DIR}/dwmblocks ${BLOCKS_OBJ}
-
-clean: jdwm_clean jdwm-msg_clean dwmblocks_clean
+clean: jdwm_clean jdwm-msg_clean 
 
 jdwm_install: jdwm
-	$(PRINTF) "Install jdwm binary           " ${DESTDIR}${PREFIX}/jdwm
-	$Qsudo mkdir -p ${DESTDIR}${PREFIX}
-	$Qsudo cp -f ${JDWM_BUILD_DIR}/jdwm ${DESTDIR}${PREFIX}
-	$Qsudo chmod 755 ${DESTDIR}${PREFIX}/jdwm
+	sudo mkdir -p ${DESTDIR}${PREFIX}
+	sudo cp -f ${JDWM_BUILD_DIR}/jdwm ${DESTDIR}${PREFIX}
+	sudo chmod 755 ${DESTDIR}${PREFIX}/jdwm
 
 jdwm-msg_install: jdwm-msg
-	$(PRINTF) "Install jdwm-msg binary       " ${DESTDIR}${PREFIX}/jdwm-msg
-	$Qsudo mkdir -p ${DESTDIR}${PREFIX}
-	$Qsudo cp -f ${JDWM_BUILD_DIR}/jdwm-msg ${DESTDIR}${PREFIX}
-	$Qsudo chmod 755 ${DESTDIR}${PREFIX}/jdwm-msg
+	sudo mkdir -p ${DESTDIR}${PREFIX}
+	sudo cp -f ${JDWM_BUILD_DIR}/jdwm-msg ${DESTDIR}${PREFIX}
+	sudo chmod 755 ${DESTDIR}${PREFIX}/jdwm-msg
 
-dwmblocks_install: dwmblocks
-	$(PRINTF) "Install dwmblocks binary      " ${DESTDIR}${PREFIX}/dwmblocks
-	$Qsudo mkdir -p ${DESTDIR}${PREFIX}
-	$Qsudo cp -f ${BLOCKS_BUILD_DIR}/dwmblocks ${DESTDIR}${PREFIX}
-	$Qsudo chmod 755 ${DESTDIR}${PREFIX}/dwmblocks
-
-install: jdwm_install jdwm-msg_install dwmblocks_install
+install: jdwm_install jdwm-msg_install
+	mkdir -p ${DESTDIR}${MANPREFIX}/man1
+	sed "s/VERSION/${VERSION}/g" < ${JDWM_RESOURCES_DIR}/jdwm.1 > ${DESTDIR}${MANPREFIX}/man1/jdwm.1
+	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	cp -f ${JDWM_RESOURCES_DIR}/jdwm.desktop /usr/share/xsessions
+	echo "Icon=${CURDIR}/${JDWM_RESOURCES_DIR}/dwm.png" >> /usr/share/xsessions/jdwm.desktop
 
 jdwm_uninstall:
-	$(PRINTF) "Removing jdwm bin file        " ${DESTDIR}${PREFIX}/jdwm
-	$Qsudo rm -f ${DESTDIR}${PREFIX}/jdwm
+	sudo rm -f ${DESTDIR}${PREFIX}/jdwm
 
 jdwm-msg_uninstall:
-	$(PRINTF) "Removing jdwm-msg bin file    " ${DESTDIR}${PREFIX}/jdwm-msg
-	$Qsudo rm -f ${DESTDIR}${PREFIX}/jdwm-msg
+	sudo rm -f ${DESTDIR}${PREFIX}/jdwm-msg
 
-dwmblocks_uninstall:
-	$(PRINTF) "Removing dwmblocks bin file   " ${DESTDIR}${PREFIX}/dwmblocks
-	$Qsudo rm -f ${DESTDIR}${PREFIX}/dwmblocks
+uninstall: jdwm_uninstall jdwm-msg_uninstall
+	sudo rm -f ${DESTDIR}${MANPREFIX}/man1/jdwm.1 \
+			   /usr/share/xsessions/jdwm.desktop
 
-uninstall: jdwm_uninstall jdwm-msg_uninstall dwmblocks_uninstall
-
-.PHONY: all jdwm_clean jdwm-msg_clean blocks_clean clean jdwm_install jdwm-msg_install dwmblocks_install install jdwm_uninstall jdwm-msg_uninstall dwmblocks_uninstall uninstall
+.PHONY: all jdwm_clean jdwm-msg_clean clean jdwm_install jdwm-msg_install install jdwm_uninstall jdwm-msg_uninstall uninstall

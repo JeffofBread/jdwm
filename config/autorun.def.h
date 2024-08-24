@@ -13,8 +13,5 @@
 // and a NULL at the end followed by a comma. The end of the array
 // should always end 'NULL,'.
 static const char *const autostart[] = {
-    "jdwm_java.sh", NULL,               // Exports java vars to help some java apps work better with jdwm
-    "jdwm_autostarts.sh", NULL,         // Runs jdwm_autostart.sh to start any programs you want at login
-    "dwmblocks", NULL,                  // dwmblocks, replaces the status text with info specified using scripts. Check out `/jdwm/dwmblocks/config/blocks.h`
     NULL,                               // Defines the end of the array, do not remove. 
 };

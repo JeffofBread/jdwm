@@ -1,6 +1,8 @@
-# jdwm
+# jdwm_pure
 
 A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and **will** change.
+
+This is the **pure** build, so it is heavily stripped down, for a more traditional dwm experience. I would only recommend this if you are severely limited on performance, storage, or simply have no interest whatsoever in the scripting or integrations of [`jdwm_complete`](https://github.com/JeffofBread/jdwm/tree/jdwm_complete).
 
 <img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_storm.png"> 
 <img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_lush.png">
@@ -10,89 +12,19 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
 **Notes before you install:**
  - Make sure you have all the necessary [required dependencies](#required-dependencies), or issues could occur during installation.
  - jdwm is only compatable with X11, not Wayland. Please make sure you use X11.
- - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified in `/jdwm/bash_paths.env`.
- - To edit things like your terminal alias before installation, edit `/jdwm/dwm/resources/jdwm.aliases`. This can also be done after installation by going to `~/.config/jdwm/jdwm.aliases`
- - To edit what programs autostart with jdwm copy `/jdwm/dwm/scripts/jdwm_autostarts.example` as `/jdwm/dwm/scripts/jdwm_autostarts.sh` and put whatever commands/programs you want started in there. It will be installed along with other scripts to `/usr/local/bin` and run at login.
- - By default on install, `install.sh` will clone [jdwm' wallpapers branch](https://github.com/JeffofBread/jdwm/tree/wallpapers) into `~/.config/jdwm/wallpapers/`. These wallpapers are used by the themes in `/jdwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jdwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`/jdwm/dwm/themes/`).
 
 ```bash
-git clone https://github.com/JeffofBread/jdwm.git
+git clone https://github.com/JeffofBread/jdwm.git -b jdwm_pure
 cd jdwm
-./install.sh
+sudo make install
 ```
-
-You can also customize your install with installer flags. To see a list of all flags and their purpose, run:
-
-```bash
-./install.sh -h
-```
-```bash
-./install.sh --help
-```
-
-Below are some examples of how these can be used and combined:
-
-<details><summary><b>Example: Only install jdwm scripts</b></summary>
-
-```bash
-./install -js
-```
-```bash
-./install --jdwm-scripts
-```
-</details>
-
-<details><summary><b>Example: Only install jdwm scripts, dwmblocks scripts, and rofi scripts</b></summary>
-
-```bash
-./install -js -bs -rs
-```
-```bash
-./install --jdwm-scripts --dwmblocks-scripts --rofi-scripts
-```
-</details>
 
 ## Uninstall
 
-**Notes before you uninstall:**
- Please make sure you know what is being removed by the script and dont accidentally remove something you intended to keep. The script (by default) will remove all of the what is listed below, but that can be adjuste with flag arguments ().
- - jdwm binaries (`jdwm`, `jdwm-msg`, and `dwmblocks`) from `/usr/local/bin/`
- - All scripts (with the `.sh` extension) present in `/jdwm/dwm/scripts/`, `/jdwm/dwmblocks/scripts/`, and `/jdwm/rofi/scripts/`, from `/usr/local/bin/`
- - Any and all files present in `~/.config/jdwm/`
- - Pathing symlink `/usr/local/share/jdwm`
- - jdwm manual (`/usr/local/share/man/man1/jdwm.1`) and desktop file (`/usr/share/xsessions/jdwm.desktop`)
- - rofi config (`~/.config/rofi/config.rasi`') and all themes (with `.rasi` extension) present in `/jdwm/rofi/themes/` from `~/.config/rofi/themes/`
-
-You can also customize your uninstall with uninstaller flags. To see a list of all flags and their purpose, run:
-
 ```bash
-./uninstall.sh -h
+cd jdwm
+sudo make uninstall
 ```
-```bash
-./uninstall.sh --help
-```
-
-Below are some examples of how these can be used and combined:
-
-<details><summary><b>Example: Only uninstall jdwm binaries (`jdwm`, `jdwm-msg`, and `dwmblocks`)</b></summary>
-
-```bash
-./install -jb
-```
-```bash
-./install --jdwm-binaries
-```
-</details>
-
-<details><summary><b>Example: Only uninstall jdwm aliases, manual, and desktop file</b></summary>
-
-```bash
-./install -ja -jd -jm
-```
-```bash
-./install --jdwm-aliases --jdwm-desktop-file --jdwm-manual
-```
-</details>
 
 ## Required Dependencies
 
@@ -100,24 +32,22 @@ These are all programs or libraries jdwm relies on (specified in `()`) in some w
 
 Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
 
-- A terminal emulator of some kind (chosen in `/jdwm/dwm/resources/jdwm.aliases`, by default it is [kitty](https://sw.kovidgoyal.net/kitty/))
+- A terminal emulator of some kind (chosen in `/jdwm/config/binds.h`, by default it is [st](https://st.suckless.org/))
 - A desktop notification handler of some kind (I recommend [dunst](https://github.com/dunst-project/dunst))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in the bar)
 - [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html) (for cli arguments in jdwm and jdwm-msg)
-- [feh](https://feh.finalrewind.org/) (Background wallpaper. Used in themes shipped in `/jdwm/dwm/themes/`)
-- [rofi](https://github.com/davatorium/rofi) (layout menu changer, window switcher, program launcher, etc. Technically not 100% dependent, but designed with it in mind)
-- [grep](https://www.gnu.org/software/grep/manual/grep.html), [sed](https://www.gnu.org/software/sed/manual/sed.html), and [cut](https://www.gnu.org/software/coreutils/cut) (various scripts)
+- [sed](https://www.gnu.org/software/sed/manual/sed.html) (Makefile install)
 
 <details><summary><b>Arch</b></summary>
 
 ```bash
-sudo pacman -S git make gcc libx11 libxinerama libxft yajl imlib2 feh rofi grep sed coreutils
+sudo pacman -S git make gcc libx11 libxinerama libxft yajl imlib2 sed
 ```
 or
 
 ```bash
-yay -S git make gcc libx11 libxinerama libxft yajl imlib2 feh rofi grep sed coreutils
+yay -S git make gcc libx11 libxinerama libxft yajl imlib2 sed
 ```
 
 </details>
@@ -125,7 +55,7 @@ yay -S git make gcc libx11 libxinerama libxft yajl imlib2 feh rofi grep sed core
 <details><summary><b>Debain/Ubuntu</b></summary>
 
 ```bash
-sudo apt install git build-essential libx11-dev libxinerama-dev libxft-dev libyajl-dev libimlib2-dev feh rofi grep sed coreutils
+sudo apt install git build-essential libx11-dev libxinerama-dev libxft-dev libyajl-dev libimlib2-dev sed
 ```
 
 </details>
@@ -133,84 +63,11 @@ sudo apt install git build-essential libx11-dev libxinerama-dev libxft-dev libya
 <details><summary><b>Fedora</b></summary>
 
 ```bash
-sudo dnf install git gcc make libX11-devel libXinerama-devel libXft-devel yajl-devel imlib2-devel feh rofi grep sed coreutils
+sudo dnf install git gcc make libX11-devel libXinerama-devel libXft-devel yajl-devel imlib2-devel sed
 ```
 
 </details>
 
-## Optional Dependencies
-
-These are all optional and easily changeable in their respective config files or scripts, these are just what are used out of the box.
-
-Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
-
-- A Compositor of some kind (I recommend https://github.com/FT-Labs/picom)
-- [jq](https://github.com/jqlang/jq) (For rofi layout menu script)
-- [xrandr](https://www.x.org/wiki/Projects/XRandR/) (Monitor resolution, refresh rate, etc)
-- [dunst](https://github.com/dunst-project/dunst) (Desktop Notifications)
-- [pactl](https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/CLI/#pactl) (Toggle mute on mic/sink binds)
-- [playerctl](https://github.com/altdesktop/playerctl) (Media control binds)
-- [pamixer](https://github.com/cdemoulins/pamixer) (Volume binds)
-- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) (For rofi powermenu script)
-- [rofi-calc](https://github.com/svenstaro/rofi-calc/tree/master?tab=readme-ov-file) (Calculator bind)
-- [Firefox](https://www.mozilla.org/en-US/firefox/new/) (jdwm.aliases, used as the default browser)
-- [VSCodium](https://vscodium.com/) (jdwm.aliases, used as the default text editor)
-- [Thunar](https://docs.xfce.org/xfce/thunar/start) (jdwm.aliases, used as the default file browser)
-
-<details><summary><b>Arch</b></summary>
-
-(Lacks [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) and [VSCodium](https://vscodium.com/) because they are AURs)
-```bash
-sudo pacman -S jq xorg-xrandr dunst libpulse playerctl pamixer rofi-calc firefox thunar
-```
-
-or
-
-```bash
-yay -S jq xorg-xrandr dunst libpulse playerctl pamixer betterlockscreen rofi-calc firefox vscodium-bin thunar
-```
-
-</details>
-
-<details><summary><b>Debian</b></summary>
-
-```bash
-sudo apt install jq libxrandr2 dunst pulseaudio-utils playerctl pamixer firefox-esr thunar
-```
-
-The below will require manual (or similar) instillation:
-- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
-- [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
-- [VSCodium (deb package)](https://vscodium.com/#install-on-debian-ubuntu-deb-package)
-
-</details>
-
-<details><summary><b>Ubuntu</b></summary>
-
-```bash
-sudo apt install jq libxrandr2 dunst pulseaudio-utils playerctl pamixer firefox thunar
-```
-
-The below will require manual (or similar) instillation:
-- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
-- [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
-- [VSCodium (deb package)](https://vscodium.com/#install-on-debian-ubuntu-deb-package) or alternatively, [VSCodium (Snap)](https://vscodium.com/#install-with-snap-linux). I recommend avoiding the snap package and instead installing the .deb package. 
-
-
-</details>
-
-<details><summary><b>Fedora</b></summary>
-
-```bash
-sudo dnf install jq xrandr dunst pulseaudio-utils playerctl pamixer firefox thunar
-```
-
-The below will require manual (or similar) instillation:
-- [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen?tab=readme-ov-file#installation)
-- [rofi-calc](https://github.com/svenstaro/rofi-calc?tab=readme-ov-file#installation)
-- [VSCodium](https://vscodium.com/#install-on-fedora-rhel-centos-rockylinux-opensuse-rpm-package)
-
-</details>
 
 ## Usage
 
@@ -225,17 +82,9 @@ Keybind | Action
  <kbd>Win</kbd> + <kbd>Q</kbd> | Kill focused window 
  <kbd>Win</kbd> + <kbd>1</kbd> .. <kbd>9</kbd> | Navigate to `number` tag on the focused monitor
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> .. <kbd>9</kbd> | Send focused window and view to `number` tag on the focused monitor
- <kbd>Win</kbd> + <kbd>D</kbd> | rofi application launcher
- <kbd>Win</kbd> + <kbd>D</kbd> | rofi power menu
- <kbd>Win</kbd> + <kbd>L</kbd> | rofi layout switcher
- <kbd>Win</kbd> + <kbd>H</kbd> | rofi based theme switcher (switches jdwm's and rofi's theme)
- <kbd>Alt</kbd> + <kbd>Tab</kbd> | rofi window switcher
- <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jdwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
- <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jdwm.aliases`, by default [VSCodium](https://vscodium.com/))
- <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jdwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
- <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another `$SCRATCHPAD` 
+ <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn st
+ <kbd>Win</kbd> + <kbd>~</kbd> | Spawn an st scratchpad
+ <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another st scratchpad
  <kbd>Win</kbd> + <kbd>&leftarrow;</kbd> | Move focus to the next left monitor
  <kbd>Win</kbd> + <kbd>&rightarrow;</kbd> | Move focus to the next right monitor
  <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>&leftarrow;</kbd> | Move focused window to next left monitor
@@ -251,7 +100,7 @@ Keybind | Action
 
 </div></p></details>
 
-<details><summary><b>Media Keybinds</b></summary><p><div>
+<details><summary><b>Media Keybinds (disabled by default in this build (jdwm_pure))</b></summary><p><div>
 
 Keybind | Action
 ----------------- | ----------
@@ -267,20 +116,6 @@ Keybind | Action
 
 </div></p></details>
 
-<details><summary><b>Aliased Program Keybinds</b></summary><p><div>
-
-Keybind | Action
------------------ | ----------
- <kbd>Win</kbd> + <kbd>Enter</kbd> | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>MMB</kbd> on Window Title | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>W</kbd> | Spawn `$BROWSER` (Found in `jdwm.aliases`, by default [Firefox](https://www.mozilla.org/en-US/firefox/new/))
- <kbd>Win</kbd> + <kbd>C</kbd> | Spawn `$CODE_EDITOR` (Found in `jdwm.aliases`, by default [VSCodium](https://vscodium.com/))
- <kbd>Win</kbd> + <kbd>A</kbd> | Spawn `$FILE_MANAGER` (Found in `jdwm.aliases`, by default [Thunar](https://docs.xfce.org/xfce/thunar/start))
- <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Q</kbd> | Spawn `$RECOMPILE_TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>~</kbd> | Spawn `$SCRATCHPAD` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>~</kbd> | Spawn another `$SCRATCHPAD` 
-
-</div></p></details>
 
 <details><summary><b>Button Binds</b></summary><p><div>
 
@@ -291,10 +126,8 @@ Button + Keybind | Bar Section | Action
  <kbd>LMB</kbd> + <kbd>Win</kbd> | Tag Number | Send focus and focused window to that tag
  <kbd>LMB</kbd> + <kbd>Win</kbd> | Window | Click and drag floating windows around
  <kbd>LMB</kbd> + <kbd>Win</kbd> + <kbd>Control</kbd> | Window | Click and drag any non-floating window into floating
- <kbd>MMB</kbd> | Window Title | Spawn `$TERM` (Found in `jdwm.aliases`, by default [kitty](https://sw.kovidgoyal.net/kitty/))
- <kbd>MMB</kbd> | Layout Symbol | Spawn rofi based theme switcher (switches jdwm's and rofi's theme)
+ <kbd>MMB</kbd> | Window Title | Spawn st
  <kbd>MMB</kbd> + <kbd>Win</kbd> | Window | Toggle window's floating state
- <kbd>RMB</kbd> | Layout Symbol | Spawn rofi layout switcher
  <kbd>RMB</kbd> | Tag Number | Focus that tag as well as your current tag (view both at the same time)
  <kbd>RMB</kbd> + <kbd>Win</kbd> | Window | Click and drag floating window's edge to resize the window
 

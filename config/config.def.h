@@ -14,10 +14,79 @@
 #define ICONSIZE                                  20            /* window icon size */
 #define ICONSPACING                               5             /* space between icon and title */
 
-// jdwm theme. Please don't remove the comment
-// inline with the include, as it's how the rofi
-// theme switcher finds the include. 
-#include <storm_theme.h> // JDWM_THEME
+
+// Themes:
+// ------------------------------------------------------------------------------------------------------------ //
+
+// Stormy blue and purple theme created by @JeffOfBread
+static const char darkblue[]    = "#16162F";
+static const char midblue[]     = "#418EB4";
+static const char lightblue[]   = "#A8CAD3"; 
+static const char nearblack[]   = "#0B0D1E";
+static const char lightpurple[] = "#645A6D";
+static const char orange[]      = "#fa9061";
+static const char white[]       = "#ffffff";
+
+static const char *colors[][4] = {
+
+    // Clients       foreground     background      border          float
+    [SchemeNorm] = { nearblack,     nearblack,      darkblue,       darkblue  },    // Generic scheme for unfocused clients
+    [SchemeSel]  = { nearblack,     nearblack,      lightblue,      lightblue },    // Generic scheme for focused clients
+
+    // Bar                  text        background
+    [SchemeSystray]     = { lightblue,  darkblue },   // Systray
+    [SchemeStatus]      = { lightblue,  darkblue },   // Statusbar (dwmblocks)
+    [SchemeTagsSel]     = { orange,     darkblue },   // Tagbar left selected
+    [SchemeTagsNorm]    = { lightblue,  darkblue },   // Tagbar left unselected
+    [SchemeInfoSel]     = { lightblue,  darkblue },   // infobar middle selected
+    [SchemeInfoNorm]    = { lightblue,  darkblue },   // infobar middle unselected 
+};
+
+/* Lush green theme created by @JeffOfBread
+static const char greygreen[]   = "#2f4a34";
+static const char normalgreen[] = "#253a29";
+static const char darkgreen[]   = "#111b13";
+static const char bluegreen[]   = "#1e453e";
+static const char grey[]        = "#25272a";
+static const char white[]       = "#e1e0db";
+
+static const char *colors[][4] = {
+    // Clients       foreground     background    border      float
+    [SchemeNorm] = { darkgreen,     grey,         darkgreen,  darkgreen },    // Generic scheme for unfocused clients
+    [SchemeSel]  = { greygreen,     grey,         greygreen,  greygreen },    // Generic scheme for focused clients
+
+    // Bar                  text        background
+    [SchemeSystray]     = { white,      normalgreen },   // Systray
+    [SchemeStatus]      = { white,      normalgreen },   // Statusbar (dwmblocks)
+    [SchemeTagsSel]     = { white,      normalgreen },   // Tagbar left selected
+    [SchemeTagsNorm]    = { white,      normalgreen },   // Tagbar left unselected
+    [SchemeInfoSel]     = { white,      normalgreen },   // infobar middle selected
+    [SchemeInfoNorm]    = { white,      normalgreen },   // infobar middle unselected
+};
+*/
+
+/* Default-ish dwm colorscheme created by the suckless team, adapted to by @JeffOfBread
+static const char col_gray1[] = "#222222";
+static const char col_gray2[] = "#444444";
+static const char col_gray3[] = "#bbbbbb";
+static const char col_gray4[] = "#eeeeee";
+static const char col_cyan[]  = "#005577";
+
+static const char *colors[][4] = {
+
+	// Clients       foreground     background      border          float
+	[SchemeNorm] = { col_gray3,     col_gray1,      col_gray2,      col_gray2 },  // Generic scheme for unfocused clients
+	[SchemeSel]  = { col_gray4,     col_cyan,       col_gray2,      col_cyan  },  // Generic scheme for focused clients
+
+	// Bar                  text       background
+    [SchemeSystray]     = { col_gray3, col_gray1 }, // Systray
+	[SchemeStatus]  	= { col_gray3, col_gray1 }, // Statusbar (dwmblocks)
+	[SchemeTagsSel]  	= { col_gray4, col_cyan  }, // Tagbar left selected
+	[SchemeTagsNorm]  	= { col_gray3, col_gray1 }, // Tagbar left unselected
+	[SchemeInfoSel]  	= { col_gray4, col_cyan  }, // infobar middle selected
+	[SchemeInfoNorm]  	= { col_gray3, col_gray1 }, // infobar middle unselected
+};
+*/
 
 // Border
 static const unsigned int borderpx              = 0;            /* border pixel of windows */
@@ -100,13 +169,6 @@ static const Rule rules[] = {
         // The below are my personal examples, feel free to remove them: 
         /* class                instance    title           tags mask       isfloating       monitor        ignoretransient     unmanaged */
         { NULL,                 NULL,       scratchpadname, 0,              1,              -1,             0,                  0 }, // Used for scratchpad, don't remove
-        { "Rofi",               NULL,       NULL,           0,              1,              -1,             0,                  0 },
-        { "Protonvpn",          NULL,       NULL,           0,              1,              -1,             0,                  0 },
-        //{ "discord",            NULL,       NULL,          1,              0,               1,             0,                  0 },
-        //{ "Spotify",            NULL,       NULL,          2,              0,               1,             0,                  0 },
-        //{ "firefox",            NULL,       NULL,          4,              0,               1,             0,                  0 },
-        //{ "VSCodium",           NULL,       NULL,          1,              0,               0,             0,                  0 },
-        //{ "obsidian",           NULL,       NULL,          2,              0,               0,             0,                  0 },
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
