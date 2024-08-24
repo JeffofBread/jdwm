@@ -6,47 +6,8 @@ if ! [ $(id -u) != 0 ]; then
     exit 1
 fi
 
-########################################################
-
-PARENT_DIR=$(pwd)
-BIN_INSTALL_DIR="/usr/local/bin"
-SHARE_DIR="/usr/local/share"
-USERS_DIR=$HOME
-
-########################################################
-
-ROFI_DIR="$PARENT_DIR/rofi"
-ROFI_SCRIPTS_DIR="$ROFI_DIR/scripts"
-ROFI_THEMES_DIR="$ROFI_DIR/themes"
-ROFI_CONFIG_INSTALL_DIR="$USERS_DIR/.config/rofi"
-ROFI_THEMES_INSTALL_DIR="$ROFI_CONFIG_INSTALL_DIR/themes"
-
-########################################################
-
-JDWM_VERSION=$(jdwm -v)
-
-JDWM_DIR="$PARENT_DIR/dwm"
-JDWM_CONFIG_DIR="$JDWM_DIR/config"
-JDWM_USER_CONFIG_DIR="$USERS_DIR/.config/jdwm"
-JDWM_WALLPAPER_DIR="$JDWM_USER_CONFIG_DIR/wallpapers"
-JDWM_THEMES_DIR="$JDWM_DIR/themes"
-JDWM_SCRIPTS_DIR="$JDWM_DIR/scripts"
-
-########################################################
-
-DWM_BLOCKS_DIR="$PARENT_DIR/dwmblocks"
-DWM_BLOCKS_SCRIPTS_DIR="$DWM_BLOCKS_DIR/scripts"
-
-########################################################
-
-JDWM_MAN_INSTALL_DIR=""
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    JDWM_MAN_INSTALL_DIR="$SHARE_DIR/man"
-elif [[ "$OSTYPE" == "openbsd"* ]]; then
-    JDWM_MAN_INSTALL_DIR="/usr/local/man"
-fi
-
-########################################################
+# Source needed path variables
+. bash_paths.env
 
 file_uninstaller(){
     files=( $(cd $2 && ls *.$1) )

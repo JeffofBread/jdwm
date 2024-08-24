@@ -6,52 +6,8 @@ if ! [ $(id -u) != 0 ]; then
     exit 1
 fi
 
-########################################################
-
-PARENT_DIR=$(pwd)
-BIN_INSTALL_DIR="/usr/local/bin"
-SHARE_DIR="/usr/local/share"
-USERS_DIR=$HOME
-REQ_DEPS_MISSING=0
-OPT_DEPS_MISSING=0
-SKIP_DEPS=0
-
-########################################################
-
-ROFI_DIR="$PARENT_DIR/rofi"
-ROFI_SCRIPTS_DIR="$ROFI_DIR/scripts"
-ROFI_THEMES_DIR="$ROFI_DIR/themes"
-ROFI_CONFIG_INSTALL_DIR="$USERS_DIR/.config/rofi"
-ROFI_THEMES_INSTALL_DIR="$ROFI_CONFIG_INSTALL_DIR/themes"
-
-########################################################
-
-JDWM_VERSION=$(grep Makefile -e "VERSION = " | cut -b 11-)
-
-JDWM_DIR="$PARENT_DIR/dwm"
-JDWM_CONFIG_DIR="$JDWM_DIR/config"
-JDWM_USER_CONFIG_DIR="$USERS_DIR/.config/jdwm"
-JDWM_WALLPAPER_DIR="$JDWM_USER_CONFIG_DIR/wallpapers"
-JDWM_THEMES_DIR="$JDWM_DIR/themes"
-JDWM_SCRIPTS_DIR="$JDWM_DIR/scripts"
-JDWM_RESOURCES_DIR="$JDWM_DIR/resources"
-
-########################################################
-
-DWM_BLOCKS_DIR="$PARENT_DIR/dwmblocks"
-DWM_BLOCKS_CONFIG_DIR="$DWM_BLOCKS_DIR/config"
-DWM_BLOCKS_SCRIPTS_DIR="$DWM_BLOCKS_DIR/scripts"
-
-########################################################
-
-JDWM_MAN_INSTALL_DIR=""
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    JDWM_MAN_INSTALL_DIR="$SHARE_DIR/man"
-elif [[ "$OSTYPE" == "openbsd"* ]]; then
-    JDWM_MAN_INSTALL_DIR="/usr/local/man"
-fi
-
-########################################################
+# Source needed path variables
+. bash_paths.env
 
 check_and_link(){
     if [ ! -f "$1.h" ]; then
@@ -75,6 +31,9 @@ check_and_link(){
     ln -s $1.h $JDWM_USER_CONFIG_DIR/$2.h &>/dev/null
 }
 
+# Option to skip checking for dependencies as a whole, enabled by using the
+# "-sd" or "--skip-dependencies" flags
+SKIP_DEPS=0
 check_dep(){
     if ! cmd="$(type -p "$1")" || [[ -z $cmd ]]; then
         if [[ $3 -eq 1 ]]; then
@@ -93,6 +52,7 @@ check_dep(){
     fi
 }
 
+OPT_DEPS_MISSING=0
 check_opt_deps(){
     check_dep "jq" "https://github.com/jqlang/jq" "0"
     check_dep "xrandr" "https://www.x.org/wiki/Projects/XRandR/" "0"
@@ -119,6 +79,7 @@ check_opt_deps(){
     fi
 }
 
+REQ_DEPS_MISSING=0
 check_req_deps(){
     check_dep "feh" "https://feh.finalrewind.org/" "1"
     check_dep "rofi" "https://github.com/davatorium/rofi" "1"

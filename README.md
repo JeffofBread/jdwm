@@ -10,7 +10,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
 **Notes before you install:**
  - Make sure you have all the necessary [required dependencies](#required-dependencies), or issues could occur during installation.
  - jdwm is only compatable with X11, not Wayland. Please make sure you use X11.
- - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified at the start of the script.
+ - For a more custom install process, check install flags (run `./install.sh -h` for more info) and/or edit paths specified in `/jdwm/bash_paths.env`.
  - To edit things like your terminal alias before installation, edit `/jdwm/dwm/resources/jdwm.aliases`. This can also be done after installation by going to `~/.config/jdwm/jdwm.aliases`
  - To edit what programs autostart with jdwm copy `/jdwm/dwm/scripts/jdwm_autostarts.example` as `/jdwm/dwm/scripts/jdwm_autostarts.sh` and put whatever commands/programs you want started in there. It will be installed along with other scripts to `/usr/local/bin` and run at login.
  - By default on install, `install.sh` will clone [jdwm' wallpapers branch](https://github.com/JeffofBread/jdwm/tree/wallpapers) into `~/.config/jdwm/wallpapers/`. These wallpapers are used by the themes in `/jdwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jdwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`/jdwm/dwm/themes/`).
