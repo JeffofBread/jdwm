@@ -32,7 +32,7 @@ These are all programs or libraries jdwm relies on (specified in `()`) in some w
 
 Also, if anyone would like to add more package managers or distros to this list, I would appreciate it, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
 
-- A terminal emulator of some kind (chosen in `/jdwm/config/binds.h`, by default it is [st](https://st.suckless.org/))
+- A terminal emulator of some kind (chosen in `/jdwm/binds.h`, by default it is [st](https://st.suckless.org/))
 - A desktop notification handler of some kind (I recommend [dunst](https://github.com/dunst-project/dunst))
 - [yajl](https://lloyd.github.io/yajl/) (dwm IPC)
 - [imlib2](https://docs.enlightenment.org/api/imlib2/html/) (for program icons in the bar)
@@ -71,7 +71,7 @@ sudo dnf install git gcc make libX11-devel libXinerama-devel libXft-devel yajl-d
 
 ## Usage
 
-This is not yet a comprehensive list, just a good place to start. All of the keybinds and button binds are found and edited in `/jdwm/dwm/config/binds.h`. 
+This is not yet a comprehensive list, just a good place to start. All of the keybinds and button binds are found and edited in `/jdwm/binds.h`. 
 
 <details><summary><b>Keybind Quickstart</b></summary><p><div>
 
