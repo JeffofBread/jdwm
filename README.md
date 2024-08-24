@@ -2,6 +2,8 @@
 
 A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and **will** change.
 
+This is the **complete** build, so the 'intended' experience. It comes with more dependencies and maybe some added complexity in some areas, but should be a far more complete and rounded experience. It comes with a bunch of software integration, scripting, and other tricks to make it a more *complete* window manager. 
+
 <img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_storm.png"> 
 <img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_lush.png">
 
@@ -16,7 +18,7 @@ A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. 
  - By default on install, `install.sh` will clone [jdwm' wallpapers branch](https://github.com/JeffofBread/jdwm/tree/wallpapers) into `~/.config/jdwm/wallpapers/`. These wallpapers are used by the themes in `/jdwm/dwm/themes/`. If you are bandwidth or storage limited, you may want to [disable this step in the install script](https://github.com/JeffofBread/jdwm/blob/2785f37afb877c014ec3e551911a805ec216c1cf/install.sh#L235) and remove/alter the wallpaper commands in the various theme files (`/jdwm/dwm/themes/`).
 
 ```bash
-git clone https://github.com/JeffofBread/jdwm.git
+git clone https://github.com/JeffofBread/jdwm.git -b jdwm_complete
 cd jdwm
 ./install.sh
 ```
