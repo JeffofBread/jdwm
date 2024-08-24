@@ -10,19 +10,16 @@
 ### Above combination will ignore all files without extension (From https://stackoverflow.com/a/25592735)  ###
 
 # Ignore user's customized files
-autorun.h
 config.h
-binds.h
 keydefs.h
-jdwm_autostarts.sh
 
 # Ignore build folder
 build/
 
 .*
+*.o
 *.bak
 !Makefile
 !LICENSE
 !.gitignore
 !.gitattributes
-!.clang-format

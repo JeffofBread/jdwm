@@ -428,12 +428,7 @@ static int unmanaged = 0; /* whether the window manager should manage the new wi
 #include "ipc.h"
 
 // Tertiary config file
-#include <config.h>
-
-// Sub config files
-#include <keydefs.h>
-#include <binds.h>
-#include <autorun.h>
+#include "config.h"
 
 // IPC
 static const char *ipcsockpath = "/tmp/jdwm.sock";
