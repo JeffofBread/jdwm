@@ -2,7 +2,7 @@
 
 A custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. If you find any issues or would like to make a recommendation, feel free. This is a major work in progress and **will** change.
 
-This is the **complete** build, so the 'intended' experience. It comes with more dependencies and maybe some added complexity in some areas, but should be a far more complete and rounded experience. It comes with a bunch of software integration, scripting, and other tricks to make it a more *complete* window manager. 
+This is the **complete** build, so the 'intended' experience. It comes with more dependencies and maybe some added complexity in some areas, but should be a far more complete and rounded experience. It comes with a bunch of software integration, scripting, and other tricks to make it a more *complete* window manager. Note, this branch also comes with some extra complexity and may be more finicky on some systems. I try my best to minimize this, but it will naturally be more prone to this due to its complexity. Also note, this branch will see most of the development work, so things like documentation (coming soon™), more themes, scripts, etc will all be for this branch alone. Only source code changes will end up in the [`pure`](https://github.com/JeffofBread/jdwm/tree/jdwm_pure) branch.
 
 <img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_storm.png"> 
 <img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_lush.png">
