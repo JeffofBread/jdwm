@@ -1,0 +1,5 @@
+# Ignore user's customized files
+blocks.h
+
+# Ignore build folder
+build/

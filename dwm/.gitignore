@@ -1,0 +1,9 @@
+# Ignore user's customized files
+autorun.h
+config.h
+binds.h
+keydefs.h
+jdwm_autostarts.sh
+
+# Ignore build folder
+build/

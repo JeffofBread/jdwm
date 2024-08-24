@@ -7,26 +7,12 @@
 # Unignore all dirs
 !*/
 
-### Above combination will ignore all files without extension (https://stackoverflow.com/a/25592735)  ###
-
+### Above combination will ignore all files without extension (From https://stackoverflow.com/a/25592735)  ###
 
 .*
-build/
 *.bak
 !Makefile
 !LICENSE
 !.gitignore
 !.gitattributes
 !.clang-format
-
-### Ignore user configs
-
-#dwmblocks
-dwmblocks/config/blocks.h
-
-#jdwm
-dwm/config/autorun.h
-dwm/config/config.h
-dwm/config/binds.h
-dwm/config/keydefs.h
-dwm/scripts/jdwm_autostarts.sh
