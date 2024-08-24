@@ -1,3 +1,0 @@
-# Ignore these dirs in language detection by github
-*/resources/* linguist-detectable=false
-*.rasi linguist-detectable=false

@@ -1,9 +1,0 @@
-# Example file to be started by jdwm from autorun.h. For most programs, it's best to start them here rather than autorun.h
-
-# Below are just examples, copy or uncomment any you want. Note, make sure to add a '&' after each command
-
-#xrandr --output HDMI-1 --mode 1920x1080 &
-#picom &
-#dunst &
-#pasystray &
-#nm-applet &

@@ -1,7 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=jdwm
-Comment=Jeff's dynamic window manager (dwm) build
-Exec=jdwm --first-run
-Type=Application
-Version=

@@ -1,9 +1,0 @@
-alias TERM='kitty &>/dev/null'
-alias RECOMPILE_TERM='kitty sh -c "jdwm_recompile.sh" &>/dev/null'
-alias BROWSER='firefox'
-alias FILE_MANAGER='thunar'
-alias CODE_EDITOR='codium'
-
-# IF YOU CHANGE THE NAME OF THIS TERMINAL, CHANGE IN CONFIG.H AS WELL
-# WITHOUT PROPER NAME, SCRATCHPADS WILL NOT WORK
-alias SCRATCHPAD='kitty -T Scratchpad'
