@@ -216,13 +216,17 @@ jdwm_man_page_install(){
 
 jdwm_scripts_install(){
     echo -e "\n|---------- jdwm scripts ---------|\n"
-    copyexamplescripts "$JDWM_SCRIPTS_DIR"
-    echo -e "jdwm scripts are being installed to $BIN_INSTALL_DIR from $JDWM_SCRIPTS_DIR"
-    echo -e "jdwm scripts being installed:\n"
-    cd $JDWM_SCRIPTS_DIR 
-    sudo chmod -R 755 ./
-    sudo cp -f *.sh $BIN_INSTALL_DIR
-    ls | grep -E '\.sh$' | sed -e 's/^/     #) /'
+    if [ ! -d "$JDWM_SCRIPTS_DIR" ]; then
+        echo -e "Unable to locate scripts because $JDWM_SCRIPTS_DIR does not exist, skipping jdwm scripts install..."
+    else 
+        copyexamplescripts "$JDWM_SCRIPTS_DIR"
+        echo -e "jdwm scripts are being installed to $BIN_INSTALL_DIR from $JDWM_SCRIPTS_DIR"
+        echo -e "jdwm scripts being installed:\n"
+        cd $JDWM_SCRIPTS_DIR 
+        sudo chmod -R 755 ./
+        sudo cp -f *.sh $BIN_INSTALL_DIR
+        ls | grep -E '\.sh$' | sed -e 's/^/     #) /'
+    fi
     echo ""
 }
 
@@ -241,17 +245,22 @@ jdwm_wallpapers_install(){
         echo "Cloning jdwm_wallpapers repo into $JDWM_WALLPAPER_DIR"
         git clone https://github.com/JeffofBread/jdwm.git -b wallpapers $JDWM_WALLPAPER_DIR
     fi
+    echo ""
 }
 
 dwm_blocks_scripts_install(){
     echo -e "\n|--------- dwmblocks scripts ---------|\n"
-    copyexamplescripts "$DWM_BLOCKS_SCRIPTS_DIR"
-    echo -e "\ndwmblocks scripts are being installed to $BIN_INSTALL_DIR from $DWM_BLOCKS_SCRIPTS_DIR"
-    echo -e "dwmblocks scripts being installed:\n"
-    cd $DWM_BLOCKS_SCRIPTS_DIR 
-    sudo chmod -R 755 ./
-    sudo cp -f *.sh $BIN_INSTALL_DIR
-    ls | grep -E '\.sh$' | sed -e 's/^/     #) /'
+    if [ ! -d "$DWM_BLOCKS_SCRIPTS_DIR" ]; then
+        echo -e "Unable to locate scripts because $DWM_BLOCKS_SCRIPTS_DIR does not exist, skipping dwmblocks scripts install..."
+    else 
+        copyexamplescripts "$DWM_BLOCKS_SCRIPTS_DIR"
+        echo -e "\ndwmblocks scripts are being installed to $BIN_INSTALL_DIR from $DWM_BLOCKS_SCRIPTS_DIR"
+        echo -e "dwmblocks scripts being installed:\n"
+        cd $DWM_BLOCKS_SCRIPTS_DIR 
+        sudo chmod -R 755 ./
+        sudo cp -f *.sh $BIN_INSTALL_DIR
+        ls | grep -E '\.sh$' | sed -e 's/^/     #) /'
+    fi
     echo ""
 }
 
@@ -277,13 +286,17 @@ rofi_config_install(){
 
 rofi_scripts_install(){
     echo -e "\n|-------- Rofi scripts install -------|\n"
-    copyexamplescripts "$ROFI_SCRIPTS_DIR"
-    echo -e "Rofi scripts are being installed to $BIN_INSTALL_DIR from $ROFI_SCRIPTS_DIR:"
-    echo -e "Rofi scripts being installed:\n"
-    cd $ROFI_SCRIPTS_DIR 
-    sudo chmod -R 755 ./
-    sudo cp -f *.sh $BIN_INSTALL_DIR
-    ls | grep -E '\.sh$' | sed -e 's/^/     #) /'
+    if [ ! -d "$ROFI_SCRIPTS_DIR" ]; then
+        echo -e "Unable to locate scripts because $ROFI_SCRIPTS_DIR does not exist, skipping rofi scripts install..."
+    else 
+        copyexamplescripts "$ROFI_SCRIPTS_DIR"
+        echo -e "Rofi scripts are being installed to $BIN_INSTALL_DIR from $ROFI_SCRIPTS_DIR:"
+        echo -e "Rofi scripts being installed:\n"
+        cd $ROFI_SCRIPTS_DIR 
+        sudo chmod -R 755 ./
+        sudo cp -f *.sh $BIN_INSTALL_DIR
+        ls | grep -E '\.sh$' | sed -e 's/^/     #) /'
+    fi
     echo ""
 }
 
