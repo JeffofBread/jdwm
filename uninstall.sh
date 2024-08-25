@@ -41,8 +41,9 @@ jdwm_rm_config_dir(){
 }
 
 jdwm_desktop_file_uninstall(){
-    echo "Removing jdwm desktop file: /usr/share/xsessions/jdwm.desktop"
+    echo "Removing jdwm desktop file: /usr/share/xsessions/jdwm.desktop and jdwm's icon dir: /usr/share/icons/jdwm/"
     sudo rm -f /usr/share/xsessions/jdwm.desktop
+    sudo rm -rf /usr/share/icons/jdwm/
     echo ""
 }
 

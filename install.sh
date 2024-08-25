@@ -200,9 +200,10 @@ jdwm_link(){
 
 jdwm_desktop_file_install(){
     echo -e "\n|--------- jdwm .desktop ---------|\n"
-    echo -e "jdwm.desktop being installed to /usr/share/xsessions/"
+    echo -e "jdwm.desktop being installed to /usr/share/xsessions/\njdwm logo being installed to /usr/share/icons/jdwm/"
+    sudo mkdir -p /usr/share/icons/jdwm
+    sudo cp -f $JDWM_RESOURCES_DIR/jdwm.png /usr/share/icons/jdwm/jdwm.png
     sudo cp -f $JDWM_RESOURCES_DIR/jdwm.desktop /usr/share/xsessions/jdwm.desktop
-    sudo /bin/sh -c "(echo "$JDWM_VERSION"; echo "Icon=$JDWM_RESOURCES_DIR/dwm.png") >> /usr/share/xsessions/jdwm.desktop"
     echo ""
 }
 
