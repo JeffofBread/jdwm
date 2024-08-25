@@ -62,7 +62,7 @@ Below are some examples of how these can be used and combined:
  - All scripts (with the `.sh` extension) present in `/jdwm/dwm/scripts/`, `/jdwm/dwmblocks/scripts/`, and `/jdwm/rofi/scripts/`, from `/usr/local/bin/`
  - Any and all files present in `~/.config/jdwm/`
  - Pathing symlink `/usr/local/share/jdwm`
- - jdwm manual (`/usr/local/share/man/man1/jdwm.1`) and desktop file (`/usr/share/xsessions/jdwm.desktop`)
+ - jdwm manual (`/usr/local/share/man/man1/jdwm.1`), desktop file (`/usr/share/xsessions/jdwm.desktop`), and icon directory (`/usr/share/icons/jdwm/`)
  - rofi config (`~/.config/rofi/config.rasi`') and all themes (with `.rasi` extension) present in `/jdwm/rofi/themes/` from `~/.config/rofi/themes/`
 
 You can also customize your uninstall with uninstaller flags. To see a list of all flags and their purpose, run:
