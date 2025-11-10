@@ -1,0 +1,8 @@
+; TODO: This could maybe use some work. Not a ton of reason to clone the whole repository
+; just for three files. A sparse checkout may be worth looking into.
+
+[wrap-git]
+url = https://https.git.savannah.gnu.org/git/gengetopt.git
+revision = HEAD
+depth = 1
+diff_files = gnu_getopt.diff

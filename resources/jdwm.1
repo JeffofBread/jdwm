@@ -1,0 +1,97 @@
+.TH JDWM 1
+.SH NAME
+\fBjdwm\fR \- jeff's dynamic window manager
+.SH SYNOPSIS
+
+\fBjdwm\fR [OPTIONS]
+
+.SH DESCRIPTION
+
+\fBjdwm\fR is a dynamic window manager for \fBX11\fR built by \fBJeffofBread\fR. To learn more
+about \fBjdwm\fR go to \fBhttps://github.com/JeffofBread/jdwm/\fR. \fBjdwm\fR is based off of the
+window manager dwm. To learn more about the original window manager \fBjdwm\fR is based off, go to
+\fBhttps://dwm.suckless.org/\fR.
+
+.P
+There are 14 different methods for controlling the layout of windows by default in \fBjdwm\fR,
+tile being the default. It is denoted by the `[]=` symbol on the left side of the bar. These
+various layouts control how windows are moved and sized as more windows are added or
+removed from the desktop. Each desktop and tag can have its own layout controlling only
+windows on that specific desktop and tag.
+
+.P
+Windows are grouped by tags. Each window can be tagged with one or multiple
+tags. Selecting certain tags displays all windows with these tags. Only currently
+active tags will be displayed on the bar. To enter a tag not shown on the bar,
+refer to the keybinds.
+
+.P
+Each screen contains a small status bar which displays all active tags, the
+layout, the title and logo of the focused window, as well as the system tray and 
+status text (this can be controlled by something like `\fBdwmblocks\fR` or
+`\fBxsetroot -name\fR`) if the screen is focused. A floating window is indicated
+with an empty square next to its name and a border. The selected tags are indicated
+by an underline under the tag icon.
+
+.SH OPTIONS
+
+.TP
+.B \-C --config FILEPATH
+Allows you to choose an alternate configuration file for \fBjdwm\fR to try and use. It will attempt to
+parse the given file at \fBFILEPATH\fR. If that fails, it will then continue and search for its normal
+configuration files in \fBXDG_CONFIG_HOME\fR (usually `~/.config/`) or \fBjdwm\fR's config home
+(`~/.config/jdwm/`). Note: \fBjdwm\fR will expand `~` but not values like $HOME.
+
+.TP
+.B \-D --disable-default-logger
+\fBjdwm\fR by default creates a logger to `\fBstdout\fR` just after CLI parsing, but before configuration
+parsing. This flag will disable the creation of this logger. This can either be used to silence
+\fBjdwm\fR's logging almost entirely, or allow you to create a custom logger to `\fBstdout\fR` without overlap.
+
+.TP
+.B \-L --log-level LEVEL
+Allows you to define the default logging level \fBjdwm\fR will use. \fBLEVEL\fR should be an integer between
+\fB0\fR and \fB5\fR. This flag can namely be used to edit the log verbosity of \fBjdwm\fR's default logger to
+`\fBstdout\fR`, or combined with configuration file loggers with a logging level of `\fB-1\fR`, allows you to set
+the log level of configuration file defined loggers from the CLI without configuration adjustments.
+
+.TP
+.B \-N --no-jdwmrc
+Skip executing `\fB.jdwmrc\fR` alongside \fBjdwm\fR. `\fB.jdwmrc\fR` is a file you can use like a shell script to start programs
+alongside \fBjdwm\fR, like wallpaper commands or tray programs. If you wish to use it, it needs to be located in either
+`~/.jdwmrc`, `~/.config/.jdwmrc`, or `~/.config/jdwm/.jdwmrc`.
+
+.TP
+.B \-V --version
+Gives a "pretty" formatted version output.
+
+.TP
+.B \-v --simple-version
+Gives a simplified version output, namely no newline character.
+
+.TP
+.B \-h, --help
+Prints a simple help/usage message
+
+.SH Bindings
+
+TODO: Replace with description of new config file
+
+.SH CUSTOMIZATION
+
+TODO: Replace with description of new config file
+
+.SH SIGNALS
+
+.TP
+.B SIGHUP - 1
+Restart the \fBjdwm\fR process.
+
+.TP
+.B SIGTERM - 15
+Cleanly terminate the \fBjdwm\fR process.
+
+.SH BUGS
+
+Any known bugs or issues are documented in \fBjdwm\fR's documentation or on its github page. Please refer to there.
+If it is not found there, please report it to \fBhttps://github.com/JeffofBread/jdwm/issues\fR.

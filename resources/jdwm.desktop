@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=jdwm
+DesktopNames=jdwm
+X-LightDM-DesktopName=jdwm
+Comment=Jeff's dynamic window manager
+Exec=jdwm
+TryExec=jdwm
+Type=Application
+Keywords=tiling;wm;windowmanager;window;manager;

@@ -1,0 +1,11 @@
+# Ignore directories cloned by meson
+*/
+
+# Keep required files for meson
+!*.wrap
+!*.patch
+!*.diff
+!/packagefiles/
+
+# Keep this directories README
+!/README.md

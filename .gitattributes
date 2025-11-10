@@ -1,0 +1,2 @@
+# Exclude libraries from stats, as I didn't write them
+subprojects/* linguist-vendored

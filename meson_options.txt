@@ -1,0 +1,7 @@
+option('disable_deps', type : 'boolean', value : false, description : 'Disables requiring dependencies')
+
+option('enable_xinerama', type : 'boolean', value : true, description : 'Enable Xinerama support.')
+
+option('git_branch', type: 'string', value: '', description: 'Git branch name override, used for version info')
+
+option('git_hash', type: 'string', value: '', description: 'Git hash override, used for version info')

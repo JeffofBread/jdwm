@@ -1,52 +1,134 @@
-# jdwm | homepage
+# jdwm
 
-jdwm is a custom build of [dwm](https://dwm.suckless.org/) made by myself, JeffofBread. This is simply the homepage to help you choose and navigate to a branch as well as get a simple overview of the project as a whole. 
+jdwm is a window manager based on [dwm](https://dwm.suckless.org/), rebuilt from the ground up for ease of use, customizability, and hackability. It 
+incorporates over [30 community patches](https://github.com/JeffofBread/jdwm/tree/patches) alongside extensive custom additions to turn the originally spartan dwm into a much 
+more modern and compelling alternative to other mainstream window managers.
 
-<img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_storm.png"> 
-<img src="https://github.com/JeffofBread/jdwm/blob/screenshots/jdwm_lush.png">
+**Note:** jdwm is still in development and will sometimes have breaking changes or bugs. If you run into any issues, please let me
+know through GitHub's [issue](https://github.com/JeffofBread/jdwm/issues) or [discussion](https://github.com/JeffofBread/jdwm/discussions) threads.
 
-## Branches
+<p align="center">
+<img src="https://raw.githubusercontent.com/JeffofBread/jdwm/refs/heads/screenshots/jdwm_storm.png" alt="Example image of jdwm 'storm' theme" style="display: block; margin-left: auto; margin-right: auto; width: 65%;"> 
+<img src="https://raw.githubusercontent.com/JeffofBread/jdwm/refs/heads/screenshots/jdwm_lush.png" alt="Example image of jdwm 'lush' theme" style="display: block; margin-left: auto; margin-right: auto; width: 65%;"> 
+</p>
 
-There are two main branches of jdwm, [`jdwm_pure`](https://github.com/JeffofBread/jdwm/tree/jdwm_pure) and [`jdwm_complete`](https://github.com/JeffofBread/jdwm/tree/jdwm_complete). 
+## Dependencies
 
-[`jdwm_pure`](https://github.com/JeffofBread/jdwm/tree/jdwm_pure) is a stripped down and less integrated build of jdwm intended for those wanting a closer to 'base' dwm experience. It is intended for more experienced users who just want the patches and fixes jdwm has with none of the fluff of dependencies or scripts I have added alongside the base program.
+- [git](https://git-scm.com/) (assuming you are cloning the repository)
+- C Compiler, like [gcc](https://gcc.gnu.org/) or [clang](https://clang.llvm.org/)
+- [meson](https://mesonbuild.com/)
+- Dependency finder like [pkgconf](https://github.com/pkgconf/pkgconf), [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/), or [cmake](https://cmake.org/)
+  ([more info](https://mesonbuild.com/Dependencies.html#dependency-detection-method))
+- [libx11](https://gitlab.freedesktop.org/xorg/lib/libx11)
+- [libxft](https://gitlab.freedesktop.org/xorg/lib/libxft)
+- [imlib2](https://docs.enlightenment.org/api/imlib2/html/)
+- [libconfig](https://hyperrealm.github.io/libconfig/)
+- [libxinerama](https://gitlab.freedesktop.org/xorg/lib/libxinerama) (optional, highly recommended)
+- [xterm](https://xterm.dev/) (Default terminal emulator, adjustable in `jdwm.conf`)
+- [JetBrains Mono font](https://github.com/JetBrains/JetBrainsMono) (Default font, adjustable in `jdwm.conf`)
 
-[`jdwm_complete`](https://github.com/JeffofBread/jdwm/tree/jdwm_complete) however is the 'intended' or *complete* build of jdwm, with all of the scripts, assisting programs, and other features that really flesh out the experience. This is the build I would recommend to most anyone that is wanting to try jdwm.
+Below are some ready-to-go commands to install all the above programs for a few distributions. If you would
+like another distribution or package managers added, I am happy to, just let me know. Also note that the below commands
+may not be 100% foolproof across distribution versions or available repositories.
 
-[`patches`](https://github.com/JeffofBread/jdwm/tree/patches) is a branch dedicated to cataloging all the dwm patches used in jdwm and to credit their authors appropriately. This branch has little practical use for most users. 
+<details><summary><b>Arch</b></summary>
 
-[`screenshots`](https://github.com/JeffofBread/jdwm/tree/screenshots) is a branch that exists solely to hold screenshots of jdwm without them cluttering the main repository. This way they can be used in README (like you see above) without the user ever cloning them and using up bandwidth during download or unneeded space on their computer. Has little practical use for most users. 
+```bash
+pacman -S sudo git gcc meson pkgconf libx11 libxft imlib2 libconfig libxinerama xterm ttf-jetbrains-mono
+```
+or
 
-[`wallpapers`](https://github.com/JeffofBread/jdwm/tree/wallpapers) is a branch that exists to hold wallpapers used by [`jdwm_complete`](https://github.com/JeffofBread/jdwm/tree/jdwm_complete), again to avoid cluttering the main repository and providing flexibility over whether the user wishes to download them or not. These wallpapers are used and defined in theme header files located in `/jdwm/dwm/themes/`, and the repository is cloned by default by `install.sh`. 
+```bash
+yay -S sudo git gcc meson pkgconf libx11 libxft imlib2 libconfig libxinerama xterm ttf-jetbrains-mono
+```
 
-For more info on jdwm or a specific branch, check them out and read their specific README
+</details>
 
-## The future of jdwm
+<details><summary><b>Debian/Ubuntu</b></summary>
 
-## Future
+```bash
+apt install sudo git gcc meson pkgconf libc-dev libx11-dev libxft-dev libimlib2-dev libconfig-dev libxinerama-dev xterm fonts-jetbrains-mono
+```
 
-I still have many plans for changes and features, but currently don't have that much time to put towards this project, so don't expect too many updates, at least not rapid ones. If you would like to suggest ideas, features, or contribute, please either reach out on discord @jeffofbread, start a discussion here on github, or create a pull request. 
+</details>
 
-Edit | Oct 16th, 2024: As mentioned above, I currently don't have a whole lot of time to put towards the project, but
-wanted to give some insight into what is being worked on. I am working on a complete rewrite of jdwm. Simply put, a lot
-of jdwm was cobbled together quite poorly and there was a lot of self created tech debt in the project. On top of the
-rewrite I am also creating complete documentation for the project, and overhauling how many of the scripts and other
-tooling work surrounding jdwm. It is a massive undertaking and has taken far longer than expected, and will likely
-still be another couple months before I am done (at the current pace). However, it will be massively beneficial in
-the long run, and will allow for a lot of what I have planned for the project to be possible in the future.
-Thank you to anyone following the project, and feel free to reach out if would like to help me test the new build (discord @jeffofbread). 
+<details><summary><b>Fedora</b></summary>
 
-Edit | April 25th, 2025: I'll add another update here since it's been a few months without anything posted here. The project is very 
-much still being worked on, but with so many radical and breaking changes patch to patch, I don't really want to post it much. As it
-stands, my  personal development repository of this project sits at over 1,000 commits ahead of this repository, with innumerable 
-changes to just about every single part of this project. I have poured probably close to five or six hundred hours of development 
-time into the dev build at this point. I would have an easier time listing the few things that are the same between the two. It is 
-taking me much longer than I anticipated because of one, my naivety. I simply misjudged how long some of the changes I had in mind 
-would take. Second, and partially related to the first, has revolved around fixing bugs and issues that have either existed in jdwm, 
-dwm, the patches (and my implementations of them), or fixing issues created changes I am making now to jdwm, like issues related to 
-file structure and architecture. Finally, scope creep has massively delayed the project. During all these changes, it has been easy 
-to decide that a new feature or modification should be done, because "while I'm here, I might as well...". All this being said, I 
-will not bother to predict when the final build will be released here. If you are interested in trying the dev build, I would love 
-people to test it. Please reach out to be on discord @jeffofbread, I'm more than happy to provide you a copy of the dev build and 
-help you get set up with it.
+```bash
+dnf install sudo git gcc meson pkgconf libX11-devel libXft-devel imlib2-devel libconfig-devel libXinerama-devel xterm jetbrains-mono-fonts
+```
 
+</details>
+
+<details><summary><b>FreeBSD</b></summary>
+
+```bash
+pkg install sudo git meson pkgconf libX11 libXft imlib2 libconfig libXinerama xterm jetbrains-mono
+```
+
+</details>
+
+<details><summary><b>openSUSE</b></summary>
+
+```bash
+zypper install sudo git gcc pkgconf-pkg-config libc-devel libX11-devel libXft-devel imlib2-devel libconfig-devel libXinerama-devel jetbrains-mono-fonts
+```
+
+</details>
+
+## Install: Quickstart
+
+**Notes before you install:**
+
+- It is recommended to create a custom configuration to your liking. The default configuration file can be found at `resources/jdwm.conf` or in `/etc/jdwm/` after install. Your
+  custom configuration file (named `jdwm.conf`) should be placed in either `~/.config/` or `~/.config/jdwm/` for jdwm to automatically find it at runtime, or use `-C` cli option.
+- To edit what programs automatically start alongside jdwm, create a file called `.jdwmrc` in either `~`, `~/.config/`, or `~/.config/jdwm/`. This file will be treated like a
+  standard shell script. Make sure it is executable and has a specified interpreter, ex `#!/bin/sh`.
+
+```bash
+git clone https://github.com/JeffofBread/jdwm.git
+cd jdwm
+meson setup --buildtype=release ./build/
+meson install -C ./build/
+```
+
+## Future & TODO
+
+I have quite a few things I still want to do before I consider jdwm to be at a `1.0` or release ready build. Here are some of the more major things that I know I want to do:
+
+- [ ] Full documentation. I have a lot of the systems already build and fleshed out for this using doxygen, but simply need to sit down and document the remaining ~70% of
+  the source code.
+- [ ] Rewrite the scratchpad patch. See ["Known Issues"](#known-issues).
+
+I am also have a few other plans, but I am not sure if they will be before a stable `1.x` release:
+
+- [ ] Variable substitution in the libconfig configuration file.
+- [ ] Handle status text internally. Currently, jdwm relies on other programs (like [dwmblocks](https://github.com/torrinfail/dwmblocks)) to perform nice, formatted, custom status
+  text.
+- [ ] Re-write and re-implement IPC. I had previously used [dwm-ipc](https://github.com/mihirlad55/dwm-ipc), but with the level of customization and changes I have made to this
+  program, it did not integrate well and had issues. It also has portability issues I would like to overcome.
+
+## Known Issues
+
+- Clients reset to their default state when jdwm restarts. Not sure how/if I will deal with this.
+- Notifications from certain more invasive programs are not handled well (ex. Zoom, Steam). Will need to look into methods to detect these notifications to handle them properly.
+- Scratchpad sometimes incorrectly modifies visibility of other currently open clients. I intend to re-write the patch.
+- Fullscreen windows incorrectly effect the state of a fullscreen window when move into the same layout as the fullscreen window. The
+  [fake fullscreen patch](https://dwm.suckless.org/patches/fakefullscreen/) that controls this is a bit of a mess of logic, it needs work.
+- When swapping themes during runtime, program tray icons do not update to the new theme. I have not come up with a way to force these to re-render yet, as X11 does not offer
+  a way to do this natively. May need to re-think how the systray is themed instead, or use something like [the alpha patch](https://dwm.suckless.org/patches/alpha/) to make it
+  completely clear.
+
+## Reaching Out
+
+If you would like to get in contact with me, please either message me on Discord @jeffofbread, or through email at jeffofbreadcoding@gmail.com.
+
+## Credits
+
+I just wanted to put a few special thanks here for a few key people that have helped more directly with jdwm:
+
+- [bakkeby](https://github.com/bakkeby) for tons of help directly through DMs to solve issues and answer my questions. He also has a ton of great [dwm](https://dwm.suckless.org/)
+  and [suckless](https://suckless.org/) related projects that I relied on throughout the project for inspiration and code.
+- [FT-Labs](https://github.com/FT-Labs) for help answering many of my questions and for inspiring me to make jdwm with his amazing [pdwm](https://github.com/FT-Labs/pdwm) (which I
+  also shamelessly copied ideas and code from).
+- [Ddubs](https://github.com/dwilliam62) for help beta testing and providing a ton of great ideas and feedback.

@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jdwm" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="-N -L 1 -C $ProjectFileDir$/resources/jdwm.conf" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="true" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="jdwm" TARGET_NAME="jdwm" CONFIG_NAME="Default" version="1" RUN_TARGET_PROJECT_NAME="jdwm" RUN_TARGET_NAME="jdwm">
+    <envs>
+      <env name="DISPLAY" value=":1" />
+    </envs>
+    <method v="2">
+      <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_Xephyr Script" />
+    </method>
+  </configuration>
+</component>
