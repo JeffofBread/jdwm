@@ -100,8 +100,7 @@ typedef struct Theme_Config {
 } Theme_Config_t;
 
 typedef struct Rule {
-        char
-        class[ 128 ];
+        char class[ 128 ];
         char instance[ 128 ];
         char title[ 128 ];
         unsigned int tags;
