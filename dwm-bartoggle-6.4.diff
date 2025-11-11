@@ -1,0 +1,124 @@
+This patch is relatively simple. It adds 5 more options that allow you to choose whether or not to show or hide each part of the bar.
+NOTE: It does not include include keybinds, see the dwm-bartoggle-keybinds-6.4.diff version for that.
+
+To use, simply patch this in and change the options this patch adds to your liking!
+
+diff -up a/config.def.h b/config.def.h
+--- a/config.def.h	2022-10-21 15:49:56.390287336 +0200
++++ b/config.def.h	2022-10-21 16:38:50.766276143 +0200
+@@ -4,6 +4,11 @@
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const int showbar            = 1;        /* 0 means no bar */
++static const int showtitle          = 1;        /* 0 means no title */
++static const int showtags           = 1;        /* 0 means no tags */
++static const int showlayout         = 1;        /* 0 means no layout indicator */
++static const int showstatus         = 1;        /* 0 means no status bar */
++static const int showfloating       = 1;        /* 0 means no floating indicator */
+ static const int topbar             = 1;        /* 0 means bottom bar */
+ static const char *fonts[]          = { "monospace:size=10" };
+ static const char dmenufont[]       = "monospace:size=10";
+diff -up a/dwm.c b/dwm.c
+--- a/dwm.c	2022-10-21 15:49:56.391287336 +0200
++++ b/dwm.c	2022-10-21 16:42:16.509275358 +0200
+@@ -435,16 +435,17 @@ buttonpress(XEvent *e)
+ 	if (ev->window == selmon->barwin) {
+ 		i = x = 0;
+ 		do
+-			x += TEXTW(tags[i]);
++		    if (showtags)
++				x += TEXTW(tags[i]);
+ 		while (ev->x >= x && ++i < LENGTH(tags));
+-		if (i < LENGTH(tags)) {
++		if (i < LENGTH(tags) && showtags) {
+ 			click = ClkTagBar;
+ 			arg.ui = 1 << i;
+-		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
++		} else if (ev->x < x + TEXTW(selmon->ltsymbol) && showlayout)
+ 			click = ClkLtSymbol;
+-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
++		else if (ev->x > selmon->ww - (int)TEXTW(stext) && showstatus)
+ 			click = ClkStatusText;
+-		else
++		else if (showtitle)
+ 			click = ClkWinTitle;
+ 	} else if ((c = wintoclient(ev->window))) {
+ 		focus(c);
+@@ -709,7 +710,7 @@ drawbar(Monitor *m)
+ 		return;
+ 
+ 	/* draw status first so it can be overdrawn by tags later */
+-	if (m == selmon) { /* status is only drawn on selected monitor */
++	if (m == selmon && showstatus) { /* status is only drawn on selected monitor */
+ 		drw_setscheme(drw, scheme[SchemeNorm]);
+ 		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
+ 		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+@@ -717,29 +718,35 @@ drawbar(Monitor *m)
+ 
+ 	for (c = m->clients; c; c = c->next) {
+ 		occ |= c->tags;
+-		if (c->isurgent)
++		if (c->isurgent && showtags)
+ 			urg |= c->tags;
+ 	}
+ 	x = 0;
+ 	for (i = 0; i < LENGTH(tags); i++) {
+-		w = TEXTW(tags[i]);
+-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+-		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+-		if (occ & 1 << i)
+-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
+-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+-				urg & 1 << i);
+-		x += w;
+-	}
+-	w = TEXTW(m->ltsymbol);
+-	drw_setscheme(drw, scheme[SchemeNorm]);
+-	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
++		if (showtags) {
++				w = TEXTW(tags[i]);
++				drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
++				drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
++				if (occ & 1 << i && showfloating)
++				drw_rect(drw, x + boxs, boxs, boxw, boxw,
++						m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
++						urg & 1 << i);
++				x += w;
++		}
++    }
++	
++	/* draw layout indicator if showlayout */
++	if (showlayout) {
++		w = TEXTW(m->ltsymbol);
++		drw_setscheme(drw, scheme[SchemeNorm]);
++		x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
++	}
+ 
+ 	if ((w = m->ww - tw - x) > bh) {
+-		if (m->sel) {
++		if (m->sel && showtitle) {
+ 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+ 			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+-			if (m->sel->isfloating)
++			if (m->sel->isfloating && showfloating)
+ 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+ 		} else {
+ 			drw_setscheme(drw, scheme[SchemeNorm]);
+@@ -1238,7 +1245,7 @@ propertynotify(XEvent *e)
+ 		}
+ 		if (ev->atom == XA_WM_NAME || ev->atom == netatom[NetWMName]) {
+ 			updatetitle(c);
+-			if (c == c->mon->sel)
++			if (c == c->mon->sel && showtitle)
+ 				drawbar(c->mon);
+ 		}
+ 		if (ev->atom == netatom[NetWMWindowType])
+@@ -1987,7 +1994,7 @@ updatesizehints(Client *c)
+ void
+ updatestatus(void)
+ {
+-	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
++	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)) && showstatus)
+ 		strcpy(stext, "dwm-"VERSION);
+ 	drawbar(selmon);
+ }

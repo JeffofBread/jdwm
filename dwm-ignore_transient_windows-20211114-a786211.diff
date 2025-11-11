@@ -1,0 +1,84 @@
+From ab0b7c8798f19fd45969590fbca421e0a526a72c Mon Sep 17 00:00:00 2001
+From: BrunoCooper17 <BrunoCooper17@outlook.com>
+Date: Sun, 14 Nov 2021 21:17:39 -0600
+Subject: [PATCH] Add support to ignore transient window to avoid becoming floating
+
+This fix issues working with Jetbrains applications and the UE4 Editor.
+
+Also, not sure if needed but add the following for some java applications before launching dwm:
+export _JAVA_AWT_WM_NONREPARENTING=1
+export AWT_TOOLKIT=MToolkit
+wmname LG3D
+
+The real authors of this patch are Ar4m1d and bakkeby from reddit, I just put it
+on a patch to share it to anyone who find it useful:
+https://www.reddit.com/r/suckless/comments/k67tso/dwm_webstormjetbrains_webstorm_window_becomes/
+
+---
+ config.def.h |  6 +++---
+ dwm.c        | 11 +++++++----
+ 2 files changed, 10 insertions(+), 7 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index a2ac963..39e50a1 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -26,9 +26,9 @@ static const Rule rules[] = {
+ 	 *	WM_CLASS(STRING) = instance, class
+ 	 *	WM_NAME(STRING) = title
+ 	 */
+-	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++	/* class      instance    title       tags mask     isfloating   monitor   ignoretransient */
++	{ "Gimp",     NULL,       NULL,       0,            1,           -1,       0 },
++	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,       0 },
+ };
+ 
+ /* layout(s) */
+diff --git a/dwm.c b/dwm.c
+index 5e4d494..8313f96 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -92,7 +92,7 @@ struct Client {
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
+ 	int bw, oldbw;
+ 	unsigned int tags;
+-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, ignoretransient;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
+@@ -139,6 +139,7 @@ typedef struct {
+ 	unsigned int tags;
+ 	int isfloating;
+ 	int monitor;
++	int ignoretransient;
+ } Rule;
+ 
+ /* function declarations */
+@@ -299,6 +300,7 @@ applyrules(Client *c)
+ 		&& (!r->instance || strstr(instance, r->instance)))
+ 		{
+ 			c->isfloating = r->isfloating;
++			c->ignoretransient = r->ignoretransient;
+ 			c->tags |= r->tags;
+ 			for (m = mons; m && m->num != r->monitor; m = m->next);
+ 			if (m)
+@@ -1224,9 +1226,10 @@ propertynotify(XEvent *e)
+ 		switch(ev->atom) {
+ 		default: break;
+ 		case XA_WM_TRANSIENT_FOR:
+-			if (!c->isfloating && (XGetTransientForHint(dpy, c->win, &trans)) &&
+-				(c->isfloating = (wintoclient(trans)) != NULL))
+-				arrange(c->mon);
++			if (!c->ignoretransient && !c->isfloating && 
++			(XGetTransientForHint(dpy, c->win, &trans)) && 
++			(c->isfloating = (wintoclient(trans)) != NULL))
++			    arrange(c->mon);
+ 			break;
+ 		case XA_WM_NORMAL_HINTS:
+ 			updatesizehints(c);
+-- 
+2.33.1
+
