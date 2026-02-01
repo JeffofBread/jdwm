@@ -1593,8 +1593,9 @@ static int parse_themes_config( const config_t *config, Theme_Config_t **themes_
                                 continue;
                         }
 
-                        failed_theme_elements_count += parse_theme( theme, &( *themes_config )[ i ], i );
-                        log_debug( "%d elements failed to be parsed in theme number %d", failed_theme_elements_count, i + 1 );
+                        const int tmp = parse_theme( theme, &( *themes_config )[ i ], i );
+                        failed_theme_elements_count += tmp;
+                        log_debug( "%d elements failed to be parsed in theme number %d", tmp, i + 1 );
                 }
 
                 log_debug( "%d themes failed to be parsed", failed_themes_count );
