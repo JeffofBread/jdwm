@@ -1507,8 +1507,8 @@ static int parse_theme_client( config_setting_t *theme, const char *path, XftCol
         const config_setting_t *tmp_config_setting = config_setting_lookup( theme, path );
 
         if ( tmp_config_setting != NULL ) {
-                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "normal-border", &client_theme[ 2 ], false );
-                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "floating-border", &client_theme[ 3 ], false );
+                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "normal-border", &client_theme[ NORMAL_BORDER ], false );
+                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "floating-border", &client_theme[ FLOATING_BORDER ], false );
         } else {
                 log_error( "Problem reading config value \"%s\" in theme %d: Not found", path, theme_index + 1 );
                 return -1;
@@ -1525,8 +1525,8 @@ static int parse_theme_bar_section( config_setting_t *theme, const char *path, X
         const config_setting_t *tmp_config_setting = config_setting_lookup( theme, path );
 
         if ( tmp_config_setting != NULL ) {
-                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "text", &client_theme[ 0 ], false );
-                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "background", &client_theme[ 1 ], false );
+                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "text", &client_theme[ FOREGROUND ], false );
+                failed_settings_count -= libconfig_setting_lookup_color( tmp_config_setting, "background", &client_theme[ BACKGROUND ], false );
         } else {
                 log_error( "Problem reading config value \"%s\" in theme %d: Not found", path, theme_index + 1 );
                 return -1;

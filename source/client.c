@@ -293,7 +293,7 @@ void focus( Client_t *client ) {
                 }
 
                 if ( g_last_focused_client && g_last_focused_client != client ) {
-                        XSetWindowBorder( g_display, g_last_focused_client->window, THEME.color_client_unselected[ NORMAL_BORDER ].pixel );
+                        XSetWindowBorder( g_display, g_last_focused_client->window, THEME.color_client_unselected[ g_last_focused_client->is_floating ? FLOATING_BORDER : NORMAL_BORDER ].pixel );
                 }
 
                 set_focus( client );
